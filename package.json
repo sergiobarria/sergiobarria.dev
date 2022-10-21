@@ -8,13 +8,26 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
+    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx,.astro --fix"
   },
   "dependencies": {
+    "@astrojs/react": "^1.2.1",
     "@astrojs/tailwind": "^2.1.1",
+    "@cloudinary/react": "^1.5.0",
+    "@cloudinary/url-gen": "^1.8.6",
     "@fontsource/ibm-plex-mono": "^4.5.12",
     "@fontsource/lato": "^4.5.10",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
     "astro": "^1.5.2",
+    "clsx": "^1.2.1",
+    "date-fns": "^2.29.3",
+    "framer-motion": "^7.6.1",
+    "hamburger-react": "^2.5.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
@@ -25,6 +38,7 @@
     "eslint-plugin-astro": "^0.20.0",
     "prettier": "^2.7.1",
     "prettier-plugin-astro": "^0.6.0",
+    "reading-time": "^1.5.0",
     "typescript": "^4.8.4"
   }
 }
