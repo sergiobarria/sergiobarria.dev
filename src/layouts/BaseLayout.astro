@@ -1,0 +1,53 @@
+---
+import '@fontsource/lato';
+import '@fontsource/ibm-plex-mono';
+
+import '~/styles/index.css';
+
+import site from '../../site.json';
+
+export interface Props {
+	title: string;
+}
+
+const { title: defaultTitle, description } = site;
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title ?? defaultTitle}</title>
+
+		<!-- Scripts -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+
+				return 'light';
+			})();
+
+			if (theme === 'light') {
+				document.documentElement.classList.remove('theme-dark');
+			} else {
+				document.documentElement.classList.add('theme-dark');
+			}
+		</script>
+	</head>
+	<body>
+		<main>
+			<!-- This is the entry point of the app -->
+			<slot />
+		</main>
+	</body>
+</html>
