@@ -7,6 +7,12 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['Lato', ...defaultTheme.fontFamily.sans]
+			},
+			colors: {
+				darker: 'var(--clr-darker)',
+				lighter: 'var(--clr-lighter)',
+				accent: 'var(--clr-accent)',
+				typography: 'var(--clr-typography)',
 			}
 		},
 	},

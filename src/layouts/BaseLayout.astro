@@ -1,6 +1,7 @@
 ---
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
+import clsx from 'clsx';
 
 import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
@@ -10,7 +11,7 @@ import '~/styles/index.css';
 import site from '../../site.json';
 
 export interface Props {
-	title: string;
+	title?: string;
 }
 
 const { title: defaultTitle, description } = site;
@@ -47,9 +48,14 @@ const { title } = Astro.props;
 			}
 		</script>
 	</head>
-	<body>
+	<body
+		class={clsx(
+			'antialiased flex flex-col text-neutral-800 dark:text-typography min-h-screen',
+			'transition-colors duration-300 ease-in-out dark:bg-[#1F2028]'
+		)}
+	>
 		<Header />
-		<main>
+		<main class="container mx-auto my-8 max-w-screen-lg flex-1 px-4 lg:px-0">
 			<!-- This is the entry point of the app -->
 			<slot />
 		</main>

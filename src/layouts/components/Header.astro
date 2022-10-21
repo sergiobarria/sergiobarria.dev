@@ -1,7 +1,45 @@
 ---
+import clsx from 'clsx';
 
+import site from '../../../site.json';
+
+const pathname = new URL(Astro.request.url).pathname;
+
+const { navLinks } = site;
 ---
 
 <header>
-  App Header
+	<div class="container mx-auto max-w-screen-lg px-4 md:px-2 lg:px-0">
+		<div class="flex items-center justify-between">
+			<div>
+				<a href="/">
+					<div class="relative h-8 w-20">
+						<!-- TODO: Add logo -->
+						<span class="absolute inset-0 text-neutral-700 dark:text-neutral-200">Logo</span>
+					</div>
+				</a>
+			</div>
+			<div class="flex items-center space-x-3">
+				<nav class="space-x-3 hidden md:flex">
+					{
+						navLinks.map((link) => (
+							<a
+								href={link.href}
+								class={clsx(
+									{
+										'font-bold bg-neutral-300 dark:bg-neutral-500 dark:text-typography':
+											pathname === link.href,
+										'hover:text-accent': pathname !== link.href,
+									},
+									'px-4 py-2 rounded-md'
+								)}
+							>
+								{link.label}
+							</a>
+						))
+					}
+				</nav>
+			</div>
+		</div>
+	</div>
 </header>
