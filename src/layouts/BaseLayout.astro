@@ -19,7 +19,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -42,9 +42,11 @@ const { title } = Astro.props;
 			})();
 
 			if (theme === 'light') {
-				document.documentElement.classList.remove('theme-dark');
+				document.documentElement.classList.remove('dark');
+				localStorage.setItem('theme', 'light');
 			} else {
-				document.documentElement.classList.add('theme-dark');
+				document.documentElement.classList.add('dark');
+				localStorage.setItem('theme', 'dark');
 			}
 		</script>
 	</head>
