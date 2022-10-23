@@ -2,6 +2,7 @@
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
 import clsx from 'clsx';
+import { Tooltips } from 'astro-tooltips';
 
 import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
@@ -30,6 +31,8 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
+
+		<Tooltips interactive={false} />
 
 		<!-- Scripts -->
 		<script is:inline>

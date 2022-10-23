@@ -103,7 +103,7 @@ export function ThemeToggleButton() {
 	};
 
 	return (
-		<div>
+		<div className='ml-3'>
 			<button
 				className={clsx(
 					'inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-[1px]',

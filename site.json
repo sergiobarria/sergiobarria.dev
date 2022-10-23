@@ -1,40 +1,52 @@
 {
-  "title": "Sergio Barria | Full Stack Developer",
-  "description": "Sergio Barria is a Full Stack Developer from Panama City, Panama. He is a passionate developer who loves to learn new things and share his knowledge with others.",
-  "url": "https://sergiobarria.com",
-  "author": "Sergio Barria",
-  "profilePicture": "",
-  "resume": "",
-  "socialLinks": {
-    "twitterUrl": "https://twitter.com/sergioBarria01",
-    "githubUrl": "https://github.com/sergiobarria",
-    "linkedinUrl": "https://www.linkedin.com/in/sergiobarria"
-  },
-  "navLinks": [
-    { "id": 1, "href": "/about", "label": "About" },
-    { "id": 2, "href": "/blog", "label": "Blog" },
-    { "id": 3, "href": "/portfolio", "label": "Portfolio" },
-    { "id": 4, "href": "/library", "label": "Library" }
-  ],
-  "skills": [
-    { "id": 1, "title": "JavaScript", "icon": "javascript", "learning": false },
-    { "id": 2, "title": "TypeScript", "icon": "typescript", "learning": false },
-    { "id": 3, "title": "Python", "icon": "python", "learning": false },
-    { "id": 1, "title": "Go", "icon": "go", "learning": true }
-  ],
-  "favoriteStack": [
-    { "id": 1, "title": "Next.js", "icon": "nextdotjs" },
-    { "id": 2, "title": "TypeScript", "icon": "typescript" },
-    { "id": 3, "title": "Tailwind CSS", "icon": "tailwindcss" },
-    { "id": 4, "title": "Node.js", "icon": "nodedotjs" }
-  ],
-  "otherLibraries": [
-    { "id": 1, "title": "Express", "icon": "express" },
-    { "id": 2, "title": "MongoDB", "icon": "mongodb" },
-    { "id": 3, "title": "Django", "icon": "django" },
-    { "id": 4, "title": "PostgreSQL", "icon": "postgresql" },
-    { "id": 5, "title": "Firebase", "icon": "firebase" },
-    { "id": 6, "title": "Vue", "icon": "vuedotjs" },
-    { "id": 7, "title": "MySQL", "icon": "mysql" }
-  ]
+	"title": "Sergio Barria | Full Stack Developer",
+	"description": "Sergio Barria is a Full Stack Developer from Panama City, Panama. He is a passionate developer who loves to learn new things and share his knowledge with others.",
+	"url": "https://sergiobarria.com",
+	"author": "Sergio Barria",
+	"profilePicture": "",
+	"resume": "",
+	"socialLinks": [
+		{
+			"name": "github",
+			"url": "https://github.com/sergiobarria",
+      "color": "#24292f"
+		},
+		{
+			"name": "twitter",
+			"url": "https://twitter.com/sergioBarria01",
+      "color": "#1DA1F2"
+		},
+		{
+			"name": "linkedin",
+			"url": "https://www.linkedin.com/in/sergiobarria",
+      "color": "#0A66C2"
+		}
+	],
+	"navLinks": [
+		{ "id": 1, "href": "/about", "label": "About" },
+		{ "id": 2, "href": "/blog", "label": "Blog" },
+		{ "id": 3, "href": "/portfolio", "label": "Portfolio" },
+		{ "id": 4, "href": "/library", "label": "Library" }
+	],
+	"skills": [
+		{ "id": 1, "title": "JavaScript", "icon": "javascript", "learning": false },
+		{ "id": 2, "title": "TypeScript", "icon": "typescript", "learning": false },
+		{ "id": 3, "title": "Python", "icon": "python", "learning": false },
+		{ "id": 1, "title": "Go", "icon": "go", "learning": true }
+	],
+	"favoriteStack": [
+		{ "id": 1, "title": "Next.js", "icon": "nextdotjs" },
+		{ "id": 2, "title": "TypeScript", "icon": "typescript" },
+		{ "id": 3, "title": "Tailwind CSS", "icon": "tailwindcss" },
+		{ "id": 4, "title": "Node.js", "icon": "nodedotjs" }
+	],
+	"otherLibraries": [
+		{ "id": 1, "title": "Express", "icon": "express" },
+		{ "id": 2, "title": "MongoDB", "icon": "mongodb" },
+		{ "id": 3, "title": "Django", "icon": "django" },
+		{ "id": 4, "title": "PostgreSQL", "icon": "postgresql" },
+		{ "id": 5, "title": "Firebase", "icon": "firebase" },
+		{ "id": 6, "title": "Vue", "icon": "vuedotjs" },
+		{ "id": 7, "title": "MySQL", "icon": "mysql" }
+	]
 }

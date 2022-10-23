@@ -14,6 +14,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.40.1
   astro: ^1.5.2
   astro-eslint-parser: ^0.7.2
+  astro-tooltips: ^0.6.0
   clsx: ^1.2.1
   date-fns: ^2.29.3
   eslint: ^8.25.0
@@ -40,6 +41,7 @@ dependencies:
   '@types/react': 18.0.21
   '@types/react-dom': 18.0.6
   astro: 1.5.2
+  astro-tooltips: 0.6.0
   clsx: 1.2.1
   date-fns: 2.29.3
   framer-motion: 7.6.1_biqbaboplfbrettd7655fr4n2y
@@ -685,6 +687,10 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: false
 
+  /@popperjs/core/2.11.6:
+    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
+    dev: false
+
   /@proload/core/0.3.3:
     resolution: {integrity: sha512-7dAFWsIK84C90AMl24+N/ProHKm4iw0akcnoKjRvbfHifJZBLhaDsDus1QJmhG12lXj4e/uB/8mB/0aduCW+NQ==}
     dependencies:
@@ -1129,6 +1135,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /astro-tooltips/0.6.0:
+    resolution: {integrity: sha512-QE7eRcGoHPBqNdQBjBEv3CEQqJRWixVBHKQPkAJAGj/Si7eodgw4G2Mtar5b2FVbxHHLpjx4czsPs2DHNYf46A==}
+    dependencies:
+      tippy.js: 6.3.7
+    dev: false
 
   /astro/1.5.2:
     resolution: {integrity: sha512-ZzPwZYo4GgwNBiOA7xumpkbKNVT/k/ZEvEkAL2lj3NAZHnU801wk9qLlugu8ECoLT4k1j9B/SSmhLr+AhLTazw==}
@@ -4381,6 +4393,12 @@ packages:
     dependencies:
       globalyzer: 0.1.0
       globrex: 0.1.2
+
+  /tippy.js/6.3.7:
+    resolution: {integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==}
+    dependencies:
+      '@popperjs/core': 2.11.6
+    dev: false
 
   /to-fast-properties/2.0.0:
     resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==}
