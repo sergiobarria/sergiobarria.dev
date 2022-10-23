@@ -1,10 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SocialLinks from '~/components/SocialLinks.astro';
+import Container from '~/components/Container.astro';
 ---
 
 <BaseLayout title="Home | Sergio Barria">
-	<div class="container space-y-6 max-w-screen-md mx-auto my-8">
+	<Container as="div" class="my-8">
+		<!-- <div class="container space-y-6 max-w-screen-md mx-auto my-8"> -->
 		<!-- Hero Section -->
 		<section>
 			<div class="flex gap-x-16 items-center justify-between">
@@ -41,5 +43,6 @@ import SocialLinks from '~/components/SocialLinks.astro';
 
 		<!-- What I'm up to right now -->
 		<section></section>
-	</div>
+		<!-- </div> -->
+	</Container>
 </BaseLayout>

@@ -15,7 +15,7 @@ const pathname = new URL(Astro.request.url).pathname;
 			<div
 				class="flex flex-col items-center space-y-1 text-neutral-500 dark:text-typography text-sm"
 			>
-				<p class="space-x-10 mb-3">
+				<p class="hidden md:flex space-x-10 mb-3">
 					{
 						navLinks.map((link) => (
 							<a
