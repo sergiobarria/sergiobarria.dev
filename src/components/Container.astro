@@ -7,7 +7,7 @@ const { as: Component, class: className = '', ...props } = Astro.props as Props;
 ---
 
 <Component
-	class:list={[className, 'max-w-screen-lg', 'mx-auto', 'px-4', 'sm:px-6', 'lg:px-8']}
+	class:list={[className, 'max-w-screen-lg', 'mx-auto', 'px-4', 'sm:px-6', 'lg:px-8', 'w-full']}
 	{...props}
 >
 	<slot />
