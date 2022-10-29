@@ -1,0 +1,58 @@
+---
+import type { MDXInstance, GetStaticPathsOptions, Page } from 'astro';
+
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Container from '~/shared/components/Container.astro';
+import BlogPostCard from '~/shared/components/BlogPostCard.astro';
+import Paginator from '~/shared/components/Paginator.astro';
+
+import { parseBlogPost, PostFrontmatter, sortPosts } from '~/shared/utils/blogPostsHelpers';
+import type { Post } from '~/shared/utils/blogPostsHelpers';
+
+interface PageProps {
+	page: Page<MDXInstance<Post>>;
+}
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+	const data = await Astro.glob<PostFrontmatter>('../../content/blog/*.mdx');
+
+	const allPosts = await Promise.all(data.map(parseBlogPost));
+	const sortedPosts = allPosts.sort(sortPosts);
+
+	return paginate(sortedPosts, { pageSize: 10 });
+}
+
+const { page } = Astro.props as PageProps;
+---
+
+<BaseLayout>
+	<Container as="div" class="my-8">
+		<h1 class="mb-3">My Blog</h1>
+		<p class="prose dark:prose-invert">
+			Here are all the posts I've published since starting this blog.
+		</p>
+		<hr class="my-4 dark:border-neutral-100/10" />
+
+		<!-- TODO: Add search bar -->
+
+		<section>
+			<h2 class="mb-6">All My Posts</h2>
+
+			<Paginator page={page} />
+
+			<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 lg:gap-6 my-4">
+				{
+					page.data.map((post) => {
+						return (
+							<li>
+								<BlogPostCard post={post} />
+							</li>
+						);
+					})
+				}
+			</ul>
+
+			<Paginator page={page} />
+		</section>
+	</Container>
+</BaseLayout>

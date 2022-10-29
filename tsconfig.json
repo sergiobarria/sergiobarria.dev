@@ -1,6 +1,16 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
+    // Enable top-level await, and other modern ESM features.
+    "target": "ESNext",
+    "module": "ESNext",
+    // Enable node-style module resolution, for things like npm package imports.
+    "moduleResolution": "node",
+    // Enable JSON imports.
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    // Enable stricter transpilation for better output.
+    "isolatedModules": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [

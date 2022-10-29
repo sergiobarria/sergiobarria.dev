@@ -1,9 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Card from '../components/Card.astro';
+import SocialLinks from '~/shared/components/SocialLinks.astro';
+import Container from '~/shared/components/Container.astro';
 ---
 
 <BaseLayout title="Home | Sergio Barria">
-	Hello world!
-</BaseLayout>
+	<Container as="div" class="my-8">
+		<!-- <div class="container space-y-6 max-w-screen-md mx-auto my-8"> -->
+		<!-- Hero Section -->
+		<section>
+			<div class="flex gap-x-16 items-center justify-between">
+				<div class="flex-[2]">
+					<h1>Hi, I'm Sergio 👋🏼</h1>
+					<p class="text-neutral-400 text-lg">Web & Mobile Full-Stack Developer</p>
+					<p class="my-3 text-lg">
+						I work with the JavaScript ecosystem, I love to learn new things and share my knowledge
+						with others. Welcome to my small space of the internet, where I write and share about
+						different topics related to the web.
+					</p>
+					<SocialLinks />
+				</div>
+				<div class="flex-1 hidden md:flex items-center justify-center h-full">
+					<div class="relative w-full">
+						<div class="absolute w-30 h-30 inset-0 rounded-full opacity-70 hero-blob"></div>
+						<div>
+							<img
+								src="https://res.cloudinary.com/sbarria-dev/image/upload/c_scale,f_auto,q_auto,w_362/v1658762124/sergiobarria/hero_nqdmcv.webp"
+								width={2000}
+								alt="hero image"
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
+		<!-- Featured Posts -->
+		<section></section>
+
+		<!-- Featured Projects -->
+		<section></section>
+
+		<!-- What I'm up to right now -->
+		<section></section>
+		<!-- </div> -->
+	</Container>
+</BaseLayout>

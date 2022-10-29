@@ -1,8 +1,89 @@
 ---
-import BaseLayout from "~/layouts/BaseLayout.astro";
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Container from '~/shared/components/Container.astro';
+import { TechCard } from '~/shared/components/jsx';
+
+import site from '../../site.json';
+
+const { skills, favoriteStack, otherLibraries } = site;
 ---
 
 <BaseLayout>
-  <h1>About Page</h1>
-</BaseLayout>
+	<Container as="div" class="my-8">
+		<section>
+			<h1>About Me</h1>
+			<article class="prose dark:prose-invert max-w-none mt-8">
+				<p>Hi! I'm sergio. I'm a Civil Engineer - Web & Movile Developer</p>
+				<p>
+					I had my first try at software development a few years back in college. Although I did
+					like it, I kept focus on my career so I couldn't keep practicing.
+				</p>
+				<p>
+					Because of the pandemic, there was not much to do during quarantine, so I started lookin
+					for some new hobbies. By the end of 2020, after a few months of digging around, I decided
+					to focus on web development. There are so many technologies to learn, for both frontend
+					and backend, that I quickly fell in love with programming in general
+				</p>
+				<p>
+					I created this website as a way of showcase and share all the projects I've worked on
+					during my journey, and who knows?, maybe help others, that like me are learning. I always
+					like to learn new things. So I wanted this website to be the place where I can put in
+					practice all the new technologies and patterns I learn.
+				</p>
+			</article>
+		</section>
 
+		<!-- Programming Languages -->
+		<section class="my-8">
+			<h2>Programming Languages</h2>
+			<p class="prose dark:prose-invert max-w-none mt-6">
+				This are some of the programming languages I know:
+			</p>
+
+			<!-- Skills -->
+			{
+				skills.map(({ title, icon, learning }) => (
+					<TechCard client:load title={title} icon={icon} learning={learning} />
+				))
+			}
+		</section>
+
+		<!-- My Skills -->
+		<section class="my-8">
+			<h2>My Favorite Stack</h2>
+			<p class="prose dark:prose-invert max-w-none mt-6">
+				Ever since I started, I've tested many libraries and frameworks from the JavaScript
+				ecosystem, and Even that I understand that each project is different and you should always
+				look for the best technologies for it, I think is save to say everyone have their own
+				favorite stack, and this is mine:
+			</p>
+
+			<!-- Favorite Tech Stack -->
+			{favoriteStack.map(({ title, icon }) => <TechCard client:load title={title} icon={icon} />)}
+		</section>
+
+		<!-- Other technologies -->
+		<section class="my-8">
+			<h2>Other Technologies I know</h2>
+			<p class="prose dark:prose-invert max-w-none mt-6">
+				I've worked with a lot of technologies, but I'm currently focusing on
+				<a
+					href="https://vercel.com/home?utm_source=next-site&utm_medium=banner&utm_campaign=next-website"
+					class="text-accent hover:text-accent">Next.js</a
+				>, <a href="https://tailwindcss.com/" class="text-accent hover:text-accent">TailwindCSS</a> and
+				<a href="https://astro.build/" class="text-accent hover:text-accent">Astro</a> for the frontent.
+				Here are other libraries/frameworks I know:
+			</p>
+
+			<div>
+				{
+					otherLibraries.map(({ title, icon }) => (
+						<TechCard client:load title={title} icon={icon} />
+					))
+				}
+			</div>
+		</section>
+
+		<!-- TODO: Add spotify top list -->
+	</Container>
+</BaseLayout>

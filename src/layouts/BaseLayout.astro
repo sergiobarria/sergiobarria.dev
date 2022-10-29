@@ -2,9 +2,12 @@
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
 import clsx from 'clsx';
+import { Tooltips } from 'astro-tooltips';
 
 import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
+import Container from '~/shared/components/Container.astro';
+import { FloatingMobileMenu } from './components/jsx';
 
 import '~/styles/index.css';
 
@@ -14,18 +17,23 @@ export interface Props {
 	title?: string;
 }
 
+const pathname = new URL(Astro.request.url).pathname;
+
 const { title: defaultTitle, description } = site;
 const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
+
+		<Tooltips interactive={false} />
 
 		<!-- Scripts -->
 		<script is:inline>
@@ -42,9 +50,11 @@ const { title } = Astro.props;
 			})();
 
 			if (theme === 'light') {
-				document.documentElement.classList.remove('theme-dark');
+				document.documentElement.classList.remove('dark');
+				localStorage.setItem('theme', 'light');
 			} else {
-				document.documentElement.classList.add('theme-dark');
+				document.documentElement.classList.add('dark');
+				localStorage.setItem('theme', 'dark');
 			}
 		</script>
 	</head>
@@ -55,10 +65,11 @@ const { title } = Astro.props;
 		)}
 	>
 		<Header />
-		<main class="container mx-auto my-8 max-w-screen-lg flex-1 px-4 lg:px-0">
+		<FloatingMobileMenu client:visible currentPath={pathname} />
+		<Container as="main" class="flex-1">
 			<!-- This is the entry point of the app -->
 			<slot />
-		</main>
+		</Container>
 		<Footer />
 	</body>
 </html>

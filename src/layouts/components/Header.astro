@@ -1,6 +1,9 @@
 ---
 import clsx from 'clsx';
 
+import { ThemeToggleButton } from '~/shared/components/jsx/ThemeToggleButton';
+import { LogoIcon } from './jsx';
+
 import site from '../../../site.json';
 
 const pathname = new URL(Astro.request.url).pathname;
@@ -9,13 +12,14 @@ const { navLinks } = site;
 ---
 
 <header>
-	<div class="container mx-auto max-w-screen-lg px-4 md:px-2 lg:px-0">
+	<div class="container mx-auto max-w-screen-lg px-4 lg:px-0 py-4">
 		<div class="flex items-center justify-between">
 			<div>
 				<a href="/">
 					<div class="relative h-8 w-20">
-						<!-- TODO: Add logo -->
-						<span class="absolute inset-0 text-neutral-700 dark:text-neutral-200">Logo</span>
+						<div class="absolute inset-0 text-neutral-700 dark:text-neutral-200">
+							<LogoIcon />
+						</div>
 					</div>
 				</a>
 			</div>
@@ -29,9 +33,9 @@ const { navLinks } = site;
 									{
 										'font-bold bg-neutral-300 dark:bg-neutral-500 dark:text-typography':
 											pathname === link.href,
-										'hover:text-accent': pathname !== link.href,
+										'nav-link': pathname !== link.href,
 									},
-									'px-4 py-2 rounded-md'
+									'px-4 py-1 rounded-md'
 								)}
 							>
 								{link.label}
@@ -39,6 +43,7 @@ const { navLinks } = site;
 						))
 					}
 				</nav>
+				<ThemeToggleButton client:visible />
 			</div>
 		</div>
 	</div>
