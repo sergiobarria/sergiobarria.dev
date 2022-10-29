@@ -2,7 +2,7 @@ import React from 'react';
 import ReactTooltip from 'react-tooltip';
 import clsx from 'clsx';
 
-import { useIsDarkMode, useIsMounted } from '~/hooks';
+import { useIsDarkMode, useIsMounted } from '~/shared/hooks';
 
 interface TechCardProps {
 	title: string;

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Divide as HamburgerMenu } from 'hamburger-react';
 import { motion as m } from 'framer-motion';
 
-import { useDimensions } from '~/hooks';
+import { useDimensions } from '~/shared/hooks';
 
 import site from '../../../../site.json';
 

@@ -1,0 +1,20 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { CloudinaryImage } from '~/components/jsx';
+import type { PostFrontmatter } from '~/utils/blogPostsHelpers';
+
+interface Props {
+	frontmatter: PostFrontmatter;
+}
+
+const { frontmatter } = Astro.props as Props;
+---
+
+<BaseLayout>
+	<article>
+		
+		<div class="prose dark:prose-invert">
+			<slot />
+		</div>
+	</article>
+</BaseLayout>

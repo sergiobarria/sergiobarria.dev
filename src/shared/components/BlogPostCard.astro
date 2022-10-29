@@ -1,0 +1,40 @@
+---
+import { format } from 'date-fns';
+
+import type { Post } from '~/shared/utils/blogPostsHelpers';
+import CalendarIcon from '../icons/CalendarIcon.astro';
+import ReadingTimeIcon from '../icons/ReadingTimeIcon.astro';
+import { CloudinaryImage } from './jsx';
+
+interface BlogPostCardProps {
+	post: Post;
+}
+
+const {
+	post: { publishDate, url, coverImage, title, minutesRead },
+} = Astro.props as BlogPostCardProps;
+const formattedDate = format(new Date(publishDate), 'MMMM dd, yyyy');
+---
+
+<article class="cursor-pointer hover:text-accent hover:scale-[1.03] transition-all duration-300">
+	<a href={url}>
+		<CloudinaryImage
+			publicId={`sergiobarria/banners/${coverImage}`}
+			isThumbnail
+			radius={30}
+			alt={`thumbnail for ${title} frontmatter`}
+		/>
+		<h3 class="mt-3">{title}</h3>
+		<div class="flex items-center text-neutral-400 dark:text-typography/80">
+			<p class="flex items-center space-x-2">
+				<CalendarIcon />
+				<time datetime={publishDate.toUTCString()}>{formattedDate}</time>
+			</p>
+			<span class="mx-2 text-3xl">·</span>
+			<p class="flex items-center space-x-2">
+				<ReadingTimeIcon />
+				<span>{minutesRead}</span>
+			</p>
+		</div>
+	</a>
+</article>
