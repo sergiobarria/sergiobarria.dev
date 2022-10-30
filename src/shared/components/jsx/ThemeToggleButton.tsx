@@ -77,7 +77,7 @@ export function ThemeToggleButton() {
 			return undefined;
 		}
 
-		return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+		return localStorage.getItem('theme');
 	});
 
 	useEffect(() => {
@@ -93,17 +93,26 @@ export function ThemeToggleButton() {
 	const handleClick = () => {
 		const matchesDarkTheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-		if ((matchesDarkTheme && theme === 'dark') || (!matchesDarkTheme && theme === 'light')) {
+		if (matchesDarkTheme && theme === 'dark') {
+			setTheme('light');
+			localStorage.setItem('theme', 'light');
+		} else if (matchesDarkTheme && theme === 'light') {
+			setTheme('dark');
+			localStorage.setItem('theme', 'dark');
+		} else if (!matchesDarkTheme && theme === 'light') {
+			setTheme('dark');
+			localStorage.setItem('theme', 'dark');
+		} else if (!matchesDarkTheme && theme === 'dark') {
+			setTheme('light');
 			localStorage.setItem('theme', 'light');
 		} else {
+			setTheme('dark');
 			localStorage.setItem('theme', 'dark');
 		}
-
-		setTheme(theme === 'dark' ? 'light' : 'dark');
 	};
 
 	return (
-		<div className='ml-3'>
+		<div className="ml-3">
 			<button
 				className={clsx(
 					'inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-[1px]',
