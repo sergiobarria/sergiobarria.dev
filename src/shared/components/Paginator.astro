@@ -31,22 +31,26 @@ const pagesArr = Array.from({ length: lastPage }, (_, i) => i + 1);
 			<PrevIcon />
 			<span>Prev {size}</span>
 		</a>
-		<div class="px-4 py-2">
+		<div class="flex items-center px-4 py-2 space-x-2">
 			{
-				pagesArr.map((page) => (
-					<a
-						href="/"
-						class={clsx(
-							'flex items-center space-x-1 md:space-x-3 py-1',
-							'bg-neutral-500 rounded-md px-2 md:px-4 transform',
-							{
-								'bg-accent scale-[1.05]': page === currentPage,
-							}
-						)}
-					>
-						{page}
-					</a>
-				))
+				pagesArr.map((page) => {
+					const href = page === 1 ? '/blog' : `/blog/${page}`;
+
+					return (
+						<a
+							href={href}
+							class={clsx(
+								'flex items-center space-x-1 md:space-x-3 py-1',
+								'bg-neutral-500 rounded-md px-2 md:px-4 transform',
+								{
+									'bg-accent scale-[1.05] cursor-not-allowed': page === currentPage,
+								}
+							)}
+						>
+							{page}
+						</a>
+					);
+				})
 			}
 		</div>
 		<a

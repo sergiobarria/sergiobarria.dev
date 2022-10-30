@@ -58,7 +58,7 @@ p > a:focus {
   margin-top: 4rem;
 }
 
-:is(h3, h4):not(:first-child),
+/* :is(h3, h4):not(:first-child), */
 .heading-wrapper:not(:first-child):is(.level-h3, .level-h4) {
   margin-top: 3rem;
 }

@@ -10,7 +10,7 @@ import { parseBlogPost, PostFrontmatter, sortPosts } from '~/shared/utils/blogPo
 import type { Post } from '~/shared/utils/blogPostsHelpers';
 
 interface PageProps {
-	page: Page<Post>;
+	page: Page<MDXInstance<Post>>;
 }
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
@@ -19,7 +19,7 @@ export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
 	const allPosts = await Promise.all(data.map(parseBlogPost));
 	const sortedPosts = allPosts.sort(sortPosts);
 
-	return paginate(sortedPosts, { pageSize: 10 });
+	return paginate(sortedPosts, { pageSize: 9 });
 }
 
 const { page } = Astro.props as PageProps;
