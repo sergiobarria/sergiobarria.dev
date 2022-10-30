@@ -1,20 +1,65 @@
 ---
+import type { MDXLayoutProps } from 'astro';
+import { format } from 'date-fns';
+
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import Container from '~/shared/components/Container.astro';
+import CalendarIcon from '~/shared/icons/CalendarIcon.astro';
+import ReadingTimeIcon from '~/shared/icons/ReadingTimeIcon.astro';
+import EyeIcon from '~/shared/icons/EyeIcon.astro';
 import { CloudinaryImage } from '~/shared/components/jsx';
 import type { PostFrontmatter } from '~/shared/utils/blogPostsHelpers';
 
-interface Props {
-	frontmatter: PostFrontmatter;
-}
+// interface Props {
+// 	frontmatter: PostFrontmatter;
+// }
 
-const { frontmatter } = Astro.props as Props;
+const {
+	frontmatter: { title, coverImage, summary, minutesRead, publishDate },
+} = Astro.props as MDXLayoutProps<PostFrontmatter>;
+const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 ---
 
 <BaseLayout>
-	<div class="my-8">
+	<Container as="div" class="my-8 mx-auto">
 		<!-- Header -->
+		<h1
+			class="text-center text-2xl md:text-3xl lg:text-4xl bg-[#37da00] text-white py-2 rounded-lg"
+		>
+			{title}
+		</h1>
+
+		<!-- Post Cover Image -->
+		<div class="my-6">
+			<CloudinaryImage publicId={`sergiobarria/banners/${coverImage}`} alt={title} radius={20} />
+		</div>
+
+		<!-- Post Summary -->
+		<div class="bg-neutral-200 dark:bg-neutral-500 rounded-lg p-4 my-4">
+			<p class="mb-3">
+				<span class="font-bold">Summary:</span>
+				<span class="italic font-serif">↬ {summary}</span>
+			</p>
+			<div class="flex items-center divide-x">
+				<p class="flex items-center pr-3 space-x-2">
+					<CalendarIcon />
+					<span>{formattedDate}</span>
+				</p>
+				<p class="flex items-center px-3 space-x-2">
+					<ReadingTimeIcon />
+					<span>{minutesRead}</span>
+				</p>
+				<p class="flex items-center pl-3 space-x-2">
+					<EyeIcon />
+					<!-- TODO: Add total views with airtable -->
+					<span>Views --</span>
+				</p>
+			</div>
+		</div>
+
+		<!-- Content -->
 		<article class="prose dark:prose-invert mx-auto">
 			<slot />
 		</article>
-	</div>
+	</Container>
 </BaseLayout>

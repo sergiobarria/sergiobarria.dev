@@ -116,7 +116,7 @@ export function CalloutBox({ type = 'tip', children }: CalloutBoxProps): JSX.Ele
 				{getBoxIcon(type)}
 				<span className="capitalize">{type === 'warn' ? 'Warning' : type}</span>
 			</div>
-			<div className="text-gray-700 dark:text-gray-300">{children}</div>
+			<div className="text-gray-700 dark:text-gray-300 prose-p:mb-0">{children}</div>
 		</div>
 	);
 }
