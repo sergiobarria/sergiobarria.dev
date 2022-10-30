@@ -10,11 +10,11 @@ import { parseBlogPost, PostFrontmatter, sortPosts } from '~/shared/utils/blogPo
 import type { Post } from '~/shared/utils/blogPostsHelpers';
 
 interface PageProps {
-	page: Page<MDXInstance<Post>>;
+	page: Page<Post>;
 }
 
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
-	const data = await Astro.glob<PostFrontmatter>('../../content/blog/*.mdx');
+	const data = await Astro.glob<PostFrontmatter>('./*.mdx');
 
 	const allPosts = await Promise.all(data.map(parseBlogPost));
 	const sortedPosts = allPosts.sort(sortPosts);
@@ -33,10 +33,15 @@ const { page } = Astro.props as PageProps;
 		</p>
 		<hr class="my-4 dark:border-neutral-100/10" />
 
-		<!-- TODO: Add search bar -->
-
 		<section>
-			<h2 class="mb-6">All My Posts</h2>
+			<h2 class="mb-3">All My Posts</h2>
+
+			<p class="mb-6">
+				In total, I've written <strong class="">{page.total}</strong> articles in this blog. You can
+				find them all below, or by searching for a post title.
+			</p>
+
+			<!-- TODO: Add search bar -->
 
 			<Paginator page={page} />
 

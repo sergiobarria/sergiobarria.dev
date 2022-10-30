@@ -31,11 +31,12 @@ specifiers:
   react-image-lightbox: ^5.1.4
   react-tooltip: ^4.4.2
   reading-time: ^1.5.0
+  remark-code-titles: ^0.1.2
   tailwindcss: ^3.0.24
   typescript: ^4.8.4
 
 dependencies:
-  '@astrojs/mdx': 0.11.4
+  '@astrojs/mdx': 0.11.4_rollup@2.78.1
   '@astrojs/react': 1.2.1_5uumaiclxbdbzaqafclbf6maf4
   '@astrojs/tailwind': 2.1.1_tailwindcss@3.2.0
   '@cloudinary/react': 1.5.0_react@18.2.0
@@ -55,7 +56,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-image-lightbox: 5.1.4_biqbaboplfbrettd7655fr4n2y
   react-tooltip: 4.4.2_biqbaboplfbrettd7655fr4n2y
-  tailwindcss: 3.2.0
+  tailwindcss: 3.2.0_postcss@8.4.18
 
 devDependencies:
   '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.0
@@ -68,6 +69,7 @@ devDependencies:
   prettier: 2.7.1
   prettier-plugin-astro: 0.6.0
   reading-time: 1.5.0
+  remark-code-titles: 0.1.2
   typescript: 4.8.4
 
 packages:
@@ -136,13 +138,13 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/mdx/0.11.4:
+  /@astrojs/mdx/0.11.4_rollup@2.78.1:
     resolution: {integrity: sha512-b86Fzd87OCuYUGk7O59mwq0URqLdH40wUJC5UCkFmSquIrk8QNrZ7tdjriBfF+Wq3+2UT5JO4ahxIuP6N3cczQ==}
     engines: {node: ^14.18.0 || >=16.12.0}
     dependencies:
       '@astrojs/prism': 1.0.1
       '@mdx-js/mdx': 2.1.5
-      '@mdx-js/rollup': 2.1.5
+      '@mdx-js/rollup': 2.1.5_rollup@2.78.1
       acorn: 8.8.0
       es-module-lexer: 0.10.5
       estree-util-visit: 1.2.0
@@ -209,7 +211,7 @@ packages:
       '@proload/core': 0.3.3
       autoprefixer: 10.4.12_postcss@8.4.18
       postcss: 8.4.18
-      tailwindcss: 3.2.0
+      tailwindcss: 3.2.0_postcss@8.4.18
     dev: false
 
   /@astrojs/telemetry/1.0.1:
@@ -664,13 +666,14 @@ packages:
       - supports-color
     dev: false
 
-  /@mdx-js/rollup/2.1.5:
+  /@mdx-js/rollup/2.1.5_rollup@2.78.1:
     resolution: {integrity: sha512-l90rSiwnEf6PnjH8uRXjZ1W0rR8p1fp1YIiDuA3uF7SOfxMQ98uymaIwI6BsX+8BC2dcWij7Racwp++JkvdOLQ==}
     peerDependencies:
       rollup: '>=2'
     dependencies:
       '@mdx-js/mdx': 2.1.5
       '@rollup/pluginutils': 4.2.1
+      rollup: 2.78.1
       source-map: 0.7.4
       vfile: 5.3.5
     transitivePeerDependencies:
@@ -790,7 +793,7 @@ packages:
     peerDependencies:
       tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
     dependencies:
-      tailwindcss: 3.2.0
+      tailwindcss: 3.2.0_postcss@8.4.18
     dev: true
 
   /@tailwindcss/typography/0.5.7_tailwindcss@3.2.0:
@@ -802,7 +805,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.2.0
+      tailwindcss: 3.2.0_postcss@8.4.18
     dev: false
 
   /@types/acorn/4.0.6:
@@ -4234,6 +4237,12 @@ packages:
       unified: 10.1.2
     dev: false
 
+  /remark-code-titles/0.1.2:
+    resolution: {integrity: sha512-KsHQbaI4FX8Ozxqk7YErxwmBiveUqloKuVqyPG2YPLHojpgomodWgRfG4B+bOtmn/5bfJ8khw4rR0lvgVFl2Uw==}
+    dependencies:
+      unist-util-visit: 1.4.1
+    dev: true
+
   /remark-frontmatter/4.0.1:
     resolution: {integrity: sha512-38fJrB0KnmD3E33a5jZC/5+gGAC2WKNiPw1/fdXJvijBlhA7RCsvJklrYJakS0HedninvaCYW8lQGf9C918GfA==}
     dependencies:
@@ -4639,10 +4648,12 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /tailwindcss/3.2.0:
+  /tailwindcss/3.2.0_postcss@8.4.18:
     resolution: {integrity: sha512-ARh/W0uH5UlWIC2nn02V0+5fyF0k6qZliyt4QYic2upOhPUE/Spu1EURNc9txJ3+4j8OEmdigqfDpw4d2tA4vA==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -4798,6 +4809,10 @@ packages:
     resolution: {integrity: sha512-TiWE6DVtVe7Ye2QxOVW9kqybs6cZexNwTwSMVgkfjEReqy/xwGpAXb99OxktoWwmL+Z+Epb0Dn8/GNDYP1wnUw==}
     dev: false
 
+  /unist-util-is/3.0.0:
+    resolution: {integrity: sha512-sVZZX3+kspVNmLWBPAB6r+7D9ZgAFPNWm66f7YNb420RlQSbn+n8rG8dGZSkrER7ZIXGQYNm5pqC3v3HopH24A==}
+    dev: true
+
   /unist-util-is/5.1.1:
     resolution: {integrity: sha512-F5CZ68eYzuSvJjGhCLPL3cYx45IxkqXSetCcRgUXtbcm50X2L9oOWQlfUfDdAf+6Pd27YDblBfdtmsThXmwpbQ==}
     dev: false
@@ -4843,12 +4858,24 @@ packages:
     resolution: {integrity: sha512-sA/nXwYRCQVRwZU2/tQWUqJ9JSFM1X3x7JIOsIgSzrFHcfVt6NkzDtKzyxg2cZWkCwGF9CO8x4QNZRJRMK8FeQ==}
     dev: false
 
+  /unist-util-visit-parents/2.1.2:
+    resolution: {integrity: sha512-DyN5vD4NE3aSeB+PXYNKxzGsfocxp6asDc2XXE3b0ekO2BaRUpBicbbUygfSvYfUz1IkmjFR1YF7dPklraMZ2g==}
+    dependencies:
+      unist-util-is: 3.0.0
+    dev: true
+
   /unist-util-visit-parents/5.1.1:
     resolution: {integrity: sha512-gks4baapT/kNRaWxuGkl5BIhoanZo7sC/cUT/JToSRNL1dYoXRFl75d++NkjYk4TAu2uv2Px+l8guMajogeuiw==}
     dependencies:
       '@types/unist': 2.0.6
       unist-util-is: 5.1.1
     dev: false
+
+  /unist-util-visit/1.4.1:
+    resolution: {integrity: sha512-AvGNk7Bb//EmJZyhtRUnNMEpId/AZ5Ph/KUpTI09WHQuDZHKovQ1oEv3mfmKpWKtoMzyMC4GLBm1Zy5k12fjIw==}
+    dependencies:
+      unist-util-visit-parents: 2.1.2
+    dev: true
 
   /unist-util-visit/4.1.1:
     resolution: {integrity: sha512-n9KN3WV9k4h1DxYR1LoajgN93wpEi/7ZplVe02IoB4gH5ctI1AaF2670BLHQYbwj+pY83gFtyeySFiyMHJklrg==}
