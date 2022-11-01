@@ -7,14 +7,17 @@ import Container from '~/shared/components/Container.astro';
 import CalendarIcon from '~/shared/icons/CalendarIcon.astro';
 import ReadingTimeIcon from '~/shared/icons/ReadingTimeIcon.astro';
 import EyeIcon from '~/shared/icons/EyeIcon.astro';
-import { CloudinaryImage, ViewCounter } from '~/shared/components/jsx';
+import { CloudinaryImage } from '~/shared/components/jsx';
 import type { PostFrontmatter } from '~/shared/utils/blogPostsHelpers';
 
+// interface Props {
+// 	frontmatter: PostFrontmatter;
+// }
+
 const {
-	frontmatter: { title, coverImage, summary, minutesRead, publishDate, url },
+	frontmatter: { title, coverImage, summary, minutesRead, publishDate },
 } = Astro.props as MDXLayoutProps<PostFrontmatter>;
 const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
-const slug = url?.split('/').pop() as string;
 ---
 
 <BaseLayout>
@@ -48,7 +51,8 @@ const slug = url?.split('/').pop() as string;
 				</p>
 				<p class="flex items-center pl-3 space-x-2">
 					<EyeIcon />
-					<ViewCounter slug={slug} client:load />
+					<!-- TODO: Add total views with airtable -->
+					<span>Views --</span>
 				</p>
 			</div>
 		</div>
