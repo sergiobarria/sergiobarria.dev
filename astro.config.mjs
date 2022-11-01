@@ -11,7 +11,7 @@ import {
 	tokens,
 	foregroundPrimary,
 	backgroundPrimary,
-} from './src/helpers/syntax-highlighting-theme';
+} from './lib/syntax-highlighting-theme';
 
 // https://astro.build/config
 export default defineConfig({

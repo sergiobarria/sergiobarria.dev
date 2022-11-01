@@ -11,6 +11,7 @@
     "allowSyntheticDefaultImports": true,
     // Enable stricter transpilation for better output.
     "isolatedModules": true,
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "~/*": [

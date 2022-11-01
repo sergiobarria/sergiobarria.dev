@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import type { Post } from '~/shared/utils/blogPostsHelpers';
 import CalendarIcon from '../icons/CalendarIcon.astro';
 import ReadingTimeIcon from '../icons/ReadingTimeIcon.astro';
-import { CloudinaryImage } from './jsx';
+import { CloudinaryImage, Views } from './jsx';
 
 interface BlogPostCardProps {
 	post: Post;
@@ -14,17 +14,23 @@ const {
 	post: { publishDate, url, coverImage, title, minutesRead },
 } = Astro.props as BlogPostCardProps;
 const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
+const slug = url.split('/').pop() as string;
 ---
 
-<article class="cursor-pointer hover:text-accent hover:scale-[1.03] transition-all duration-300">
+<article
+	class="relative cursor-pointer hover:scale-[1.03] transition-all duration-300"
+>
 	<a href={url}>
-		<CloudinaryImage
-			publicId={`sergiobarria/banners/${coverImage}`}
-			isThumbnail
-			radius={30}
-			alt={`thumbnail for ${title} frontmatter`}
-		/>
-		<h3 class="mt-1">{title}</h3>
+		<div class="relative">
+			<CloudinaryImage
+				publicId={`sergiobarria/banners/${coverImage}`}
+				isThumbnail
+				radius={30}
+				alt={`thumbnail for ${title} frontmatter`}
+			/>
+			<Views slug={slug} client:visible />
+		</div>
+		<h3 class="mt-1 hover:text-accent">{title}</h3>
 		<div class="flex items-center text-neutral-400 dark:text-typography/80 mt-auto">
 			<p class="flex items-center space-x-2">
 				<CalendarIcon />
