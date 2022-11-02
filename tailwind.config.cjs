@@ -8,6 +8,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['Lato', ...defaultTheme.fontFamily.sans],
+				code: ['IBM Plex Mono', 'Lato', ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				darker: 'var(--clr-darker)',
@@ -25,11 +26,36 @@ module.exports = {
 						'code::before': { content: 'none' },
 						'code::after': { content: 'none' },
 						code: {
+							fontFamily: theme('...fontFamily.code') + ' !important',
 							fontWeight: theme('fontWeight.normal'),
 							backgroundColor: theme('colors.neutral.100'),
-							paddingBlock: theme('spacing')[1],
-							paddingInline: theme('spacing')[1.5],
+							// paddingBlock: theme('spacing')[1],
+							// paddingInline: theme('spacing')[1.5],
 							borderRadius: theme('borderRadius.DEFAULT'),
+						},
+						pre: {
+							marginTop: 0,
+							borderTopLeftRadius: 0,
+						},
+					},
+				},
+				invert: {
+					css: {
+						'blockquote p:first-of-type::before': {
+							content: 'none',
+						},
+						'blockquote p:first-of-type::after': { content: 'none' },
+						'code::before': { content: 'none' },
+						'code::after': { content: 'none' },
+						code: {
+							fontWeight: theme('fontWeight.normal'),
+							backgroundColor: theme('colors.neutral.700'),
+							// paddingBlock: theme('spacing')[1],
+							// paddingInline: theme('spacing')[1.5],
+							borderRadius: theme('borderRadius.DEFAULT'),
+						},
+						'pre > code': {
+							backgroundColor: 'transparent',
 						},
 					},
 				},
@@ -42,5 +68,9 @@ module.exports = {
 	variants: {
 		typography: ['dark'],
 	},
-	plugins: [require('@tailwindcss/typography'), require('@tailwindcss/aspect-ratio')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/forms'),
+	],
 };
