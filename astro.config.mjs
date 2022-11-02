@@ -7,11 +7,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
 import { remarkReadingTime } from './src/shared/utils/remark-reading-time.mjs';
-import {
-	tokens,
-	foregroundPrimary,
-	backgroundPrimary,
-} from './src/helpers/syntax-highlighting-theme';
+import { tokens, foregroundPrimary, backgroundPrimary } from './lib/syntax-highlighting-theme';
 
 // https://astro.build/config
 export default defineConfig({

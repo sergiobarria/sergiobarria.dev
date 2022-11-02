@@ -14,7 +14,7 @@ export type Post = {
 export interface PostFrontmatter {
 	title: string;
 	summary: string;
-	publishDate: string;
+	publishDate: Date;
 	coverImage: string;
 	isFeatured: boolean;
 	minutesRead?: string;
