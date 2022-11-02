@@ -1,5 +1,5 @@
 ---
-import type { MDXLayoutProps } from 'astro';
+import type { MDXLayoutProps, MDXInstance } from 'astro';
 import { format } from 'date-fns';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
@@ -7,16 +7,18 @@ import Container from '~/shared/components/Container.astro';
 import CalendarIcon from '~/shared/icons/CalendarIcon.astro';
 import ReadingTimeIcon from '~/shared/icons/ReadingTimeIcon.astro';
 import EyeIcon from '~/shared/icons/EyeIcon.astro';
-import { CloudinaryImage } from '~/shared/components/jsx';
+import { CloudinaryImage, ViewCounter } from '~/shared/components/jsx';
 import type { PostFrontmatter } from '~/shared/utils/blogPostsHelpers';
 
-// interface Props {
-// 	frontmatter: PostFrontmatter;
-// }
+interface Props {
+	slug?: string;
+	frontmatter: PostFrontmatter;
+}
 
 const {
 	frontmatter: { title, coverImage, summary, minutesRead, publishDate },
-} = Astro.props as MDXLayoutProps<PostFrontmatter>;
+	slug,
+} = Astro.props as Props;
 const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 ---
 
@@ -51,8 +53,7 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 				</p>
 				<p class="flex items-center pl-3 space-x-2">
 					<EyeIcon />
-					<!-- TODO: Add total views with airtable -->
-					<span>Views --</span>
+					<ViewCounter client:load slug={slug as string} />
 				</p>
 			</div>
 		</div>

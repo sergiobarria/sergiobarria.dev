@@ -1,0 +1,33 @@
+---
+import type { MDXInstance, GetStaticPathsOptions, Page } from 'astro';
+import clsx from 'clsx';
+
+import BlogPostLayout from '~/layouts/BlogPostLayout.astro';
+
+import { getSlugFromFilePath } from '~/shared/utils/blogPostsHelpers';
+import type { Post } from '~/shared/utils/blogPostsHelpers';
+
+interface Props {
+	post: MDXInstance<Post>;
+}
+
+export async function getStaticPaths() {
+	const allPosts = await Astro.glob<Post>('../../content/blog/*.mdx');
+
+	return allPosts.map((post) => ({
+		params: {
+			slug: getSlugFromFilePath(post.file),
+		},
+		props: { post },
+	}));
+}
+
+const { slug } = Astro.params;
+const {
+	post: { frontmatter, Content },
+} = Astro.props as Props;
+---
+
+<BlogPostLayout frontmatter={frontmatter} slug={slug as string}>
+	<Content />
+</BlogPostLayout>

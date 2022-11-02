@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AdvancedImage, lazyload, responsive, placeholder, accessibility } from '@cloudinary/react';
+import { AdvancedImage, lazyload, responsive, placeholder } from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { fill, thumbnail } from '@cloudinary/url-gen/actions/resize';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
@@ -51,7 +51,7 @@ export function CloudinaryImage({
 				<AdvancedImage
 					style={{ width: '100%', height: '100%' }}
 					cldImg={image}
-					plugins={[lazyload(), responsive(), accessibility({}), placeholder({ mode: 'blur' })]}
+					plugins={[lazyload(), responsive(), placeholder({ mode: 'blur' })]}
 					alt={alt}
 				/>
 			</div>

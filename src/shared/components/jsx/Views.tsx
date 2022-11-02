@@ -23,13 +23,12 @@ function ViewsIcon({ className }: { className?: string }) {
 }
 
 interface ViewsProps {
-	slug?: string;
+	slug: string;
 	title?: string;
 }
 
 export function Views({ slug, title }: ViewsProps) {
-	const postSlug = slug || title?.toLowerCase().replace(/ /g, '-') || '';
-	const { views } = useViews(postSlug);
+	const { views } = useViews(slug as string);
 
 	return (
 		<span
@@ -39,7 +38,7 @@ export function Views({ slug, title }: ViewsProps) {
 			)}
 		>
 			<ViewsIcon className="w-4 h-4" />
-			<span>{views ?? '--'}</span>
+			<span className="text-xs">{views ?? '--'}</span>
 		</span>
 	);
 }

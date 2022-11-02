@@ -1,0 +1,71 @@
+---
+import clsx from 'clsx';
+
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import Container from '~/shared/components/Container.astro';
+import { BlogPostsList, SearchBar } from '~/shared/components/jsx';
+
+import { parseBlogPost, sortPosts } from '~/shared/utils/blogPostsHelpers';
+
+const data = await Astro.glob('../../content/blog/*.mdx');
+const allPosts = await Promise.all(data?.map(parseBlogPost) ?? []);
+const sortedPosts = allPosts.sort(sortPosts);
+---
+
+<BaseLayout>
+	<Container as="div" class="my-8">
+		<h1 class="mb-3">My Blog</h1>
+		<p class="prose dark:prose-invert">
+			Here are all the posts I've published since starting this blog.
+		</p>
+		<hr class="my-4 dark:border-neutral-100/10" />
+
+		<section>
+			<h2 class="mb-3">All My Posts</h2>
+
+			<p class="mb-6">
+				In total, I've written <strong class="">{allPosts.length}</strong> articles in this blog. You
+				can find them all below, or by searching for a post title.
+			</p>
+
+			<SearchBar client:load />
+
+			<section class="mt-10">
+				<BlogPostsList client:load posts={sortedPosts} />
+			</section>
+		</section>
+	</Container>
+</BaseLayout>
+
+<script type="module">
+	// This script is used to add a search bar to the blog page
+	const searchInput = document.getElementById('search-post');
+
+	function debounce(fn, timeout = 150) {
+		let timer;
+
+		return (...args) => {
+			clearTimeout(timer);
+			timer = setTimeout(() => fn.apply(this, args), timeout);
+		};
+	}
+
+	searchInput.addEventListener(
+		'input',
+		debounce((event) => {
+			const query = event.target.value.toLowerCase();
+
+			const allPosts = document.querySelectorAll('#post-item');
+
+			allPosts.forEach((post) => {
+				const title = post.querySelector('h3').textContent.toLowerCase();
+
+				if (title.includes(query)) {
+					post.classList.remove('hidden');
+				} else {
+					post.classList.add('hidden');
+				}
+			});
+		})
+	);
+</script>
