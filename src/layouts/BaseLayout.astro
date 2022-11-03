@@ -55,10 +55,8 @@ const { title } = Astro.props;
 
 			if (theme === 'light') {
 				document.documentElement.classList.remove('dark');
-				// localStorage.setItem('theme', 'light');
 			} else {
 				document.documentElement.classList.add('dark');
-				// localStorage.setItem('theme', 'dark');
 			}
 		</script>
 	</head>
@@ -70,7 +68,7 @@ const { title } = Astro.props;
 	>
 		<Header />
 		<FloatingMobileMenu client:visible currentPath={pathname} />
-		<Container as="main" class="flex-1">
+		<Container as="main" class="flex-1 mt-20">
 			<!-- This is the entry point of the app -->
 			<slot />
 		</Container>
