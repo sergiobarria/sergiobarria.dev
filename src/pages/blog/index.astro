@@ -1,6 +1,4 @@
 ---
-import clsx from 'clsx';
-
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import Container from '~/shared/components/Container.astro';
 import { BlogPostsList, SearchBar } from '~/shared/components/jsx';
@@ -36,36 +34,3 @@ const sortedPosts = allPosts.sort(sortPosts);
 		</section>
 	</Container>
 </BaseLayout>
-
-<script type="module">
-	// This script is used to add a search bar to the blog page
-	const searchInput = document.getElementById('search-post');
-
-	function debounce(fn, timeout = 150) {
-		let timer;
-
-		return (...args) => {
-			clearTimeout(timer);
-			timer = setTimeout(() => fn.apply(this, args), timeout);
-		};
-	}
-
-	searchInput.addEventListener(
-		'input',
-		debounce((event) => {
-			const query = event.target.value.toLowerCase();
-
-			const allPosts = document.querySelectorAll('#post-item');
-
-			allPosts.forEach((post) => {
-				const title = post.querySelector('h3').textContent.toLowerCase();
-
-				if (title.includes(query)) {
-					post.classList.remove('hidden');
-				} else {
-					post.classList.add('hidden');
-				}
-			});
-		})
-	);
-</script>

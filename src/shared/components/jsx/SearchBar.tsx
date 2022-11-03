@@ -1,19 +1,21 @@
-import type { ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import clsx from 'clsx';
 
 import { searchQuery as nSearchQuery } from '~/stores';
+import { useDebounce } from '~/shared/hooks';
 
 export const SearchBar = () => {
+	const [searchQuery, setSearchQuery] = useState<string>('');
+	const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
-	const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-		const query = e.target.value;
-		nSearchQuery.set(query);
-	};
+	useEffect(() => {
+		nSearchQuery.set(debouncedSearchQuery);
+	}, [debouncedSearchQuery]);
 
 	return (
 		<form>
 			<label
-				htmlFor="search-post"
+				htmlFor="search-bar"
 				className="mb-2 text-sm font-medium text-neutral-900 sr-only dark:text-neutral-300"
 			>
 				Search
@@ -37,11 +39,11 @@ export const SearchBar = () => {
 					</svg>
 				</div>
 				<input
-					id="search-post"
+					id="search-bar"
 					type="text"
 					placeholder="Search posts by names..."
 					aria-label="Search posts by names"
-					onChange={handleSearch}
+					onChange={(e) => setSearchQuery(e.target.value)}
 					className={clsx(
 						'block p-4 pl-10 w-full text-sm text-gray-900 bg-neutral-50 rounded-md',
 						'boder boder-gray-300 focus:ring-accent focus:border-accent',
