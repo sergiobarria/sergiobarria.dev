@@ -44,7 +44,7 @@ function FloatingButton({ isOpen, setIsOpen }: FloatingButtonProps): JSX.Element
 	return (
 		<div
 			className={clsx(
-				'fixed bottom-10 right-10 rounded-full z-50 sm:hidden',
+				'fixed bottom-10 right-10 rounded-full z-50 md:hidden',
 				isOpen ? 'bg-white text-accent' : 'bg-accent text-white'
 			)}
 		>
