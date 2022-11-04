@@ -21,6 +21,7 @@
 		"@cloudinary/url-gen": "^1.8.6",
 		"@fontsource/ibm-plex-mono": "^4.5.12",
 		"@fontsource/lato": "^4.5.10",
+		"@fontsource/permanent-marker": "^4.5.7",
 		"@nanostores/react": "^0.4.0",
 		"@tailwindcss/typography": "^0.5.7",
 		"@types/react": "^18.0.21",

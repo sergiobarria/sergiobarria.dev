@@ -64,10 +64,10 @@ function MenuItem({ text, href, setIsOpen, pathname }: MenuItemProps): JSX.Eleme
 	return (
 		<m.li
 			variants={menuItemVariants}
-			whileHover={{ scale: 1.1, skew: '10deg' }}
+			whileHover={{ scale: 1.1 }}
 			whileTap={{ scale: 0.95 }}
-			className={clsx('text-lg text-white hover:bg-accent', {
-				'bg-accent': href === pathname,
+			className={clsx('cursor-pointer px-6 py-4 font-semibold', {
+				'bg-accent': pathname === href,
 			})}
 			onClick={() => setIsOpen(false)}
 		>
@@ -88,11 +88,7 @@ function Navigation({ isOpen, setIsOpen, pathname }: NavigationProps): JSX.Eleme
 	return (
 		<m.ul
 			variants={navigationVariants}
-			className={clsx(
-				'fixed inset-0 z-20 space-y-8 text-center transform',
-				'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-				!isOpen && 'hidden'
-			)}
+			className={clsx('divide-y divide-neutral-500/50', !isOpen && 'hidden')}
 		>
 			{navigationLinks.map((link) => {
 				return (
@@ -147,11 +143,11 @@ export function FloatingMobileMenu({ currentPath }: FloatingMobileMenuProps): JS
 			className="md:hidden"
 		>
 			<m.div
-				className="fixed inset-0 z-10 bg-accent dark:bg-lighter sm:hidden"
+				className="fixed inset-0 z-10 bg-accent dark:bg-lighter flex flex-col justify-center sm:hidden"
 				variants={sidebar}
-			/>
-
-			<Navigation isOpen={isOpen} setIsOpen={setIsOpen} pathname={currentPath} />
+			>
+				<Navigation isOpen={isOpen} setIsOpen={setIsOpen} pathname={currentPath} />
+			</m.div>
 
 			<FloatingButton isOpen={isOpen} setIsOpen={setIsOpen} />
 		</m.nav>

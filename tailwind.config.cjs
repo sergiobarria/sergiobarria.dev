@@ -9,6 +9,7 @@ module.exports = {
 			fontFamily: {
 				sans: ['Lato', ...defaultTheme.fontFamily.sans],
 				code: ['IBM Plex Mono', 'Lato', ...defaultTheme.fontFamily.sans],
+				marker: ['Permanent Marker', 'cursive', ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				darker: 'var(--clr-darker)',

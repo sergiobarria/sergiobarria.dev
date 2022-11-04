@@ -8,6 +8,7 @@ specifiers:
   '@cloudinary/url-gen': ^1.8.6
   '@fontsource/ibm-plex-mono': ^4.5.12
   '@fontsource/lato': ^4.5.10
+  '@fontsource/permanent-marker': ^4.5.7
   '@nanostores/react': ^0.4.0
   '@tailwindcss/aspect-ratio': ^0.4.2
   '@tailwindcss/forms': ^0.5.3
@@ -51,6 +52,7 @@ dependencies:
   '@cloudinary/url-gen': 1.8.6
   '@fontsource/ibm-plex-mono': 4.5.12
   '@fontsource/lato': 4.5.10
+  '@fontsource/permanent-marker': 4.5.7
   '@nanostores/react': 0.4.0_kumziggp74xxkphhh7wyh33hzm
   '@tailwindcss/typography': 0.5.7_tailwindcss@3.2.1
   '@types/react': 18.0.24
@@ -609,6 +611,10 @@ packages:
 
   /@fontsource/lato/4.5.10:
     resolution: {integrity: sha512-2hYR6r661Cq9B8zugtu6yxuOKqrVhAgfOSaPSq8XoxbC4ebsl0KOTy/vPoP+9U7JuQVLfrmikirW4a9Z0nDUug==}
+    dev: false
+
+  /@fontsource/permanent-marker/4.5.7:
+    resolution: {integrity: sha512-1WFV2w9zBFaQ2BIH9xUq+9sRFs+uVg/QDLCSOOHrmIQPhAg0YHRoqCqAXxhHPnzqCp2Ai9d7ASRQZxbDhb6Itw==}
     dev: false
 
   /@humanwhocodes/config-array/0.11.7:
