@@ -2,7 +2,7 @@ import { Fragment, useState, useEffect, useMemo } from 'react';
 import { useStore } from '@nanostores/react';
 
 import { Pagination } from './Pagination';
-import type { Post } from '~/shared/utils/blogPostsHelpers';
+import type { Post } from '~/pages/blog/_utils';
 import { BlogPostCard } from './BlogPostCard';
 import { posts as nPosts, searchQuery as nSearchQuery } from '~/stores';
 

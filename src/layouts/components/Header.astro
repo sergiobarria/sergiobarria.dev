@@ -32,8 +32,8 @@ const { navLinks } = site;
 								class={clsx(
 									{
 										'font-bold bg-neutral-300 dark:bg-neutral-500 dark:text-typography':
-											pathname === link.href,
-										'nav-link': pathname !== link.href,
+											pathname === link.href || pathname.startsWith(link.href),
+										'nav-link': !pathname.startsWith(link.href),
 									},
 									'px-4 py-1 rounded-md'
 								)}

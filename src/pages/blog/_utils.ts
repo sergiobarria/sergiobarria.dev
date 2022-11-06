@@ -1,30 +1,19 @@
-import path from 'node:path';
 import type { MDXInstance } from 'astro';
 
-export type Post = {
-	url: string;
-	title: string;
-	summary: string;
-	publishDate: Date;
-	coverImage: string;
-	isFeatured: boolean;
-	minutesRead: string;
-};
+import { urlFromContentUrl } from '~/shared/utils/helpers';
 
-export interface PostFrontmatter {
+export type PostFrontmatter = {
 	title: string;
 	summary: string;
 	publishDate: Date;
 	coverImage: string;
 	isFeatured: boolean;
 	minutesRead?: string;
-}
-
-export const getSlugFromFilePath = (file: string) => path.parse(file).name;
-export const urlFromContentUrl = (url: string) => {
-	const { dir, name } = path.parse(url);
-	return path.join(dir.replace('src/content', ''), name);
 };
+
+export type Post = {
+	url: string;
+} & PostFrontmatter;
 
 export async function parseBlogPost({
 	url,

@@ -2,12 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SocialLinks from '~/shared/components/SocialLinks.astro';
 import Container from '~/shared/components/Container.astro';
+import { FeaturedPostCard } from '~/shared/components/jsx';
+import { parseBlogPost } from './blog/_utils';
+
+const data = await Astro.glob('../content/blog/*.mdx');
+const allPosts = await Promise.all(data?.map(parseBlogPost) ?? []);
+const featuredPosts = allPosts.filter((post) => post.isFeatured);
+
+const gradients = [
+	'from-[#a952f6] via-[#9efbd8] to-[#17bb88]',
+	'from-[#7a7176] via-[#509ce6] to-[#e5ac66]',
+	'from-[#f9646a] via-[#dfc5e8] to-[#e3b59a]',
+];
 ---
 
 <BaseLayout title="Home | Sergio Barria">
-	<Container as="div" class="my-8">
-		<!-- <div class="container space-y-6 max-w-screen-md mx-auto my-8"> -->
-		<!-- Hero Section -->
+	<Container as="div" class="my-8 space-y-10">
 		<section>
 			<div class="flex gap-x-16 items-center justify-between">
 				<div class="flex-[2]">
@@ -23,20 +33,55 @@ import Container from '~/shared/components/Container.astro';
 				<div class="flex-1 hidden md:flex items-center justify-center h-full">
 					<div class="relative w-full">
 						<div class="absolute w-30 h-30 inset-0 rounded-full opacity-70 hero-blob"></div>
-						<div>
-							<img
-								src="https://res.cloudinary.com/sbarria-dev/image/upload/c_scale,f_auto,q_auto,w_362/v1658762124/sergiobarria/hero_nqdmcv.webp"
-								width={2000}
-								alt="hero image"
-							/>
-						</div>
+						<img
+							src="https://res.cloudinary.com/sbarria-dev/image/upload/c_scale,f_auto,q_auto,w_362/v1658762124/sergiobarria/hero_nqdmcv.webp"
+							width={2000}
+							alt="hero image"
+						/>
 					</div>
 				</div>
 			</div>
 		</section>
 
 		<!-- Featured Posts -->
-		<section></section>
+		<section>
+			<h2>Featured Posts</h2>
+			<div class="flex flex-col gap-6 md:flex-row my-6">
+				{
+					featuredPosts.map((post, i) => {
+						const { title, url, minutesRead } = post;
+						const gradient = gradients[i];
+
+						return (
+							<FeaturedPostCard
+								client:visible
+								title={title}
+								url={url}
+								readingTime={minutesRead as string}
+								gradient={gradient}
+							/>
+						);
+					})
+				}
+			</div>
+			<a
+				href="/blog"
+				class="inline-flex justify-center items-center px-3 py-2 text-base font-medium text-gray-500 bg-gray-50 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white"
+			>
+				<span class="w-full">See all posts</span>
+				<svg
+					aria-hidden="true"
+					class="ml-3 w-6 h-6"
+					fill="currentColor"
+					viewBox="0 0 20 20"
+					xmlns="http://www.w3.org/2000/svg"
+					><path
+						fill-rule="evenodd"
+						d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+						clip-rule="evenodd"></path>
+				</svg>
+			</a>
+		</section>
 
 		<!-- Featured Projects -->
 		<section></section>
