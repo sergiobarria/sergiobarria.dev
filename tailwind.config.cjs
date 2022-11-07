@@ -14,7 +14,7 @@ module.exports = {
 			colors: {
 				darker: 'var(--clr-darker)',
 				lighter: 'var(--clr-lighter)',
-				accent: 'var(--clr-accent)',
+				accent: 'rgb(var(--tw-accent-p1) / <alpha-value>)',
 				typography: 'var(--clr-typography)',
 			},
 			typography: (theme) => ({
@@ -30,8 +30,6 @@ module.exports = {
 							fontFamily: theme('...fontFamily.code') + ' !important',
 							fontWeight: theme('fontWeight.normal'),
 							backgroundColor: theme('colors.neutral.100'),
-							// paddingBlock: theme('spacing')[1],
-							// paddingInline: theme('spacing')[1.5],
 							borderRadius: theme('borderRadius.DEFAULT'),
 						},
 						pre: {
@@ -51,8 +49,6 @@ module.exports = {
 						code: {
 							fontWeight: theme('fontWeight.normal'),
 							backgroundColor: theme('colors.neutral.700'),
-							// paddingBlock: theme('spacing')[1],
-							// paddingInline: theme('spacing')[1.5],
 							borderRadius: theme('borderRadius.DEFAULT'),
 						},
 						'pre > code': {
