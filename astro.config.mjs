@@ -1,10 +1,10 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import remarkCodeTitles from 'remark-code-titles';
 
 // Integrations
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
+import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import { remarkReadingTime } from './src/shared/utils/remark-reading-time.mjs';
 import { tokens, foregroundPrimary, backgroundPrimary } from './lib/syntax-highlighting-theme';
@@ -13,11 +13,6 @@ import { tokens, foregroundPrimary, backgroundPrimary } from './lib/syntax-highl
 export default defineConfig({
 	site: 'https://sergiobarria.com',
 	integrations: [
-		tailwind({
-			config: {
-				applyBaseStyles: true,
-			},
-		}),
 		react(),
 		mdx({
 			extendPlugins: 'markdown',
@@ -37,12 +32,13 @@ export default defineConfig({
 		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
 	},
 	vite: {
+		plugins: [vanillaExtractPlugin()],
 		server: {
 			open: true,
 		},
 	},
 	server: {
 		host: 'localhost',
-		port: 3000,
+		port: 3001,
 	},
 });
