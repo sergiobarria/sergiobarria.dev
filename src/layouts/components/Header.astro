@@ -1,8 +1,8 @@
 ---
 import clsx from 'clsx';
 
-import { ThemeToggleButton } from '~/shared/components/jsx/ThemeToggleButton';
 import { LogoIcon } from './jsx';
+import ThemeToggle from './ThemeToggle.astro';
 
 import site from '../../../site.json';
 
@@ -11,40 +11,78 @@ const pathname = new URL(Astro.request.url).pathname;
 const { navLinks } = site;
 ---
 
-<header class="fixed top-0 left-0 right-0 z-10 backdrop-blur-sm dark:bg-[#1F2028]/30">
-	<div class="container mx-auto max-w-screen-lg px-4 lg:px-0 py-4">
-		<div class="flex items-center justify-between">
-			<div>
-				<a href="/">
-					<div class="relative h-8 w-20">
-						<div class="absolute inset-0 text-neutral-700 dark:text-neutral-200">
-							<LogoIcon />
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="flex items-center space-x-3">
-				<nav class="space-x-3 hidden md:flex">
+<style lang="scss">
+	.header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: flex;
+		align-items: center;
+		height: var(--size-9);
+		width: 100%;
+		backdrop-filter: blur(10px);
+		z-index: 100;
+
+		background-color: var(--surface1);
+
+		&__container {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: var(--size-1) 0;
+			width: min(100% - 2rem, 64rem);
+			margin-inline: auto;
+		}
+
+		&__logo {
+			width: 5rem;
+			color: var(--text1);
+		}
+
+		&__nav {
+			display: flex;
+			align-items: center;
+			gap: var(--size-6);
+
+			& ul {
+				display: flex;
+				align-items: center;
+				gap: var(--size-4);
+
+				@media (max-width: 768px) {
+					display: none;
+				}
+			}
+
+			& li {
+				font-size: var(--font-size-1);
+			}
+		}
+	}
+</style>
+
+<header class="header">
+	<div class="header__container">
+		<div class="header__logo">
+			<a href="/" class="logo">
+				<LogoIcon />
+			</a>
+		</div>
+		<div class="header__nav">
+			<nav>
+				<ul>
 					{
-						navLinks.map((link) => (
-							<a
-								href={link.href}
-								class={clsx(
-									{
-										'font-bold bg-neutral-300 dark:bg-neutral-500 dark:text-typography':
-											pathname === link.href || pathname.startsWith(link.href),
-										'nav-link': !pathname.startsWith(link.href),
-									},
-									'px-4 py-1 rounded-md'
-								)}
-							>
-								{link.label}
-							</a>
-						))
+						navLinks.map((link) => {
+							return (
+								<li>
+									<a href={link.href}>{link.label}</a>
+								</li>
+							);
+						})
 					}
-				</nav>
-				<ThemeToggleButton client:visible />
-			</div>
+				</ul>
+			</nav>
+			<ThemeToggle />
 		</div>
 	</div>
 </header>

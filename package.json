@@ -60,11 +60,13 @@
 		"eslint": "^8.25.0",
 		"eslint-plugin-astro": "^0.20.0",
 		"mdast-util-to-string": "^3.1.0",
+		"open-props": "^1.4.24",
 		"polished": "^4.2.2",
 		"prettier": "^2.7.1",
 		"prettier-plugin-astro": "^0.6.0",
 		"reading-time": "^1.5.0",
 		"remark-code-titles": "^0.1.2",
+		"sass": "^1.56.1",
 		"typescript": "^4.8.4"
 	}
 }

@@ -7,7 +7,15 @@ import { navLinks } from '../../../site.json';
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
-<footer>
+<style>
+	.footer {
+		margin-top: auto;
+	}
+</style>
+
+<footer class="footer">App footer</footer>
+
+<!-- <footer>
 	<div
 		class="container mx-auto max-w-screen-lg border-t-[1px] border-neutral-300 dark:border-neutral-300/10 pt-8 pb-4"
 	>
@@ -67,4 +75,4 @@ const pathname = new URL(Astro.request.url).pathname;
 			</div>
 		</div>
 	</div>
-</footer>
+</footer> -->

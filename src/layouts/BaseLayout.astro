@@ -9,7 +9,8 @@ import Footer from './components/Footer.astro';
 import Container from '~/shared/components/Container.astro';
 import { FloatingMobileMenu } from './components/jsx';
 
-import '~/styles/index.css';
+// import '~/styles/index.css';
+import '~/styles/main.scss';
 
 import site from '../../site.json';
 
@@ -24,7 +25,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en" class="" data-theme="light">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -39,7 +40,7 @@ const { title } = Astro.props;
 		<Tooltips interactive={false} />
 
 		<!-- Scripts -->
-		<script is:inline>
+		<!-- <script is:inline>
 			const theme = (() => {
 				if (typeof localStorage !== 'undefined' && !localStorage.getItem('theme')) {
 					localStorage.setItem('theme', 'dark');
@@ -61,9 +62,31 @@ const { title } = Astro.props;
 			} else {
 				document.documentElement.classList.add('dark');
 			}
-		</script>
+		</script> -->
+		<style>
+			body {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+			}
+
+			main {
+				margin-top: var(--size-9);
+				padding-top: var(--size-6);
+				width: min(100% - 2rem, 64rem);
+				margin-inline: auto;
+			}
+		</style>
 	</head>
-	<body
+
+	<body>
+		<Header />
+		<main>
+			<!-- This slot is the entry point of the application -->
+			<slot />
+		</main>
+		<Footer />
+	</body><!-- <body
 		class={clsx(
 			'antialiased flex flex-col text-neutral-800 dark:text-typography min-h-screen',
 			'transition-colors duration-300 ease-in-out dark:bg-[#1F2028]'
@@ -72,9 +95,9 @@ const { title } = Astro.props;
 		<Header />
 		<FloatingMobileMenu client:visible currentPath={pathname} />
 		<Container as="main" class="flex-1 mt-20">
-			<!-- This is the entry point of the app -->
+			
 			<slot />
 		</Container>
 		<Footer />
-	</body>
+	</body> -->
 </html>
