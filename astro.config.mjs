@@ -4,7 +4,6 @@ import remarkCodeTitles from 'remark-code-titles';
 // Integrations
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
-import { vanillaExtractPlugin } from '@vanilla-extract/vite-plugin';
 
 import { remarkReadingTime } from './src/shared/utils/remark-reading-time.mjs';
 import { tokens, foregroundPrimary, backgroundPrimary } from './lib/syntax-highlighting-theme';
@@ -32,7 +31,6 @@ export default defineConfig({
 		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
 	},
 	vite: {
-		plugins: [vanillaExtractPlugin()],
 		server: {
 			open: true,
 		},

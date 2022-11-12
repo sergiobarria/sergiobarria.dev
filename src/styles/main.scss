@@ -8,10 +8,14 @@
 
 // Theme colors
 :root {
-	--brand: var(--red-7);
+	--brand: #651ef4;
+	--brand-dimmed: #7435f5;
+	--accent: #ffbc2f;
 
 	--text1: var(--gray-8);
 	--text2: var(--gray-7);
+
+	--icon-fill: var(--gray-7);
 
 	--border-color: var(--gray-3);
 
@@ -25,22 +29,24 @@
 }
 
 html[data-theme='dark'] {
-	// --brand: #da0037;
-	--brand: var(--grape-6);
-	--brand-dimmed: var(--grape-5);
+	--brand: #651ef4;
+	--brand-dimmed: #7435f5;
+	--accent: #ffbc2f;
 
 	--text1: var(--gray-1);
 	--text2: var(--gray-3);
 
-	--border-color: var(--gray-7);
+	--icon-fill: var(--gray-3);
+
+	--border-color: #7435f5;
 
 	--link: var(--gray-1);
 	--link-visited: var(--gray-1);
 
-	--surface1: var(--gray-9);
-	--surface2: var(--gray-8);
-	--surface3: var(--gray-7);
-	--surface4: var(--gray-6);
+	--surface1: #1c1e2b;
+	--surface2: #333540;
+	--surface3: #494b55;
+	--surface4: #60626b;
 }
 
 // Globals
@@ -100,9 +106,13 @@ html {
 	}
 }
 
-:where(a[href]):visited {
-	color: inherit;
-}
+// a, a:visited, a:hover, a:active {
+//   color: inherit;
+// }
+
+// :where(a[href]):visited {
+// 	color: inherit;
+// }
 
 a {
 	all: unset;

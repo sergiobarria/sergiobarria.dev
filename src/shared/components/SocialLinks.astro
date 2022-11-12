@@ -14,7 +14,6 @@ const { size = 'medium' } = Astro.props as Props;
 	.container {
 		display: flex;
 		flex-direction: row;
-		justify-content: center;
 		align-items: center;
 		gap: var(--size-3);
 		margin: var(--size-2) 0;
@@ -26,7 +25,7 @@ const { size = 'medium' } = Astro.props as Props;
 		position: relative;
 
 		& > span {
-			color: var(--text-2);
+			color: var(--icon-fill);
 
 			&:hover {
 				color: var(--brand);

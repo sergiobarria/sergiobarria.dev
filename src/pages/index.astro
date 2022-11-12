@@ -1,7 +1,138 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import SocialLinks from '~/shared/components/SocialLinks.astro';
 ---
 
-<BaseLayout>
-	<div>hello world!</div>
+<style lang="scss">
+	.homepage {
+		& > section:not(:first-child) {
+			margin-top: var(--size-6);
+			margin-bottom: var(--size-6);
+		}
+
+		h1 {
+			font-size: var(--font-size-fluid-3);
+			color: var(--text1);
+		}
+
+		h2 {
+			font-size: var(--font-size-fluid-2);
+			color: var(--text1);
+		}
+	}
+
+	.hero {
+		&__container {
+			display: flex;
+			align-items: center;
+			gap: var(--size-6);
+		}
+
+		&__leftSide {
+			&-subtitle {
+				font-size: var(--font-size-2);
+				color: var(--text2);
+				opacity: 0.6;
+				margin-bottom: var(--size-3);
+			}
+
+			&-paragraph {
+				font-size: var(--font-size-3);
+				margin-bottom: var(--size-3);
+			}
+		}
+
+		&__rightSide {
+			width: 100%;
+			max-width: 300px;
+			// background-color: yellow;
+			aspect-ratio: var(--ratio-square);
+		}
+
+		&__image {
+			position: relative;
+			width: 100%;
+			height: 100%;
+
+			& > img {
+				z-index: 10;
+			}
+		}
+	}
+
+	.name {
+		color: var(--accent);
+	}
+
+	.blob {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		// background-color: crimson;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.3;
+			filter: blur(15px);
+			background: #fff;
+
+			transition: 0.5s ease;
+			-webkit-animation: blob 12s linear infinite alternate;
+			animation: blob 12s linear infinite alternate;
+		}
+
+		&:before {
+			background: linear-gradient(165deg, var(--brand), var(--accent));
+		}
+	}
+</style>
+
+<BaseLayout title="Home | Sergio Barria">
+	<div class="homepage">
+		<section id="hero">
+			<div class="hero__container">
+				<div class="hero__leftSide">
+					<h1>Hi, My name is <span class="name">Sergio</span> 👋🏼</h1>
+					<p class="hero__leftSide-subtitle">Web & Mobile Full-Stack Developer</p>
+					<p class="hero__leftSide-paragraph">
+						I work with the JavaScript ecosystem, I love to learn new things and share my knowledge
+						with others. Welcome to my small space of the internet, where I write and share about
+						different topics related to the web.
+					</p>
+					<SocialLinks size="medium" />
+				</div>
+				<div class="hero__rightSide">
+					<div class="hero__image">
+						<div class="blob"></div>
+						<picture>
+							<img
+								src="https://res.cloudinary.com/sbarria-dev/image/upload/v1668232848/sergiobarria/spaceship-launch_lsag8o.png"
+								alt=""
+							/>
+						</picture>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="about">
+			<h2>About Me</h2>
+		</section>
+		<section id="feat-posts">
+			<h2>Featured Posts</h2>
+		</section>
+		<section id="feat-projects">
+			<h2>Featured Projects</h2>
+		</section>
+		<section id="doing-now">
+			<h2>What I'm Doing Now</h2>
+		</section>
+	</div>
 </BaseLayout>

@@ -8,4 +8,3 @@ export * from './SearchBar';
 export * from './FeaturedPostCard';
 export * from './FeaturedReposList';
 export * from './AboutMeTabs';
-export * from './TagsCloud';

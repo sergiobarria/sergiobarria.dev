@@ -8,7 +8,7 @@
     justify-content: center;
     padding: var(--size-1);
     border-radius: var(--radius-2);
-    background-color: var(--surface4);
+    background-color: var(--brand-dimmed);
   }
 
 	.theme-toggle {
@@ -45,19 +45,19 @@
 		}
 
 		& > :is(.moon, .sun) {
-			fill: var(--text1);
+			fill: var(--accent);
 
 			&:is(:hover, :focus-visible) {
-				fill: var(--text2);
+				opacity: 0.8;
 			}
 		}
 
 		& > .sun-beams {
-			stroke: var(--text1);
+			stroke: var(--accent);
 			stroke-width: 1px;
 
 			&:is(:hover, :focus-visible) {
-				stroke: var(--text2);
+				opacity: 0.8;
 			}
 		}
 

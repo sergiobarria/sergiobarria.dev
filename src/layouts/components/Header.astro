@@ -20,10 +20,11 @@ const { navLinks } = site;
 		align-items: center;
 		height: var(--size-9);
 		width: 100%;
-		backdrop-filter: blur(10px);
 		z-index: 100;
 
-		background-color: var(--surface1);
+		background: rgba(var(--surface1), 0.25);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 
 		&__container {
 			display: flex;
@@ -100,7 +101,7 @@ const { navLinks } = site;
 	}
 
 	.link-active {
-		color: var(--brand);
+		color: var(--accent) !important;
 		font-weight: 600;
 	}
 </style>

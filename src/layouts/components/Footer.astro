@@ -17,12 +17,14 @@ const pathname = new URL(Astro.request.url).pathname;
 			align-items: center;
 			justify-content: center;
 			padding: var(--size-4) 0;
-			border: solid var(--border-size-1) var(--border-color);
+			width: min(100% - 2rem, 64rem);
+			margin-inline: auto;
+			border-top: solid var(--border-size-1) var(--border-color);
 
 			&-navLinks {
 				display: flex;
-				gap: var(--size-4);
-				font-size: var(--font-size-0);
+				gap: var(--size-6);
+				font-size: calc(var(--font-size-5) / 2);
 				color: var(--brand);
 				list-style: none;
 				padding: var(--size-1) 0;
@@ -41,7 +43,7 @@ const pathname = new URL(Astro.request.url).pathname;
 			color: var(--text2);
 
 			& > a {
-				color: var(--brand);
+				color: var(--accent);
 
 				&:hover {
 					opacity: 0.8;
@@ -53,7 +55,7 @@ const pathname = new URL(Astro.request.url).pathname;
 	.link-inactive {
 		position: relative;
 		display: inline-block;
-		color: var(--brand);
+		color: var(--accent) !important;
 
 		&:hover {
 			opacity: 0.9;
@@ -65,7 +67,7 @@ const pathname = new URL(Astro.request.url).pathname;
 			left: 0;
 			width: 100%;
 			height: 2px;
-			background-color: var(--brand);
+			background-color: var(--accent);
 			transform: scaleX(0);
 			transition: transform 0.25s ease-in-out;
 			bottom: -2px;
@@ -79,7 +81,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
 	.link-active {
 		background-color: var(--surface3);
-		padding: 0 var(--size-1);
+		padding: 0 var(--size-2);
 		border-radius: var(--radius-1);
 	}
 </style>
