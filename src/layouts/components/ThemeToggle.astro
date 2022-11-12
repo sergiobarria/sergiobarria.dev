@@ -2,11 +2,20 @@
 ---
 
 <style lang="scss">
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--size-1);
+    border-radius: var(--radius-2);
+    background-color: var(--surface4);
+  }
+
 	.theme-toggle {
 		--size: var(--size-7);
 
 		@media (hover: none) {
-			--size: var(--size-8);
+			--size: var(--size-7);
 		}
 
 		background: none;
@@ -72,7 +81,7 @@
 	}
 </style>
 
-<div title="Toggle theme" data-tooltip-placement="top">
+<div class="toggle-container" title="Toggle theme" data-tooltip-placement="top">
 	<button id="theme-toggle" class="theme-toggle" aria-label="auto" aria-live="polite">
 		<svg class="sun-and-moon" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24">
 			<circle class="sun" cx="12" cy="12" r="6" mask="url(#moon-mask)" fill="currentColor"></circle>

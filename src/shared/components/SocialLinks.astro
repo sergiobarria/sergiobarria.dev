@@ -10,28 +10,62 @@ export interface Props {
 const { size = 'medium' } = Astro.props as Props;
 ---
 
-<div class="flex items-center mb-3 space-x-6 h-8 transition-colors duration-200">
+<style lang="scss">
+	.container {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		gap: var(--size-3);
+		margin: var(--size-2) 0;
+
+		transition: color 0.2s ease-in-out;
+	}
+
+	.icon-container {
+		position: relative;
+
+		& > span {
+			color: var(--text-2);
+
+			&:hover {
+				color: var(--brand);
+			}
+		}
+	}
+
+	.small {
+		width: var(--size-5);
+		height: var(--size-5);
+	}
+
+	.medium {
+		width: var(--size-6);
+		height: var(--size-6);
+	}
+
+	.large {
+		width: var(--size-7);
+		height: var(--size-7);
+	}
+</style>
+
+<div class="container">
 	<a
 		href={socialLinks.find((link) => link.name === 'github')?.url}
 		target="_blank"
 		rel="noopener noreferrer"
 	>
 		<div
-			class={clsx('relative', {
-				'w-6 h-6': size === 'small',
-				'w-8 h-8': size === 'medium',
-				'w-10 h-10': size === 'large',
+			class={clsx('icon-container', {
+				small: size === 'small',
+				medium: size === 'medium',
+				large: size === 'large',
 			})}
 			title="My GitHub"
 			data-tooltip-placement="top"
 		>
-			<span
-				class={clsx(
-					'absolute inset-0 text-neutral-700 dark:text-neutral-200',
-					'hover:text-[#24292f] dark:hover:text-[#565b62]',
-					'transition-colors duration-200'
-				)}
-			>
+			<span>
 				<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 					<title>GitHub</title>
 					<path
@@ -48,21 +82,15 @@ const { size = 'medium' } = Astro.props as Props;
 		rel="noopener noreferrer"
 	>
 		<div
-			class={clsx('relative', {
-				'w-6 h-6': size === 'small',
-				'w-8 h-8': size === 'medium',
-				'w-10 h-10': size === 'large',
+			class={clsx('icon-container', {
+				small: size === 'small',
+				medium: size === 'medium',
+				large: size === 'large',
 			})}
 			title="My Twitter"
 			data-tooltip-placement="top"
 		>
-			<span
-				class={clsx(
-					'absolute inset-0 text-neutral-700 dark:text-neutral-200',
-					'hover:text-[#1DA1F2] dark:hover:text-[#1DA1F2]',
-					'transition-colors duration-200'
-				)}
-			>
+			<span>
 				<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 					<title>Twitter</title>
 					<path
@@ -79,21 +107,15 @@ const { size = 'medium' } = Astro.props as Props;
 		rel="noopener noreferrer"
 	>
 		<div
-			class={clsx('relative', {
-				'w-6 h-6': size === 'small',
-				'w-8 h-8': size === 'medium',
-				'w-10 h-10': size === 'large',
+			class={clsx('icon-container', {
+				small: size === 'small',
+				medium: size === 'medium',
+				large: size === 'large',
 			})}
 			title="My LinkedIn"
 			data-tooltip-placement="top"
 		>
-			<span
-				class={clsx(
-					'absolute inset-0 text-neutral-700 dark:text-neutral-200',
-					'hover:text-[#0A66C2] dark:hover:text-[#0A66C2]',
-					'transition-colors duration-200'
-				)}
-			>
+			<span>
 				<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 					<title>LinkedIn</title>
 					<path

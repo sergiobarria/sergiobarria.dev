@@ -1,15 +1,14 @@
 ---
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
-import clsx from 'clsx';
+import '@fontsource/permanent-marker';
+
 import { Tooltips } from 'astro-tooltips';
 
 import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
-import Container from '~/shared/components/Container.astro';
 import { FloatingMobileMenu } from './components/jsx';
 
-// import '~/styles/index.css';
 import '~/styles/main.scss';
 
 import site from '../../site.json';
@@ -37,32 +36,8 @@ const { title } = Astro.props;
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
 
-		<Tooltips interactive={false} />
+		<Tooltips interactive={false} delay={[15, 14000]} />
 
-		<!-- Scripts -->
-		<!-- <script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && !localStorage.getItem('theme')) {
-					localStorage.setItem('theme', 'dark');
-				}
-
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-
-				return 'light';
-			})();
-
-			if (theme === 'light') {
-				document.documentElement.classList.remove('dark');
-			} else {
-				document.documentElement.classList.add('dark');
-			}
-		</script> -->
 		<style>
 			body {
 				display: flex;
@@ -81,23 +56,11 @@ const { title } = Astro.props;
 
 	<body>
 		<Header />
+		<FloatingMobileMenu client:visible currentPath={pathname} />
 		<main>
 			<!-- This slot is the entry point of the application -->
 			<slot />
 		</main>
 		<Footer />
-	</body><!-- <body
-		class={clsx(
-			'antialiased flex flex-col text-neutral-800 dark:text-typography min-h-screen',
-			'transition-colors duration-300 ease-in-out dark:bg-[#1F2028]'
-		)}
-	>
-		<Header />
-		<FloatingMobileMenu client:visible currentPath={pathname} />
-		<Container as="main" class="flex-1 mt-20">
-			
-			<slot />
-		</Container>
-		<Footer />
-	</body> -->
+	</body>
 </html>

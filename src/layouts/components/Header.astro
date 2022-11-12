@@ -42,9 +42,9 @@ const { navLinks } = site;
 		&__nav {
 			display: flex;
 			align-items: center;
-			gap: var(--size-6);
+			gap: var(--size-8);
 
-			& ul {
+			& nav {
 				display: flex;
 				align-items: center;
 				gap: var(--size-4);
@@ -56,8 +56,52 @@ const { navLinks } = site;
 
 			& li {
 				font-size: var(--font-size-1);
+				padding: var(--size-1) var(--size-2);
 			}
 		}
+	}
+
+	.link {
+		position: relative;
+		display: inline-block;
+
+		& > a {
+			text-decoration: none;
+			color: var(--text1);
+		}
+
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background-color: var(--brand);
+			transform: scaleX(0);
+			transition: transform 0.3s ease;
+		}
+
+		&::before {
+			top: -2px;
+			transform-origin: left;
+		}
+
+		&::after {
+			bottom: -2px;
+			transform-origin: right;
+		}
+
+		&:hover::before,
+		&:hover::after {
+			transform: scaleX(1);
+		}
+	}
+
+	.link-active {
+		color: var(--brand);
+		font-weight: 600;
 	}
 </style>
 
@@ -70,17 +114,21 @@ const { navLinks } = site;
 		</div>
 		<div class="header__nav">
 			<nav>
-				<ul>
-					{
-						navLinks.map((link) => {
-							return (
-								<li>
-									<a href={link.href}>{link.label}</a>
-								</li>
-							);
-						})
-					}
-				</ul>
+				{
+					navLinks.map((link) => {
+						return (
+							<a
+								href={link.href}
+								class={clsx({
+									link: link.href !== pathname,
+									'link-active': link.href === pathname,
+								})}
+							>
+								{link.label}
+							</a>
+						);
+					})
+				}
 			</nav>
 			<ThemeToggle />
 		</div>

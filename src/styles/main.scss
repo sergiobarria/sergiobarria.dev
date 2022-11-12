@@ -1,15 +1,22 @@
-// Open Props imports
 @import 'open-props/style';
 
-// Optionals
-// @import 'open-props/normalize';
+// Open Props Optionals
+@import 'open-props/normalize';
+
+// Partials
+@import './animations';
 
 // Theme colors
 :root {
-	--brand: var(--lime-2);
+	--brand: var(--red-7);
 
 	--text1: var(--gray-8);
 	--text2: var(--gray-7);
+
+	--border-color: var(--gray-3);
+
+	--link: var(--gray-8);
+	--link-visited: var(--gray-8);
 
 	--surface1: var(--gray-2);
 	--surface2: var(--gray-0);
@@ -17,25 +24,18 @@
 	--surface4: var(--gray-3);
 }
 
-// @media (prefers-color-scheme: dark) {
-// 	:root {
-// 		--brand: var(--lime-1);
-
-// 		--text1: var(--gray-1);
-// 		--text2: var(--gray-3);
-
-// 		--surface1: var(--gray-9);
-// 		--surface2: var(--gray-8);
-// 		--surface3: var(--gray-7);
-// 		--surface4: var(--gray-6);
-// 	}
-// }
-
 html[data-theme='dark'] {
-	--brand: var(--pink-1);
+	// --brand: #da0037;
+	--brand: var(--grape-6);
+	--brand-dimmed: var(--grape-5);
 
 	--text1: var(--gray-1);
 	--text2: var(--gray-3);
+
+	--border-color: var(--gray-7);
+
+	--link: var(--gray-1);
+	--link-visited: var(--gray-1);
 
 	--surface1: var(--gray-9);
 	--surface2: var(--gray-8);
@@ -100,26 +100,11 @@ html {
 	}
 }
 
-// html {
-// height: 100%;
-// }
-
-// html[data-theme='light'] {
-// 	background-color: var(--brand);
-// }
-
-// html[data-theme='dark'] {
-// 	background-color: var(--brand);
-// }
-
-// Styles reset for Open props normalize file
-ol,
-ul {
-	list-style: none;
+:where(a[href]):visited {
+	color: inherit;
 }
 
-a,
-a:visited {
-	text-decoration: none;
-	color: inherit;
+a {
+	all: unset;
+	cursor: pointer;
 }
