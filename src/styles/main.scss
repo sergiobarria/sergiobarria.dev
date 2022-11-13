@@ -35,6 +35,7 @@ html[data-theme='dark'] {
 
 	--text1: var(--gray-1);
 	--text2: var(--gray-3);
+	--text3: var(--gray-5);
 
 	--icon-fill: var(--gray-3);
 
@@ -106,13 +107,26 @@ html {
 	}
 }
 
-// a, a:visited, a:hover, a:active {
-//   color: inherit;
-// }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--text1);
+}
 
-// :where(a[href]):visited {
-// 	color: inherit;
-// }
+h1 {
+	font-size: var(--font-size-fluid-3);
+}
+
+h2 {
+	font-size: var(--font-size-fluid-2);
+}
+
+h3 {
+	font-size: var(--font-size-fluid-1);
+}
 
 a {
 	all: unset;

@@ -1,9 +1,11 @@
 import { format } from 'date-fns';
+import { Icon } from '@iconify/react';
 
 import type { Post } from '~/pages/blog/_utils';
-import { CalendarIcon, ReadingTimeIcon } from '~/shared/icons';
 import { CloudinaryImage } from './CloudinaryImage';
 import { Views } from './Views';
+
+import styles from './BlogPostCard.module.scss';
 
 interface BlogPostCardProps {
 	post: Post;
@@ -16,26 +18,27 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
 	return (
 		<a href={url}>
-			<article className="flex flex-col cursor-pointer hover:scale-[1.03] transition-all duration-300 h-full">
-				<div className="relative">
+			<article className={styles.article}>
+				<div className={styles.imgContainer}>
 					<CloudinaryImage
 						publicId={`sergiobarria/banners/${coverImage}`}
 						isThumbnail
 						radius={30}
 						alt={`thumbnail for ${title} frontmatter`}
 					/>
-					<Views slug={slug as string} />
+					{/* TODO: Add the view counter again */}
+					{/* <Views slug={slug as string} /> */}
 				</div>
-				<div className="flex flex-col justify-between flex-1">
-					<h3 className="mt-1 hover:text-accent">{title}</h3>
-					<div className="flex items-center text-neutral-400 dark:text-typography/80">
-						<p className="flex items-center space-x-2">
-							<CalendarIcon />
+				<div className={styles.cardContent}>
+					<h3>{title}</h3>
+					<div className={styles.content}>
+						<p>
+							<Icon icon="ic:sharp-calendar-month" width={24} height={24} />
 							<time dateTime={publishDate.toUTCString()}>{formattedDate}</time>
 						</p>
-						<span className="mx-2 text-3xl">·</span>
-						<p className="flex items-center space-x-2">
-							<ReadingTimeIcon />
+						<span className={styles.separator}>|</span>
+						<p>
+							<Icon icon="mdi:clock-time-eight-outline" width={24} height={24} />
 							<span>{minutesRead}</span>
 						</p>
 					</div>

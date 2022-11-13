@@ -6,6 +6,8 @@ import type { Post } from '~/pages/blog/_utils';
 import { BlogPostCard } from './BlogPostCard';
 import { posts as nPosts, searchQuery as nSearchQuery } from '~/stores';
 
+import styles from './BlogPostsList.module.scss';
+
 interface BlogPostsListProps {
 	className?: string;
 	pageSize?: number;
@@ -13,7 +15,6 @@ interface BlogPostsListProps {
 }
 
 export const BlogPostsList = ({ posts, pageSize = 9 }: BlogPostsListProps) => {
-	const $storePosts = useStore(nPosts);
 	const $storeSearchQuery = useStore(nSearchQuery);
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
@@ -39,25 +40,21 @@ export const BlogPostsList = ({ posts, pageSize = 9 }: BlogPostsListProps) => {
 
 	if (!filteredPosts.length) {
 		return (
-			<div className="flex items-center justify-center">
-				<p className="text-neutral-500">No posts found for your search...</p>
+			<div className={styles.noPostFoundContainer}>
+				<p>No posts found for your search...</p>
 			</div>
 		);
 	}
 
 	return (
 		<Fragment>
-			<ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10 lg:gap-6 my-4">
+			<div className={styles.gridContainer}>
 				{currentData.map((post) => {
 					const slug = post.url.split('/').pop();
 
-					return (
-						<li id="post-item" key={slug}>
-							<BlogPostCard post={post} />
-						</li>
-					);
+					return <BlogPostCard key={slug} post={post} />;
 				})}
-			</ul>
+			</div>
 
 			{filteredPosts.length > pageSize && (
 				<Pagination

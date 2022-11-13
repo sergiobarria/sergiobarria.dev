@@ -50,6 +50,20 @@ const { title } = Astro.props;
 				padding-top: var(--size-6);
 				width: min(100% - 2rem, 64rem);
 				margin-inline: auto;
+				max-width: 1024px;
+				padding: 0 var(--size-9);
+			}
+
+			@media (max-width: 1024px) {
+				main {
+					padding: 0 var(--size-6);
+				}
+			}
+
+			@media (max-width: 768px) {
+				main {
+					padding: 0 var(--size-0);
+				}
 			}
 		</style>
 	</head>

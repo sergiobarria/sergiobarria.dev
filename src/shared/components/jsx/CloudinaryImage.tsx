@@ -49,7 +49,6 @@ export function CloudinaryImage({
 		<figure className="min-h-[10rem] w-full">
 			<div onClick={preview ? () => setIsOpen(true) : undefined}>
 				<AdvancedImage
-					style={{ width: '100%', height: '100%' }}
 					cldImg={image}
 					plugins={[lazyload(), responsive(), placeholder({ mode: 'blur' })]}
 					alt={alt}
