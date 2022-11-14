@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 
 import { useViews } from '~/shared/hooks';
-import { ViewsIcon, ReadingTimeIcon } from '~/shared/icons';
 
 interface FeaturedPostCardProps {
 	title: string;
@@ -31,11 +30,11 @@ export function FeaturedPostCard({ title, url, gradient, readingTime }: Featured
 				</div>
 				<div className="flex items-center justify-around text-sm text-gray-700 dark:text-gray-200">
 					<div className="flex items-center space-x-1">
-						<ViewsIcon />
+						{/* <ViewsIcon /> */}
 						<p>{`${views ? new Number(views).toLocaleString() : '---'} views`}</p>
 					</div>
 					<div className="flex items-center space-x-1">
-						<ReadingTimeIcon />
+						{/* <ReadingTimeIcon /> */}
 						<p>{readingTime}</p>
 					</div>
 				</div>

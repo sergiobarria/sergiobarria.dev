@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 
 import { useViews } from '~/shared/hooks/useViews';
-import { ViewsIcon } from '~/shared/icons';
 
 interface ViewsProps {
 	slug: string;
@@ -18,7 +17,7 @@ export function Views({ slug, title }: ViewsProps) {
 				'bg-amber-500 px-2 py-[2px] rounded-md'
 			)}
 		>
-			<ViewsIcon className="w-4 h-4" />
+			{/* <ViewsIcon className="w-4 h-4" /> */}
 			<span className="text-xs">{views ?? '--'}</span>
 		</span>
 	);
