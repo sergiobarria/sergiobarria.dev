@@ -22,6 +22,7 @@
 		"@fontsource/lato": "^4.5.10",
 		"@fontsource/permanent-marker": "^4.5.7",
 		"@nanostores/react": "^0.4.0",
+		"@xata.io/client": "^0.20.2",
 		"astro": "^1.5.2",
 		"astro-icon": "^0.8.0",
 		"astro-tooltips": "^0.6.0",
