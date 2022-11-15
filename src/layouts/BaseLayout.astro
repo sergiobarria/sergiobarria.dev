@@ -24,7 +24,7 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="" data-theme="light">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -38,43 +38,43 @@ const { title } = Astro.props;
 
 		<Tooltips interactive={false} delay={[15, 10]} />
 
-		<style>
-			body {
+		<style lang="scss">
+			.container {
 				display: flex;
 				flex-direction: column;
 				min-height: 100vh;
 			}
 
 			main {
+				flex-grow: 1;
 				margin-top: var(--size-9);
-				padding-top: var(--size-6);
-				width: min(100% - 2rem, 64rem);
-				margin-inline: auto;
-				max-width: 1024px;
-				padding: 0 var(--size-9);
-			}
-
-			@media (max-width: 1024px) {
-				main {
-					padding: 0 var(--size-6);
-				}
-			}
-
-			@media (max-width: 768px) {
-				main {
-					padding: 0 var(--size-0);
-				}
 			}
 		</style>
 	</head>
 
 	<body>
-		<Header />
-		<FloatingMobileMenu client:visible currentPath={pathname} />
-		<main>
-			<!-- This slot is the entry point of the application -->
-			<slot />
-		</main>
-		<Footer />
+		<div class="container">
+			<Header />
+			<!-- <FloatingMobileMenu client:visible currentPath={pathname} /> -->
+			<main>
+				<!-- <button id="theme-switcher">Toggle Purple</button>
+					<button id="theme-switcher-2">Toggle Light</button> -->
+				<!-- This slot is the entry point of the application -->
+				Content
+				<!-- <slot /> -->
+			</main>
+
+			<!-- <script is:inline>
+					const themeSwitcherPurple = document.querySelector('#theme-switcher');
+					const themeSwitcherLight = document.querySelector('#theme-switcher-2');
+					const doc = document.firstElementChild;
+					
+					themeSwitcherPurple.addEventListener('click', () => setTheme('purple'));
+					themeSwitcherLight.addEventListener('click', () => setTheme('light'));
+					
+					const setTheme = (theme) => doc.setAttribute('color-scheme', theme);
+				</script> -->
+			<Footer />
+		</div>
 	</body>
 </html>

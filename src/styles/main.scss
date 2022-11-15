@@ -1,134 +1,151 @@
-@import 'open-props/style';
+/* Import normalize.css from Open Props */
+@use 'open-props/normalize';
 
-// Open Props Optionals
-@import 'open-props/normalize';
+/* Import partials */
+@forward 'globals';
+@forward 'utils';
 
-// Partials
-@import './animations';
+// @import 'https://unpkg.com/open-props';
 
-// Theme colors
-:root {
-	--brand: #651ef4;
-	--brand-dimmed: #7435f5;
-	--accent: #ffbc2f;
+// @use postcss-preset-env {
+// 	stage: 0;
+// 	features: {
+// 		"logical-properties-and-values":false ;
+// 	}
+// }
 
-	--text1: var(--gray-8);
-	--text2: var(--gray-7);
 
-	--icon-fill: var(--gray-7);
+// @import 'open-props/style';
 
-	--border-color: var(--gray-3);
+// // Open Props Optionals
+// @import 'open-props/normalize';
 
-	--link: var(--gray-8);
-	--link-visited: var(--gray-8);
+// // Partials
+// @import './animations';
 
-	--surface1: var(--gray-2);
-	--surface2: var(--gray-0);
-	--surface3: var(--gray-1);
-	--surface4: var(--gray-3);
-}
+// // Theme colors
+// :root {
+// 	--brand: #651ef4;
+// 	--brand-dimmed: #7435f5;
+// 	--accent: #ffbc2f;
 
-html[data-theme='dark'] {
-	--brand: #651ef4;
-	--brand-dimmed: #7435f5;
-	--accent: #ffbc2f;
+// 	--text1: var(--gray-8);
+// 	--text2: var(--gray-7);
 
-	--text1: var(--gray-1);
-	--text2: var(--gray-3);
-	--text3: var(--gray-5);
+// 	--icon-fill: var(--gray-7);
 
-	--icon-fill: var(--gray-3);
+// 	--border-color: var(--gray-3);
 
-	--border-color: #7435f5;
+// 	--link: var(--gray-8);
+// 	--link-visited: var(--gray-8);
 
-	--link: var(--gray-1);
-	--link-visited: var(--gray-1);
+// 	--surface1: var(--gray-2);
+// 	--surface2: var(--gray-0);
+// 	--surface3: var(--gray-1);
+// 	--surface4: var(--gray-3);
+// }
 
-	--surface1: #1c1e2b;
-	--surface2: #333540;
-	--surface3: #494b55;
-	--surface4: #60626b;
-}
+// html[data-theme='dark'] {
+// 	--brand: #651ef4;
+// 	--brand-dimmed: #7435f5;
+// 	--accent: #ffbc2f;
 
-// Globals
-*,
-*::before,
-*::after {
-	margin: 0;
-	box-sizing: border-box;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
+// 	--text1: var(--gray-1);
+// 	--text2: var(--gray-3);
+// 	--text3: var(--gray-5);
 
-html,
-body {
-	font-family: Lato, sans-serif;
-	background-color: var(--surface1);
-	color: var(--text1);
-}
+// 	--icon-fill: var(--gray-3);
 
-html {
-	&[data-theme='dark'] {
-		& .sun-and-moon {
-			& > .sun {
-				transform: scale(1.75);
-			}
+// 	--border-color: #7435f5;
 
-			& > .sun-beams {
-				opacity: 0;
-			}
+// 	--link: var(--gray-1);
+// 	--link-visited: var(--gray-1);
 
-			& > .moon > circle {
-				transform: translateX(-7px);
+// 	--surface1: #1c1e2b;
+// 	--surface2: #333540;
+// 	--surface3: #494b55;
+// 	--surface4: #60626b;
+// }
 
-				@supports (cx: 1) {
-					transform: translateX(0);
-					cx: 17;
-				}
-			}
+// // Globals
+// *,
+// *::before,
+// *::after {
+// 	margin: 0;
+// 	box-sizing: border-box;
+// 	-webkit-font-smoothing: antialiased;
+// 	-moz-osx-font-smoothing: grayscale;
+// }
 
-			@media (prefers-reduced-motion: no-preference) {
-				& > .sun {
-					transform: scale(1.75);
-					transition: transform 0.25 var(--ease-3);
-				}
+// html,
+// body {
+// 	font-family: Lato, sans-serif;
+// 	background-color: var(--surface1);
+// 	color: var(--text1);
+// }
 
-				& > .sun-beams {
-					transform: rotateZ(-25deg);
-					transition-duration: 0.15s;
-				}
+// html {
+// 	&[data-theme='dark'] {
+// 		& .sun-and-moon {
+// 			& > .sun {
+// 				transform: scale(1.75);
+// 			}
 
-				& > .moon > circle {
-					transition-delay: 0.25s;
-					transition-duration: 0.5s;
-				}
-			}
-		}
-	}
-}
+// 			& > .sun-beams {
+// 				opacity: 0;
+// 			}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	color: var(--text1);
-}
+// 			& > .moon > circle {
+// 				transform: translateX(-7px);
 
-h1 {
-	font-size: var(--font-size-fluid-3);
-}
+// 				@supports (cx: 1) {
+// 					transform: translateX(0);
+// 					cx: 17;
+// 				}
+// 			}
 
-h2 {
-	font-size: var(--font-size-fluid-2);
-}
+// 			@media (prefers-reduced-motion: no-preference) {
+// 				& > .sun {
+// 					transform: scale(1.75);
+// 					transition: transform 0.25 var(--ease-3);
+// 				}
 
-h3 {
-	font-size: var(--font-size-fluid-1);
-}
+// 				& > .sun-beams {
+// 					transform: rotateZ(-25deg);
+// 					transition-duration: 0.15s;
+// 				}
 
-a {
-	all: unset;
-	cursor: pointer;
-}
+// 				& > .moon > circle {
+// 					transition-delay: 0.25s;
+// 					transition-duration: 0.5s;
+// 				}
+// 			}
+// 		}
+// 	}
+// }
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+// 	color: var(--text1);
+// }
+
+// h1 {
+// 	font-size: var(--font-size-fluid-3);
+// }
+
+// h2 {
+// 	font-size: var(--font-size-fluid-2);
+// }
+
+// h3 {
+// 	font-size: var(--font-size-fluid-1);
+// }
+
+// a {
+// 	all: unset;
+// 	cursor: pointer;
+// }

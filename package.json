@@ -1,11 +1,14 @@
 {
-	"name": "@example/basics",
+	"name": "sergiobarria.com",
 	"type": "module",
 	"version": "0.0.1",
 	"private": true,
+	"engines": {
+		"node": ">=18.0.0"
+	},
 	"scripts": {
 		"dev": "astro dev",
-		"serve": "vercel dev",
+		"serve": "vercel dev --listen 8080",
 		"start": "astro dev",
 		"build": "astro build",
 		"preview": "astro preview",
@@ -35,7 +38,6 @@
 		"nanostores": "^0.7.0",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
-		"react-icons": "^4.6.0",
 		"react-image-lightbox": "^5.1.4",
 		"react-tagcloud": "^2.3.1",
 		"react-tooltip": "^4.4.2",
@@ -53,11 +55,13 @@
 		"@typescript-eslint/parser": "^5.40.1",
 		"@vercel/node": "^2.5.26",
 		"astro-eslint-parser": "^0.7.2",
+		"autoprefixer": "^10.4.13",
 		"eslint": "^8.25.0",
 		"eslint-plugin-astro": "^0.20.0",
 		"mdast-util-to-string": "^3.1.0",
 		"open-props": "^1.4.24",
 		"polished": "^4.2.2",
+		"postcss-jit-props": "^1.0.7",
 		"prettier": "^2.7.1",
 		"prettier-plugin-astro": "^0.6.0",
 		"reading-time": "^1.5.0",

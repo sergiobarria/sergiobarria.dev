@@ -12,65 +12,59 @@ const { navLinks } = site;
 ---
 
 <style lang="scss">
+	@use 'src/styles/utils';
 	.header {
 		position: fixed;
 		top: 0;
 		left: 0;
-		display: flex;
-		align-items: center;
-		height: var(--size-9);
 		width: 100%;
-		z-index: 100;
+		height: var(--size-9);
 
 		background: rgba(var(--surface1), 0.25);
 		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
 
 		&__container {
+			@include utils.center-horizontally;
+
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: var(--size-1) 0;
-			width: min(100% - 2rem, 64rem);
-			margin-inline: auto;
-		}
+			height: 100%;
 
-		&__logo {
-			width: 5rem;
-			color: var(--text1);
-		}
+			&-logo > a {
+				color: var(--text1);
 
-		&__nav {
-			display: flex;
-			align-items: center;
-			gap: var(--size-8);
-
-			& nav {
-				display: flex;
-				align-items: center;
-				gap: var(--size-4);
-
-				@media (max-width: 768px) {
-					display: none;
+				&:hover {
+					opacity: 0.9;
 				}
 			}
 
-			& li {
-				font-size: var(--font-size-1);
-				padding: var(--size-1) var(--size-2);
+			&-nav {
+				display: flex;
+				align-items: center;
+				gap: var(--size-6);
+
+				& > nav {
+					display: flex;
+					align-items: center;
+					gap: var(--size-4);
+				}
 			}
 		}
 	}
 
 	.link {
 		position: relative;
-		display: inline-block;
+		display: none;
+		text-decoration: none;
+		font-weight: var(--font-weight-2);
 
-		& > a {
-			text-decoration: none;
-			color: var(--text1);
+		@include utils.breakpoint-up('md') {
+			display: inline-block;
 		}
+	}
 
+	.link-inactive {
 		&::before,
 		&::after {
 			content: '';
@@ -101,28 +95,32 @@ const { navLinks } = site;
 	}
 
 	.link-active {
-		color: var(--accent) !important;
+		color: var(--brand-accent);
 		font-weight: 600;
+
+		&:visited {
+			color: var(--brand-accent);
+		}
 	}
 </style>
 
 <header class="header">
 	<div class="header__container">
-		<div class="header__logo">
+		<div class="header__container-logo">
 			<a href="/" class="logo">
 				<LogoIcon />
 			</a>
 		</div>
-		<div class="header__nav">
+		<div class="header__container-nav">
 			<nav>
 				{
 					navLinks.map((link) => {
 						return (
 							<a
 								href={link.href}
-								class={clsx({
-									link: link.href !== pathname,
-									'link-active': link.href === pathname,
+								class={clsx('link', {
+									'link-active': pathname === link.href,
+									'link-inactive': pathname !== link.href,
 								})}
 							>
 								{link.label}
@@ -131,7 +129,8 @@ const { navLinks } = site;
 					})
 				}
 			</nav>
-			<ThemeToggle />
+			<span>Theme Toggle</span>
+			<!-- <ThemeToggle /> -->
 		</div>
 	</div>
 </header>

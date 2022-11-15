@@ -1,0 +1,5 @@
+@mixin center-horizontally {
+	width: min(100% - var(--size-4), 64rem);
+	padding-inline: var(--size-2);
+	margin-inline: auto;
+}
