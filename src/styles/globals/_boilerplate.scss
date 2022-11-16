@@ -23,8 +23,7 @@ h3 {
 	font-size: var(--font-size-fluid-1);
 }
 
-:where(a, a:visited, a:active),
-:where(a[href]):visited {
+:is(a, a:visited, a:active, a:hover, a[href]) {
 	color: var(--text1);
 }
 

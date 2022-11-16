@@ -1,9 +1,18 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import SocialLinks from '~/shared/components/SocialLinks.astro';
+import { FeaturedPostsList } from '~/shared/components/jsx';
+
+import { SocialLinks } from '~/shared/components/jsx';
+import { parseBlogPost } from './blog/_utils';
+
+const data = await Astro.glob('../content/blog/*.mdx');
+const allPosts = await Promise.all(data?.map(parseBlogPost) ?? []);
+const featuredPosts = allPosts.filter((post) => post.isFeatured);
+
 ---
 
 <style lang="scss">
+	@use 'src/styles/utils';
 	.homepage {
 		margin-top: var(--size-8);
 		& > section:not(:first-child) {
@@ -24,6 +33,7 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 			display: flex;
 			align-items: center;
 			gap: var(--size-6);
+			animation: fadeIn 300ms ease-in;
 		}
 
 		&__leftSide {
@@ -35,7 +45,8 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 			}
 
 			&-paragraph {
-				font-size: var(--font-size-3);
+				font-size: clamp(var(--font-size-3), 1.5vw, var(--font-size-4));
+				color: var(--text1);
 				margin-bottom: var(--size-3);
 			}
 		}
@@ -44,9 +55,10 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 			width: 100%;
 			max-width: 300px;
 			aspect-ratio: var(--ratio-square);
+			display: none;
 
-			@media screen and (max-width: 768px) {
-				display: none;
+			@include utils.breakpoint-up('md') {
+				display: block;
 			}
 		}
 
@@ -58,10 +70,10 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 	}
 
 	.name {
-		color: var(--accent);
+		color: var(--brand-accent);
 	}
 
-	.blob {
+	.blob-container {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -85,18 +97,24 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 		}
 
 		&:before {
-			background: linear-gradient(165deg, var(--brand), var(--accent));
+			background: linear-gradient(165deg, var(--brand), var(--brand-accent));
 		}
 	}
 
 	.about {
 		background-color: var(--surface2);
 		padding: var(--size-4) 0 var(--size-8) 0;
-		border-radius: var(--size-4);
+		border-radius: var(--radius-3);
 		&__container {
 			display: flex;
+			flex-direction: column;
 			align-items: center;
 			gap: var(--size-3);
+
+			@include utils.breakpoint-up('md') {
+				flex-direction: row;
+				justify-content: space-between;
+			}
 		}
 
 		&__leftSide {
@@ -117,7 +135,7 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 					height: 75%;
 					object-fit: cover;
 					border-radius: var(--radius-round);
-					border: var(--border-size-2) solid var(--accent);
+					border: var(--border-size-2) solid var(--brand-accent);
 				}
 
 				&:after {
@@ -137,7 +155,7 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 			padding-top: var(--size-6);
 
 			& .accent {
-				color: var(--accent);
+				color: var(--brand-accent);
 			}
 
 			&-content > li {
@@ -168,15 +186,16 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 						with others. Welcome to my small space of the internet, where I write and share about
 						different topics related to the web.
 					</p>
-					<SocialLinks size="medium" />
+					<SocialLinks client:visible size="large" />
+					<!-- <SocialLinks size="medium" /> -->
 				</div>
 				<div class="hero__rightSide">
 					<div class="hero__image">
-						<div class="blob"></div>
+						<div class="blob-container"></div>
 						<picture>
 							<img
 								src="https://res.cloudinary.com/sbarria-dev/image/upload/v1668232848/sergiobarria/spaceship-launch_lsag8o.png"
-								alt=""
+								alt="hero image"
 							/>
 						</picture>
 					</div>
@@ -198,9 +217,11 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 				<div class="about__rightSide">
 					<ul class="about__rightSide-content">
 						<li>
-							I'm a <strong>Civil Engineer</strong> turn into Full Stack <strong class="accent"
-								>Web & Mobile Developer</strong
-							> from Panama.
+							<p>
+								I'm a <strong>Civil Engineer</strong> turn into Full Stack <strong class="accent"
+									>Web & Mobile Developer</strong
+								> from Panama.
+							</p>
 						</li>
 						<li>
 							Although I mostly work in the JavaScript/TypeScript ecosystem, with technologies like <strong
@@ -232,6 +253,7 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 
 		<section id="feat-posts">
 			<h2>Featured Posts</h2>
+			<FeaturedPostsList posts={featuredPosts} />
 		</section>
 
 		<section id="feat-projects">

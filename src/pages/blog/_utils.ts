@@ -4,6 +4,7 @@ import { urlFromContentUrl } from '~/shared/utils/helpers';
 
 export type PostFrontmatter = {
 	title: string;
+	number: number;
 	summary: string;
 	publishDate: Date;
 	coverImage: string;
@@ -19,7 +20,7 @@ export async function parseBlogPost({
 	url,
 	frontmatter,
 }: MDXInstance<Record<string, any>>): Promise<Post> {
-	const { title, summary, publishDate, coverImage, isFeatured, minutesRead } = frontmatter;
+	const { title, summary, publishDate, coverImage, isFeatured, minutesRead, number } = frontmatter;
 
 	return {
 		url: urlFromContentUrl(url as string),
@@ -28,6 +29,7 @@ export async function parseBlogPost({
 		publishDate: new Date(publishDate),
 		coverImage,
 		isFeatured,
+		number,
 		minutesRead: minutesRead,
 	};
 }

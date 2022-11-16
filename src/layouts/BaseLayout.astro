@@ -33,12 +33,12 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
 
 		<Tooltips interactive={false} delay={[15, 10]} />
 
 		<style lang="scss">
+			@use 'src/styles/utils';
 			.container {
 				display: flex;
 				flex-direction: column;
@@ -46,34 +46,51 @@ const { title } = Astro.props;
 			}
 
 			main {
+				@include utils.center-horizontally;
+
 				flex-grow: 1;
 				margin-top: var(--size-9);
 			}
 		</style>
+
+		<script is:inline>
+			const storageKey = 'theme-preference';
+
+			const getColorPreference = () => {
+				if (localStorage.getItem(storageKey)) {
+					return localStorage.getItem(storageKey);
+				} else if (window.matchMedia('prefers-color-scheme: dark').matches) {
+					return 'night-owl';
+				} else {
+					return 'night';
+				}
+			};
+
+			const setColorPreference = () => {
+				localStorage.setItem(storageKey, getColorPreference());
+				reflectPreference();
+			};
+
+			const reflectPreference = () => {
+				document.firstElementChild.setAttribute('data-theme', getColorPreference());
+			};
+
+			reflectPreference();
+			window.onload = () => {
+				reflectPreference();
+				setColorPreference();
+			};
+		</script>
 	</head>
 
 	<body>
 		<div class="container">
 			<Header />
-			<!-- <FloatingMobileMenu client:visible currentPath={pathname} /> -->
+			<FloatingMobileMenu client:visible currentPath={pathname} />
 			<main>
-				<!-- <button id="theme-switcher">Toggle Purple</button>
-					<button id="theme-switcher-2">Toggle Light</button> -->
 				<!-- This slot is the entry point of the application -->
-				Content
-				<!-- <slot /> -->
+				<slot />
 			</main>
-
-			<!-- <script is:inline>
-					const themeSwitcherPurple = document.querySelector('#theme-switcher');
-					const themeSwitcherLight = document.querySelector('#theme-switcher-2');
-					const doc = document.firstElementChild;
-					
-					themeSwitcherPurple.addEventListener('click', () => setTheme('purple'));
-					themeSwitcherLight.addEventListener('click', () => setTheme('light'));
-					
-					const setTheme = (theme) => doc.setAttribute('color-scheme', theme);
-				</script> -->
 			<Footer />
 		</div>
 	</body>
