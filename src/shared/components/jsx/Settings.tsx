@@ -1,4 +1,4 @@
-import { Fragment, forwardRef, useState, useEffect } from 'react';
+import { Fragment, forwardRef, useState } from 'react';
 import clsx from 'clsx';
 
 import * as Popover from '@radix-ui/react-popover';

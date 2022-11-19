@@ -34,6 +34,14 @@ export default defineConfig({
 		server: {
 			open: true,
 		},
+		ssr: {
+			noExternal: [
+				'@radix-ui/react-tooltip',
+				'@radix-ui/react-popover',
+				'@radix-ui/react-select',
+				'@radix-ui/react-tabs',
+			],
+		},
 	},
 	server: {
 		host: 'localhost',
