@@ -1,0 +1,47 @@
+@use 'src/styles/utils';
+
+.container {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--size-4);
+	margin: var(--size-4) 0;
+
+	@include utils.breakpoint-up('md') {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@include utils.breakpoint-up('lg') {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+.card {
+	background-image: var(--background-gradient);
+	padding: var(--size-4);
+	border-radius: var(--radius-3);
+	transition: all 0.3s var(--ease-in-out-1);
+
+	&:hover {
+		transform: scale(1.05);
+		box-shadow: 0 0 0 3px var(--brand-dimmed);
+	}
+
+	@include utils.breakpoint-up('md') {
+		border: 1px solid var(--brand-contrast);
+	}
+}
+
+.statsContainer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--size-2);
+	margin-top: var(--size-3);
+}
+
+.stat {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--size-1);
+}

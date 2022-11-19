@@ -5,6 +5,8 @@ import { motion as m } from 'framer-motion';
 
 import { useDimensions } from '~/shared/hooks';
 
+import styles from './FloatingMobileMenu.module.scss';
+
 import site from '../../../../site.json';
 
 interface ToggleActions {
@@ -42,12 +44,7 @@ interface FloatingButtonProps extends ToggleActions {}
 
 function FloatingButton({ isOpen, setIsOpen }: FloatingButtonProps): JSX.Element {
 	return (
-		<div
-			className={clsx(
-				'fixed bottom-10 right-10 rounded-full z-50 sm:hidden',
-				isOpen ? 'bg-white text-accent' : 'bg-accent text-white'
-			)}
-		>
+		<div className={clsx(styles.floatingBtn, isOpen ? styles.open : styles.closed)}>
 			<HamburgerMenu size={24} toggled={isOpen} toggle={setIsOpen} />
 		</div>
 	);
@@ -64,11 +61,8 @@ function MenuItem({ text, href, setIsOpen, pathname }: MenuItemProps): JSX.Eleme
 	return (
 		<m.li
 			variants={menuItemVariants}
-			whileHover={{ scale: 1.1, skew: '10deg' }}
 			whileTap={{ scale: 0.95 }}
-			className={clsx('text-lg text-white hover:bg-accent', {
-				'bg-accent': href === pathname,
-			})}
+			className={clsx(styles.menuItem, pathname === href && styles.menuItemActive)}
 			onClick={() => setIsOpen(false)}
 		>
 			<a href={href}>{text}</a>
@@ -88,11 +82,7 @@ function Navigation({ isOpen, setIsOpen, pathname }: NavigationProps): JSX.Eleme
 	return (
 		<m.ul
 			variants={navigationVariants}
-			className={clsx(
-				'fixed inset-0 z-20 space-y-8 text-center transform',
-				'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-				!isOpen && 'hidden'
-			)}
+			className={clsx(styles.navigation, !isOpen && styles.navigationHidden)}
 		>
 			{navigationLinks.map((link) => {
 				return (
@@ -144,15 +134,11 @@ export function FloatingMobileMenu({ currentPath }: FloatingMobileMenuProps): JS
 			animate={isOpen ? 'open' : 'closed'}
 			custom={height}
 			ref={containerRef}
-			className="md:hidden"
+			className={styles.mobileNav}
 		>
-			<m.div
-				className="fixed inset-0 z-10 bg-accent dark:bg-lighter sm:hidden"
-				variants={sidebar}
-			/>
-
-			<Navigation isOpen={isOpen} setIsOpen={setIsOpen} pathname={currentPath} />
-
+			<m.div className={styles.navContainer} variants={sidebar}>
+				<Navigation isOpen={isOpen} setIsOpen={setIsOpen} pathname={currentPath} />
+			</m.div>
 			<FloatingButton isOpen={isOpen} setIsOpen={setIsOpen} />
 		</m.nav>
 	);

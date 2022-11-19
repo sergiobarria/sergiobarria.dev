@@ -1,0 +1,60 @@
+.article {
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	height: 100%;
+	transition: all 0.2s ease-in-out;
+
+	&:hover {
+		transform: scale(1.03);
+	}
+
+	& > .imgContainer {
+		position: relative;
+	}
+
+	& > .cardContent {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 100%;
+
+		& > h3 {
+			margin-top: var(--size-3);
+
+			&:hover {
+				color: var(--accent);
+			}
+		}
+
+		& > .content {
+			display: flex;
+			align-items: center;
+			color: var(--text2);
+
+			& > p {
+				display: flex;
+				align-items: center;
+				gap: var(--size-2);
+        color: var(--text3);
+				font-size: calc(var(--font-size-2) / 1.25);
+			}
+
+			@media screen and (max-width: 768px) {
+				& > p {
+					font-size: var(--font-size-0);
+				}
+			}
+		}
+	}
+}
+
+.separator {
+	padding: 0 var(--size-2);
+	font-size: var(--font-size-3);
+}
+
+.icon {
+	width: var(--size-5);
+	height: var(--size-5);
+}

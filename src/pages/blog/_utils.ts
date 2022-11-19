@@ -1,36 +1,26 @@
-import path from 'node:path';
 import type { MDXInstance } from 'astro';
 
-export type Post = {
-	url: string;
-	title: string;
-	summary: string;
-	publishDate: Date;
-	coverImage: string;
-	isFeatured: boolean;
-	minutesRead: string;
-};
+import { urlFromContentUrl } from '~/shared/utils/helpers';
 
-export interface PostFrontmatter {
+export type PostFrontmatter = {
 	title: string;
+	number: number;
 	summary: string;
 	publishDate: Date;
 	coverImage: string;
 	isFeatured: boolean;
 	minutesRead?: string;
-}
-
-export const getSlugFromFilePath = (file: string) => path.parse(file).name;
-export const urlFromContentUrl = (url: string) => {
-	const { dir, name } = path.parse(url);
-	return path.join(dir.replace('src/content', ''), name);
 };
+
+export type Post = {
+	url: string;
+} & PostFrontmatter;
 
 export async function parseBlogPost({
 	url,
 	frontmatter,
 }: MDXInstance<Record<string, any>>): Promise<Post> {
-	const { title, summary, publishDate, coverImage, isFeatured, minutesRead } = frontmatter;
+	const { title, summary, publishDate, coverImage, isFeatured, minutesRead, number } = frontmatter;
 
 	return {
 		url: urlFromContentUrl(url as string),
@@ -39,6 +29,7 @@ export async function parseBlogPost({
 		publishDate: new Date(publishDate),
 		coverImage,
 		isFeatured,
+		number,
 		minutesRead: minutesRead,
 	};
 }

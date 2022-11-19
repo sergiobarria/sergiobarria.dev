@@ -1,15 +1,16 @@
 ---
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
-import clsx from 'clsx';
+import '@fontsource/permanent-marker';
+
 import { Tooltips } from 'astro-tooltips';
 
 import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
-import Container from '~/shared/components/Container.astro';
+import FloatingIcons from '~/layouts/components/FloatingIcons.astro';
 import { FloatingMobileMenu } from './components/jsx';
 
-import '~/styles/index.css';
+import '~/styles/main.scss';
 
 import site from '../../site.json';
 
@@ -24,56 +25,75 @@ const { title } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en" class="">
+<html lang="en">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
+		<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title ?? defaultTitle}</title>
 
-		<Tooltips interactive={false} />
+		<Tooltips interactive={false} delay={[15, 10]} />
 
-		<!-- Scripts -->
-		<script is:inline>
-			const theme = (() => {
-				if (typeof localStorage !== 'undefined' && !localStorage.getItem('theme')) {
-					localStorage.setItem('theme', 'dark');
-				}
-
-				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-					return localStorage.getItem('theme');
-				}
-
-				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-					return 'dark';
-				}
-
-				return 'light';
-			})();
-
-			if (theme === 'light') {
-				document.documentElement.classList.remove('dark');
-				// localStorage.setItem('theme', 'light');
-			} else {
-				document.documentElement.classList.add('dark');
-				// localStorage.setItem('theme', 'dark');
+		<style lang="scss">
+			@use 'src/styles/utils';
+			.container {
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
 			}
+
+			main {
+				@include utils.center-horizontally;
+
+				flex-grow: 1;
+				margin-top: var(--size-9);
+			}
+		</style>
+
+		<script is:inline>
+			const storageKey = 'theme-preference';
+
+			const getColorPreference = () => {
+				if (localStorage.getItem(storageKey)) {
+					return localStorage.getItem(storageKey);
+				} else if (window.matchMedia('prefers-color-scheme: dark').matches) {
+					return 'night-owl';
+				} else {
+					return 'night';
+				}
+			};
+
+			const setColorPreference = () => {
+				localStorage.setItem(storageKey, getColorPreference());
+				reflectPreference();
+			};
+
+			const reflectPreference = () => {
+				document.firstElementChild.setAttribute('data-theme', getColorPreference());
+			};
+
+			reflectPreference();
+			window.onload = () => {
+				reflectPreference();
+				setColorPreference();
+			};
 		</script>
 	</head>
-	<body
-		class={clsx(
-			'antialiased flex flex-col text-neutral-800 dark:text-typography min-h-screen',
-			'transition-colors duration-300 ease-in-out dark:bg-[#1F2028]'
-		)}
-	>
-		<Header />
-		<FloatingMobileMenu client:visible currentPath={pathname} />
-		<Container as="main" class="flex-1">
-			<!-- This is the entry point of the app -->
-			<slot />
-		</Container>
-		<Footer />
+
+	<body>
+		<div class="container">
+			<Header />
+			<FloatingMobileMenu client:visible currentPath={pathname} />
+			<main>
+				<!-- This slot is the entry point of the application -->
+				<slot />
+			</main>
+			<FloatingIcons />
+			<Footer />
+		</div>
 	</body>
 </html>

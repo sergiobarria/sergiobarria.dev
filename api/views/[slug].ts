@@ -1,11 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
-import { getPostViews, updatePostViews } from '../../lib/redis';
+import { getPostViews, updatePostViews } from '../../lib/xata';
 
 export default async (req: VercelRequest, res: VercelResponse) => {
 	const { slug } = req.query as { slug: string };
 
 	if (req.method === 'GET') {
 		const views = await getPostViews(slug);
+		console.log('views: ', views);
 
 		return res.status(200).json({ total: views?.toString() });
 	}

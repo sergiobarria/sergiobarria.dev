@@ -1,0 +1,41 @@
+@mixin center-horizontally {
+	width: min(100% - var(--size-4), 64rem);
+	padding-inline: var(--size-2);
+	margin-inline: auto;
+}
+
+/* Absolute Positioning */
+/* Example of Usage: 
+	div {
+   	@include abs-position(100px, 100px, auto, auto);
+	}
+*/
+@mixin abs-positiong($top: 0, $right: 0, $bottom: 0, $left: 0) {
+	position: absolute;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+
+/* Positioning */
+/* Example of Usage: 
+	.element-absolute {
+  	@include position(absolute, 60px, 0, 0, 0, z('modal'));
+	}
+*/
+@mixin position(
+	$position: absolute,
+	$top: null,
+	$right: null,
+	$bottom: null,
+	$left: null,
+	$z-index: initial
+) {
+	position: $position;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+	z-index: $z-index;
+}

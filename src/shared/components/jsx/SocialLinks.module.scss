@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4);
+	transition: transform 2s var(--ease-in-out-1);
+}
+
+.icon {
+	&:hover {
+		color: var(--brand-accent);
+		transform: scale(1.1);
+	}
+}

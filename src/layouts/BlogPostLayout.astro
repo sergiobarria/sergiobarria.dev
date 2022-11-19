@@ -1,14 +1,12 @@
 ---
-import type { MDXLayoutProps, MDXInstance } from 'astro';
 import { format } from 'date-fns';
+import { Icon } from 'astro-icon';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import Container from '~/shared/components/Container.astro';
-import CalendarIcon from '~/shared/icons/CalendarIcon.astro';
-import ReadingTimeIcon from '~/shared/icons/ReadingTimeIcon.astro';
 import EyeIcon from '~/shared/icons/EyeIcon.astro';
 import { CloudinaryImage, ViewCounter } from '~/shared/components/jsx';
-import type { PostFrontmatter } from '~/shared/utils/blogPostsHelpers';
+import type { PostFrontmatter } from '~/pages/blog/_utils';
 
 interface Props {
 	slug?: string;
@@ -22,27 +20,119 @@ const {
 const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 ---
 
+<style lang="scss">
+	.container {
+		margin: var(--size-8) 0;
+	}
+
+	.post {
+		&__header {
+			& > h1 {
+				text-align: center;
+				max-inline-size: 100%;
+				margin-bottom: var(--size-3);
+				background-color: #37da00;
+				border-radius: var(--radius-3);
+				padding: var(--size-1);
+			}
+		}
+		&__image {
+			margin-bottom: var(--size-3);
+		}
+
+		&__summaryCard {
+			background-color: var(--surface-2);
+			padding: var(--size-3);
+			border-radius: var(--radius-3);
+			margin-bottom: var(--size-3);
+
+			&-excerpt {
+				margin-bottom: var(--size-3);
+				max-inline-size: 100%;
+
+				&--title {
+					color: var(--accent);
+					font-weight: 600;
+				}
+
+				&--text {
+					font-style: italic;
+					font-family: serif;
+				}
+			}
+
+			&-stats {
+				display: flex;
+				align-items: center;
+
+				& > p {
+					display: flex;
+					align-items: center;
+					gap: var(--size-2);
+					color: var(--text-3);
+					opacity: 0.7;
+					font-size: var(--font-size-1);
+
+					&:not(:last-child) {
+						padding-right: var(--size-3);
+						margin-right: var(--size-3);
+						border-right: var(--border-size-1) solid var(--text-2);
+					}
+				}
+			}
+		}
+	}
+</style>
+
 <BaseLayout>
-	<Container as="div" class="my-8 mx-auto">
-		<!-- Header -->
-		<h1
-			class="text-center text-2xl md:text-3xl lg:text-4xl bg-[#37da00] text-white py-2 rounded-lg"
-		>
-			{title}
-		</h1>
+	<div class="container">
+		<section class="post">
+			<div class="post__header">
+				<h1>{title}</h1>
+				<div class="post__image">
+					<CloudinaryImage
+						publicId={`sergiobarria/banners/${coverImage}`}
+						alt={title}
+						radius={20}
+					/>
+				</div>
+			</div>
+			<div class="post__summaryCard">
+				<p class="post__summaryCard-excerpt">
+					<span class="post__summaryCard-excerpt--title">Summary:</span>
+					<span class="post__summaryCard-excerpt--text">↬ {summary}</span>
+				</p>
+				<div class="post__summaryCard-stats">
+					<p>
+						<Icon name="ic:sharp-calendar-month" width={24} height={24} />
+						<span>{formattedDate}</span>
+					</p>
+					<p>
+						<Icon name="mdi:clock-time-eight-outline" width={24} height={24} />
+						<span>{minutesRead}</span>
+					</p>
+					<p>
+						<Icon name="akar-icons:eye" width={24} height={24} />
+						<!-- TODO: Add views counter -->
+						<span>Views</span>
+					</p>
+				</div>
+			</div>
+		</section>
+		<!-- Content -->
+		<article>
+			<slot />
+		</article>
+	</div>
+</BaseLayout>
 
-		<!-- Post Cover Image -->
-		<div class="my-6">
-			<CloudinaryImage publicId={`sergiobarria/banners/${coverImage}`} alt={title} radius={20} />
-		</div>
-
-		<!-- Post Summary -->
-		<div class="bg-neutral-200 dark:bg-neutral-500 rounded-lg p-4 my-4">
+<!-- Post Summary -->
+<!-- <div class="bg-neutral-200 dark:bg-neutral-500 rounded-lg p-4 my-4">
 			<p class="mb-3">
 				<span class="font-bold">Summary:</span>
 				<span class="italic font-serif">↬ {summary}</span>
-			</p>
-			<div class="flex items-center divide-x">
+			</p> -->
+<!-- <div class="flex items-center divide-x">
 				<p class="flex items-center pr-3 space-x-2">
 					<CalendarIcon />
 					<span>{formattedDate}</span>
@@ -56,11 +146,11 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 					<ViewCounter client:load slug={slug as string} />
 				</p>
 			</div>
-		</div>
+		</div> -->
 
-		<!-- Content -->
-		<article class="prose dark:prose-invert mx-auto">
+<!-- Content -->
+<!-- <article class="prose dark:prose-invert mx-auto">
 			<slot />
 		</article>
 	</Container>
-</BaseLayout>
+</BaseLayout> -->
