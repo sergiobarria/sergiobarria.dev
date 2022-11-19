@@ -35,6 +35,7 @@ export default defineConfig({
 			open: true,
 		},
 		ssr: {
+			// NOTE: This is needed to avoid vite issues with default exports
 			noExternal: [
 				'@radix-ui/react-tooltip',
 				'@radix-ui/react-popover',
