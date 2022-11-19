@@ -9,24 +9,31 @@
 		{
 			"name": "github",
 			"url": "https://github.com/sergiobarria",
-      "color": "#24292f"
+			"color": "#24292f"
 		},
 		{
 			"name": "twitter",
 			"url": "https://twitter.com/sergioBarria01",
-      "color": "#1DA1F2"
+			"color": "#1DA1F2"
 		},
 		{
 			"name": "linkedin",
 			"url": "https://www.linkedin.com/in/sergiobarria",
-      "color": "#0A66C2"
+			"color": "#0A66C2"
+		},
+		{
+			"name": "email",
+			"url": "mailto:sbarria.dev@gmail.com"
+		},
+		{
+			"name": "codepen",
+			"url": "https://codepen.io/sergiobarria"
 		}
 	],
 	"navLinks": [
-		{ "id": 1, "href": "/about", "label": "About" },
-		{ "id": 2, "href": "/blog", "label": "Blog" },
-		{ "id": 3, "href": "/portfolio", "label": "Portfolio" },
-		{ "id": 4, "href": "/library", "label": "Library" }
+		{ "id": 2, "href": "/blog", "label": "Blog", "number": "01." },
+		{ "id": 3, "href": "/portfolio", "label": "Portfolio", "number": "02." },
+		{ "id": 4, "href": "/library", "label": "Library", "number": "03." }
 	],
 	"skills": [
 		{ "id": 1, "title": "JavaScript", "icon": "javascript", "learning": false },

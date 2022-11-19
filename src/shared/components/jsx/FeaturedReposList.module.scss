@@ -1,0 +1,16 @@
+@use 'src/styles/utils';
+
+.cardsContainer {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--size-4);
+	margin: var(--size-4) 0;
+
+	@include utils.breakpoint-up('md') {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@include utils.breakpoint-up('lg') {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}

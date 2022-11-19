@@ -1,48 +1,335 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import SocialLinks from '~/shared/components/SocialLinks.astro';
-import Container from '~/shared/components/Container.astro';
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { FeaturedPostsList } from '~/shared/components/jsx';
+
+import { SocialLinks, FeaturedProjectsList, MyselfSection } from '~/shared/components/jsx';
+import { parseBlogPost } from './blog/_utils';
+import { parseProject } from './projects/_utils';
+
+const postsData = await Astro.glob('../content/blog/*.mdx');
+const projectsData = await Astro.glob('../content/projects/*.mdx');
+const allPosts = await Promise.all(postsData?.map(parseBlogPost) ?? []);
+const allProjects = await Promise.all(projectsData?.map(parseProject) ?? []);
+const featuredPosts = allPosts.filter((post) => post.isFeatured);
+const featuredProjects = allProjects.filter((project) => project.featured);
 ---
 
+<style lang="scss">
+	@use 'src/styles/utils';
+	.homepage {
+		margin-top: var(--size-8);
+		& > section:not(:first-child) {
+			margin-top: var(--size-10);
+			margin-bottom: var(--size-10);
+		}
+
+		h2 {
+			font-size: var(--font-size-fluid-2);
+			color: var(--text1);
+			text-align: center;
+			max-inline-size: 100%;
+		}
+	}
+
+	.hero {
+		&__container {
+			display: flex;
+			align-items: center;
+			gap: var(--size-6);
+			animation: fadeIn 300ms ease-in;
+		}
+
+		&__leftSide {
+			&-subtitle {
+				font-size: var(--font-size-2);
+				color: var(--text2);
+				opacity: 0.6;
+				margin-bottom: var(--size-3);
+			}
+
+			&-paragraph {
+				font-size: clamp(var(--font-size-3), 1.5vw, var(--font-size-4));
+				color: var(--text1);
+				margin-bottom: var(--size-3);
+			}
+		}
+
+		&__rightSide {
+			width: 100%;
+			max-width: 300px;
+			aspect-ratio: var(--ratio-square);
+			display: none;
+
+			@include utils.breakpoint-up('md') {
+				display: block;
+			}
+		}
+
+		&__image {
+			position: relative;
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.name {
+		color: var(--brand-accent);
+	}
+
+	.blob-container {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.3;
+			filter: blur(15px);
+			background: #fff;
+
+			transition: 0.5s ease;
+			-webkit-animation: blob 12s linear infinite alternate;
+			animation: blob 12s linear infinite alternate;
+		}
+
+		&:before {
+			background: linear-gradient(165deg, var(--brand), var(--brand-accent));
+		}
+	}
+
+	.about {
+		background-color: var(--surface2);
+		padding: var(--size-4) 0 var(--size-8) 0;
+		border-radius: var(--radius-3);
+		&__container {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: var(--size-3);
+			overflow: hidden;
+
+			@include utils.breakpoint-up('md') {
+				flex-direction: row;
+				justify-content: space-between;
+			}
+		}
+
+		&__leftSide {
+			width: 100%;
+			max-width: 300px;
+			aspect-ratio: var(--ratio-square);
+
+			& > picture {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: relative;
+
+				& > img {
+					width: 75%;
+					height: 75%;
+					object-fit: cover;
+					border-radius: var(--radius-round);
+					border: var(--border-size-2) solid var(--brand-accent);
+				}
+
+				&:after {
+					content: '';
+					position: absolute;
+					width: 60%;
+					height: 12%;
+					bottom: 15%;
+					border-radius: 50%;
+					box-shadow: 0 60px 24px rgba(255, 188, 47, 0.2);
+				}
+			}
+		}
+
+		&__rightSide {
+			align-self: flex-start;
+			padding-top: var(--size-6);
+
+			& .accent {
+				color: var(--brand-accent);
+			}
+
+			&-content {
+				@include utils.breakpoint-down('md') {
+					padding-left: var(--size-6);
+				}
+
+				& > li {
+					max-inline-size: 90%;
+					list-style-type: square;
+					animation: var(--animation-fade-in) forwards, var(--animation-slide-in-left);
+					animation-timing-function: var(--ease-elastic-3);
+					animation-duration: 1250ms;
+
+					&:nth-child(1) {
+						animation-delay: 0.2s;
+					}
+
+					&:nth-child(2) {
+						animation-delay: 0.4s;
+					}
+
+					&:nth-child(3) {
+						animation-delay: 0.6s;
+					}
+
+					&:nth-child(4) {
+						animation-delay: 0.8s;
+					}
+
+					&:nth-child(5) {
+						animation-delay: 1s;
+					}
+
+					&::marker {
+						color: var(--brand-dimmed);
+						content: '▹';
+					}
+
+					&:not(:last-child) {
+						margin-bottom: var(--size-2);
+					}
+				}
+			}
+
+			&-link {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 70%;
+				margin-inline: auto;
+				text-align: center;
+				gap: var(--size-2);
+				color: var(--brand-accent);
+				font-size: var(--font-size-1);
+				font-weight: var(--font-weight-3);
+				transition: 0.2s ease;
+				margin-top: var(--size-3);
+				animation: var(--animation-bounce);
+
+				& > a {
+					color: var(--brand-dimmed);
+					&:hover {
+						color: var(--brand);
+					}
+				}
+			}
+		}
+	}
+
+	.slide-fade {
+		animation: var(--animation-fade-in) forwards, var(--animation-slide-in-left);
+		animation-timing-function: var(--ease-squish-3);
+		animation-duration: 1s;
+	}
+</style>
+
 <BaseLayout title="Home | Sergio Barria">
-	<Container as="div" class="my-8">
-		<!-- <div class="container space-y-6 max-w-screen-md mx-auto my-8"> -->
-		<!-- Hero Section -->
-		<section>
-			<div class="flex gap-x-16 items-center justify-between">
-				<div class="flex-[2]">
-					<h1>Hi, I'm Sergio 👋🏼</h1>
-					<p class="text-neutral-400 text-lg">Web & Mobile Full-Stack Developer</p>
-					<p class="my-3 text-lg">
+	<div class="homepage">
+		<section id="hero">
+			<div class="hero__container">
+				<div class="hero__leftSide">
+					<h1>Hey! I'm <span class="name">Sergio</span> 👋🏼</h1>
+					<p class="hero__leftSide-subtitle">Web & Mobile Full-Stack Developer</p>
+					<p class="hero__leftSide-paragraph">
 						I work with the JavaScript ecosystem, I love to learn new things and share my knowledge
 						with others. Welcome to my small space of the internet, where I write and share about
 						different topics related to the web.
 					</p>
-					<SocialLinks />
+					<SocialLinks client:visible size="large" />
+					<!-- <SocialLinks size="medium" /> -->
 				</div>
-				<div class="flex-1 hidden md:flex items-center justify-center h-full">
-					<div class="relative w-full">
-						<div class="absolute w-30 h-30 inset-0 rounded-full opacity-70 hero-blob"></div>
-						<div>
+				<div class="hero__rightSide">
+					<div class="hero__image">
+						<div class="blob-container"></div>
+						<picture>
 							<img
-								src="https://res.cloudinary.com/sbarria-dev/image/upload/c_scale,f_auto,q_auto,w_362/v1658762124/sergiobarria/hero_nqdmcv.webp"
-								width={2000}
+								src="https://res.cloudinary.com/sbarria-dev/image/upload/v1668232848/sergiobarria/spaceship-launch_lsag8o.png"
 								alt="hero image"
 							/>
-						</div>
+						</picture>
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<!-- Featured Posts -->
-		<section></section>
+		<section id="about" class="about">
+			<h2>About Me</h2>
+			<div class="about__container">
+				<div class="about__leftSide">
+					<picture>
+						<img
+							src="https://res.cloudinary.com/sbarria-dev/image/upload/v1668277002/sergiobarria/4C59B2D2-E116-4D3A-8F83-E2D1DA064661_1_105_c_kpcrhr.jpg"
+							alt=""
+						/>
+					</picture>
+				</div>
+				<div class="about__rightSide">
+					<ul class="about__rightSide-content">
+						<li>
+							<p>
+								I'm a <strong>Civil Engineer</strong> turn into Full Stack <strong class="accent"
+									>Web & Mobile Developer</strong
+								> from Panama.
+							</p>
+						</li>
+						<li>
+							Although I mostly work in the JavaScript/TypeScript ecosystem, with technologies like <strong
+								class="accent">React, Next.js and Node.js</strong
+							>. I also, have experience with other programming languages like <strong
+								class="accent">Python & Dart.</strong
+							>
+						</li>
+						<li>
+							Also, I like using other libraries/frameworks like <strong class="accent"
+								>Next.js, Vue</strong
+							>, as many <strong class="accent">styling libraries.</strong>
+						</li>
+						<li>
+							I enjoy learning about new technologies, patterns and best practices related to web &
+							mobile development.
+						</li>
+						<li>
+							Currently, I'm learning more about backend development with the <strong class="accent"
+								>Go
+							</strong>programming language. Also, I'm learning more about <strong class="accent"
+								>SQL</strong
+							> Databases and <strong class="accent">CI/CD.</strong>
+						</li>
+					</ul>
+					<div class="about__rightSide-link">
+						<a href="#doing-now">Whant to now more about me? Click here.</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
-		<!-- Featured Projects -->
-		<section></section>
+		<section id="feat-posts">
+			<h2>Featured Posts</h2>
+			<FeaturedPostsList posts={featuredPosts} />
+		</section>
 
-		<!-- What I'm up to right now -->
-		<section></section>
-		<!-- </div> -->
-	</Container>
+		<section id="feat-projects">
+			<h2>Featured Projects</h2>
+			<FeaturedProjectsList projects={featuredProjects} />
+		</section>
+
+		<section id="doing-now">
+			<h2>Me, Myself and I</h2>
+			<MyselfSection client:visible />
+		</section>
+	</div>
 </BaseLayout>

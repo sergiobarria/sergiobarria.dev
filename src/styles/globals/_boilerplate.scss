@@ -1,0 +1,32 @@
+html {
+	font-family: system-ui, 'Lato', -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+		Noto Sans sans-serif;
+	background-color: var(--surface1);
+	color: var(--text1);
+	transition: background-color 0.25s var(--ease-3);
+}
+
+/* Override Open-Props Normalize styles */
+:where(h1, h2, h3, h4, h5, h6, p) {
+	color: var(--text1);
+}
+
+h1 {
+	font-size: var(--font-size-fluid-3);
+}
+
+h2 {
+	font-size: var(--font-size-fluid-2);
+}
+
+h3 {
+	font-size: var(--font-size-fluid-1);
+}
+
+:is(a, a:visited, a:active, a:hover, a[href]) {
+	color: var(--text1);
+}
+
+:where(a, a:visited, a:active):hover {
+	text-decoration: none;
+}

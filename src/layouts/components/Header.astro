@@ -1,8 +1,8 @@
 ---
 import clsx from 'clsx';
 
-import { ThemeToggleButton } from '~/shared/components/jsx/ThemeToggleButton';
 import { LogoIcon } from './jsx';
+import { Settings } from '~/shared/components/jsx';
 
 import site from '../../../site.json';
 
@@ -11,40 +11,141 @@ const pathname = new URL(Astro.request.url).pathname;
 const { navLinks } = site;
 ---
 
-<header>
-	<div class="container mx-auto max-w-screen-lg px-4 lg:px-0 py-4">
-		<div class="flex items-center justify-between">
-			<div>
-				<a href="/">
-					<div class="relative h-8 w-20">
-						<div class="absolute inset-0 text-neutral-700 dark:text-neutral-200">
-							<LogoIcon />
-						</div>
-					</div>
-				</a>
-			</div>
-			<div class="flex items-center space-x-3">
-				<nav class="space-x-3 hidden md:flex">
-					{
-						navLinks.map((link) => (
-							<a
-								href={link.href}
-								class={clsx(
-									{
-										'font-bold bg-neutral-300 dark:bg-neutral-500 dark:text-typography':
-											pathname === link.href,
-										'nav-link': pathname !== link.href,
-									},
-									'px-4 py-1 rounded-md'
-								)}
-							>
-								{link.label}
-							</a>
-						))
+<style lang="scss">
+	@use 'src/styles/utils';
+	.header {
+		@include utils.position(fixed, 0, null, null, 0);
+
+		width: 100%;
+		height: var(--size-9);
+		background: rgba(var(--surface1), 0.25);
+		backdrop-filter: blur(10px);
+		z-index: 10;
+
+		&__container {
+			@include utils.center-horizontally;
+
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			height: 100%;
+
+			&-logo > a {
+				color: var(--text1);
+
+				&:hover {
+					opacity: 0.9;
+				}
+			}
+
+			&-nav {
+				display: flex;
+				align-items: center;
+				gap: var(--size-6);
+
+				& > nav {
+					display: none;
+					align-items: center;
+					gap: var(--size-4);
+
+					& > span {
+						display: flex;
+						align-items: center;
+						gap: var(--size-1);
 					}
-				</nav>
-				<ThemeToggleButton client:visible />
-			</div>
+
+					@include utils.breakpoint-up('md') {
+						display: flex;
+					}
+				}
+			}
+		}
+	}
+
+	.link {
+		position: relative;
+		text-decoration: none;
+		font-weight: var(--font-weight-2);
+	}
+
+	.link-inactive {
+		&::before,
+		&::after {
+			@include utils.position(absolute, null, null, 0, 0);
+
+			content: '';
+			width: 100%;
+			height: 2px;
+			background-color: var(--brand);
+			transform: scaleX(0);
+			transition: transform 0.3s ease;
+		}
+
+		&::before {
+			top: -2px;
+			transform-origin: left;
+		}
+
+		&::after {
+			bottom: -2px;
+			transform-origin: right;
+		}
+
+		&:hover::before,
+		&:hover::after {
+			transform: scaleX(1);
+		}
+	}
+
+	.link-active {
+		color: var(--brand-accent);
+		font-weight: 600;
+
+		&:visited {
+			color: var(--brand-accent);
+		}
+	}
+
+	.logo {
+		&:hover {
+			color: var(--brand);
+		}
+	}
+
+	.number {
+		color: var(--brand);
+	}
+</style>
+
+<header class="header">
+	<div class="header__container">
+		<div class="header__container-logo">
+			<a href="/" class="logo">
+				<LogoIcon />
+			</a>
+		</div>
+		<div class="header__container-nav">
+			<nav>
+				{
+					navLinks.map((link) => {
+						return (
+							<span>
+								<span class="number">{link.number}</span>
+								<a
+									href={link.href}
+									class={clsx('link', {
+										'link-active': pathname === link.href,
+										'link-inactive': pathname !== link.href,
+									})}
+								>
+									{link.label}
+								</a>
+							</span>
+						);
+					})
+				}
+			</nav>
+			<Settings client:load />
 		</div>
 	</div>
 </header>

@@ -1,41 +1,9 @@
-import React from 'react';
 import clsx from 'clsx';
+import { Icon } from '@iconify/react';
 
 import { usePagination, SEPARATOR } from '~/shared/hooks';
 
-const LeftArrowIcon = ({ className = 'w-6 h-6' }: { className?: string }) => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		fill="none"
-		viewBox="0 0 24 24"
-		strokeWidth={1.5}
-		stroke="currentColor"
-		className={className}
-	>
-		<path
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			d="M11.25 9l-3 3m0 0l3 3m-3-3h7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-		/>
-	</svg>
-);
-
-const RightArrowIcon = ({ className = 'w-6 h-6' }: { className?: string }) => (
-	<svg
-		xmlns="http://www.w3.org/2000/svg"
-		fill="none"
-		viewBox="0 0 24 24"
-		strokeWidth={1.5}
-		stroke="currentColor"
-		className={className}
-	>
-		<path
-			strokeLinecap="round"
-			strokeLinejoin="round"
-			d="M12.75 15l3-3m0 0l-3-3m3 3h-7.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-		/>
-	</svg>
-);
+import styles from './Pagination.module.scss';
 
 interface PaginationProps {
 	className?: string;
@@ -81,17 +49,17 @@ export const Pagination = ({
 	let lastPage = paginationRange[paginationRange.length - 1];
 
 	return (
-		<nav className="flex justify-center mt-6">
-			<ul className="flex items-center space-x-3">
+		<nav className={styles.nav}>
+			<ul className={styles.pagination}>
 				{/* Left arrow */}
 				<li
 					onClick={onPrev}
-					className={clsx({
-						'cursor-pointer': currentPage > 1,
-						'cursor-not-allowed text-neutral-200 dark:text-neutral-700': currentPage === 1,
-					})}
+					className={clsx(
+						currentPage > 1 && styles.arrowActive,
+						currentPage === 1 && styles.arrowDisabled
+					)}
 				>
-					<LeftArrowIcon />
+					<Icon icon="material-symbols:arrow-circle-left-rounded" width={32} height={32} />
 				</li>
 
 				{/* Render pages numbers */}
@@ -100,7 +68,7 @@ export const Pagination = ({
 					if (page === SEPARATOR) {
 						return (
 							<li key={page}>
-								<span className="">&#8230;</span>
+								<span>&#8230;</span>
 							</li>
 						);
 					}
@@ -109,11 +77,9 @@ export const Pagination = ({
 						<li
 							key={page}
 							className={clsx(
-								'px-3 py-1 rounded-md cursor-pointer transform transition-all duration-200',
-								{
-									'bg-neutral-500 hover:scale-[1.1]': page !== currentPage,
-									'bg-accent cursor-not-allowed': page === currentPage,
-								}
+								styles.number,
+								page !== currentPage && styles.numberInactive,
+								page === currentPage && styles.numberActive
 							)}
 							onClick={() => onPageChange(Number(page))}
 						>
@@ -125,12 +91,12 @@ export const Pagination = ({
 				{/* Right arrow */}
 				<li
 					onClick={onNext}
-					className={clsx({
-						'cursor-pointer': currentPage < lastPage,
-						'cursor-not-allowed text-neutral-200 dark:text-neutral-700': currentPage === lastPage,
-					})}
+					className={clsx(
+						currentPage < lastPage && styles.arrowActive,
+						currentPage === lastPage && styles.arrowDisabled
+					)}
 				>
-					<RightArrowIcon />
+					<Icon icon="material-symbols:arrow-circle-right" width={32} height={32} />
 				</li>
 			</ul>
 		</nav>

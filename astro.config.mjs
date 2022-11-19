@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import remarkCodeTitles from 'remark-code-titles';
 
 // Integrations
@@ -13,11 +12,6 @@ import { tokens, foregroundPrimary, backgroundPrimary } from './lib/syntax-highl
 export default defineConfig({
 	site: 'https://sergiobarria.com',
 	integrations: [
-		tailwind({
-			config: {
-				applyBaseStyles: true,
-			},
-		}),
 		react(),
 		mdx({
 			extendPlugins: 'markdown',
@@ -40,9 +34,18 @@ export default defineConfig({
 		server: {
 			open: true,
 		},
+		ssr: {
+			// NOTE: This is needed to avoid vite issues with default exports
+			noExternal: [
+				'@radix-ui/react-tooltip',
+				'@radix-ui/react-popover',
+				'@radix-ui/react-select',
+				'@radix-ui/react-tabs',
+			],
+		},
 	},
 	server: {
 		host: 'localhost',
-		port: 3000,
+		port: 8080,
 	},
 });
