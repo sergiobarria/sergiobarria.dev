@@ -46,7 +46,7 @@ export function CloudinaryImage({
 	const imageUrl = image.toURL();
 
 	return (
-		<figure className="min-h-[10rem] w-full">
+		<figure>
 			<div onClick={preview ? () => setIsOpen(true) : undefined}>
 				<AdvancedImage
 					cldImg={image}

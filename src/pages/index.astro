@@ -2,13 +2,16 @@
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { FeaturedPostsList } from '~/shared/components/jsx';
 
-import { SocialLinks } from '~/shared/components/jsx';
+import { SocialLinks, FeaturedProjectsList, MyselfSection } from '~/shared/components/jsx';
 import { parseBlogPost } from './blog/_utils';
+import { parseProject } from './projects/_utils';
 
-const data = await Astro.glob('../content/blog/*.mdx');
-const allPosts = await Promise.all(data?.map(parseBlogPost) ?? []);
+const postsData = await Astro.glob('../content/blog/*.mdx');
+const projectsData = await Astro.glob('../content/projects/*.mdx');
+const allPosts = await Promise.all(postsData?.map(parseBlogPost) ?? []);
+const allProjects = await Promise.all(projectsData?.map(parseProject) ?? []);
 const featuredPosts = allPosts.filter((post) => post.isFeatured);
-
+const featuredProjects = allProjects.filter((project) => project.featured);
 ---
 
 <style lang="scss">
@@ -110,6 +113,7 @@ const featuredPosts = allPosts.filter((post) => post.isFeatured);
 			flex-direction: column;
 			align-items: center;
 			gap: var(--size-3);
+			overflow: hidden;
 
 			@include utils.breakpoint-up('md') {
 				flex-direction: row;
@@ -158,19 +162,78 @@ const featuredPosts = allPosts.filter((post) => post.isFeatured);
 				color: var(--brand-accent);
 			}
 
-			&-content > li {
-				max-inline-size: 90%;
-				list-style-type: square;
-
-				&::marker {
-					color: var(--brand-dimmed);
+			&-content {
+				@include utils.breakpoint-down('md') {
+					padding-left: var(--size-6);
 				}
 
-				&:not(:last-child) {
-					margin-bottom: var(--size-2);
+				& > li {
+					max-inline-size: 90%;
+					list-style-type: square;
+					animation: var(--animation-fade-in) forwards, var(--animation-slide-in-left);
+					animation-timing-function: var(--ease-elastic-3);
+					animation-duration: 1250ms;
+
+					&:nth-child(1) {
+						animation-delay: 0.2s;
+					}
+
+					&:nth-child(2) {
+						animation-delay: 0.4s;
+					}
+
+					&:nth-child(3) {
+						animation-delay: 0.6s;
+					}
+
+					&:nth-child(4) {
+						animation-delay: 0.8s;
+					}
+
+					&:nth-child(5) {
+						animation-delay: 1s;
+					}
+
+					&::marker {
+						color: var(--brand-dimmed);
+						content: '▹';
+					}
+
+					&:not(:last-child) {
+						margin-bottom: var(--size-2);
+					}
+				}
+			}
+
+			&-link {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 70%;
+				margin-inline: auto;
+				text-align: center;
+				gap: var(--size-2);
+				color: var(--brand-accent);
+				font-size: var(--font-size-1);
+				font-weight: var(--font-weight-3);
+				transition: 0.2s ease;
+				margin-top: var(--size-3);
+				animation: var(--animation-bounce);
+
+				& > a {
+					color: var(--brand-dimmed);
+					&:hover {
+						color: var(--brand);
+					}
 				}
 			}
 		}
+	}
+
+	.slide-fade {
+		animation: var(--animation-fade-in) forwards, var(--animation-slide-in-left);
+		animation-timing-function: var(--ease-squish-3);
+		animation-duration: 1s;
 	}
 </style>
 
@@ -247,6 +310,9 @@ const featuredPosts = allPosts.filter((post) => post.isFeatured);
 							> Databases and <strong class="accent">CI/CD.</strong>
 						</li>
 					</ul>
+					<div class="about__rightSide-link">
+						<a href="#doing-now">Whant to now more about me? Click here.</a>
+					</div>
 				</div>
 			</div>
 		</section>
@@ -258,10 +324,12 @@ const featuredPosts = allPosts.filter((post) => post.isFeatured);
 
 		<section id="feat-projects">
 			<h2>Featured Projects</h2>
+			<FeaturedProjectsList projects={featuredProjects} />
 		</section>
 
 		<section id="doing-now">
-			<h2>What I'm Doing Now</h2>
+			<h2>Me, Myself and I</h2>
+			<MyselfSection client:visible />
 		</section>
 	</div>
 </BaseLayout>

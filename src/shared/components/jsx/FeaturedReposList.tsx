@@ -3,6 +3,8 @@ import clsx from 'clsx';
 
 import { gqlFetcher, GET_PINNED_REPOSTS_QUERY } from 'lib/gql';
 
+import styles from './FeaturedReposList.module.scss';
+
 const languages = [
 	'bg-[#563d7c]',
 	'bg-[#f1e05a]',
@@ -18,29 +20,37 @@ const languages = [
 ];
 
 export type Repo = {
-	node: {
+	id: string;
+	name: string;
+	description: string;
+	homepageUrl: string;
+	url: string;
+	stargazerCount: number;
+	primaryLanguage: {
 		id: string;
 		name: string;
-		description: string;
-		homepageUrl: string;
-		url: string;
-		stargazerCount: number;
-		primaryLanguage: {
-			id: string;
-			name: string;
-			color: string;
-		};
+		color: string;
 	};
+};
+
+export type Node = {
+	node: Repo;
 };
 
 export type User = {
 	user: {
 		pinnedItems: {
 			totalCount: number;
-			edges: Repo[];
+			edges: Node[];
 		};
 	};
 };
+
+function RepoCard({ repo }: { repo: Repo }) {
+	const { id, name, url, description, primaryLanguage } = repo;
+
+	return <div>{repo.name} card</div>;
+}
 
 function LoadingCard() {
 	return (
@@ -101,5 +111,11 @@ export function FeaturedReposList() {
 		});
 	}
 
-	return <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">{content}</div>;
+	return (
+		<div className={styles.cardsContainer}>
+			{repos.map((repo) => {
+				return <RepoCard key={repo.id} repo={repo} />;
+			})}
+		</div>
+	);
 }

@@ -2,7 +2,7 @@ import React from 'react';
 
 export function LogoIcon(): JSX.Element {
 	return (
-		<svg viewBox="0 0 320 108.64197530864197" className="css-1j8o68f" fill="none">
+		<svg viewBox="0 0 320 108.64" className="css-1j8o68f" fill="none">
 			<defs id="SvgjsDefs1001"></defs>
 			<g
 				id="SvgjsG1007"

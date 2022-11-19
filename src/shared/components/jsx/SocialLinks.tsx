@@ -1,4 +1,10 @@
-import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons';
+import {
+	GitHubLogoIcon,
+	LinkedInLogoIcon,
+	TwitterLogoIcon,
+	EnvelopeClosedIcon,
+	CodeSandboxLogoIcon,
+} from '@radix-ui/react-icons';
 import clsx from 'clsx';
 
 import { Tooltip } from './Tooltip';
@@ -23,6 +29,8 @@ export function SocialLinks({ className, size = 'medium' }: SocialLinksProps) {
 		github: <GitHubLogoIcon width={sizes[size]} height={sizes[size]} />,
 		linkedin: <LinkedInLogoIcon width={sizes[size]} height={sizes[size]} />,
 		twitter: <TwitterLogoIcon width={sizes[size]} height={sizes[size]} />,
+		email: <EnvelopeClosedIcon width={sizes[size]} height={sizes[size]} />,
+		codepen: <CodeSandboxLogoIcon width={sizes[size]} height={sizes[size]} />,
 	};
 
 	return (

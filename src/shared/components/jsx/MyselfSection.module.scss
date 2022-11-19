@@ -1,0 +1,91 @@
+@use 'src/styles/utils';
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	background-color: var(--surface2);
+	border-radius: var(--radius-3);
+	margin: var(--size-6) 0;
+	padding: var(--size-6);
+}
+
+.tabs {
+	align-items: flex-start;
+	gap: var(--size-6);
+	padding: var(--size-3) 0;
+	width: 100%;
+
+	@include utils.breakpoint-up('md') {
+		display: flex;
+	}
+}
+
+.tabsList {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--size-3);
+	max-width: 100%;
+	overflow-x: auto;
+	position: relative;
+	margin-bottom: var(--size-3);
+	border-bottom: 1px solid var(--surface4);
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE 10+ */
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	@include utils.breakpoint-up('md') {
+		flex-direction: column;
+		border-bottom: 0;
+		gap: var(--size-3);
+	}
+}
+
+.tab {
+	display: inline-block;
+	white-space: nowrap;
+	width: 100%;
+	text-align: left;
+
+	@include utils.breakpoint-up('md') {
+		padding: var(--size-2) var(--size-3);
+		border-radius: var(--radius-3);
+	}
+
+	&[data-state='active'] {
+		border-bottom: 1px solid var(--brand);
+	}
+}
+
+.tabContent {
+	animation: fadeIn 300ms ease-in;
+
+	h4 {
+    font-size: clamp(1.25rem, 2vw, 2rem);
+		margin-bottom: var(--size-1);
+	}
+
+	ul {
+    cursor: auto;
+
+		@include utils.breakpoint-down('md') {
+			padding-inline-start: var(--size-2);
+		}
+	}
+
+	li {
+    font-size: clamp(1rem, 1.75vw, 1.25rem);
+
+		&::marker {
+			color: var(--brand-dimmed);
+			content: '▹';
+		}
+	}
+}

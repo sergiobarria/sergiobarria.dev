@@ -20,6 +20,7 @@ const { navLinks } = site;
 		height: var(--size-9);
 		background: rgba(var(--surface1), 0.25);
 		backdrop-filter: blur(10px);
+		z-index: 10;
 
 		&__container {
 			@include utils.center-horizontally;
@@ -43,9 +44,19 @@ const { navLinks } = site;
 				gap: var(--size-6);
 
 				& > nav {
-					display: flex;
+					display: none;
 					align-items: center;
 					gap: var(--size-4);
+
+					& > span {
+						display: flex;
+						align-items: center;
+						gap: var(--size-1);
+					}
+
+					@include utils.breakpoint-up('md') {
+						display: flex;
+					}
 				}
 			}
 		}
@@ -53,13 +64,8 @@ const { navLinks } = site;
 
 	.link {
 		position: relative;
-		display: none;
 		text-decoration: none;
 		font-weight: var(--font-weight-2);
-
-		@include utils.breakpoint-up('md') {
-			display: inline-block;
-		}
 	}
 
 	.link-inactive {
@@ -105,6 +111,10 @@ const { navLinks } = site;
 			color: var(--brand);
 		}
 	}
+
+	.number {
+		color: var(--brand);
+	}
 </style>
 
 <header class="header">
@@ -119,15 +129,18 @@ const { navLinks } = site;
 				{
 					navLinks.map((link) => {
 						return (
-							<a
-								href={link.href}
-								class={clsx('link', {
-									'link-active': pathname === link.href,
-									'link-inactive': pathname !== link.href,
-								})}
-							>
-								{link.label}
-							</a>
+							<span>
+								<span class="number">{link.number}</span>
+								<a
+									href={link.href}
+									class={clsx('link', {
+										'link-active': pathname === link.href,
+										'link-inactive': pathname !== link.href,
+									})}
+								>
+									{link.label}
+								</a>
+							</span>
 						);
 					})
 				}
