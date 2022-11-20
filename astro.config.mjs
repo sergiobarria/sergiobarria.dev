@@ -1,35 +1,22 @@
 import { defineConfig } from 'astro/config';
 import remarkCodeTitles from 'remark-code-titles';
+import rehypePrettyCode from 'rehype-pretty-code';
 
 // Integrations
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 
 import { remarkReadingTime } from './src/shared/utils/remark-reading-time.mjs';
-import { tokens, foregroundPrimary, backgroundPrimary } from './lib/syntax-highlighting-theme';
 
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://sergiobarria.com',
-	integrations: [
-		react(),
-		mdx({
-			remarkPlugins: [remarkReadingTime, remarkCodeTitles],
-		}),
-	],
-	// markdown: {
-	// 	syntaxHighlight: 'shiki',
-	// 	shikiConfig: {
-	// 		theme: {
-	// 			name: 'Star Gazer',
-	// 			type: 'dark',
-	// 			settings: tokens,
-	// 			fg: foregroundPrimary,
-	// 			bg: backgroundPrimary,
-	// 		},
-	// 	},
-	// 	remarkPlugins: [remarkReadingTime, remarkCodeTitles],
-	// },
+	markdown: {
+		shikiConfig: { theme: 'css-variables' }, // css-variables tells shiki to read the theme from CSS variables
+		rehypePlugins: [rehypePrettyCode],
+		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
+	},
+	integrations: [react(), mdx()],
 	vite: {
 		server: {
 			open: true,

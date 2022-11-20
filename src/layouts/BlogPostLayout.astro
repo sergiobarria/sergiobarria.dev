@@ -29,7 +29,9 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 				text-align: center;
 				max-inline-size: 100%;
 				margin-bottom: var(--size-3);
-				background-color: #37da00;
+				background: var(--text-gradient);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
 				border-radius: var(--radius-3);
 				padding: var(--size-1);
 			}
@@ -39,7 +41,7 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 		}
 
 		&__summaryCard {
-			background-color: var(--surface-2);
+			background-color: var(--surface2);
 			padding: var(--size-3);
 			border-radius: var(--radius-3);
 			margin-bottom: var(--size-3);
@@ -80,6 +82,10 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 			}
 		}
 	}
+
+	.content {
+		max-inline-size: var(--size-content-3);
+	}
 </style>
 
 <BaseLayout>
@@ -117,7 +123,7 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 			</div>
 		</section>
 		<!-- Content -->
-		<article>
+		<article id="post-content" class="content">
 			<slot />
 		</article>
 	</div>

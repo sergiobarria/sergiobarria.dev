@@ -30,3 +30,13 @@ h3 {
 :where(a, a:visited, a:active):hover {
 	text-decoration: none;
 }
+
+html[data-theme='light'] {
+	pre {
+		background-color: var(--gray-8);
+	}
+}
+
+:where(:not(pre) > code) {
+	background-color: var(--surface2);
+}

@@ -16,5 +16,5 @@ export function ViewCounter({ slug }: ViewCounterProps) {
 		registerView();
 	}, [slug]);
 
-	return <span className="ml-2">{views ? views : '---'}</span>;
+	return <span>{views ? `${views} views` : '---'}</span>;
 }
