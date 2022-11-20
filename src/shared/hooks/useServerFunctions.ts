@@ -9,7 +9,8 @@ export function useServerFunctions() {
 	}
 
 	if (mode === 'production') {
-		apiUrl = window.location.origin + '/api';
+		const origin = typeof window !== 'undefined' ? window.location.origin : '';
+		apiUrl = origin + '/api';
 	}
 
 	return { apiUrl };
