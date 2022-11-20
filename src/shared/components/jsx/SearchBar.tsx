@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Icon } from '@iconify/react';
+import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
 import { searchQuery as nSearchQuery } from '~/stores';
 import { useDebounce } from '~/shared/hooks';
@@ -21,7 +21,7 @@ export const SearchBar = () => {
 			</label>
 			<div className={styles.searchContainer}>
 				<div className={styles.iconContainer}>
-					<Icon icon="material-symbols:search" width={24} height={24} />
+					<MagnifyingGlassIcon width={24} height={24} />
 				</div>
 				<input
 					id="search-bar"

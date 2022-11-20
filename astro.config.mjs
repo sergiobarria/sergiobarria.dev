@@ -14,22 +14,22 @@ export default defineConfig({
 	integrations: [
 		react(),
 		mdx({
-			extendPlugins: 'markdown',
+			remarkPlugins: [remarkReadingTime, remarkCodeTitles],
 		}),
 	],
-	markdown: {
-		syntaxHighlight: 'shiki',
-		shikiConfig: {
-			theme: {
-				name: 'Star Gazer',
-				type: 'dark',
-				settings: tokens,
-				fg: foregroundPrimary,
-				bg: backgroundPrimary,
-			},
-		},
-		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
-	},
+	// markdown: {
+	// 	syntaxHighlight: 'shiki',
+	// 	shikiConfig: {
+	// 		theme: {
+	// 			name: 'Star Gazer',
+	// 			type: 'dark',
+	// 			settings: tokens,
+	// 			fg: foregroundPrimary,
+	// 			bg: backgroundPrimary,
+	// 		},
+	// 	},
+	// 	remarkPlugins: [remarkReadingTime, remarkCodeTitles],
+	// },
 	vite: {
 		server: {
 			open: true,

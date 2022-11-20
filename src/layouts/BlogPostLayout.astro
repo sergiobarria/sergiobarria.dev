@@ -1,10 +1,8 @@
 ---
 import { format } from 'date-fns';
-import { Icon } from 'astro-icon';
+import { CalendarIcon, ClockIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import Container from '~/shared/components/Container.astro';
-import EyeIcon from '~/shared/icons/EyeIcon.astro';
 import { CloudinaryImage, ViewCounter } from '~/shared/components/jsx';
 import type { PostFrontmatter } from '~/pages/blog/_utils';
 
@@ -104,17 +102,16 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 				</p>
 				<div class="post__summaryCard-stats">
 					<p>
-						<Icon name="ic:sharp-calendar-month" width={24} height={24} />
+						<CalendarIcon width={24} height={24} />
 						<span>{formattedDate}</span>
 					</p>
 					<p>
-						<Icon name="mdi:clock-time-eight-outline" width={24} height={24} />
+						<ClockIcon width={24} height={24} />
 						<span>{minutesRead}</span>
 					</p>
 					<p>
-						<Icon name="akar-icons:eye" width={24} height={24} />
-						<!-- TODO: Add views counter -->
-						<span>Views</span>
+						<EyeOpenIcon width={24} height={24} />
+						<ViewCounter client:load slug={slug as string} />
 					</p>
 				</div>
 			</div>
@@ -125,32 +122,3 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 		</article>
 	</div>
 </BaseLayout>
-
-<!-- Post Summary -->
-<!-- <div class="bg-neutral-200 dark:bg-neutral-500 rounded-lg p-4 my-4">
-			<p class="mb-3">
-				<span class="font-bold">Summary:</span>
-				<span class="italic font-serif">↬ {summary}</span>
-			</p> -->
-<!-- <div class="flex items-center divide-x">
-				<p class="flex items-center pr-3 space-x-2">
-					<CalendarIcon />
-					<span>{formattedDate}</span>
-				</p>
-				<p class="flex items-center px-3 space-x-2">
-					<ReadingTimeIcon />
-					<span>{minutesRead}</span>
-				</p>
-				<p class="flex items-center pl-3 space-x-2">
-					<EyeIcon />
-					<ViewCounter client:load slug={slug as string} />
-				</p>
-			</div>
-		</div> -->
-
-<!-- Content -->
-<!-- <article class="prose dark:prose-invert mx-auto">
-			<slot />
-		</article>
-	</Container>
-</BaseLayout> -->

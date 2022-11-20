@@ -22,7 +22,7 @@ const pathname = new URL(Astro.request.url).pathname;
 			padding: var(--size-6) 0;
 			border-top: 1px solid var(--surface3);
 
-			@include utils.breakpoint-up('up') {
+			@include utils.breakpoint-up('md') {
 				justify-content: space-between;
 			}
 		}
@@ -64,6 +64,8 @@ const pathname = new URL(Astro.request.url).pathname;
 				a {
 					position: relative;
 					display: inline-block;
+					color: var(--brand-dimmed);
+					font-weight: 300;
 
 					&::after {
 						@include utils.position(absolute, null, null, 0, 0);

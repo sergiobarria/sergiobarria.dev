@@ -23,7 +23,7 @@ const grey = {
   0: '#d8dee9',
   1: '#c7c5d3',
   2: '#aba8bd',
-  9: '#181325',
+  9: 'hsl(200 7% 15%)',
 };
 
 export const foregroundPrimary = green[0];

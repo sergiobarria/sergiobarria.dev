@@ -1,7 +1,7 @@
 @use 'src/styles/utils';
 
 .mobileNav {
-	@include utils.breakpoint-up(md) {
+	@include utils.breakpoint-up('md') {
 		display: none;
 	}
 }

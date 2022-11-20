@@ -1,4 +1,3 @@
-export * from './TechCard';
 export * from './CloudinaryImage';
 export * from './CalloutBox';
 export * from './Views';
