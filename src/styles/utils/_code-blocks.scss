@@ -1,6 +1,9 @@
 @use 'mixins' as utils;
 
-/* NOTE: This variables define the syntax highlight for code blocks */
+/* NOTE: This variables define the syntax highlight for code blocks 
+*  the astro-code prefix is required to work with astro, normally the
+*  prefix would be --shiki
+*/
 /* TODO: Add different themes for each color scheme depending on the [data-theme] attribute */
 :root {
 	--astro-code-color-text: hsl(0, 0%, 95%);
