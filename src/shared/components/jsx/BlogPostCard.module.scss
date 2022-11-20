@@ -1,3 +1,5 @@
+@use 'src/styles/utils';
+
 .article {
 	display: flex;
 	flex-direction: column;
@@ -23,7 +25,7 @@
 			margin-top: var(--size-3);
 
 			&:hover {
-				color: var(--accent);
+				color: var(--brand-accent);
 			}
 		}
 
@@ -31,12 +33,19 @@
 			display: flex;
 			align-items: center;
 			color: var(--text2);
+			margin-top: var(--size-1);
+
+			p:nth-child(1) {
+				margin-right: var(--size-2);
+				padding-right: var(--size-2);
+				border-right: 1px solid var(--text2);
+			}
 
 			& > p {
 				display: flex;
 				align-items: center;
 				gap: var(--size-2);
-        color: var(--text3);
+				color: var(--text3);
 				font-size: calc(var(--font-size-2) / 1.25);
 			}
 

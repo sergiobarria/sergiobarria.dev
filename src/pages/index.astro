@@ -77,17 +77,15 @@ const featuredProjects = allProjects.filter((project) => project.featured);
 	}
 
 	.blob-container {
-		position: absolute;
-		top: 0;
-		left: 0;
+		@include utils.position(absolute, 0, null, null, 0);
+
 		width: 100%;
 		height: 100%;
 
 		&::before {
+			@include utils.position(absolute, 0, null, null, 0);
+
 			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
 			width: 100%;
 			height: 100%;
 			opacity: 0.3;
