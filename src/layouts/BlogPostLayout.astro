@@ -1,4 +1,5 @@
 ---
+import type { MarkdownHeading } from 'astro';
 import { format } from 'date-fns';
 import { CalendarIcon, ClockIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
@@ -9,18 +10,26 @@ import type { PostFrontmatter } from '~/pages/blog/_utils';
 interface Props {
 	slug?: string;
 	frontmatter: PostFrontmatter;
+	headings: MarkdownHeading[];
 }
 
 const {
 	frontmatter: { title, coverImage, summary, minutesRead, publishDate },
 	slug,
+	headings,
 } = Astro.props as Props;
 const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
+console.log('headings: ', headings);
 ---
 
 <style lang="scss">
+	@use 'src/styles/utils';
 	.container {
 		margin: var(--size-8) 0;
+
+		hr {
+			margin-block: var(--size-fluid-2);
+		}
 	}
 
 	.post {
@@ -29,7 +38,9 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 				text-align: center;
 				max-inline-size: 100%;
 				margin-bottom: var(--size-3);
-				background-color: #37da00;
+				background: var(--text-gradient);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
 				border-radius: var(--radius-3);
 				padding: var(--size-1);
 			}
@@ -39,7 +50,7 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 		}
 
 		&__summaryCard {
-			background-color: var(--surface-2);
+			background-color: var(--surface2);
 			padding: var(--size-3);
 			border-radius: var(--radius-3);
 			margin-bottom: var(--size-3);
@@ -80,6 +91,55 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 			}
 		}
 	}
+
+	.content {
+		max-inline-size: var(--size-content-3);
+	}
+
+	.grid {
+		@include utils.breakpoint-up('md') {
+			display: grid;
+			gap: var(--size-8);
+			grid-template-columns: auto 350px;
+		}
+	}
+
+	.toc {
+		position: relative;
+		padding: var(--size-3);
+
+		@include utils.breakpoint-down('md') {
+			display: none;
+		}
+
+		&__container {
+			@include utils.position(sticky, 9rem, null, null, null);
+		}
+
+		h3 {
+			margin-bottom: var(--size-3);
+		}
+
+		&__links {
+			& > a {
+				display: block;
+				margin-bottom: var(--size-1);
+				color: var(--text-3);
+				opacity: 0.7;
+				font-size: var(--font-size-1);
+				transition: opacity 0.2s ease-in-out;
+
+				&:hover {
+					opacity: 1;
+				}
+
+				&:active {
+					opacity: 1;
+					font-weight: 600;
+				}
+			}
+		}
+	}
 </style>
 
 <BaseLayout>
@@ -116,9 +176,20 @@ const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 				</div>
 			</div>
 		</section>
+		<hr />
 		<!-- Content -->
-		<article>
-			<slot />
-		</article>
+		<div class="grid">
+			<article id="post-content" class="content">
+				<slot />
+			</article>
+			<div class="toc">
+				<div class="toc__container">
+					<h3>Table of Contents</h3>
+					<div class="toc__links">
+						{headings.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </BaseLayout>

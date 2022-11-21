@@ -1,0 +1,59 @@
+@use 'src/styles/utils';
+
+.callout {
+	position: relative;
+	margin: var(--size-4) 0;
+	border-radius: var(--radius-3);
+	padding: 0 var(--size-4);
+}
+
+.tip {
+	background-color: hsl(var(--green-5-hsl) / 30%);
+	border: 2px solid var(--green-5);
+
+	span {
+		color: var(--green-5);
+	}
+}
+
+.info {
+	background-color: hsl(var(--blue-5-hsl) / 30%);
+	border: 2px solid var(--blue-5);
+
+	span {
+		color: var(--blue-5);
+	}
+}
+
+.warn {
+	background-color: hsl(var(--yellow-5-hsl) / 30%);
+	border: 2px solid var(--yellow-5);
+
+	span {
+		color: var(--yellow-5);
+	}
+}
+
+.danger {
+	background-color: hsl(var(--red-5-hsl) / 30%);
+	border: 2px solid var(--red-5);
+
+	span {
+		color: var(--red-5);
+	}
+}
+
+.icon {
+	@include utils.position(absolute, -18px, null, null, -18px);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--size-2);
+	background-color: var(--surface1);
+	border-radius: var(--radius-round);
+}
+
+.content {
+	font-size: var(--font-size-fluid-1);
+}

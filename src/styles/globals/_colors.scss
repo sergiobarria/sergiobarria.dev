@@ -21,6 +21,7 @@ html {
 		hsl(178deg 75% 9%) 63%,
 		hsl(173deg 100% 9%) 100%
 	);
+	--text-gradient-night: linear-gradient(to top right, hsl(173 100% 66%), hsl(60 92% 71%));
 
 	/* Light */
 	--brand-light: hsl(220, 100%, 50%);
@@ -36,6 +37,15 @@ html {
 	--surface4-light: hsl(0 0% 85%);
 	--surface-shadow-light: hsl(200 7% 11% / 0.7);
 	--surface-strength-light: 2%;
+	--background-gradient-light: linear-gradient(
+		270deg,
+		hsl(195deg 7% 11%) 0%,
+		hsl(191deg 30% 11%) 49%,
+		hsl(184deg 53% 10%) 57%,
+		hsl(178deg 75% 9%) 63%,
+		hsl(173deg 100% 9%) 100%
+	);
+	--text-gradient-light: linear-gradient(to top right, hsl(220, 100%, 50%), hsl(332, 100%, 61%));
 
 	/* Night Owl */
 	--brand-night-owl: hsl(207 100% 94%);
@@ -51,6 +61,15 @@ html {
 	--surface4-night-owl: hsl(210 47% 25%);
 	--surface-shadow-night-owl: hsl(200 7% 11% / 0.7);
 	--surface-strength-night-owl: 2%;
+	--background-gradient-night-owl: linear-gradient(
+		270deg,
+		hsl(210 47% 12%) 0%,
+		hsl(210 47% 15%) 49%,
+		hsl(210 47% 20%) 57%,
+		hsl(210 47% 25%) 63%,
+		hsl(210 47% 30%) 100%
+	);
+	--text-gradient-night-owl: linear-gradient(to top right, hsl(207 100% 94%), hsl(6 100% 86%));
 
 	/* Purple */
 	--brand-purple: hsl(260 91% 54%);
@@ -66,6 +85,15 @@ html {
 	--surface4-purple: hsl(260, 45%, 29%);
 	--surface-shadow-purple: hsl(200 7% 11% / 0.7);
 	--surface-strength-purple: 2%;
+	--background-gradient-purple: linear-gradient(
+		270deg,
+		hsl(260, 45%, 16%) 0%,
+		hsl(260, 45%, 19%) 49%,
+		hsl(260, 45%, 24%) 57%,
+		hsl(260, 45%, 29%) 63%,
+		hsl(260, 45%, 34%) 100%
+	);
+	--text-gradient-purple: linear-gradient(to top right, hsl(260 91% 54%), hsl(41 100% 59%));
 }
 
 [data-theme='night'] {
@@ -83,6 +111,7 @@ html {
 	--surface-shadow: var(--surface-shadow-night);
 	--surface-strength: var(--surface-strength-night);
 	--background-gradient: var(--background-gradient-night);
+	--text-gradient: var(--text-gradient-night);
 }
 
 [data-theme='light'] {
@@ -99,6 +128,8 @@ html {
 	--surface4: var(--surface4-light);
 	--surface-shadow: var(--surface-shadow-light);
 	--surface-strength: var(--surface-strength-light);
+	--background-gradient: var(--background-gradient-light);
+	--text-gradient: var(--text-gradient-light);
 }
 
 [data-theme='night-owl'] {
@@ -115,6 +146,8 @@ html {
 	--surface4: var(--surface4-night-owl);
 	--surface-shadow: var(--surface-shadow-night-owl);
 	--surface-strength: var(--surface-strength-night-owl);
+	--background-gradient: var(--background-gradient-night-owl);
+	--text-gradient: var(--text-gradient-night-owl);
 }
 
 [data-theme='purple'] {
@@ -131,102 +164,6 @@ html {
 	--surface4: var(--surface4-purple);
 	--surface-shadow: var(--surface-shadow-purple);
 	--surface-strength: var(--surface-strength-purple);
+	--background-gradient: var(--background-gradient-purple);
+	--text-gradient: var(--text-gradient-purple);
 }
-
-// html {
-// 	/* light */
-// 	--brand-light: hsl(260, 91%, 54%);
-// 	--brand-dimmed-light: hsl(260, 91%, 58%);
-// 	--brand-accent-light: hsl(41, 100%, 59%);
-// 	--text1-light: var(--gray-8);
-// 	--text2-light: var(--gray-7);
-// 	--border-menu-light: var(--gray-2);
-// 	--surface1-light: var(--gray-0);
-// 	--surface2-light: var(--gray-1);
-// 	--surface3-light: var(--gray-2);
-// 	--surface4-light: var(--gray-3);
-// 	--surface-shadow-light: 200 10% 20%;
-// 	--shadow-strength-light: 2%;
-
-// 	/* purple */
-// 	--brand-dark: hsl(260, 91%, 54%);
-// 	--brand-dimmed-dark: hsl(260, 91%, 58%);
-// 	--brand-accent-purple: hsl(41, 100%, 59%);
-// 	--text1-dark: var(--gray-1);
-// 	--text2-dark: var(--gray-3);
-// 	--border-menu-dark: var(--gray-6);
-// 	--surface1-dark: hsl(232, 21%, 14%);
-// 	--surface2-dark: hsl(231, 11%, 23%);
-// 	--surface3-dark: hsl(230, 8%, 31%);
-// 	--surface4-dark: hsl(229, 5%, 40%);
-// 	--surface-shadow-dark: 200 50% 3%;
-// 	--shadow-strength-dark: 80%;
-// }
-
-// :root {
-// 	/* set defaults to light color */
-// 	--brand: var(--brand-light);
-// 	--brand-dimmed: var(--brand-dimmed-light);
-// 	--brand-accent: var(--brand-accent-light);
-// 	--text1: var(--text1-light);
-// 	--text2: var(--text2-light);
-// 	--border-menu: var(--border-menu-light);
-// 	--surface1: var(--surface1-light);
-// 	--surface2: var(--surface2-light);
-// 	--surface3: var(--surface3-light);
-// 	--surface4: var(--surface4-light);
-// 	--surface-shadow: var(--surface-shadow-light);
-// 	--shadow-strength: var(--shadow-strength-light);
-// }
-
-// @media (prefers-color-scheme: dark) {
-// 	:root {
-// 		// color-scheme: purple;
-// 		--brand: var(--brand-dark);
-// 		--brand-dimmed: var(--brand-dimmed-dark);
-// 		--brand-accent: var(--brand-accent-purple);
-// 		--text1: var(--text1-dark);
-// 		--text2: var(--text2-dark);
-// 		--border-menu: var(--border-menu-dark);
-// 		--surface1: var(--surface1-dark);
-// 		--surface2: var(--surface2-dark);
-// 		--surface3: var(--surface3-dark);
-// 		--surface4: var(--surface4-dark);
-// 		--surface-shadow: var(--surface-shadow-dark);
-// 		--shadow-strength: var(--shadow-strength-dark);
-// 	}
-// }
-
-// [color-scheme='light'] {
-// 	color-scheme: light;
-
-// 	--brand: var(--brand-light);
-// 	--brand-dimmed: var(--brand-dimmed-light);
-// 	--brand-accent: var(--accent);
-// 	--text1: var(--text1-light);
-// 	--text2: var(--text2-light);
-// 	--border-menu: var(--border-menu-light);
-// 	--surface1: var(--surface1-light);
-// 	--surface2: var(--surface2-light);
-// 	--surface3: var(--surface3-light);
-// 	--surface4: var(--surface4-light);
-// 	--surface-shadow: var(--surface-shadow-light);
-// 	--shadow-strength: var(--shadow-strength-light);
-// }
-
-// [color-scheme='purple'] {
-// 	color-scheme: purple;
-
-// 	--brand: var(--brand-dark);
-// 	--brand-dimmed: var(--brand-dimmed-dark);
-// 	--brand-accent: var(--accent);
-// 	--text1: var(--text1-dark);
-// 	--text2: var(--text2-dark);
-// 	--border-menu: var(--border-menu-dark);
-// 	--surface1: var(--surface1-dark);
-// 	--surface2: var(--surface2-dark);
-// 	--surface3: var(--surface3-dark);
-// 	--surface4: var(--surface4-dark);
-// 	--surface-shadow: var(--surface-shadow-dark);
-// 	--shadow-strength: var(--shadow-strength-dark);
-// }

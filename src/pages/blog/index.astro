@@ -46,8 +46,8 @@ const sortedPosts = allPosts.sort(sortPosts);
 		<section id="blog-list">
 			<h2>All My Posts</h2>
 			<p>
-				In total, I've written <strong>{sortedPosts.length}</strong> articles in this blog. You can
-				find them all below, or by searching for a post title.
+				In total, I've written <strong>{sortedPosts.length}</strong> articles in this blog. You can find
+				them all below, or by searching for a post title.
 			</p>
 			<SearchBar client:load />
 			<BlogPostsList client:load posts={sortedPosts} />

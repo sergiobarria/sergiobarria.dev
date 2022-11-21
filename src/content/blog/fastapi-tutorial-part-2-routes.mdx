@@ -27,7 +27,7 @@ At the end, we'll fix the CORS origin error to allow front-end applications to i
 
 ## Project files and repo
 
-All the files for this and the other sections are stored in this [repo](https://github.com/sergiobarria/fastapi-tutorial). Each part of the series has a corresponding branch and the `main` branch includes the finished project.
+All the files for this and the other sections are stored in this [repo](https://github.com/sergiobarria/sergiobarria.com-astro). Each part of the series has a corresponding branch and the `main` branch includes the finished project.
 
 There is also a `starter` branch with a base starting project, you can clone it or download it in case you want to follow along.
 
@@ -84,7 +84,7 @@ The `API_STR`, refers to the API base endpoint. In the previous post we added th
 
 To use our new global settings, in the `main.py` file, add this:
 
-```python:main.py
+```python {3,4,5}
 # from fastapi import FastAPI
 
 # from app.endpoints.api import api_router
@@ -106,7 +106,7 @@ Now, go to your API docs.
 	alt="api title description inside swagger docs"
 	width={524}
 	height={148}
-  preview={true}
+	preview={true}
 />
 
 As you can see, our API title has changed and a new description was added.
@@ -272,8 +272,8 @@ If you refresh your browser, you can see two new fields in your docs (skip & lim
 	alt="endpoint with query params"
 	width={1442}
 	height={564}
-  preview={true}
-  client:visible
+	preview={true}
+	client:visible
 />
 
 Since we're adding default values, you can test your API and notice that now you only get 1 result instead of all the books in the dummy list (3).
