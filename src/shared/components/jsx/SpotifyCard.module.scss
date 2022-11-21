@@ -1,0 +1,73 @@
+.spotify {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2);
+	font-size: var(--font-size-1);
+	max-width: 300px;
+	border: 1px solid var(--surface3);
+	border-radius: var(--radius-3);
+	padding: var(--size-2) var(--size-3);
+	margin-top: var(--size-4);
+
+	& > svg {
+		width: var(--size-6);
+		height: var(--size-6);
+	}
+
+	& > div {
+		display: flex;
+		flex-direction: column;
+		gap: var(--size-1);
+
+		a {
+			font-size: var(--font-size-1);
+			font-weight: var(--font-weight-bold);
+			color: var(--text1);
+		}
+
+		& .subheader {
+			font-size: var(--font-size-0);
+			color: var(--text2);
+			opacity: 0.7;
+		}
+
+		& .subcontent {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+      gap: var(--size-2);
+		}
+	}
+}
+
+.barsContainer {
+	display: flex;
+	align-items: flex-end;
+	width: auto;
+	overflow: hidden;
+	gap: var(--size-1);
+
+	span {
+		background: var(--green-5);
+
+		&:nth-child(1) {
+			width: 3px;
+			height: 6px;
+		}
+
+		&:nth-child(2) {
+			width: 3px;
+			height: 8px;
+		}
+
+		&:nth-child(3) {
+			width: 3px;
+			height: 10px;
+		}
+
+		&:nth-child(4) {
+			width: 3px;
+			height: 12px;
+		}
+	}
+}
