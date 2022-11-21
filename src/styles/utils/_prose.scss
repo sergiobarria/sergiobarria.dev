@@ -8,6 +8,9 @@
 
 	h2 {
 		margin: var(--size-6) 0 var(--size-3);
+		display: flex;
+		align-items: center;
+		gap: var(--size-2);
 	}
 
 	p {

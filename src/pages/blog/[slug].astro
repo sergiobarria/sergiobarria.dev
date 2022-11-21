@@ -23,10 +23,10 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const {
-	post: { frontmatter, Content },
+	post: { frontmatter, Content, getHeadings },
 } = Astro.props as Props;
 ---
 
-<BlogPostLayout frontmatter={frontmatter} slug={slug as string}>
+<BlogPostLayout frontmatter={frontmatter} slug={slug as string} headings={getHeadings()}>
 	<Content />
 </BlogPostLayout>
