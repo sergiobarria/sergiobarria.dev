@@ -6,7 +6,6 @@ import { parseSnippet } from './_utils';
 
 const data = await Astro.glob('../../content/snippets/*.mdx');
 const allSnippets = await Promise.all(data?.map(parseSnippet));
-console.log('allSnippets', allSnippets);
 ---
 
 <style lang="scss">
