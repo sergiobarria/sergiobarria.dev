@@ -1,0 +1,77 @@
+---
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
+
+import BaseLayout from './BaseLayout.astro';
+
+import type { SnippetFrontmatter } from '~/pages/snippets/_utils';
+
+interface Props {
+	slug?: string;
+	frontmatter: SnippetFrontmatter;
+}
+
+const {
+	frontmatter: { title },
+} = Astro.props as Props;
+---
+
+<style lang="scss">
+	.container {
+		margin: var(--size-8) 0;
+
+		h2 {
+			margin-bottom: var(--size-6);
+		}
+
+		h3 {
+			display: flex;
+		}
+
+		pre {
+			max-inline-size: var(--size-content-3);
+		}
+
+    hr {
+      margin: var(--size-8) 0;
+      max-inline-size: var(--size-content-3);
+    }
+	}
+
+	.return-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: var(--size-6) 0;
+		max-inline-size: var(--size-content-3);
+
+		span {
+			display: flex;
+			align-items: center;
+			gap: var(--size-2);
+			background-color: var(--surface2);
+			padding: var(--size-2) var(--size-3);
+			border-radius: var(--size-1);
+
+			&:hover,
+			& a:hover {
+				color: var(--brand-accent);
+			}
+		}
+	}
+</style>
+
+<BaseLayout title="Snippets | Sergio Barria">
+	<div class="container">
+		<h2>{title}</h2>
+		<article id="post-content">
+			<slot />
+		</article>
+		<hr />
+		<div class="return-link">
+			<span>
+				<ArrowLeftIcon width={16} height={16} />
+				<a href="/snippets">Return to all snippets</a>
+			</span>
+		</div>
+	</div>
+</BaseLayout>

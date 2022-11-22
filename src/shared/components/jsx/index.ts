@@ -14,3 +14,5 @@ export * from './MyselfSection';
 export * from './SpotifyCard';
 export * from './TopTracks';
 export * from './Metrics';
+export * from './Step';
+export * from './SnippetsList';

@@ -1,0 +1,35 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+import { SnippetsList } from '~/shared/components/jsx';
+import { parseSnippet } from './_utils';
+
+const data = await Astro.glob('../../content/snippets/*.mdx');
+const allSnippets = await Promise.all(data?.map(parseSnippet));
+console.log('allSnippets', allSnippets);
+---
+
+<style lang="scss">
+	.header {
+		margin-bottom: var(--size-8);
+
+		hr {
+			margin: var(--size-2) 0;
+		}
+	}
+</style>
+
+<BaseLayout>
+	<section class="header" id="header">
+		<h1>Library</h1>
+		<hr />
+	</section>
+
+	<section class="snippets" id="snippets">
+		<h2>All Snippets</h2>
+		<p>Here is a list of all snippets I've created</p>
+		<!-- TODO: Add Search bar -->
+		<span>Search Bar</span>
+		<SnippetsList client:visible snippets={allSnippets} />
+	</section>
+</BaseLayout>
