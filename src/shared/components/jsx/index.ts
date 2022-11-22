@@ -5,7 +5,7 @@ export * from './ViewCounter';
 export * from './BlogPostsList';
 export * from './SearchBar';
 export * from './FeaturedPostsList';
-export * from './FeaturedReposList';
+export * from './PinnedReposList';
 export * from './Settings';
 export * from './Tooltip';
 export * from './SocialLinks';

@@ -11,7 +11,11 @@ const projectsData = await Astro.glob('../content/projects/*.mdx');
 const allPosts = await Promise.all(postsData?.map(parseBlogPost) ?? []);
 const allProjects = await Promise.all(projectsData?.map(parseProject) ?? []);
 const featuredPosts = allPosts.filter((post) => post.isFeatured);
-const featuredProjects = allProjects.filter((project) => project.featured);
+const featuredProjects = allProjects
+	.filter((project) => project.featured)
+	.sort((a, b) => a.order - b.order);
+
+console.log('featuredProjects', featuredProjects);
 ---
 
 <style lang="scss">
