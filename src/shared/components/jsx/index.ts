@@ -11,3 +11,6 @@ export * from './Tooltip';
 export * from './SocialLinks';
 export * from './FeaturedProjectsList';
 export * from './MyselfSection';
+export * from './SpotifyCard';
+export * from './TopTracks';
+export * from './Metrics';
