@@ -26,17 +26,21 @@ export interface SpotifyResponse {
 }
 
 export interface SpotifyTrack {
+	id: string;
 	external_urls: { spotify: string };
 	name: string;
 	artists: Array<{ name: string }>;
-	id: string;
+	album: {
+		images: Array<{ width: number; height: number; url: string }>;
+	};
 }
 
 export interface Track {
+	id: string;
 	songUrl: string;
 	artists: string;
 	title: string;
-	id: string;
+	images: Array<{ width: number; height: number; url: string }>;
 }
 
 export interface TopSpotifyTracks {

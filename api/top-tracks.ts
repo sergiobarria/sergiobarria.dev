@@ -12,6 +12,9 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 			songUrl: track.external_urls.spotify,
 			title: track.name,
 			id: track.id,
+			images: track?.album?.images,
+			// NOTE: return track to see all available data
+			// track: track
 		}));
 
 		res.setHeader('Cache-Control', 's-maxage=86400, stale-while-revalidate=43200');

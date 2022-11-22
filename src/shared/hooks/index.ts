@@ -6,3 +6,7 @@ export * from './useServerFunctions';
 export * from './useViews';
 export * from './usePagination';
 export * from './useDebounce';
+export * from './useTotalViews';
+export * from './useGithubUserData';
+export * from './useWakatime';
+export * from './useWakatimeAll';

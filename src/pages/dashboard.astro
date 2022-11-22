@@ -1,0 +1,74 @@
+---
+import BaseLayout from '~/layouts/BaseLayout.astro';
+
+import { TopTracks, Metrics } from '~/shared/components/jsx';
+
+const posts = await Astro.glob('../content/blog/*.mdx');
+---
+
+<style lang="scss">
+	.header {
+		margin-top: var(--size-8);
+
+		p {
+			max-inline-size: none;
+
+			a {
+				text-decoration: wavy underline;
+				color: var(--brand-accent);
+
+				&:hover {
+					opacity: 0.8;
+				}
+			}
+		}
+
+		hr {
+			margin: var(--size-6) 0;
+		}
+	}
+
+	.stats {
+		margin: var(--size-6) 0 var(--size-8);
+
+		h2 {
+			margin-bottom: var(--size-4);
+		}
+	}
+
+	.top-tracks {
+		margin: var(--size-6) 0 var(--size-8);
+
+		p {
+			max-inline-size: none;
+		}
+	}
+</style>
+
+<BaseLayout title="Dashboard | Sergio Barria">
+	<section id="header" class="header">
+		<h1>Dashboard</h1>
+		<p>
+			This dashboard is inspired by <a
+				href="https://leerob.io/dashboard"
+				target="_blank"
+				rel="noopener noreferrer">Lee Robinson's Website.</a
+			> My main goal with this page was to track some of my personal coding stats, while consuming different
+			API's and getting up to date live data.
+		</p>
+		<hr />
+	</section>
+
+	<section id="stats" class="stats">
+		<h2>Metrics</h2>
+		<Metrics client:load totalPosts={posts.length} />
+	</section>
+
+	<section id="top-spotify-tracks" class="top-tracks">
+		<h2>Top Spotify Tracks</h2>
+		<p>
+			Want to know what I'm currently listening the most? Here's my top tracks list from Spotify
+		</p>
+		<TopTracks client:load />
+	</section>
+</BaseLayout>
