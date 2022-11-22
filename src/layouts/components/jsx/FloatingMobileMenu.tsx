@@ -55,9 +55,10 @@ interface MenuItemProps {
 	href: string;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	pathname?: string;
+	number?: number;
 }
 
-function MenuItem({ text, href, setIsOpen, pathname }: MenuItemProps): JSX.Element {
+function MenuItem({ text, href, setIsOpen, pathname, number }: MenuItemProps): JSX.Element {
 	return (
 		<m.li
 			variants={menuItemVariants}
@@ -65,6 +66,7 @@ function MenuItem({ text, href, setIsOpen, pathname }: MenuItemProps): JSX.Eleme
 			className={clsx(styles.menuItem, pathname === href && styles.menuItemActive)}
 			onClick={() => setIsOpen(false)}
 		>
+			<span>0{number}.</span>
 			<a href={href}>{text}</a>
 		</m.li>
 	);
@@ -84,11 +86,12 @@ function Navigation({ isOpen, setIsOpen, pathname }: NavigationProps): JSX.Eleme
 			variants={navigationVariants}
 			className={clsx(styles.navigation, !isOpen && styles.navigationHidden)}
 		>
-			{navigationLinks.map((link) => {
+			{navigationLinks.map((link, index) => {
 				return (
 					<MenuItem
 						key={link.id}
 						text={link.label}
+						number={index + 1}
 						href={link.href}
 						setIsOpen={setIsOpen}
 						pathname={pathname}

@@ -12,7 +12,10 @@
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	background-color: var(--surface3);
+	background: linear-gradient(60deg, #29323c 0%, #485563 100%);
+	// background: radial-gradient(circle at -8.9% 51.2%, rgb(255, 124, 0) 0%, rgb(255, 124, 0) 15.9%, rgb(255, 163, 77) 15.9%, rgb(255, 163, 77) 24.4%, rgb(19, 30, 37) 24.5%, rgb(19, 30, 37) 66%);
+	// background: var(--gradient-8);
+	background: linear-gradient(to right, #434343 0%, rgb(34, 34, 34) 100%);
 }
 
 .floatingBtn {
@@ -43,6 +46,9 @@
 }
 
 .menuItem {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4);
 	cursor: pointer;
 	padding: var(--size-4) var(--size-6);
 	border-bottom: solid var(--border-size-1) var(--surface4);
@@ -67,6 +73,11 @@
 	&:hover::before {
 		transition: width 0.5s ease;
 		width: 100%;
+	}
+
+	a,
+	span {
+		color: inherit;
 	}
 }
 
