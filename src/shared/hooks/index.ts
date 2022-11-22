@@ -10,3 +10,4 @@ export * from './useTotalViews';
 export * from './useGithubUserData';
 export * from './useWakatime';
 export * from './useWakatimeAll';
+export * from './usePinnedRepos';

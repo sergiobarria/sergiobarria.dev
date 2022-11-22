@@ -1,7 +1,38 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
+import { PinnedReposList } from '~/shared/components/jsx';
 ---
 
+<style lang="scss">
+	.header {
+		p {
+			max-inline-size: none;
+		}
+		margin-top: var(--size-8);
+
+		hr {
+			margin: var(--size-6) 0;
+		}
+	}
+
+	.pinned {
+		margin-bottom: var(--size-8);
+		p {
+			max-inline-size: none;
+		}
+	}
+</style>
+
 <BaseLayout title="Portfolio | Sergio Barria">
-	<h1>Portfolio</h1>
+	<section class="header" id="header">
+		<h1>My Portfolio</h1>
+		<p>Here is a summary of some of the personal and profesional projects I've work on.</p>
+		<hr />
+	</section>
+
+	<section class="pinned" id="pinned">
+		<h2>Github Pinned Projects</h2>
+		<p>These are the projects pinned in my Github Profile and fetched via Github GraphQL API.</p>
+		<PinnedReposList client:visible />
+	</section>
 </BaseLayout>

@@ -11,7 +11,7 @@ export function TopTracks() {
 	if (!data?.tracks) return <p>No data available...</p>;
 
 	return (
-		<ul>
+		<ul className={styles.tracksList}>
 			{data?.tracks.map((track: Track, idx: number) => {
 				const { id, artists, songUrl, title, images } = track;
 
