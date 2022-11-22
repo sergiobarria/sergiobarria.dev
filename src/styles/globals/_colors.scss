@@ -7,6 +7,7 @@ html {
 	--text1-night: hsl(0 0% 98%);
 	--text2-night: hsl(0 0% 80%);
 	--text3-night: hsl(0 0% 60%);
+	--selection-text-night: hsl(200 7% 11%);
 	--surface1-night: hsl(200 7% 11%);
 	--surface2-night: hsl(200 7% 15%);
 	--surface3-night: hsl(200 7% 20%);
@@ -31,6 +32,7 @@ html {
 	--text1-light: hsl(220 10% 10%);
 	--text2-light: hsl(220 10% 30%);
 	--text3-light: hsl(220 10% 50%);
+	--selection-text-light: hsl(220 10% 90%);
 	--surface1-light: hsl(0 0% 98%);
 	--surface2-light: hsl(0 0% 95%);
 	--surface3-light: hsl(0 0% 90%);
@@ -55,6 +57,7 @@ html {
 	--text1-night-owl: hsl(210 40% 80%);
 	--text2-night-owl: hsl(210 40% 60%);
 	--text3-night-owl: hsl(210 40% 40%);
+	--selection-text-night-owl: hsl(210 40% 20%);
 	--surface1-night-owl: hsl(210 47% 12%);
 	--surface2-night-owl: hsl(210 47% 15%);
 	--surface3-night-owl: hsl(210 47% 20%);
@@ -79,6 +82,7 @@ html {
 	--text1-purple: hsl(260, 45%, 86%);
 	--text2-purple: hsl(260, 45%, 66%);
 	--text3-purple: hsl(260, 45%, 46%);
+	--selection-text-purple: hsl(260, 45%, 26%);
 	--surface1-purple: hsl(260, 45%, 16%);
 	--surface2-purple: hsl(260, 45%, 19%);
 	--surface3-purple: hsl(260, 45%, 24%);
@@ -104,6 +108,7 @@ html {
 	--text1: var(--text1-night);
 	--text2: var(--text2-night);
 	--text3: var(--text3-night);
+	--selection-text: var(--selection-text-night);
 	--surface1: var(--surface1-night);
 	--surface2: var(--surface2-night);
 	--surface3: var(--surface3-night);
@@ -122,6 +127,7 @@ html {
 	--text1: var(--text1-light);
 	--text2: var(--text2-light);
 	--text3: var(--text3-light);
+	--selection-text: var(--selection-text-light);
 	--surface1: var(--surface1-light);
 	--surface2: var(--surface2-light);
 	--surface3: var(--surface3-light);
@@ -140,6 +146,7 @@ html {
 	--text1: var(--text1-night-owl);
 	--text2: var(--text2-night-owl);
 	--text3: var(--text3-night-owl);
+	--selection-text: var(--selection-text-night-owl);
 	--surface1: var(--surface1-night-owl);
 	--surface2: var(--surface2-night-owl);
 	--surface3: var(--surface3-night-owl);
@@ -158,6 +165,7 @@ html {
 	--text1: var(--text1-purple);
 	--text2: var(--text2-purple);
 	--text3: var(--text3-purple);
+	--selection-text: var(--selection-text-purple);
 	--surface1: var(--surface1-purple);
 	--surface2: var(--surface2-purple);
 	--surface3: var(--surface3-purple);
