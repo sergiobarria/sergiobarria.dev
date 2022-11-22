@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Icon } from '@iconify/react';
+import { ArrowRightIcon, ArrowLeftIcon } from '@radix-ui/react-icons';
 
 import { usePagination, SEPARATOR } from '~/shared/hooks';
 
@@ -59,7 +59,7 @@ export const Pagination = ({
 						currentPage === 1 && styles.arrowDisabled
 					)}
 				>
-					<Icon icon="material-symbols:arrow-circle-left-rounded" width={32} height={32} />
+					<ArrowLeftIcon width={18} height={18} />
 				</li>
 
 				{/* Render pages numbers */}
@@ -96,7 +96,7 @@ export const Pagination = ({
 						currentPage === lastPage && styles.arrowDisabled
 					)}
 				>
-					<Icon icon="material-symbols:arrow-circle-right" width={32} height={32} />
+					<ArrowRightIcon width={18} height={18} />
 				</li>
 			</ul>
 		</nav>

@@ -5,14 +5,12 @@ export function useServerFunctions() {
 	let apiUrl = '';
 
 	if (mode === 'development') {
-		apiUrl = 'http://localhost:3000/api';
+		apiUrl = 'http://localhost:8080/api';
 	}
 
 	if (mode === 'production') {
-		// TODO: Change this to your production URL
-		// https://docs.astro.build/en/guides/environment-variables/#default-environment-variables
-		// Check the default base_url and site variables to see if they can be used
-		apiUrl = 'https://my-production-api.com';
+		const origin = typeof window !== 'undefined' ? window.location.origin : '';
+		apiUrl = origin + '/api';
 	}
 
 	return { apiUrl };

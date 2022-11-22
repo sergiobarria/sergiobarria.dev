@@ -11,7 +11,10 @@ const projectsData = await Astro.glob('../content/projects/*.mdx');
 const allPosts = await Promise.all(postsData?.map(parseBlogPost) ?? []);
 const allProjects = await Promise.all(projectsData?.map(parseProject) ?? []);
 const featuredPosts = allPosts.filter((post) => post.isFeatured);
-const featuredProjects = allProjects.filter((project) => project.featured);
+const featuredProjects = allProjects
+	.filter((project) => project.featured)
+	.sort((a, b) => a.order - b.order);
+
 ---
 
 <style lang="scss">
@@ -77,17 +80,15 @@ const featuredProjects = allProjects.filter((project) => project.featured);
 	}
 
 	.blob-container {
-		position: absolute;
-		top: 0;
-		left: 0;
+		@include utils.position(absolute, 0, null, null, 0);
+
 		width: 100%;
 		height: 100%;
 
 		&::before {
+			@include utils.position(absolute, 0, null, null, 0);
+
 			content: '';
-			position: absolute;
-			top: 0;
-			left: 0;
 			width: 100%;
 			height: 100%;
 			opacity: 0.3;

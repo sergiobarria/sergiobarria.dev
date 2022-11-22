@@ -1,0 +1,66 @@
+@use 'src/styles/utils';
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: var(--size-4);
+	margin: var(--size-4) 0;
+
+	@include utils.breakpoint-up('md') {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	@include utils.breakpoint-up('lg') {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-2);
+	background-color: var(--surface2);
+	padding: var(--size-4);
+	border-radius: var(--size-3);
+	box-shadow: var(--shadow-1);
+	border-top: 1px solid var(--brand);
+
+	a {
+		padding-inline: 0;
+		margin-inline: 0;
+
+		& h5:hover {
+			color: var(--brand);
+		}
+	}
+
+	p {
+		font-size: clamp(0.7rem, 1vw, 1rem);
+
+		&::first-letter {
+			text-transform: uppercase;
+		}
+	}
+
+  div {
+    margin-top: auto;
+  }
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--size-2);
+	margin-top: auto;
+
+	span {
+		font-size: clamp(0.5rem, 0.7vw, 0.8rem);
+		background-color: var(--surface3);
+		padding: var(--size-1) var(--size-2);
+		border-radius: var(--size-3);
+
+		&::first-letter {
+			text-transform: capitalize;
+		}
+	}
+}

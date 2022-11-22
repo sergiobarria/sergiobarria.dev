@@ -134,7 +134,7 @@ const { navLinks } = site;
 								<a
 									href={link.href}
 									class={clsx('link', {
-										'link-active': pathname === link.href,
+										'link-active': pathname === link.href || pathname.includes(link.href),
 										'link-inactive': pathname !== link.href,
 									})}
 								>

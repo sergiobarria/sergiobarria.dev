@@ -44,3 +44,53 @@ export const GET_PINNED_REPOSTS_QUERY = `
   }
   ${PINNED_REPOST_FRAGMENT}
 `;
+
+export type User = {
+	user: {
+		followers: {
+			totalCount: number;
+		};
+		pullRequests: {
+			totalCount: number;
+		};
+		starredRepositories: {
+			totalCount: number;
+		};
+		repositories: {
+			totalCount: number;
+			edges: {
+				node: {
+					id: string;
+					name: string;
+					stargazerCount: number;
+				};
+			}[];
+		};
+	};
+};
+
+export const GET_USER_METRICS = `
+	query getUserMetrics {
+		user(login: "sergiobarria") {
+			followers {
+				totalCount
+			}
+			pullRequests {
+				totalCount
+			}
+			starredRepositories {
+				totalCount
+			}
+			repositories(first: 100, orderBy: { field: STARGAZERS, direction: DESC }) {
+				totalCount
+				edges {
+					node {
+						stargazerCount
+						id
+						name
+					}
+				}
+			}
+		}
+	}
+`;

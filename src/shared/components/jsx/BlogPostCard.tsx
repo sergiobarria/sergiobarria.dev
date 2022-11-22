@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { Icon } from '@iconify/react';
+import { CalendarIcon, ClockIcon } from '@radix-ui/react-icons';
 
 import type { Post } from '~/pages/blog/_utils';
 import { CloudinaryImage } from './CloudinaryImage';
@@ -26,19 +26,17 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 						radius={30}
 						alt={`thumbnail for ${title} frontmatter`}
 					/>
-					{/* TODO: Add the view counter again */}
-					{/* <Views slug={slug as string} /> */}
+					<Views slug={slug as string} />
 				</div>
 				<div className={styles.cardContent}>
 					<h3>{title}</h3>
 					<div className={styles.content}>
 						<p>
-							<Icon icon="ic:sharp-calendar-month" width={24} height={24} />
+							<CalendarIcon width={24} height={24} />
 							<time dateTime={publishDate.toUTCString()}>{formattedDate}</time>
 						</p>
-						<span className={styles.separator}>|</span>
 						<p>
-							<Icon icon="mdi:clock-time-eight-outline" width={24} height={24} />
+							<ClockIcon width={24} height={24} />
 							<span>{minutesRead}</span>
 						</p>
 					</div>

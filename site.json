@@ -31,9 +31,10 @@
 		}
 	],
 	"navLinks": [
-		{ "id": 2, "href": "/blog", "label": "Blog", "number": "01." },
-		{ "id": 3, "href": "/portfolio", "label": "Portfolio", "number": "02." },
-		{ "id": 4, "href": "/library", "label": "Library", "number": "03." }
+		{ "id": 1, "href": "/blog", "label": "Blog", "number": "01." },
+		{ "id": 2, "href": "/projects", "label": "Projects", "number": "02." },
+		{ "id": 3, "href": "/snippets", "label": "Snippets", "number": "03." },
+		{ "id": 4, "href": "/dashboard", "label": "Dashboard", "number": "04." }
 	],
 	"skills": [
 		{ "id": 1, "title": "JavaScript", "icon": "javascript", "learning": false },

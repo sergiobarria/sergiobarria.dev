@@ -67,7 +67,7 @@
 	height: var(--size-7);
 	gap: var(--size-2);
 	background-color: var(--surface4);
-	color: var(--brand);
+	color: var(--brand-accent);
 	box-shadow: var(--shadow-3);
 	transition: all 100ms var(--ease-in-out-2);
 
@@ -123,8 +123,8 @@
 
 	&[data-highlighted] {
 		outline: none;
-		background-color: var(--brand-dimmed);
-		color: var(--text1);
+		background-color: var(--brand-accent);
+		color: var(--selection-text);
 		border-radius: var(--radius-2);
 	}
 }

@@ -1,0 +1,16 @@
+@use 'src/styles/utils';
+
+.chip {
+	@include utils.position(absolute, null, 1rem, 1rem, null);
+
+	display: flex;
+	align-items: center;
+	gap: var(--size-2);
+	padding: var(--size-1) var(--size-2);
+	border-radius: var(--radius-3);
+	background-color: rgba(0, 0, 0, 0.75);
+
+	span {
+		font-size: var(--font-size-0);
+	}
+}
