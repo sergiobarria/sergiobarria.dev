@@ -10,6 +10,7 @@ export type PostFrontmatter = {
 	coverImage: string;
 	isFeatured: boolean;
 	minutesRead?: string;
+	keywords?: string;
 };
 
 export type Post = {
@@ -20,7 +21,8 @@ export async function parseBlogPost({
 	url,
 	frontmatter,
 }: MDXInstance<Record<string, any>>): Promise<Post> {
-	const { title, summary, publishDate, coverImage, isFeatured, minutesRead, number } = frontmatter;
+	const { title, summary, publishDate, coverImage, isFeatured, minutesRead, number, keywords } =
+		frontmatter;
 
 	return {
 		url: urlFromContentUrl(url as string),
@@ -31,6 +33,7 @@ export async function parseBlogPost({
 		isFeatured,
 		number,
 		minutesRead: minutesRead,
+		keywords,
 	};
 }
 

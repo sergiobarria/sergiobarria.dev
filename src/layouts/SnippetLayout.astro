@@ -1,9 +1,12 @@
 ---
+import type { Props as SeoProps } from 'astro-seo';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 
 import BaseLayout from './BaseLayout.astro';
 
 import type { SnippetFrontmatter } from '~/pages/snippets/_utils';
+
+import site from '../../site.json';
 
 interface Props {
 	slug?: string;
@@ -13,6 +16,22 @@ interface Props {
 const {
 	frontmatter: { title },
 } = Astro.props as Props;
+
+const metadata: SeoProps = {
+	title: 'Snippets | Sergio Barria',
+	canonical: 'https://sergiobarria.com/Snippets',
+	openGraph: {
+		basic: {
+			title: 'Snippets detail page',
+			url: 'https://sergiobarria.com/Snippets',
+			image: site.openGraph.images[0].url,
+			type: 'website',
+		},
+		image: {
+			alt: 'Website Cover',
+		},
+	},
+};
 ---
 
 <style lang="scss">
@@ -31,10 +50,10 @@ const {
 			max-inline-size: var(--size-content-3);
 		}
 
-    hr {
-      margin: var(--size-8) 0;
-      max-inline-size: var(--size-content-3);
-    }
+		hr {
+			margin: var(--size-8) 0;
+			max-inline-size: var(--size-content-3);
+		}
 	}
 
 	.return-link {
@@ -60,7 +79,7 @@ const {
 	}
 </style>
 
-<BaseLayout title="Snippets | Sergio Barria">
+<BaseLayout metadata={metadata}>
 	<div class="container">
 		<h2>{title}</h2>
 		<article id="post-content">
