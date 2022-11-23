@@ -1,5 +1,4 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
 import { SEO, Props as SeoProps, Meta } from 'astro-seo';
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
@@ -135,7 +134,7 @@ const params = Astro.params;
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
 		<script type="module" define:vars={{ pathname, analyticsId, params }}>
-			import { webVitals } from '../../lib/vitals';
+			import { webVitals } from '../../lib/vitals.js';
 
 			webVitals({
 				path: pathname,
