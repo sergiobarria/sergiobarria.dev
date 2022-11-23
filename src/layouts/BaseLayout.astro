@@ -133,8 +133,10 @@ const params = Astro.params;
 			};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
-		<script type="module" define:vars={{ pathname, analyticsId, params }}>
+		<script type="module">
 			import { webVitals } from '../../lib/vitals';
+
+			const id = import.meta.env.VERCEL_ANALYTICS_ID;
 
 			webVitals({
 				path: pathname,
