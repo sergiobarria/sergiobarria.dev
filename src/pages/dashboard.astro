@@ -9,14 +9,17 @@ import site from '../../site.json';
 const posts = await Astro.glob('../content/blog/*.mdx');
 
 const metadata: SeoProps = {
-	title: 'Blog | Sergio Barria',
-	canonical: 'https://sergiobarria.com/',
+	title: 'Dashboard | Sergio Barria',
+	canonical: 'https://sergiobarria.com/dashboard',
 	openGraph: {
 		basic: {
-			title: 'Blog | Sergio Barria',
-			url: 'https://sergiobarria.com/',
+			title: 'Dashboard page',
+			url: 'https://sergiobarria.com/dashboard',
 			image: site.openGraph.images[0].url,
 			type: 'website',
+		},
+		image: {
+			alt: 'Website Cover',
 		},
 	},
 };
