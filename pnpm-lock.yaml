@@ -20,6 +20,7 @@ specifiers:
   '@types/react-dom': ^18.0.8
   '@typescript-eslint/eslint-plugin': ^5.40.1
   '@typescript-eslint/parser': ^5.40.1
+  '@vercel/analytics': ^0.1.5
   '@vercel/node': ^2.5.26
   '@xata.io/client': ^0.20.2
   astro: ^1.6.10
@@ -73,6 +74,7 @@ dependencies:
   '@radix-ui/react-select': 1.1.1_2zx2umvpluuhvlq44va5bta2da
   '@radix-ui/react-tabs': 1.0.1_biqbaboplfbrettd7655fr4n2y
   '@radix-ui/react-tooltip': 1.0.2_2zx2umvpluuhvlq44va5bta2da
+  '@vercel/analytics': 0.1.5_react@18.2.0
   '@xata.io/client': 0.20.2_typescript@4.8.4
   astro: 1.6.10_ajklay5k626t46b6fyghkbup3i
   astro-tooltips: 0.6.0
@@ -1850,6 +1852,14 @@ packages:
       '@typescript-eslint/types': 5.42.1
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@vercel/analytics/0.1.5_react@18.2.0:
+    resolution: {integrity: sha512-/k9N8Ea3Yc5A52GlkjzUEbi2vE/izClrOf++ryBkxEfrZM/OZwtHkdNw/QExZ1h/B67RCZLK7bCOnKKrhG7gTg==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /@vercel/build-utils/5.5.7:
     resolution: {integrity: sha512-F8brek8VcR3CLgcuKyXbb8k8y/KRwqO/yEV5dTUW6OZ0fGxxa+0RnaaY1UbHlCVF1Cnu+/IsMDsmsj9o1RCP5A==}
