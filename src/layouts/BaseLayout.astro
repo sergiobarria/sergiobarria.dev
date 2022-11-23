@@ -1,4 +1,6 @@
 ---
+import { AstroSeo } from '@astrolib/seo';
+import { SEO, Props as SeoProps, Meta } from 'astro-seo';
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
 import '@fontsource/permanent-marker';
@@ -14,14 +16,21 @@ import '~/styles/main.scss';
 
 import site from '../../site.json';
 
-export interface Props {
-	title?: string;
-}
-
 const pathname = new URL(Astro.request.url).pathname;
 
-const { title: defaultTitle, description } = site;
-const { title } = Astro.props;
+interface Props {
+	metadata?: SeoProps;
+}
+
+const { defaultTitle, description, url, canonical, openGraph, twitter, additionalMetaTags } = site;
+const { metadata } = Astro.props as Props;
+const defaultKeywords = additionalMetaTags
+	?.find((tag) => tag.name === 'keywords')
+	?.content.split(', ');
+const dynamicKeywords = metadata?.extend?.meta
+	?.find((tag) => tag.name === 'keywords')
+	?.content?.split(', ');
+const keywords = [...(defaultKeywords || []), ...(dynamicKeywords || [])].join(', ');
 ---
 
 <!DOCTYPE html>
@@ -34,7 +43,46 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title ?? defaultTitle}</title>
+		<SEO
+			title={metadata?.title ?? defaultTitle}
+			description={metadata?.description ?? description}
+			canonical={canonical}
+			openGraph={{
+				basic: {
+					url: metadata?.openGraph?.basic?.url ?? openGraph.url,
+					title: metadata?.openGraph?.basic?.title ?? openGraph.title,
+					image: metadata?.openGraph?.basic?.image ?? openGraph.images[0].url,
+					type: 'website',
+				},
+				article: {
+					authors: metadata?.openGraph?.article?.authors,
+					publishedTime: metadata?.openGraph?.article?.publishedTime,
+					modifiedTime: metadata?.openGraph?.article?.modifiedTime,
+					tags: metadata?.openGraph?.article?.tags,
+					section: metadata?.openGraph?.article?.section,
+				},
+				image: {
+					url: metadata?.openGraph?.image?.url,
+					width: metadata?.openGraph?.image?.width,
+					height: metadata?.openGraph?.image?.height,
+					alt: metadata?.openGraph?.image?.alt,
+				},
+				optional: {},
+			}}
+			twitter={{
+				creator: twitter.handle,
+				site: twitter.site,
+				card: twitter.cardType,
+			}}
+			extend={{
+				meta: [
+					{
+						name: 'keywords',
+						content: keywords,
+					},
+				],
+			}}
+		/>
 
 		<Tooltips interactive={false} delay={[15, 10]} />
 

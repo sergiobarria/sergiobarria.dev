@@ -3,7 +3,6 @@ import { AdvancedImage, lazyload, responsive, placeholder } from '@cloudinary/re
 import { Cloudinary } from '@cloudinary/url-gen';
 import { fill, thumbnail } from '@cloudinary/url-gen/actions/resize';
 import { byRadius } from '@cloudinary/url-gen/actions/roundCorners';
-import Lightbox from 'react-image-lightbox';
 
 const CLOUD_NAME = import.meta.env.PUBLIC_CLOUDINARY_ID ?? '';
 
@@ -54,7 +53,6 @@ export function CloudinaryImage({
 					alt={alt}
 				/>
 			</div>
-			{isOpen && <Lightbox mainSrc={imageUrl} onCloseRequest={() => setIsOpen(false)} />}
 		</figure>
 	);
 }

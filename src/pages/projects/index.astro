@@ -1,6 +1,25 @@
 ---
+import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { PinnedReposList } from '~/shared/components/jsx';
+
+import site from '../../../site.json';
+
+const metadata: SeoProps = {
+	title: 'Projects | Sergio Barria',
+	canonical: 'https://sergiobarria.com/projects',
+	openGraph: {
+		basic: {
+			title: 'Projects page',
+			url: 'https://sergiobarria.com/projects',
+			image: site.openGraph.images[0].url,
+			type: 'website',
+		},
+		image: {
+			alt: 'Website Cover'
+		}
+	},
+};
 ---
 
 <style lang="scss">
@@ -23,7 +42,7 @@ import { PinnedReposList } from '~/shared/components/jsx';
 	}
 </style>
 
-<BaseLayout title="Portfolio | Sergio Barria">
+<BaseLayout metadata={metadata}>
 	<section class="header" id="header">
 		<h1>My Portfolio</h1>
 		<p>Here is a summary of some of the personal and profesional projects I've work on.</p>
