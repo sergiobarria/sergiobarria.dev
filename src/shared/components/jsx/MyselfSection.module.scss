@@ -53,6 +53,7 @@
 	white-space: nowrap;
 	width: 100%;
 	text-align: left;
+	background-color: var(--surface3);
 
 	@include utils.breakpoint-up('md') {
 		padding: var(--size-2) var(--size-3);
@@ -81,7 +82,7 @@
 	}
 
 	li {
-    font-size: clamp(1rem, 1.75vw, 1.25rem);
+    font-size: clamp(0.75rem, 1.5vw, 1rem);
 
 		&::marker {
 			color: var(--brand-dimmed);
