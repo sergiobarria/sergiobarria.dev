@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { StarIcon, GitHubLogoIcon, ExternalLinkIcon } from '@radix-ui/react-icons';
 
-import { usePinnedRepos, Repo, User } from '~/shared/hooks';
+import { usePinnedRepos, Repo } from '~/shared/hooks';
 
 import styles from './PinnedReposList.module.scss';
 
@@ -30,7 +30,7 @@ function LoadingCard() {
 }
 
 function RepoCard({ repo }: { repo: Repo }) {
-	const { name, url, description, primaryLanguage, stargazerCount } = repo;
+	const { name, url, description, primaryLanguage, stargazerCount, homepageUrl } = repo;
 
 	return (
 		<div className={styles.card}>
@@ -38,14 +38,18 @@ function RepoCard({ repo }: { repo: Repo }) {
 				<GitHubLogoIcon width={16} height={16} />
 				<h5>{name}</h5>
 			</a>
-			<p>{description.substring(0, 75)}</p>
+			<p>{description?.substring(0, 75) ?? 'No Description provided yet...'}</p>
 			<div className={styles.stats}>
 				<span>{primaryLanguage?.name}</span>
 				<span className={styles.stars}>
 					<StarIcon width={16} height={16} />
 					<span>{stargazerCount}</span>
 				</span>
-				<ExternalLinkIcon width={16} height={16} className={styles.extLink} />
+				{homepageUrl && (
+					<a href={homepageUrl}>
+						<ExternalLinkIcon width={16} height={16} className={styles.extLink} />
+					</a>
+				)}
 			</div>
 		</div>
 	);

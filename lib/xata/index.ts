@@ -6,7 +6,11 @@ const xata = getXataClient();
 export async function getAllSlugs() {
 	const records = await xata.db.posts_views.getAll();
 
-	return records.map((record) => record.slug);
+	const allSlugs = records.map(
+		(record: Readonly<SelectedPick<PostsViewsRecord, ['*']>>) => record.slug
+	);
+
+	return allSlugs;
 }
 
 export async function getAllRecords() {
