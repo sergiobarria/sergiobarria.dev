@@ -4,6 +4,14 @@ import BaseLayout from '~/layouts/BaseLayout.astro';
 import { TopTracks, Metrics } from '~/shared/components/jsx';
 
 const posts = await Astro.glob('../content/blog/*.mdx');
+
+const metadata = {
+	title: 'Dashboard',
+	canonical: 'https://sergiobarria.com/dashboard',
+	openGraph: {
+		url: 'https://sergiobarria.com/dashboard',
+	},
+};
 ---
 
 <style lang="scss">
@@ -45,7 +53,11 @@ const posts = await Astro.glob('../content/blog/*.mdx');
 	}
 </style>
 
-<BaseLayout title="Dashboard | Sergio Barria">
+<BaseLayout
+	title={metadata.title}
+	pageCanonical={metadata.canonical}
+	pageOpengraph={metadata.openGraph}
+>
 	<section id="header" class="header">
 		<h1>Dashboard</h1>
 		<p>

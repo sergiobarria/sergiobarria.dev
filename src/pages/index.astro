@@ -1,4 +1,5 @@
 ---
+import { AstroSeo } from '@astrolib/seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { FeaturedPostsList } from '~/shared/components/jsx';
 
@@ -15,6 +16,13 @@ const featuredProjects = allProjects
 	.filter((project) => project.featured)
 	.sort((a, b) => a.order - b.order);
 
+const metadata = {
+	title: 'Home',
+	canonical: 'https://sergiobarria.com/',
+	openGraph: {
+		url: 'https://sergiobarria.com/',
+	},
+};
 ---
 
 <style lang="scss">
@@ -238,7 +246,7 @@ const featuredProjects = allProjects
 	}
 </style>
 
-<BaseLayout title="Home | Sergio Barria">
+<BaseLayout>
 	<div class="homepage">
 		<section id="hero">
 			<div class="hero__container">

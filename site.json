@@ -1,8 +1,37 @@
 {
-	"title": "Sergio Barria | Full Stack Developer",
+	"title": "",
+	"titleTemplate": "%s | Sergio Barria",
+	"defaultTitle": "Sergio Barria | Engineer, developer and writer",
 	"description": "Sergio Barria is a Full Stack Developer from Panama City, Panama. He is a passionate developer who loves to learn new things and share his knowledge with others.",
 	"url": "https://sergiobarria.com",
 	"author": "Sergio Barria",
+	"canonical": "https://www.sergiobarria.com/",
+	"openGraph": {
+		"title": "Sergio Barria's Website",
+		"type": "website",
+		"locale": "en_IE",
+		"url": "https://www.sergiobarria.com",
+		"site_name": "sergiobarria.com",
+		"images": [
+			{
+				"url": "https://www.sergiobarria.com/images/banner.png",
+				"width": 800,
+				"height": 800,
+				"alt": "Og Banner"
+			}
+		]
+	},
+	"twitter": {
+		"handle": "@sergioBarria01",
+		"site": "@sergioBarria01",
+		"cardType": "summary_large_image"
+	},
+	"additionalMetaTags": [
+		{
+			"name": "keywords",
+			"content": "blog, HTML, CSS, JavaScript, Next js, Gatsby, React, Node, Vue, Tailwind CSS, React Native, Flutter"
+		}
+	],
 	"profilePicture": "",
 	"resume": "",
 	"socialLinks": [

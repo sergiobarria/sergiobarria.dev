@@ -1,4 +1,6 @@
 ---
+import { AstroSeo } from '@astrolib/seo';
+import { SEO, Props as SeoProps } from 'astro-seo';
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
 import '@fontsource/permanent-marker';
@@ -14,14 +16,27 @@ import '~/styles/main.scss';
 
 import site from '../../site.json';
 
-export interface Props {
-	title?: string;
-}
+// Generate optional types from site.json
+type Metadata = {
+	[key in keyof typeof site]: typeof site[key];
+};
 
 const pathname = new URL(Astro.request.url).pathname;
 
-const { title: defaultTitle, description } = site;
-const { title } = Astro.props;
+interface Props {
+	metadata?: SeoProps;
+}
+
+const {
+	defaultTitle,
+	description,
+	url,
+	canonical,
+	openGraph,
+	twitter,
+	additionalMetaTags,
+} = site;
+const { metadata } = Astro.props as Props;
 ---
 
 <!DOCTYPE html>
@@ -34,7 +49,27 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{title ?? defaultTitle}</title>
+		<SEO
+			title={defaultTitle}
+			description={description}
+			canonical={canonical}
+			openGraph={{
+				basic: {
+					url: openGraph.url,
+					title: openGraph.title,
+					image: openGraph.images[0].url,
+					type: 'website',
+				},
+			}}
+			twitter={{
+				creator: twitter.handle,
+				site: twitter.site,
+				card: twitter.cardType,
+			}}
+			extend={{
+				meta: additionalMetaTags,
+			}}
+		/>
 
 		<Tooltips interactive={false} delay={[15, 10]} />
 

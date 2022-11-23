@@ -1,6 +1,14 @@
 ---
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { PinnedReposList } from '~/shared/components/jsx';
+
+const metadata = {
+	title: 'Projects',
+	canonical: 'https://sergiobarria.com/projects',
+	openGraph: {
+		url: 'https://sergiobarria.com/projects',
+	},
+};
 ---
 
 <style lang="scss">
@@ -23,7 +31,11 @@ import { PinnedReposList } from '~/shared/components/jsx';
 	}
 </style>
 
-<BaseLayout title="Portfolio | Sergio Barria">
+<BaseLayout
+	title={metadata.title}
+	pageCanonical={metadata.canonical}
+	pageOpengraph={metadata.openGraph}
+>
 	<section class="header" id="header">
 		<h1>My Portfolio</h1>
 		<p>Here is a summary of some of the personal and profesional projects I've work on.</p>

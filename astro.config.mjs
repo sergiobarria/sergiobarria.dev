@@ -7,8 +7,11 @@ import { h } from 'hastscript';
 // Integrations
 import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
+import robotsTxt from 'astro-robots-txt';
+import sitemap from '@astrojs/sitemap';
 
-import { remarkReadingTime } from './src/shared/utils/remark-reading-time.mjs';
+// App Plugins
+import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 
 const AnchorLinkIcon = h(
 	'svg',
@@ -30,14 +33,23 @@ const AnchorLinkIcon = h(
 export default defineConfig({
 	site: 'https://sergiobarria.com',
 	markdown: {
-		shikiConfig: { theme: 'css-variables' }, // css-variables tells shiki to read the theme from CSS variables
+		shikiConfig: {
+			// css-variables tells shiki to read the theme from CSS variables
+			theme: 'css-variables',
+		},
 		rehypePlugins: [
 			rehypePrettyCode,
-			[rehypeAutolinkHeadings, { behavior: 'append', content: AnchorLinkIcon }],
+			[
+				rehypeAutolinkHeadings,
+				{
+					behavior: 'append',
+					content: AnchorLinkIcon,
+				},
+			],
 		],
 		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
 	},
-	integrations: [react(), mdx()],
+	integrations: [react(), mdx(), robotsTxt(), sitemap()],
 	vite: {
 		server: {
 			open: true,

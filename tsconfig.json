@@ -19,6 +19,6 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "react"
 	},
-	"include": ["src/**/*", "lib/**/*"],
+	"include": ["src/**/*", "lib/**/*", "plugins/remark-reading-time.mjs"],
 	"exclude": ["node_modules", "dist"]
 }
