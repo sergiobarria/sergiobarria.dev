@@ -1,49 +1,92 @@
-# Welcome to [Astro](https://astro.build)
+![Logo](https://res.cloudinary.com/sbarria-dev/image/upload/v1669242055/sergiobarria/banners/repo-cover_sdlb8e.png)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
+<p align="center">
+  <img src="https://img.shields.io/apm/l/atomic-design-ui.svg?" />
+  <img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg" />
+  <img src="https://github.com/sergiobarria/sergiobarria.com/actions/workflows/cypress.yml/badge.svg?branch=main" />
+</p>
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+# sergiobarria.com (With Astro)
 
-![basics](https://user-images.githubusercontent.com/4677417/186188965-73453154-fdec-4d6b-9c34-cb35c248ae5b.png)
+This is my personal website, blog and portfolio showcase. Built with Astro, Vercel Functions and SCSS. Written using TypeScript and content managed with MDX.
 
+## Overview
 
-## 🚀 Project Structure
+Previously my website was built with Next.js, but I wanted to try Astro, so I decided to rebuild it from scratch. I'm using Vercel Functions to handle API requests and communication with different platforms. I'm also using Cloudinary to store the images.
 
-Inside of your Astro project, you'll see the following folders and files:
+## Files and Folders Structure
 
 ```
-/
-├── public/
-│   └── favicon.svg
+.
+├── api
+├── lib
+├── plugins
+├── public
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── content
+│   ├── layouts
+│   ├── pages
+│   ├── shared
+│   ├── stores
+│   └── styles
+└── ...(other root files)
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+### Explanation
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+- `api`: Contains the Vercel Functions.
+- `lib`: Contains the different functions used in the project.
+- `plugins`: Contains the different speciffic plugins used by Astro in this project.
+- `public`: Contains the different static files used in the project.
+- `src`: Contains source files used in the project.
+  - `content`: Contains MDX files used in the project.
+  - `layouts`: Contains layouts used in the project.
+  - `pages`: Contains pages used in the project.
+  - `shared`: Contains shared components, hooks, helpers used in the project.
+  - `stores`: Contains nano stores used in the project.
+  - `styles`: Contains `scss` styles used in the project.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Tech Stack
 
-## 🧞 Commands
+**Language:** TypeScript
+**Client Framework:** Astro
+**Server Framework:** Vercel Functions
+**Styles:** SCSS, SCSS Modules
+**Content:** MDX
+**APIs:** Cloudinary, GitHub, Wakatime, Vercel, Spotify
+**Database:** Xata.io
 
-All commands are run from the root of the project, from a terminal:
+## Run Locally
 
-| Command                | Action                                             |
-| :--------------------- | :------------------------------------------------- |
-| `npm install`          | Installs dependencies                              |
-| `npm run dev`          | Starts local dev server at `localhost:3000`        |
-| `npm run build`        | Build your production site to `./dist/`            |
-| `npm run preview`      | Preview your build locally, before deploying       |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro preview` |
-| `npm run astro --help` | Get help using the Astro CLI                       |
+- Clone the project
 
-## 👀 Want to learn more?
+```bash
+$  git clone git@github.com:sergiobarria/sergiobarria.com-astro.git
+$  cd sergiobarria.com-astro
+$  pnpm install
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- Create `.env` file similar to `.env.example` and fill the variables.
+
+- Run the project
+
+```bash
+$  pnpm dev --> if not using serverless functions
+$  pnpm sertve --> if using serverless functions
+```
+
+## Contributing
+
+Contributions are always welcome!
+
+## Screenshots
+
+My pinned github repos using Github GraphQL API and Urql client for data fetching
+
+<img alt="featured projects from github" src="https://res.cloudinary.com/sbarria-dev/image/upload/v1669242857/sergiobarria/repo/CleanShot_2022-11-23_at_17.33.24_lepfoj.png" />
+
+Currently playing using spotify API
+
+<img alt="currently playing card" src="https://res.cloudinary.com/sbarria-dev/image/upload/v1669242893/sergiobarria/repo/CleanShot_2022-11-23_at_17.34.36_tzvh16.png" />
+
+
