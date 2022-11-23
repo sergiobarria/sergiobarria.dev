@@ -3,6 +3,12 @@ import { getXataClient, PostsViewsRecord } from './__codegen__';
 
 const xata = getXataClient();
 
+export async function getAllSlugs() {
+	const records = await xata.db.posts_views.getAll();
+
+	return records.map((record) => record.slug);
+}
+
 export async function getAllRecords() {
 	const records = await xata.db.posts_views.getAll();
 	const total = records.reduce(
