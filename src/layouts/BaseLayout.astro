@@ -31,6 +31,9 @@ const dynamicKeywords = metadata?.extend?.meta
 	?.find((tag) => tag.name === 'keywords')
 	?.content?.split(', ');
 const keywords = [...(defaultKeywords || []), ...(dynamicKeywords || [])].join(', ');
+
+const analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
+const params = Astro.params;
 ---
 
 <!DOCTYPE html>
@@ -131,6 +134,15 @@ const keywords = [...(defaultKeywords || []), ...(dynamicKeywords || [])].join('
 			};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
+		<script type="module" define:vars={{ pathname, analyticsId, params }}>
+			import { webVitals } from '../../lib/vitals';
+
+			webVitals({
+				path: pathname,
+				params,
+				analyticsId,
+			});
+		</script>
 	</head>
 
 	<body>
