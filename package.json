@@ -32,6 +32,7 @@
 		"@radix-ui/react-select": "1.1.1",
 		"@radix-ui/react-tabs": "^1.0.1",
 		"@radix-ui/react-tooltip": "1.0.2",
+		"@vercel/analytics": "^0.1.5",
 		"@xata.io/client": "^0.20.2",
 		"astro": "^1.6.10",
 		"astro-tooltips": "^0.6.0",
