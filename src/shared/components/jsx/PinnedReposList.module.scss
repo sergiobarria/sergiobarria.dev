@@ -27,7 +27,7 @@
 
 	h5 {
 		&:hover {
-			color: var(--brand);
+			color: var(--brand-accent);
 		}
 	}
 
@@ -60,7 +60,7 @@
 			cursor: pointer;
 
 			&:hover {
-				color: var(--brand);
+				color: var(--brand-accent);
 			}
 		}
 	}
