@@ -1,11 +1,14 @@
 ---
 import { AstroSeo } from '@astrolib/seo';
+import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { FeaturedPostsList } from '~/shared/components/jsx';
 
 import { SocialLinks, FeaturedProjectsList, MyselfSection } from '~/shared/components/jsx';
 import { parseBlogPost } from './blog/_utils';
 import { parseProject } from './projects/_utils';
+
+import site from '../../site.json';
 
 const postsData = await Astro.glob('../content/blog/*.mdx');
 const projectsData = await Astro.glob('../content/projects/*.mdx');
@@ -16,11 +19,16 @@ const featuredProjects = allProjects
 	.filter((project) => project.featured)
 	.sort((a, b) => a.order - b.order);
 
-const metadata = {
-	title: 'Home',
+const metadata: SeoProps = {
+	title: 'Home | Sergio Barria',
 	canonical: 'https://sergiobarria.com/',
 	openGraph: {
-		url: 'https://sergiobarria.com/',
+		basic: {
+			title: 'Homepage',
+			url: 'https://sergiobarria.com/',
+			image: site.openGraph.images[0].url,
+			type: 'website',
+		},
 	},
 };
 ---
@@ -246,7 +254,7 @@ const metadata = {
 	}
 </style>
 
-<BaseLayout>
+<BaseLayout metadata={metadata}>
 	<div class="homepage">
 		<section id="hero">
 			<div class="hero__container">

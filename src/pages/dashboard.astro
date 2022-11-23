@@ -1,15 +1,23 @@
 ---
+import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
 import { TopTracks, Metrics } from '~/shared/components/jsx';
 
+import site from '../../site.json';
+
 const posts = await Astro.glob('../content/blog/*.mdx');
 
-const metadata = {
-	title: 'Dashboard',
-	canonical: 'https://sergiobarria.com/dashboard',
+const metadata: SeoProps = {
+	title: 'Blog | Sergio Barria',
+	canonical: 'https://sergiobarria.com/',
 	openGraph: {
-		url: 'https://sergiobarria.com/dashboard',
+		basic: {
+			title: 'Blog | Sergio Barria',
+			url: 'https://sergiobarria.com/',
+			image: site.openGraph.images[0].url,
+			type: 'website',
+		},
 	},
 };
 ---
@@ -53,11 +61,7 @@ const metadata = {
 	}
 </style>
 
-<BaseLayout
-	title={metadata.title}
-	pageCanonical={metadata.canonical}
-	pageOpengraph={metadata.openGraph}
->
+<BaseLayout metadata={metadata}>
 	<section id="header" class="header">
 		<h1>Dashboard</h1>
 		<p>

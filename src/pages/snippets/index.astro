@@ -1,17 +1,25 @@
 ---
+import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
 import { SnippetsList } from '~/shared/components/jsx';
 import { parseSnippet } from './_utils';
 
+import site from '../../../site.json';
+
 const data = await Astro.glob('../../content/snippets/*.mdx');
 const allSnippets = await Promise.all(data?.map(parseSnippet));
 
-const metadata = {
-	title: 'Snippets',
+const metadata: SeoProps = {
+	title: 'Snippets | Sergio Barria',
 	canonical: 'https://sergiobarria.com/snippets',
 	openGraph: {
-		url: 'https://sergiobarria.com/snippets',
+		basic: {
+			title: 'Snippets | Sergio Barria',
+			url: 'https://sergiobarria.com/',
+			image: site.openGraph.images[0].url,
+			type: 'website',
+		},
 	},
 };
 ---
@@ -26,7 +34,7 @@ const metadata = {
 	}
 </style>
 
-<BaseLayout>
+<BaseLayout metadata={metadata}>
 	<section class="header" id="header">
 		<h1>Library</h1>
 		<hr />

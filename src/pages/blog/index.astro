@@ -1,18 +1,26 @@
 ---
+import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { BlogPostsList, SearchBar } from '~/shared/components/jsx';
 
 import { parseBlogPost, sortPosts } from './_utils';
 
+import site from '../../../site.json';
+
 const data = await Astro.glob('../../content/blog/*.mdx');
 const allPosts = await Promise.all(data?.map(parseBlogPost) ?? []);
 const sortedPosts = allPosts.sort(sortPosts);
 
-const metadata = {
-	title: 'Blog',
+const metadata: SeoProps = {
+	title: 'Blog | Sergio Barria',
 	canonical: 'https://sergiobarria.com/blog',
 	openGraph: {
-		url: 'https://sergiobarria.com/blog',
+		basic: {
+			title: 'Blog | Sergio Barria',
+			url: 'https://sergiobarria.com/',
+			image: site.openGraph.images[0].url,
+			type: 'website',
+		},
 	},
 };
 ---
@@ -45,11 +53,7 @@ const metadata = {
 	}
 </style>
 
-<BaseLayout
-	title={metadata.title}
-	pageCanonical={metadata.canonical}
-	pageOpengraph={metadata.openGraph}
->
+<BaseLayout metadata={metadata}>
 	<div class="container">
 		<h1>My Blog</h1>
 		<p>Here are all the posts I've published since starting this website.</p>
