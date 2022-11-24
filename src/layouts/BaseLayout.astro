@@ -134,7 +134,9 @@ const params = Astro.params;
 			};
 		</script>
 		<script defer src="/_vercel/insights/script.js"></script>
-		<script type="module" define:vars={{ pathname, analyticsId, params }}>
+		<!-- NOTE: Commented until finding a way to make it work with Astro -->
+		<!-- TODO: Add Vercel web vitals script -->
+		<!-- <script type="module" define:vars={{ pathname, analyticsId, params }}>
 			import { webVitals } from '../../lib/vitals';
 
 			webVitals({
@@ -142,7 +144,7 @@ const params = Astro.params;
 				params,
 				analyticsId,
 			});
-		</script>
+		</script> -->
 	</head>
 
 	<body>

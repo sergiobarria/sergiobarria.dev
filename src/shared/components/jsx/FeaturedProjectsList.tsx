@@ -42,6 +42,7 @@ export function FeaturedProjectsList({ projects }: FeaturedProjectsListProps) {
 							publicId={`sergiobarria/projects/${project.image}`}
 							isThumbnail
 							alt={`thumbnail for ${project.name} frontmatter`}
+							width={500}
 						/>
 					</div>
 				</div>

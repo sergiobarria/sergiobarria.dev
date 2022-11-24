@@ -62,7 +62,7 @@ const pathname = new URL(Astro.request.url).pathname;
 				a {
 					position: relative;
 					display: inline-block;
-					color: var(--brand-dimmed);
+					color: var(--brand-accent);
 					font-weight: 300;
 					opacity: 0.7;
 
@@ -112,10 +112,10 @@ const pathname = new URL(Astro.request.url).pathname;
 				}
 
 				& > a {
-					color: var(--brand);
+					color: var(--brand-accent);
 
 					&:hover {
-						color: var(--brand-dimmed);
+						opacity: 0.9;
 					}
 				}
 			}
