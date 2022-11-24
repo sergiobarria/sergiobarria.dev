@@ -4,7 +4,12 @@ import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { FeaturedPostsList } from '~/shared/components/jsx';
 
-import { SocialLinks, FeaturedProjectsList, MyselfSection } from '~/shared/components/jsx';
+import {
+	SocialLinks,
+	FeaturedProjectsList,
+	MyselfSection,
+	CloudinaryImage,
+} from '~/shared/components/jsx';
 import { parseBlogPost } from './blog/_utils';
 import { parseProject } from './projects/_utils';
 
@@ -276,8 +281,8 @@ const metadata: SeoProps = {
 					<div class="hero__image">
 						<div class="blob-container"></div>
 						<picture>
-							<img
-								src="https://res.cloudinary.com/sbarria-dev/image/upload/v1668232848/sergiobarria/spaceship-launch_lsag8o.png"
+							<CloudinaryImage
+								publicId="sergiobarria/spaceship-launch_lsag8o.png"
 								alt="hero image"
 							/>
 						</picture>
@@ -291,9 +296,10 @@ const metadata: SeoProps = {
 			<div class="about__container">
 				<div class="about__leftSide">
 					<picture>
-						<img
-							src="https://res.cloudinary.com/sbarria-dev/image/upload/v1668277002/sergiobarria/4C59B2D2-E116-4D3A-8F83-E2D1DA064661_1_105_c_kpcrhr.jpg"
-							alt=""
+						<CloudinaryImage
+							publicId="sergiobarria/4C59B2D2-E116-4D3A-8F83-E2D1DA064661_1_105_c_kpcrhr.jpg"
+							alt="profile image"
+							rounded
 						/>
 					</picture>
 				</div>
