@@ -9,6 +9,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
 
 // App Plugins
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
@@ -30,6 +31,8 @@ const AnchorLinkIcon = h(
 );
 
 // https://astro.build/config
+
+// https://astro.build/config
 export default defineConfig({
 	site: 'https://sergiobarria.com',
 	markdown: {
@@ -49,7 +52,15 @@ export default defineConfig({
 		],
 		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
 	},
-	integrations: [react(), mdx(), robotsTxt(), sitemap()],
+	integrations: [
+		react(),
+		mdx(),
+		robotsTxt(),
+		sitemap(),
+		tailwind({
+			config: { applyAstroPreset: false, applyBaseStyles: true },
+		}),
+	],
 	vite: {
 		server: {
 			open: true,

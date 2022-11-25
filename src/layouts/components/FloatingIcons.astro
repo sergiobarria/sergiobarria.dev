@@ -10,55 +10,9 @@ import {
 import { socialLinks } from '../../../site.json';
 ---
 
-<style lang="scss">
-	@use 'src/styles/utils';
-
-	.container {
-		@include utils.position(fixed, null, null, 0, 2rem);
-
-		@include utils.breakpoint-down('lg') {
-			display: none;
-		}
-
-		ul {
-			display: inline-flex;
-			flex-direction: column;
-			list-style: none;
-			padding-inline-start: 0;
-			font-size: var(--font-size-00);
-			transition: transform 2s var(--ease-in-out-1);
-
-			li {
-				display: inline-block;
-				padding-left: 0;
-
-				&:hover {
-					color: var(--brand);
-					transform: scale(1.1);
-				}
-
-				a {
-					color: inherit;
-				}
-			}
-		}
-
-		&::after {
-			content: '';
-			display: block;
-			height: 80px;
-			width: 1px;
-			background-color: var(--surface4);
-			margin-inline: auto;
-		}
-
-		// background-color: yellowgreen;
-	}
-</style>
-
-<div class="container">
-	<ul>
-		<li>
+<div class="fixed left-[2rem] bottom-0 fixed-icons">
+	<ul class="inline-flex flex-col gap-3 transition-transform duration-200 ease-in-out">
+		<li class="hover:text-brand transform scale-105">
 			<a
 				href={socialLinks.find((link) => link.name === 'github')?.url}
 				target="_blank"
@@ -67,7 +21,7 @@ import { socialLinks } from '../../../site.json';
 				<GitHubLogoIcon width={24} height={24} />
 			</a>
 		</li>
-		<li>
+		<li class="hover:text-brand transform scale-105">
 			<a
 				href={socialLinks.find((link) => link.name === 'twitter')?.url}
 				target="_blank"
@@ -76,7 +30,7 @@ import { socialLinks } from '../../../site.json';
 				<TwitterLogoIcon width={24} height={24} />
 			</a>
 		</li>
-		<li>
+		<li class="hover:text-brand transform scale-105">
 			<a
 				href={socialLinks.find((link) => link.name === 'linkedin')?.url}
 				target="_blank"
@@ -85,7 +39,7 @@ import { socialLinks } from '../../../site.json';
 				<LinkedInLogoIcon width={24} height={24} />
 			</a>
 		</li>
-		<li>
+		<li class="hover:text-brand transform scale-105">
 			<a
 				href={socialLinks.find((link) => link.name === 'email')?.url}
 				target="_blank"
@@ -94,7 +48,7 @@ import { socialLinks } from '../../../site.json';
 				<EnvelopeOpenIcon width={24} height={24} />
 			</a>
 		</li>
-		<li>
+		<li class="hover:text-brand transform scale-105">
 			<a
 				href={socialLinks.find((link) => link.name === 'codepen')?.url}
 				target="_blank"

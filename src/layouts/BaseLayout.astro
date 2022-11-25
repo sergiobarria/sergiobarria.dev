@@ -1,5 +1,4 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
 import { SEO, Props as SeoProps, Meta } from 'astro-seo';
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
@@ -12,7 +11,7 @@ import Footer from './components/Footer.astro';
 import FloatingIcons from '~/layouts/components/FloatingIcons.astro';
 import { FloatingMobileMenu } from './components/jsx';
 
-import '~/styles/main.scss';
+import '~/styles/tailwind.css';
 
 import site from '../../site.json';
 
@@ -147,16 +146,14 @@ const params = Astro.params;
 		</script> -->
 	</head>
 
-	<body>
-		<div class="container">
-			<Header />
-			<FloatingMobileMenu client:media="(max-width: 768px)" currentPath={pathname} />
-			<main>
-				<!-- This slot is the entry point of the application -->
-				<slot />
-			</main>
-			<FloatingIcons />
-			<Footer />
-		</div>
+	<body class="antialiased bg-surface-one text-font-one">
+		<Header />
+		<FloatingMobileMenu client:media="(max-width: 768px)" currentPath={pathname} />
+		<main class="container px-4">
+			<!-- This slot is the entry point of the application -->
+			<!-- <slot /> -->
+		</main>
+		<FloatingIcons />
+		<Footer />
 	</body>
 </html>

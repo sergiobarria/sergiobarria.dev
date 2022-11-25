@@ -1,4 +1,6 @@
 ---
+import clsx from 'clsx';
+
 import { SocialLinks } from '~/shared/components/jsx';
 
 import { navLinks } from '../../../site.json';
@@ -8,149 +10,73 @@ import { SpotifyCard } from '~/shared/components/jsx';
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
-<style lang="scss">
-	@use 'src/styles/utils';
-
-	.footer {
-		&__container {
-			@include utils.center-horizontally;
-
-			display: flex;
-			align-items: flex-end;
-			justify-content: center;
-			padding: var(--size-6) 0;
-			border-top: 1px solid var(--surface3);
-
-			@include utils.breakpoint-up('md') {
-				justify-content: space-between;
-			}
-		}
-
-		.leftSide {
-			width: min(100%, 400px);
-
-			@include utils.breakpoint-down('sm') {
-				display: none;
-			}
-
-			a {
-				padding-inline: 0;
-				margin-inline: 0;
-
-				&:hover {
-					color: var(--brand);
-				}
-			}
-		}
-
-		.rightSide {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-
-			@include utils.breakpoint-up('md') {
-				align-items: flex-end;
-			}
-
-			&__links {
-				display: flex;
-				gap: var(--size-3);
-				font-size: var(--font-size-0);
-				margin-bottom: var(--size-2);
-				color: var(--text2);
-
-				a {
-					position: relative;
-					display: inline-block;
-					color: var(--brand-accent);
-					font-weight: 300;
-					opacity: 0.7;
-
-					&:hover {
-						opacity: 1;
-					}
-
-					&::after {
-						@include utils.position(absolute, null, null, 0, 0);
-
-						content: '';
-						width: 100%;
-						height: 2px;
-						background-color: var(--brand);
-						transform: scaleX(0);
-						transform-origin: left;
-						transition: transform 0.3s ease;
-					}
-
-					&:hover::after {
-						transform: scaleX(1);
-					}
-				}
-
-				@include utils.breakpoint-up('md') {
-					font-size: var(--font-size-1);
-				}
-			}
-
-			p {
-				text-align: center;
-				font-size: var(--font-size-0);
-				font-weight: 200;
-				width: var(--size-content-2);
-				color: var(--text2);
-
-				@include utils.breakpoint-up('md') {
-					text-align: right;
-				}
-
-				&:first-of-type {
-					margin-top: var(--size-2);
-				}
-
-				@include utils.breakpoint-up('md') {
-					font-size: var(--font-size-1);
-				}
-
-				& > a {
-					color: var(--brand-accent);
-
-					&:hover {
-						opacity: 0.9;
-					}
-				}
-			}
-		}
-	}
-</style>
-
-<footer class="footer">
-	<div class="footer__container">
-		<div class="leftSide">
-			<a href="/">
-				<LogoIcon />
-			</a>
+<footer>
+	<div
+		class={clsx(
+			'container flex flex-col md:flex-row justify-center py-6 px-4 md:justify-between',
+			'border-t border-surface-three'
+		)}
+	>
+		<div
+			class={clsx(
+				'flex flex-col md:flex-1 items-center w-full mb-6',
+				'md:items-start md:justify-between md:mb-0'
+			)}
+		>
+			<div class="hidden md:block w-24 hover:text-brand">
+				<a href="/">
+					<LogoIcon />
+				</a>
+			</div>
 			<SpotifyCard client:load />
 		</div>
-		<div class="rightSide">
-			<div class="rightSide__links">
+		<div class="flex flex-col md:flex-1 items-center md:items-end">
+			<div
+				class={clsx(
+					'relative flex items-center gap-3 text-brand-accent',
+					'transition-opacity duration-300 ease-in-out mb-4'
+				)}
+			>
 				{
 					navLinks.map((link) => (
-						<a href={link.href} data-active={pathname === link.href ? true : false}>
+						<a
+							href={link.href}
+							class={clsx(
+								'relative inline-block opacity-90 text-sm md:text-base hover:opacity-100',
+								{
+									'animated-underline': pathname !== link.href,
+									'font-semibold': pathname === link.href,
+								}
+							)}
+						>
 							{link.label}
 						</a>
 					))
 				}
 			</div>
 			<SocialLinks />
-			<p>© {new Date().getFullYear()} - Designed and developed by Sergio Barria</p>
-			<p>
-				Built with <a href="https://astro.build/" target="_blank" rel="noopener noreferrer"
-					>Astro,</a
-				> styled with <a href="https://sass-lang.com" target="_blank" rel="noopener noreferrer"
-					>Sass</a
-				> and content with
-				<a href="https://mdxjs.com/" target="_blank" rel="noopener noreferrer">MDX</a>
-			</p>
+			<div class="text-center text-sm mt-4 md:text-right text-font-two">
+				<p>© {new Date().getFullYear()} - Designed and developed by Sergio Barria</p>
+				<p>
+					Built with <a
+						href="https://astro.build/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-brand-accent hover:opacity-90">Astro,</a
+					> styled with <a
+						href="https://tailwindcss.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-brand-accent hover:opacity-90">Tailwind CSS</a
+					> and content with
+					<a
+						href="https://mdxjs.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="text-brand-accent hover:opacity-90">MDX</a
+					>
+				</p>
+			</div>
 		</div>
 	</div>
 </footer>

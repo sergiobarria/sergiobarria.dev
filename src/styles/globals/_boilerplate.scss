@@ -1,9 +1,9 @@
 html {
-	font-family: system-ui, 'Lato', -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-		Noto Sans sans-serif;
-	background-color: var(--surface1);
-	color: var(--text1);
-	transition: background-color 0.25s var(--ease-3);
+	// font-family: system-ui, 'Lato', -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+	// Noto Sans sans-serif;
+	// background-color: var(--surface1);
+	// color: var(--text1);
+	// transition: background-color 0.25s var(--ease-3);
 }
 
 /* Override Open-Props Normalize styles */
@@ -33,7 +33,7 @@ h3 {
 
 html[data-theme='light'] {
 	pre {
-		background-color: var(--gray-8);
+		// background-color: var(--gray-8);
 	}
 }
 
