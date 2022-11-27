@@ -1,8 +1,7 @@
 import { EyeOpenIcon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
 
 import { useViews } from '~/shared/hooks/useViews';
-
-import styles from './Views.module.scss';
 
 interface ViewsProps {
 	slug: string;
@@ -13,9 +12,13 @@ export function Views({ slug, title }: ViewsProps) {
 	const { views } = useViews(slug as string);
 
 	return (
-		<span className={styles.chip}>
+		<span
+			className={clsx(
+				'absolute right-4 bottom-4 flex items-center gap-2 px-2 py-1 bg-surface-two/80 rounded-lg'
+			)}
+		>
 			<EyeOpenIcon width={18} height={18} />
-			<span>{views ?? '--'}</span>
+			<span className="text-xs">{views ?? '--'}</span>
 		</span>
 	);
 }

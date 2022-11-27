@@ -22,47 +22,19 @@ const metadata: SeoProps = {
 			type: 'website',
 		},
 		image: {
-			alt: 'Website Cover'
-		}
+			alt: 'Website Cover',
+		},
 	},
 };
 ---
-
-<style lang="scss">
-	.container {
-		margin-top: var(--size-8);
-
-		h1 {
-			margin-bottom: var(--size-2);
-		}
-
-		& > section:not(:first-child) {
-			margin-top: var(--size-10);
-			margin-bottom: var(--size-10);
-		}
-
-		& > hr {
-			margin: var(--size-2) 0;
-		}
-
-		p {
-			max-inline-size: 100%;
-			font-size: clamp(1.2rem, 1.5vw, 1.5rem);
-
-			& > strong {
-				color: var(--brand);
-			}
-		}
-	}
-</style>
 
 <BaseLayout metadata={metadata}>
 	<div class="container">
 		<h1>My Blog</h1>
 		<p>Here are all the posts I've published since starting this website.</p>
-		<hr />
+		<hr class="border-surface-four" />
 
-		<section id="blog-list">
+		<section id="blog-list" class="my-8">
 			<h2>All My Posts</h2>
 			<p>
 				In total, I've written <strong>{sortedPosts.length}</strong> articles in this blog. You can find

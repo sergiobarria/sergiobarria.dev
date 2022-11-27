@@ -3,51 +3,57 @@ import { StarIcon, GitHubLogoIcon, ExternalLinkIcon } from '@radix-ui/react-icon
 
 import { usePinnedRepos, Repo } from '~/shared/hooks';
 
-import styles from './PinnedReposList.module.scss';
-
-const languages = [
-	'bg-[#563d7c]',
-	'bg-[#f1e05a]',
-	'bg-[#3572A5]',
-	'bg-[#e34c26]',
-	'bg-[#3178c6]',
-	'bg-[#41b883]',
-	'bg-[#c6538c]',
-	'bg-[#a91e50]',
-	'bg-[#DA5B0B]',
-	'bg-[#00ADD8]',
-	'bg-[#ff5a03]',
-];
+const languages = {
+	JavaScript: 'border-[#f1e05a]',
+	TypeScript: 'border-[#3572A5]',
+	HTML: 'border-[#e34c26]',
+	CSS: 'border-[#3178c6]',
+	Python: 'border-[#3572A5]',
+	Astro: 'border-[#e34c26]',
+	Svelte: 'border-[#ff3e00]',
+	Vue: 'border-[#41b883]',
+	React: 'border-[#00ADD8]',
+};
 
 function LoadingCard() {
 	return (
-		<div className={styles.loadingCard}>
-			<span></span>
-			<span></span>
-			<span></span>
+		<div className="bg-surface-two w-full h-[8rem] rounded-lg p-4 space-y-3">
+			<span className="block bg-surface-four rounded-lg animate-pulse w-full h-3"></span>
+			<span className="block bg-surface-four rounded-lg animate-pulse w-full h-10"></span>
+			<span className="block bg-surface-four rounded-lg animate-pulse w-full h-3"></span>
 		</div>
 	);
 }
 
 function RepoCard({ repo }: { repo: Repo }) {
 	const { name, url, description, primaryLanguage, stargazerCount, homepageUrl } = repo;
+	console.log('repo', repo);
 
 	return (
-		<div className={styles.card}>
-			<a href={url} target="_blank" rel="noreferrer">
+		<div
+			className={clsx(
+				'flex flex-col gap-3 bg-surface-two rounded-lg p-4 border-t-2',
+				`${languages[primaryLanguage?.name as keyof typeof languages] ?? 'border-brand'}`
+			)}
+		>
+			<a href={url} className="inline-flex items-center gap-2" target="_blank" rel="noreferrer">
 				<GitHubLogoIcon width={16} height={16} />
-				<h5>{name}</h5>
+				<h5 className="inline hover:text-brand">{name}</h5>
 			</a>
-			<p>{description?.substring(0, 75) ?? 'No Description provided yet...'}</p>
-			<div className={styles.stats}>
-				<span>{primaryLanguage?.name}</span>
-				<span className={styles.stars}>
+			<p className="text-sm">{description?.substring(0, 75) ?? 'No Description provided yet...'}</p>
+			<div className="flex items-center justify-between gap-3 text-xs">
+				<span className="text-brand-accent">{primaryLanguage?.name}</span>
+				<span className="flex items-center gap-3">
 					<StarIcon width={16} height={16} />
 					<span>{stargazerCount}</span>
 				</span>
 				{homepageUrl && (
 					<a href={homepageUrl}>
-						<ExternalLinkIcon width={16} height={16} className={styles.extLink} />
+						<ExternalLinkIcon
+							width={16}
+							height={16}
+							className="cursor-pointer hover:text-brand-accent"
+						/>
 					</a>
 				)}
 			</div>
@@ -60,7 +66,7 @@ export function PinnedReposList() {
 
 	if (isLoading || error) {
 		return (
-			<div className={styles.cardsContainer}>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
 				{[...Array(6)].map((_, i) => (
 					<LoadingCard key={i} />
 				))}
@@ -69,7 +75,7 @@ export function PinnedReposList() {
 	}
 
 	return (
-		<div className={styles.cardsContainer}>
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
 			{repos.map((repo) => {
 				return <RepoCard key={repo.id} repo={repo} />;
 			})}

@@ -21,33 +21,23 @@ const metadata: SeoProps = {
 			type: 'website',
 		},
 		image: {
-			alt: 'Website Cover'
-		}
+			alt: 'Website Cover',
+		},
 	},
 };
 ---
 
-<style lang="scss">
-	.header {
-		margin: var(--size-8) 0;
-
-		hr {
-			margin: var(--size-2) 0;
-		}
-	}
-</style>
-
 <BaseLayout metadata={metadata}>
-	<section class="header" id="header">
+	<section id="header">
 		<h1>Library</h1>
 		<hr />
 	</section>
 
-	<section class="snippets" id="snippets">
+	<section id="snippets" class="mt-8">
 		<h2>All Snippets</h2>
 		<p>Here is a list of all snippets I've created</p>
 		<!-- TODO: Add Search bar -->
-		<span>Search Bar</span>
+		<!-- <span>Search Bar</span> -->
 		<SnippetsList client:visible snippets={allSnippets} />
 	</section>
 </BaseLayout>
