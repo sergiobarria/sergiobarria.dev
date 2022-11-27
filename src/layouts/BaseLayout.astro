@@ -11,7 +11,7 @@ import Footer from './components/Footer.astro';
 import FloatingIcons from '~/layouts/components/FloatingIcons.astro';
 import { FloatingMobileMenu } from './components/jsx';
 
-import '~/styles/tailwind.css';
+import '~/styles/tailwind.scss';
 
 import site from '../../site.json';
 
@@ -88,22 +88,6 @@ const params = Astro.params;
 
 		<Tooltips interactive={false} delay={[15, 10]} />
 
-		<style lang="scss">
-			@use 'src/styles/utils';
-			.container {
-				display: flex;
-				flex-direction: column;
-				min-height: 100vh;
-			}
-
-			main {
-				@include utils.center-horizontally;
-
-				flex-grow: 1;
-				margin-top: var(--size-9);
-			}
-		</style>
-
 		<script is:inline>
 			const storageKey = 'theme-preference';
 
@@ -146,12 +130,12 @@ const params = Astro.params;
 		</script> -->
 	</head>
 
-	<body class="antialiased bg-surface-one text-font-one">
+	<body class="flex flex-col h-full min-h-screen antialiased bg-surface-one text-font-one">
 		<Header />
 		<FloatingMobileMenu client:media="(max-width: 768px)" currentPath={pathname} />
-		<main class="container px-4">
+		<main class="container flex-1 px-4 mt-10 max-w-screen-lg">
 			<!-- This slot is the entry point of the application -->
-			<!-- <slot /> -->
+			<slot />
 		</main>
 		<FloatingIcons />
 		<Footer />

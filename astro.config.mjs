@@ -31,8 +31,6 @@ const AnchorLinkIcon = h(
 );
 
 // https://astro.build/config
-
-// https://astro.build/config
 export default defineConfig({
 	site: 'https://sergiobarria.com',
 	markdown: {
@@ -63,7 +61,7 @@ export default defineConfig({
 	],
 	vite: {
 		server: {
-			open: true,
+			// open: true,
 		},
 		ssr: {
 			// NOTE: This is needed to avoid vite issues with default exports

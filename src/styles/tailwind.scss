@@ -1,3 +1,6 @@
+@use 'prose.scss';
+@use 'code-blocks.scss';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,7 +14,7 @@
 	--text2: hsl(0 0% 78%);
 	--text3: hsl(0 0% 58%);
 	--text4: hsl(0 0% 39%);
-	--selection-text: hsl(0 0% 100%);
+	--selection-text: hsl(210 10% 10%);
 	--surface1: hsl(210 10% 10%);
 	--surface2: hsl(210 10% 16%);
 	--surface3: hsl(210 10% 21%);
@@ -64,17 +67,10 @@
 	/* DEFAULT STYLES */
 	:root {
 		/* FLUID FONT SIZES */
-		--fs-fluid-0: clamp(0.75rem, 1rem + 0.5vw, 1.5rem);
-		--fs-fluid-1: clamp(0.875rem, 1.125rem + 0.5vw, 1.625rem);
-		--fs-fluid-2: clamp(1rem, 1.25rem + 0.5vw, 1.75rem);
-		--fs-fluid-3: clamp(1.125rem, 1.375rem + 0.5vw, 1.875rem);
-		--fs-fluid-4: clamp(1.25rem, 1.5rem + 0.5vw, 2rem);
-		--fs-fluid-5: clamp(1.5rem, 1.75rem + 0.5vw, 2.25rem);
-		--fs-fluid-6: clamp(1.75rem, 2rem + 0.5vw, 2.5rem);
-		--fs-fluid-7: clamp(2rem, 2.25rem + 0.5vw, 2.75rem);
-		--fs-fluid-8: clamp(2.25rem, 2.5rem + 0.5vw, 3rem);
-		--fs-fluid-9: clamp(2.5rem, 2.75rem + 0.5vw, 3.25rem);
-		--fs-fluid-10: clamp(2.75rem, 3rem + 0.5vw, 3.5rem);
+		--font-size-fluid-0: clamp(0.75rem, 1.5vw, 1rem);
+		--font-size-fluid-1: clamp(1rem, 2vw, 1.5rem);
+		--font-size-fluid-2: clamp(1.5rem, 3vw, 2.5rem);
+		--font-size-fluid-3: clamp(2rem, 4vw, 3.5rem);
 	}
 
 	/* TAILWIND THEMES */
@@ -142,11 +138,11 @@
 	h4,
 	h5,
 	h6 {
-		@apply font-bold text-font-one;
+		@apply font-bold text-font-one leading-tight;
 	}
 
 	h1 {
-		@apply step-1;
+		@apply step-3;
 	}
 
 	h2 {
@@ -154,19 +150,7 @@
 	}
 
 	h3 {
-		@apply step-3;
-	}
-
-	h4 {
-		@apply step-4;
-	}
-
-	h5 {
-		@apply step-5;
-	}
-
-	h6 {
-		@apply step-6;
+		@apply step-1;
 	}
 }
 
@@ -230,28 +214,24 @@
 }
 
 @layer utilities {
+	.step-0 {
+		font-size: var(--font-size-fluid-0);
+	}
+
 	.step-1 {
-		font-size: var(--fs-fluid-10);
+		font-size: var(--font-size-fluid-1);
 	}
 
 	.step-2 {
-		font-size: var(--fs-fluid-9);
+		font-size: var(--font-size-fluid-2);
 	}
 
 	.step-3 {
-		font-size: var(--fs-fluid-8);
+		font-size: var(--font-size-fluid-3);
 	}
 
-	.step-4 {
-		font-size: var(--fs-fluid-7);
-	}
-
-	.step-5 {
-		font-size: var(--fs-fluid-6);
-	}
-
-	.step-6 {
-		font-size: var(--fs-fluid-5);
+	.text-gradient {
+		@apply text-transparent bg-clip-text bg-gradient-to-tr from-[var(--brand)] to-[var(--brand-accent)];
 	}
 }
 
@@ -268,7 +248,7 @@
 	background: var(--brand-accent);
 }
 
-/* Animations */
+/* ANIMATIONS */
 /* Fade In Animation */
 @keyframes fade-in {
 	from {
@@ -286,5 +266,69 @@
 	}
 	to {
 		opacity: 0;
+	}
+}
+
+/* Blob */
+.blob-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.blob-container::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+	filter: blur(20px);
+	background: linear-gradient(165deg, var(--brand), var(--brand-accent));
+
+	transition: 0.5s ease;
+	-webkit-animation: blob 12s linear infinite alternate;
+	animation: blob 12s linear infinite alternate;
+}
+
+/* Blob Animation */
+@-webkit-keyframes blob {
+	0%,
+	100% {
+		border-radius: 77% 47% 61% 49%;
+	}
+	20% {
+		border-radius: 89% 26% 70% 30%;
+	}
+	40% {
+		border-radius: 56% 93% 56% 94%;
+	}
+	60% {
+		border-radius: 68% 60% 94% 96%;
+	}
+	80% {
+		border-radius: 34% 74% 59% 82%;
+	}
+}
+
+@keyframes blob {
+	0%,
+	100% {
+		border-radius: 77% 47% 61% 49%;
+	}
+	20% {
+		border-radius: 89% 26% 70% 30%;
+	}
+	40% {
+		border-radius: 56% 93% 56% 94%;
+	}
+	60% {
+		border-radius: 68% 60% 94% 96%;
+	}
+	80% {
+		border-radius: 34% 74% 59% 82%;
 	}
 }

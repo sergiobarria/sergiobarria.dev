@@ -1,4 +1,5 @@
 ---
+import clsx from 'clsx';
 import type { Props as SeoProps } from 'astro-seo';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
 
@@ -34,63 +35,21 @@ const metadata: SeoProps = {
 };
 ---
 
-<style lang="scss">
-	.container {
-		margin: var(--size-8) 0;
-
-		h2 {
-			margin-bottom: var(--size-6);
-		}
-
-		h3 {
-			display: flex;
-		}
-
-		pre {
-			max-inline-size: var(--size-content-3);
-		}
-
-		hr {
-			margin: var(--size-8) 0;
-			max-inline-size: var(--size-content-3);
-		}
-	}
-
-	.return-link {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin: var(--size-6) 0;
-		max-inline-size: var(--size-content-3);
-
-		span {
-			display: flex;
-			align-items: center;
-			gap: var(--size-2);
-			background-color: var(--surface2);
-			padding: var(--size-2) var(--size-3);
-			border-radius: var(--size-1);
-
-			&:hover,
-			& a:hover {
-				color: var(--brand-accent);
-			}
-		}
-	}
-</style>
-
 <BaseLayout metadata={metadata}>
-	<div class="container">
-		<h2>{title}</h2>
-		<article id="post-content">
-			<slot />
-		</article>
-		<hr />
-		<div class="return-link">
-			<span>
-				<ArrowLeftIcon width={16} height={16} />
-				<a href="/snippets">Return to all snippets</a>
-			</span>
-		</div>
+	<h2 class="text-center">{title}</h2>
+	<article id="content" class="custom-prose mx-auto mb-4">
+		<slot />
+	</article>
+	<hr class="border-surface-four" />
+	<div class="flex items-center justify-center my-6">
+		<span
+			class={clsx(
+				'flex items-center gap-3 bg-surface-two px-3 py-2 rounded-lg',
+				'hover:text-brand-accent'
+			)}
+		>
+			<ArrowLeftIcon width={16} height={16} />
+			<a href="/snippets" class="">Return to all snippets</a>
+		</span>
 	</div>
 </BaseLayout>

@@ -10,6 +10,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['system-ui', ...defaultTheme.fontFamily.sans],
+				marker: ['Permanent Marker', 'cursive', ...defaultTheme.fontFamily.sans],
 			},
 			colors: {
 				brand: 'rgba(var(--tw-brand) / <alpha-value>)',
