@@ -1,11 +1,10 @@
+import clsx from 'clsx';
 import { format } from 'date-fns';
 import { CalendarIcon, ClockIcon } from '@radix-ui/react-icons';
 
 import type { Post } from '~/pages/blog/_utils';
 import { CloudinaryImage } from './CloudinaryImage';
 import { Views } from './Views';
-
-import styles from './BlogPostCard.module.scss';
 
 interface BlogPostCardProps {
 	post: Post;
@@ -18,8 +17,13 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 
 	return (
 		<a href={url}>
-			<article className={styles.article}>
-				<div className={styles.imgContainer}>
+			<article
+				className={clsx(
+					'flex flex-col cursor-pointer h-full bg-surface-two rounded-lg',
+					'transition-all duration-200 ease-in-out hover:scale-105'
+				)}
+			>
+				<div className="relative rounded-tl-lg rounded-tr-lg">
 					<CloudinaryImage
 						publicId={`sergiobarria/banners/${coverImage}`}
 						isThumbnail
@@ -28,14 +32,14 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 					/>
 					<Views slug={slug as string} />
 				</div>
-				<div className={styles.cardContent}>
-					<h3>{title}</h3>
-					<div className={styles.content}>
-						<p>
+				<div className="flex flex-col justify-between h-full p-3">
+					<h3 className="hover:text-brand-accent">{title}</h3>
+					<div className="flex items-center text-font-two mt-2">
+						<p className="flex items-center gap-3 mr-4 pr-4 border-r-[1px] border-font-two">
 							<CalendarIcon width={24} height={24} />
 							<time dateTime={publishDate.toUTCString()}>{formattedDate}</time>
 						</p>
-						<p>
+						<p className="flex items-center gap-3">
 							<ClockIcon width={24} height={24} />
 							<span>{minutesRead}</span>
 						</p>

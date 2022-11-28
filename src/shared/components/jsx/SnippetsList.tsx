@@ -1,19 +1,31 @@
+import clsx from 'clsx';
 import type { Snippet } from '~/pages/snippets/_utils';
-
-import styles from './SnippetsList.module.scss';
 
 function SnippetCard({ snippet }: { snippet: Snippet }) {
 	const { title, description, tags, url } = snippet;
 
 	return (
-		<div className={styles.card}>
+		<div
+			className={clsx(
+				'flex flex-col gap-2 p-4 rounded-md shadow-md',
+				'border-t border-brand bg-surface-two transition-colors duration-200 ease-in-out'
+			)}
+		>
 			<a href={url}>
-				<h5>{title}</h5>
+				<h5 className="hover:text-brand">{title}</h5>
 			</a>
-			<p>{description}</p>
-			<div className={styles.tags}>
+			<p className="text-sm md:text-base first-letter:uppercase">{description}</p>
+			<div className="flex flex-wrap gap-2 mt-auto">
 				{tags.split(',').map((tag) => (
-					<span key={tag}>{tag}</span>
+					<span
+						key={tag}
+						className={clsx(
+							'text-xs px-2 py-1 rounded-sm',
+							'first-letter:capitalize bg-surface-four'
+						)}
+					>
+						{tag}
+					</span>
 				))}
 			</div>
 		</div>
@@ -26,7 +38,7 @@ interface SnippetsListProps {
 
 export function SnippetsList({ snippets }: SnippetsListProps) {
 	return (
-		<div className={styles.grid}>
+		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
 			{snippets.map((snippet) => (
 				<SnippetCard key={snippet.order} snippet={snippet} />
 			))}

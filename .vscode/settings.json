@@ -1,4 +1,5 @@
 {
+	"editor.formatOnSave": true,
 	"cssvar.files": [
 		"./node_modules/open-props/open-props.min.css",
 		// if you have an alternative path to where your styles are located

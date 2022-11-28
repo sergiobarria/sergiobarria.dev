@@ -1,8 +1,6 @@
-@use 'mixins' as utils;
-
-/* NOTE: This variables define the syntax highlight for code blocks 
+/* NOTE: This variables define the syntax highlight for code blocks
 *  the astro-code prefix is required to work with astro, normally the
-*  prefix would be --shiki
+*  prefix would be --shiki for non astro projects
 */
 /* TODO: Add different themes for each color scheme depending on the [data-theme] attribute */
 :root {
@@ -21,22 +19,22 @@
 
 :where(pre, .remark-code-title) {
 	font-family: 'IMB Plex Mono', monospace;
-	font-size: var(--font-size-1);
-	line-height: var(--font-lineheight-2);
+	font-size: 1rem;
+	line-height: 1.375;
 	color: var(--text1);
 	background-color: var(--surface2);
 }
 
 :where(pre) {
 	box-sizing: border-box;
-	padding: var(--size-3);
+	padding: 1rem;
 	overflow: auto;
 	white-space: pre;
-	border-bottom-left-radius: var(--radius-3);
-	border-bottom-right-radius: var(--radius-3);
+	border-bottom-left-radius: 1rem;
+	border-bottom-right-radius: 1rem;
 	border: 1px solid var(--surface4);
-	margin-bottom: var(--size-4);
-	max-inline-size: var(--size-content-3);
+	margin-bottom: 1.25rem;
+	max-inline-size: 60ch;
 	max-width: none;
 
 	& > code {
@@ -48,33 +46,34 @@
 	& > code {
 		font-family: 'IBM Plex Mono', monospace;
 		color: var(--brand-accent);
-		font-size: var(--font-size-0);
+		font-size: 0.75rem;
 	}
 }
 
 :where(.remark-code-title) {
 	position: relative;
-	padding: var(--size-3);
-	border-top-left-radius: var(--radius-3);
-	border-top-right-radius: var(--radius-3);
-	border: 1px solid var(--surface4);
+	padding: 1rem;
+	border-top-left-radius: 1rem;
+	border-top-right-radius: 1rem;
+	border-bottom: 1px solid var(--surface4) !important;
 	padding-left: 40px;
 
 	html[data-theme='light'] & {
-		background-color: var(--gray-8);
-		color: var(--gray-2);
+		background-color: #343a40;
+		color: #e9ecef;
 	}
 
 	&:before {
-		@include utils.position(absolute, 50%, null, null, 0);
-
 		content: '';
+		position: absolute;
+		top: 50%;
+		left: 0;
 		transform: translateY(-50%);
 		display: block;
 		height: 15px;
 		width: 15px;
 		margin-left: 15px;
-		border-radius: var(--radius-round);
+		border-radius: 9999px;
 		background-color: var(--brand-accent);
 	}
 }

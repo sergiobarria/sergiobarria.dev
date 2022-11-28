@@ -9,6 +9,7 @@ import react from '@astrojs/react';
 import mdx from '@astrojs/mdx';
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
 
 // App Plugins
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
@@ -49,20 +50,20 @@ export default defineConfig({
 		],
 		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
 	},
-	integrations: [react(), mdx(), robotsTxt(), sitemap()],
+	integrations: [
+		react(),
+		mdx(),
+		robotsTxt(),
+		sitemap(),
+		tailwind({
+			config: { applyAstroPreset: false, applyBaseStyles: true },
+		}),
+	],
 	vite: {
 		server: {
 			open: true,
 		},
-		ssr: {
-			// NOTE: This is needed to avoid vite issues with default exports
-			noExternal: [
-				'@radix-ui/react-tooltip',
-				'@radix-ui/react-popover',
-				'@radix-ui/react-select',
-				'@radix-ui/react-tabs',
-			],
-		},
+		ssr: {},
 	},
 	server: {
 		host: 'localhost',

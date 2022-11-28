@@ -7,8 +7,6 @@ import {
 	CircleBackslashIcon,
 } from '@radix-ui/react-icons';
 
-import styles from './CalloutBox.module.scss';
-
 const icons = {
 	info: <InfoCircledIcon width={22} height={22} />,
 	warn: <ExclamationTriangleIcon width={22} height={22} />,
@@ -37,17 +35,31 @@ export function CalloutBox({ type = 'tip', children }: CalloutBoxProps): JSX.Ele
 
 	return (
 		<div
-			className={clsx(styles.callout, {
-				[styles.tip]: type === 'tip',
-				[styles.info]: type === 'info',
-				[styles.warn]: type === 'warn',
-				[styles.error]: type === 'error',
+			className={clsx('relative my-5 rounded-lg px-5', {
+				'bg-green-500/30 border-2 border-green-500': type === 'tip',
+				'bg-blue-500/30 border-2 border-blue-500': type === 'info',
+				'bg-yellow-500/30 border-2 border-yellow-500': type === 'warn',
+				'bg-red-500/30 border-2 border-red-500': type === 'error',
 			})}
 		>
-			<div className={clsx(styles.icon)}>
-				<span>{getBoxIcon(type)}</span>
+			<div
+				className={clsx(
+					'absolute -top-4 -left-4 flex items-center justify-center',
+					'p-2 bg-surface-one rounded-full'
+				)}
+			>
+				<span
+					className={clsx({
+						'text-green-500': type === 'tip',
+						'text-blue-500': type === 'info',
+						'text-yellow-500': type === 'warn',
+						'text-red-500': type === 'error',
+					})}
+				>
+					{getBoxIcon(type)}
+				</span>
 			</div>
-			<div className={styles.content}>{children}</div>
+			<div className="text-sm">{children}</div>
 		</div>
 	);
 }

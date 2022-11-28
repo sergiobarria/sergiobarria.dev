@@ -1,29 +1,18 @@
-import { Fragment, forwardRef, useState } from 'react';
+import { Fragment, useState } from 'react';
 import clsx from 'clsx';
+import { Popover, Listbox, Transition } from '@headlessui/react';
+import { usePopper } from 'react-popper';
 
-import * as Popover from '@radix-ui/react-popover';
-import * as Select from '@radix-ui/react-select';
 import { GearIcon, ChevronDownIcon, ChevronUpIcon, CheckIcon } from '@radix-ui/react-icons';
 
-import { Tooltip } from './Tooltip';
+const themes = [
+	{ id: 1, label: 'Night', value: 'night' },
+	{ id: 2, label: 'Light', value: 'light' },
+	{ id: 3, label: 'Night Owl', value: 'night-owl' },
+	{ id: 4, label: 'Grape', value: 'grape' },
+];
 
-import styles from './Settings.module.scss';
-
-export const SelectItem = forwardRef<
-	HTMLDivElement,
-	Select.SelectItemProps & React.RefAttributes<HTMLDivElement>
->(({ children, className, ...props }, forwardedRef) => {
-	return (
-		<Select.Item className={clsx(styles.selectItem, className)} {...props} ref={forwardedRef}>
-			<Select.ItemText>{children}</Select.ItemText>
-			<Select.ItemIndicator className={styles.selectItemIndicator}>
-				<CheckIcon />
-			</Select.ItemIndicator>
-		</Select.Item>
-	);
-});
-
-export function ThemeSelect() {
+function ThemeSelect() {
 	const [theme, setTheme] = useState(localStorage.getItem('theme-preference') ?? 'night');
 
 	const handleThemeChange = (value: string) => {
@@ -34,60 +23,112 @@ export function ThemeSelect() {
 		localStorage.setItem('theme-preference', value);
 	};
 
-	return (
-		<Select.Root value={theme} onValueChange={(value) => handleThemeChange(value)}>
-			<Select.Trigger className={styles.selectTrigger} aria-label="themes">
-				<Select.Value />
-				<Select.Icon className={styles.selectIcon}>
-					<ChevronDownIcon />
-				</Select.Icon>
-			</Select.Trigger>
+	const formatThemeLabel = (value: string) => {
+		return value.split('-').join(' ');
+	};
 
-			<Select.Portal>
-				<Select.Content className={styles.selectContent}>
-					<Select.ScrollUpButton className={styles.selectScrollButton}>
-						<ChevronUpIcon />
-					</Select.ScrollUpButton>
-					<Select.Viewport className={styles.selectViewport}>
-						<Select.Group>
-							<SelectItem value="night">Night</SelectItem>
-							<SelectItem value="light">Light</SelectItem>
-							<SelectItem value="night-owl">Night-Owl</SelectItem>
-							<SelectItem value="purple">Purple</SelectItem>
-						</Select.Group>
-					</Select.Viewport>
-					<Select.ScrollDownButton className={styles.selectScrollButton}>
-						<ChevronDownIcon />
-					</Select.ScrollDownButton>
-				</Select.Content>
-			</Select.Portal>
-		</Select.Root>
+	return (
+		<Listbox value={formatThemeLabel(theme)} onChange={handleThemeChange}>
+			<Listbox.Button
+				className={clsx(
+					'relative flex items-center justify-between rounded-md px-4',
+					'h-[2rem] gap-2 bg-surface-four text-brand-accent shadow-md',
+					'transition-all duration-200 ease-in-out hover:opacity-90',
+					'hover:shadow-lg transform hover:scale-105 focus:shadow-lg'
+				)}
+			>
+				{theme}
+				<ChevronDownIcon />
+			</Listbox.Button>
+			<Transition
+				as={Fragment}
+				enter="transition duration-100 ease-out"
+				enterFrom="transform scale-95 opacity-0"
+				enterTo="transform scale-100 opacity-100"
+				leave="transition duration-75 ease-out"
+				leaveFrom="transform scale-100 opacity-100"
+				leaveTo="transform scale-95 opacity-0"
+			>
+				<Listbox.Options
+					className={clsx(
+						'absolute top-10 right-0 mt-2 w-32 origin-top-right divide-y divide-surface-four',
+						'rounded-md bg-surface-three shadow-lg focus:outline-none'
+					)}
+				>
+					{themes.map((theme) => (
+						<Listbox.Option key={theme.id} value={theme.value} as={Fragment}>
+							{({ active, selected }) => (
+								<li
+									className={clsx(
+										'capitalize inline-flex w-full items-center gap-2 rounded-md px-2 py-2 text-sm',
+										'cursor-pointer focus:outline-none focus:ring-0',
+										active && 'bg-brand-accent text-selection',
+										selected && 'text-brand-accent'
+									)}
+								>
+									{selected && <CheckIcon />}
+									{formatThemeLabel(theme.value)}
+								</li>
+							)}
+						</Listbox.Option>
+					))}
+				</Listbox.Options>
+			</Transition>
+		</Listbox>
 	);
 }
 
 export function Settings() {
-	return (
-		<Fragment>
-			<Popover.Root>
-				<Tooltip content="Settings">
-					<Popover.Trigger className={styles.trigger}>
-						<GearIcon width={24} height={24} />
-					</Popover.Trigger>
-				</Tooltip>
+	const [referenceElement, setReferenceElement] = useState(null);
+	const [popperElement, setPopperElement] = useState(null);
+	const [arrowElement, setArrowElement] = useState(null);
+	const { styles, attributes } = usePopper(referenceElement, popperElement, {
+		placement: 'bottom-end',
+		modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
+	});
 
-				<Popover.Portal>
-					<Popover.Content className={styles.preferences}>
-						<span>Preferences</span>
-						<div className={styles.preferenceBlock}>
-							<div className={styles.preferenceItem}>
-								<span>Theme</span>
-								<ThemeSelect />
-							</div>
+	return (
+		<Popover className="relative">
+			<Popover.Button
+				ref={setReferenceElement as any}
+				className={clsx(
+					'outline outline-1 outline-brand bg-surface-one rounded-full p-2',
+					'transition-all duration-200 ease-in-out',
+					'hover:bg-surface-two hover:outline-2 hover:motion-safe:animate-spin'
+				)}
+			>
+				<GearIcon width={24} height={24} />
+			</Popover.Button>
+
+			<Transition
+				as={Fragment}
+				enter="transition duration-100 ease-out"
+				enterFrom="transform scale-95 opacity-0"
+				enterTo="transform scale-100 opacity-100"
+				leave="transition duration-75 ease-out"
+				leaveFrom="transform scale-100 opacity-100"
+				leaveTo="transform scale-95 opacity-0"
+			>
+				<Popover.Panel
+					ref={setPopperElement as any}
+					style={styles.popper}
+					{...attributes.popper}
+					className={clsx('bg-surface-two rounded-md px-6 py-4 shadow-md w-[70vw] md:w-[250px]')}
+				>
+					<span className="block text-xl font-semibold mb-3">Preferences</span>
+					<div>
+						<div
+							className={clsx(
+								'relative flex items-center justify-between py-4 border-b',
+								'border-surface-four [&:first-child]:border-t'
+							)}
+						>
+							<span>Theme</span>
+							<ThemeSelect />
 						</div>
-						<Popover.Arrow className={styles.arrow} />
-					</Popover.Content>
-				</Popover.Portal>
-			</Popover.Root>
-		</Fragment>
+					</div>
+				</Popover.Panel>
+			</Transition>
+		</Popover>
 	);
 }

@@ -3,8 +3,6 @@ import { ArrowRightIcon, ArrowLeftIcon } from '@radix-ui/react-icons';
 
 import { usePagination, SEPARATOR } from '~/shared/hooks';
 
-import styles from './Pagination.module.scss';
-
 interface PaginationProps {
 	className?: string;
 	currentPage: number;
@@ -49,14 +47,14 @@ export const Pagination = ({
 	let lastPage = paginationRange[paginationRange.length - 1];
 
 	return (
-		<nav className={styles.nav}>
-			<ul className={styles.pagination}>
+		<nav className="flex items-center mt-5">
+			<ul className="flex items-center justify-center gap-6 w-full">
 				{/* Left arrow */}
 				<li
 					onClick={onPrev}
 					className={clsx(
-						currentPage > 1 && styles.arrowActive,
-						currentPage === 1 && styles.arrowDisabled
+						currentPage > 1 && 'cursor-pointer bg-white rounded-full p-1 text-surface-one',
+						currentPage === 1 && 'cursor-not-allowed text-font-two opacity-60'
 					)}
 				>
 					<ArrowLeftIcon width={18} height={18} />
@@ -77,9 +75,11 @@ export const Pagination = ({
 						<li
 							key={page}
 							className={clsx(
-								styles.number,
-								page !== currentPage && styles.numberInactive,
-								page === currentPage && styles.numberActive
+								'flex items-center justify-center w-8 h-8 md:w-12 md:h-12 p-2 rounded-full',
+								'cursor-pointer transform transition-all duration-200 ease-in-out',
+								page !== currentPage &&
+									'bg-surface-two opacity-90 hover:scale-105 bg-brand-accent/80 text-surface-one',
+								page === currentPage && 'bg-brand-accent text-surface-one cursor-not-allowed'
 							)}
 							onClick={() => onPageChange(Number(page))}
 						>
@@ -92,8 +92,10 @@ export const Pagination = ({
 				<li
 					onClick={onNext}
 					className={clsx(
-						currentPage < lastPage && styles.arrowActive,
-						currentPage === lastPage && styles.arrowDisabled
+						'hover:bg-surface-four',
+						currentPage < lastPage &&
+							'cursor-pointer bg-surface-three rounded-full p-1 text-surface-one',
+						currentPage === lastPage && 'cursor-not-allowed text-font-two opacity-60'
 					)}
 				>
 					<ArrowRightIcon width={18} height={18} />
