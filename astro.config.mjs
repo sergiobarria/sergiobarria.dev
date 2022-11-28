@@ -61,18 +61,9 @@ export default defineConfig({
 	],
 	vite: {
 		server: {
-			// open: true,
+			open: true,
 		},
-		ssr: {
-			// NOTE: This is needed to avoid vite issues with default exports
-			noExternal: [
-				'@radix-ui/react-tooltip',
-				'@radix-ui/react-popover',
-				'@radix-ui/react-select',
-				'@radix-ui/react-tabs',
-				'@radix-ui/react-accordion',
-			],
-		},
+		ssr: {},
 	},
 	server: {
 		host: 'localhost',
