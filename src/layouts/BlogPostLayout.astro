@@ -1,4 +1,5 @@
 ---
+import clsx from 'clsx';
 import type { Meta, Props as SeoProps } from 'astro-seo';
 import type { MarkdownHeading } from 'astro';
 import { format } from 'date-fns';
@@ -15,6 +16,8 @@ interface Props {
 	frontmatter: PostFrontmatter;
 	headings: MarkdownHeading[];
 }
+
+const pathname = new URL(Astro.request.url).pathname;
 
 const {
 	frontmatter: { title, coverImage, summary, minutesRead, publishDate, keywords },
@@ -64,132 +67,12 @@ const metadata: SeoProps = {
 };
 ---
 
-<style lang="scss">
-	@use 'src/styles/utils';
-	.container {
-		margin: var(--size-8) 0;
-
-		hr {
-			margin-block: var(--size-fluid-2);
-		}
-	}
-
-	.post {
-		&__header {
-			& > h1 {
-				text-align: center;
-				max-inline-size: 100%;
-				margin-bottom: var(--size-3);
-				background: var(--text-gradient);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				border-radius: var(--radius-3);
-				padding: var(--size-1);
-			}
-		}
-		&__image {
-			margin-bottom: var(--size-3);
-		}
-
-		&__summaryCard {
-			background-color: var(--surface2);
-			padding: var(--size-3);
-			border-radius: var(--radius-3);
-			margin-bottom: var(--size-3);
-
-			&-excerpt {
-				margin-bottom: var(--size-3);
-				max-inline-size: 100%;
-
-				&--title {
-					color: var(--accent);
-					font-weight: 600;
-				}
-
-				&--text {
-					font-style: italic;
-					font-family: serif;
-				}
-			}
-
-			&-stats {
-				display: flex;
-				align-items: center;
-
-				& > p {
-					display: flex;
-					align-items: center;
-					gap: var(--size-2);
-					color: var(--text-3);
-					opacity: 0.7;
-					font-size: var(--font-size-1);
-
-					&:not(:last-child) {
-						padding-right: var(--size-3);
-						margin-right: var(--size-3);
-						border-right: var(--border-size-1) solid var(--text-2);
-					}
-				}
-			}
-		}
-	}
-
-	.content {
-		max-inline-size: var(--size-content-3);
-	}
-
-	.grid {
-		@include utils.breakpoint-up('md') {
-			display: grid;
-			gap: var(--size-8);
-			grid-template-columns: auto 350px;
-		}
-	}
-
-	.toc {
-		position: relative;
-		padding: var(--size-3);
-
-		@include utils.breakpoint-down('md') {
-			display: none;
-		}
-
-		&__container {
-			@include utils.position(sticky, 9rem, null, null, null);
-		}
-
-		h3 {
-			margin-bottom: var(--size-3);
-		}
-
-		&__links {
-			& > a {
-				display: block;
-				margin-bottom: var(--size-1);
-				color: var(--text-3);
-				opacity: 0.7;
-				font-size: var(--font-size-1);
-				transition: opacity 0.2s ease-in-out;
-
-				&:hover {
-					opacity: 1;
-				}
-
-				&:active {
-					opacity: 1;
-					font-weight: 600;
-				}
-			}
-		}
-	}
-</style>
-
 <BaseLayout metadata={metadata}>
 	<div class="container">
 		<section class="post">
-			<div class="post__header">
-				<h1>{title}</h1>
-				<div class="post__image">
+			<div>
+				<h1 class="text-center text-gradient">{title}</h1>
+				<div class="mb-6">
 					<CloudinaryImage
 						publicId={`sergiobarria/banners/${coverImage}`}
 						alt={title}
@@ -197,41 +80,87 @@ const metadata: SeoProps = {
 					/>
 				</div>
 			</div>
-			<div class="post__summaryCard">
-				<p class="post__summaryCard-excerpt">
-					<span class="post__summaryCard-excerpt--title">Summary:</span>
-					<span class="post__summaryCard-excerpt--text">↬ {summary}</span>
+			<div class="bg-surface-four p-4 rounded-lg mb-3">
+				<p class="mb-2">
+					<span class="font-semibold">Summary:</span>
+					<span class="italic font-serif">↬ {summary}</span>
 				</p>
-				<div class="post__summaryCard-stats">
-					<p>
-						<CalendarIcon width={24} height={24} />
+				<div class="flex items-center gap-3 text-font-two">
+					<p class="flex items-center gap-2 pr-3 border-r">
+						<CalendarIcon width={18} height={18} />
 						<span>{formattedDate}</span>
 					</p>
-					<p>
-						<ClockIcon width={24} height={24} />
+					<p class="flex items-center gap-2 pr-3 border-r">
+						<ClockIcon width={18} height={18} />
 						<span>{minutesRead}</span>
 					</p>
-					<p>
-						<EyeOpenIcon width={24} height={24} />
+					<p class="flex items-center gap-2">
+						<EyeOpenIcon width={18} height={18} />
 						<ViewCounter client:load slug={slug as string} />
 					</p>
 				</div>
 			</div>
 		</section>
-		<hr />
+		<hr class="my-3" />
 		<!-- Content -->
-		<div class="grid">
-			<article id="post-content" class="content">
+		<div class="grid grid-cols-1 md:grid-cols-[auto,250px]">
+			<article id="content" class="custom-prose">
 				<slot />
 			</article>
-			<div class="toc">
-				<div class="toc__container">
+			<aside id="toc" class="hidden md:block relative mt-8">
+				<div class="sticky top-36">
 					<h3>Table of Contents</h3>
-					<div class="toc__links">
-						{headings.map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}
+					<div class="mt-3 space-y-1">
+						{
+							headings.map((heading) => (
+								<a
+									href={`#${heading.slug}`}
+									data-heading={heading.slug}
+									class={clsx('block text-sm opacity-70', {
+										'hover:opacity-100': !pathname.includes(heading.slug),
+									})}
+								>
+									{heading.text}
+								</a>
+							))
+						}
 					</div>
 				</div>
-			</div>
+			</aside>
 		</div>
 	</div>
 </BaseLayout>
+
+<script is:inline define:vars={{ headings }}>
+	const allHeadings = headings.map((heading) => document.querySelector(`#${heading.slug}`));
+	const tocLinks = document.querySelectorAll('#toc a');
+
+	const options = {
+		root: null,
+		rootMargin: '-150px',
+		threshold: 0.5,
+	};
+
+	// TODO: improve this functionality
+	// Use IntersectionObserver to add active class to TOC links
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			const id = entry.target.getAttribute('id');
+			const link = document.querySelector(`#toc a[data-heading="${id}"]`);
+
+			if (entry.isIntersecting) {
+				link.classList.add('text-font-one');
+				link.classList.add('font-semibold');
+				link.classList.add('opacity-100');
+			} else {
+				link.classList.remove('text-font-one');
+				link.classList.remove('font-semibold');
+				link.classList.remove('opacity-100');
+			}
+		});
+	}, options);
+
+	allHeadings.forEach((heading) => {
+		observer.observe(heading);
+	});
+</script>

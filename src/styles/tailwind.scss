@@ -233,6 +233,14 @@
 	.text-gradient {
 		@apply text-transparent bg-clip-text bg-gradient-to-tr from-[var(--brand)] to-[var(--brand-accent)];
 	}
+
+	.border-tl {
+		@apply border-t border-l;
+	}
+
+	.border-tl-2 {
+		@apply border-t-2 border-l-2;
+	}
 }
 
 /* GLOBALS */

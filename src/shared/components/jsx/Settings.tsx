@@ -11,8 +11,6 @@ export const SelectItem = forwardRef<
 	HTMLDivElement,
 	Select.SelectItemProps & React.RefAttributes<HTMLDivElement>
 >(({ children, className, ...props }, forwardedRef) => {
-	console.log('props', props);
-	console.log('forwardedRef', forwardedRef);
 	return (
 		<Select.Item
 			className={clsx(
