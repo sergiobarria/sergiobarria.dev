@@ -6,8 +6,6 @@ import type { Post } from '~/pages/blog/_utils';
 import { BlogPostCard } from './BlogPostCard';
 import { posts as nPosts, searchQuery as nSearchQuery } from '~/stores';
 
-import styles from './BlogPostsList.module.scss';
-
 interface BlogPostsListProps {
 	className?: string;
 	pageSize?: number;
@@ -40,15 +38,15 @@ export const BlogPostsList = ({ posts, pageSize = 9 }: BlogPostsListProps) => {
 
 	if (!filteredPosts.length) {
 		return (
-			<div className={styles.noPostFoundContainer}>
-				<p>No posts found for your search...</p>
+			<div className="flex items-center justify-center">
+				<p className="text-font-two">No posts found for your search...</p>
 			</div>
 		);
 	}
 
 	return (
 		<Fragment>
-			<div className={styles.gridContainer}>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
 				{currentData.map((post) => {
 					const slug = post.url.split('/').pop();
 

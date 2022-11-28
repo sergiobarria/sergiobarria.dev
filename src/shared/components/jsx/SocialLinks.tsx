@@ -7,11 +7,9 @@ import {
 } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 
-import { Tooltip } from './Tooltip';
+// import { Tooltip } from './Tooltip';
 
 import { socialLinks } from '../../../../site.json';
-
-import styles from './SocialLinks.module.scss';
 
 interface SocialLinksProps {
 	className?: string;
@@ -34,18 +32,18 @@ export function SocialLinks({ className, size = 'medium' }: SocialLinksProps) {
 	};
 
 	return (
-		<div className={styles.container}>
+		<div className="flex items-center gap-3 transition-transform duration-200 ease-in-out">
 			{socialLinks.map((link) => (
-				<Tooltip key={link.name} content={`My ${link.name}`}>
-					<a
-						href={link.url}
-						className={clsx(styles.icon, className)}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						{icons[link.name as keyof typeof icons]}
-					</a>
-				</Tooltip>
+				// <Tooltip key={link.name} content={`My ${link.name}`}>
+				<a
+					href={link.url}
+					className={clsx('hover:text-brand-accent hover:scale-105', className)}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{icons[link.name as keyof typeof icons]}
+				</a>
+				// </Tooltip>
 			))}
 		</div>
 	);

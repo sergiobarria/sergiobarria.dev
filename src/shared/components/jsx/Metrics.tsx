@@ -1,12 +1,9 @@
-import useSWR from 'swr';
+import { Fragment } from 'react';
 import { ExternalLinkIcon } from '@radix-ui/react-icons';
 
 import { useTotalViews, useGithubUserData, useWakatime, useWakatimeAll } from '~/shared/hooks';
 
 import { socialLinks } from '../../../../site.json';
-
-import styles from './Metrics.module.scss';
-import { Fragment } from 'react';
 
 interface MetricsCardProps {
 	title: string;
@@ -16,16 +13,16 @@ interface MetricsCardProps {
 
 function MetricCard({ title, value, link }: MetricsCardProps) {
 	return (
-		<div className={styles.card}>
-			<div className={styles.header}>
-				<h4>{title}</h4>
+		<div className="flex flex-col bg-surface-two p-4 rounded-lg shadow-md">
+			<div className="flex items-center justify-between">
+				<h3>{title}</h3>
 				<span>
-					<a href={link}>
+					<a href={link} className="hover:text-brand">
 						<ExternalLinkIcon width={24} height={24} />
 					</a>
 				</span>
 			</div>
-			<span className={styles.value}>{value}</span>
+			<span className="font-semibold mt-auto text-2xl md:text-3xl lg:text-4xl">{value}</span>
 		</div>
 	);
 }
@@ -55,7 +52,7 @@ export function Metrics({ totalPosts }: MetricsProps) {
 
 	return (
 		<Fragment>
-			<div className={styles.grid}>
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
 				<MetricCard
 					title="Total Posts"
 					value={totalPosts ? totalPosts.toString() : '--'}
@@ -98,9 +95,9 @@ export function Metrics({ totalPosts }: MetricsProps) {
 					link={githubUrl}
 				/>
 			</div>
-			<span>*Wakatime stats: {allWakaStats?.since ?? '--'}</span>
+			<small>*Wakatime stats {allWakaStats?.since ?? '--'}</small>
 			{isError && (
-				<p className={styles.error}>
+				<p className="text-red-500 text-center">
 					There was an error fetching one or more stats, please try again later
 				</p>
 			)}

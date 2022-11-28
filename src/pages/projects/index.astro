@@ -16,31 +16,11 @@ const metadata: SeoProps = {
 			type: 'website',
 		},
 		image: {
-			alt: 'Website Cover'
-		}
+			alt: 'Website Cover',
+		},
 	},
 };
 ---
-
-<style lang="scss">
-	.header {
-		p {
-			max-inline-size: none;
-		}
-		margin-top: var(--size-8);
-
-		hr {
-			margin: var(--size-6) 0;
-		}
-	}
-
-	.pinned {
-		margin-bottom: var(--size-8);
-		p {
-			max-inline-size: none;
-		}
-	}
-</style>
 
 <BaseLayout metadata={metadata}>
 	<section class="header" id="header">
@@ -49,7 +29,7 @@ const metadata: SeoProps = {
 		<hr />
 	</section>
 
-	<section class="pinned" id="pinned">
+	<section id="pinned" class="my-8">
 		<h2>Github Pinned Projects</h2>
 		<p>These are the projects pinned in my Github Profile and fetched via Github GraphQL API.</p>
 		<PinnedReposList client:visible />

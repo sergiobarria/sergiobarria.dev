@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 import { searchQuery as nSearchQuery } from '~/stores';
 import { useDebounce } from '~/shared/hooks';
 
-import styles from './SearchBar.module.scss';
+import clsx from 'clsx';
 
 export const SearchBar = () => {
 	const [searchQuery, setSearchQuery] = useState<string>('');
@@ -16,11 +16,11 @@ export const SearchBar = () => {
 
 	return (
 		<form>
-			<label htmlFor="search-bar" className={styles.srOnly}>
+			<label htmlFor="search-bar" className="sr-only">
 				Search
 			</label>
-			<div className={styles.searchContainer}>
-				<div className={styles.iconContainer}>
+			<div className="relative mb-7">
+				<div className="absolute flex top-0 left-0 bottom-0 items-center pl-6">
 					<MagnifyingGlassIcon width={24} height={24} />
 				</div>
 				<input
@@ -29,6 +29,11 @@ export const SearchBar = () => {
 					placeholder="Search posts by names..."
 					aria-label="Search posts by names"
 					onChange={(e) => setSearchQuery(e.target.value)}
+					className={clsx(
+						'block w-full mt-6 pl-14 pr-4 py-3 bg-surface-two',
+						'text-font-two rounded-lg',
+						'focus:ring-brand-accent focus:border-none'
+					)}
 				/>
 			</div>
 		</form>

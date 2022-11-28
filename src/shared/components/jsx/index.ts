@@ -7,7 +7,6 @@ export * from './SearchBar';
 export * from './FeaturedPostsList';
 export * from './PinnedReposList';
 export * from './Settings';
-export * from './Tooltip';
 export * from './SocialLinks';
 export * from './FeaturedProjectsList';
 export * from './MyselfSection';
