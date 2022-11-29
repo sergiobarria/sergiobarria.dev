@@ -12,7 +12,7 @@ interface FeaturedProjectsListProps {
 
 export function FeaturedProjectsList({ projects }: FeaturedProjectsListProps) {
 	return (
-		<div className="bg-surface-two p-4 md:p-8 rounded-lg mt-3">
+		<div className="p-4 mt-3 rounded-lg bg-surface-two md:p-8">
 			<Tab.Group>
 				<div className="grid grid-cols-1 md:grid-cols-[175px,auto] gap-4">
 					<Tab.List
@@ -41,7 +41,7 @@ export function FeaturedProjectsList({ projects }: FeaturedProjectsListProps) {
 					<Tab.Panels>
 						{projects.map((project) => (
 							<Tab.Panel key={project.order}>
-								<div className="flex flex-col h-full gap-4 w-full">
+								<div className="flex flex-col w-full h-full gap-4">
 									<div className="flex items-center justify-between">
 										<h3>{project.name}</h3>
 										<span className="flex items-center gap-5">
@@ -64,11 +64,11 @@ export function FeaturedProjectsList({ projects }: FeaturedProjectsListProps) {
 										</span>
 									</div>
 									<p>{project.description}</p>
-									<div className="flex items-center gap-3 mt-auto">
+									<div className="flex items-center mt-auto gap-3">
 										{project.stack.split(',').map((item) => (
 											<span
 												key={item}
-												className="capitalize text-sm bg-surface-four rounded-lg px-2 py-1"
+												className="px-2 py-1 text-sm capitalize rounded-lg bg-surface-four"
 											>
 												{item}
 											</span>

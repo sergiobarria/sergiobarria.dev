@@ -27,7 +27,7 @@ function FeaturedPostCard({ title, url, readingTime }: FeaturedPostCardProps) {
 				<div className="flex flex-col h-full">
 					<h3 className="hover:text-brand">{title}</h3>
 
-					<div className="flex items-center justify-between mt-auto pt-2">
+					<div className="flex items-center justify-between pt-2 mt-auto">
 						<div className="flex items-center gap-2 text-font-two">
 							<EyeOpenIcon width={18} height={18} />
 							<p>{`${views ? new Number(views).toLocaleString() : '--'} views`}</p>
@@ -49,7 +49,7 @@ interface FeaturedPostsListProps {
 
 export function FeaturedPostsList({ posts }: FeaturedPostsListProps) {
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-3">
+		<div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{posts.map((post) => {
 				const { title, url, minutesRead, number } = post;
 

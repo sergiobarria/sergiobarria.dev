@@ -115,7 +115,7 @@ export function Settings() {
 					{...attributes.popper}
 					className={clsx('bg-surface-two rounded-md px-6 py-4 shadow-md w-[70vw] md:w-[250px]')}
 				>
-					<span className="block text-xl font-semibold mb-3">Preferences</span>
+					<span className="block mb-3 text-xl font-semibold">Preferences</span>
 					<div>
 						<div
 							className={clsx(

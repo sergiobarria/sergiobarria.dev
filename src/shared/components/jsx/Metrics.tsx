@@ -13,7 +13,7 @@ interface MetricsCardProps {
 
 function MetricCard({ title, value, link }: MetricsCardProps) {
 	return (
-		<div className="flex flex-col bg-surface-two p-4 rounded-lg shadow-md">
+		<div className="flex flex-col p-4 rounded-lg shadow-md bg-surface-two">
 			<div className="flex items-center justify-between">
 				<h3>{title}</h3>
 				<span>
@@ -22,7 +22,7 @@ function MetricCard({ title, value, link }: MetricsCardProps) {
 					</a>
 				</span>
 			</div>
-			<span className="font-semibold mt-auto text-2xl md:text-3xl lg:text-4xl">{value}</span>
+			<span className="mt-auto text-2xl font-semibold md:text-3xl lg:text-4xl">{value}</span>
 		</div>
 	);
 }
@@ -52,7 +52,7 @@ export function Metrics({ totalPosts }: MetricsProps) {
 
 	return (
 		<Fragment>
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-3">
+			<div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 				<MetricCard
 					title="Total Posts"
 					value={totalPosts ? totalPosts.toString() : '--'}
@@ -97,7 +97,7 @@ export function Metrics({ totalPosts }: MetricsProps) {
 			</div>
 			<small>*Wakatime stats {allWakaStats?.since ?? '--'}</small>
 			{isError && (
-				<p className="text-red-500 text-center">
+				<p className="text-center text-red-500">
 					There was an error fetching one or more stats, please try again later
 				</p>
 			)}
