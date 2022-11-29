@@ -36,6 +36,7 @@ export function SocialLinks({ className, size = 'medium' }: SocialLinksProps) {
 			{socialLinks.map((link) => (
 				// <Tooltip key={link.name} content={`My ${link.name}`}>
 				<a
+					key={link.name}
 					href={link.url}
 					className={clsx('hover:text-brand-accent hover:scale-105', className)}
 					target="_blank"

@@ -20,7 +20,7 @@ export const SearchBar = () => {
 				Search
 			</label>
 			<div className="relative mb-7">
-				<div className="absolute flex top-0 left-0 bottom-0 items-center pl-6">
+				<div className="absolute top-0 bottom-0 left-0 flex items-center pl-6">
 					<MagnifyingGlassIcon width={24} height={24} />
 				</div>
 				<input

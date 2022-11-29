@@ -15,7 +15,7 @@ function SnippetCard({ snippet }: { snippet: Snippet }) {
 				<h5 className="hover:text-brand">{title}</h5>
 			</a>
 			<p className="text-sm md:text-base first-letter:uppercase">{description}</p>
-			<div className="flex flex-wrap gap-2 mt-auto">
+			<div className="flex flex-wrap mt-auto gap-2">
 				{tags.split(',').map((tag) => (
 					<span
 						key={tag}
@@ -38,7 +38,7 @@ interface SnippetsListProps {
 
 export function SnippetsList({ snippets }: SnippetsListProps) {
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
+		<div className="my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{snippets.map((snippet) => (
 				<SnippetCard key={snippet.order} snippet={snippet} />
 			))}

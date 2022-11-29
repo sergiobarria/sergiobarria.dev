@@ -18,9 +18,9 @@ const languages = {
 function LoadingCard() {
 	return (
 		<div className="bg-surface-two w-full h-[8rem] rounded-lg p-4 space-y-3">
-			<span className="block bg-surface-four rounded-lg animate-pulse w-full h-3"></span>
-			<span className="block bg-surface-four rounded-lg animate-pulse w-full h-10"></span>
-			<span className="block bg-surface-four rounded-lg animate-pulse w-full h-3"></span>
+			<span className="block w-full h-3 rounded-lg bg-surface-four animate-pulse"></span>
+			<span className="block w-full h-10 rounded-lg bg-surface-four animate-pulse"></span>
+			<span className="block w-full h-3 rounded-lg bg-surface-four animate-pulse"></span>
 		</div>
 	);
 }
@@ -41,7 +41,7 @@ function RepoCard({ repo }: { repo: Repo }) {
 				<h5 className="inline hover:text-brand">{name}</h5>
 			</a>
 			<p className="text-sm">{description?.substring(0, 75) ?? 'No Description provided yet...'}</p>
-			<div className="flex items-center justify-between gap-3 text-xs">
+			<div className="flex items-center justify-between text-xs gap-3">
 				<span className="text-brand-accent">{primaryLanguage?.name}</span>
 				<span className="flex items-center gap-3">
 					<StarIcon width={16} height={16} />
@@ -66,7 +66,7 @@ export function PinnedReposList() {
 
 	if (isLoading || error) {
 		return (
-			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+			<div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{[...Array(6)].map((_, i) => (
 					<LoadingCard key={i} />
 				))}
@@ -75,7 +75,7 @@ export function PinnedReposList() {
 	}
 
 	return (
-		<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+		<div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 			{repos.map((repo) => {
 				return <RepoCard key={repo.id} repo={repo} />;
 			})}
