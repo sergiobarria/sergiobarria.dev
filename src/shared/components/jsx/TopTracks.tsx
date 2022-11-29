@@ -7,7 +7,7 @@ import type { TopSpotifyTracks, Track } from 'lib/spotify';
 export function TopTracks() {
 	const { data } = useSWR<TopSpotifyTracks>('/api/top-tracks', fetcher);
 
-	if (!data?.tracks) return <p className="text-center mt-8 opacity-70">No data available...</p>;
+	if (!data?.tracks) return <p className="mt-8 text-center opacity-70">No data available...</p>;
 
 	return (
 		<ul className="mt-4 md:columns-2 gap-x-10">
@@ -21,7 +21,7 @@ export function TopTracks() {
 					>
 						<div className="first-of-type:flex first-of-type:items-baseline">
 							<span className="text-sm font-medium text-font-two opacity-70">{idx + 1}</span>
-							<div className="flex flex-col pl-3 p-5">
+							<div className="flex flex-col p-5 pl-3">
 								<a
 									href={songUrl}
 									className={clsx(
@@ -33,7 +33,7 @@ export function TopTracks() {
 								>
 									{title}
 								</a>
-								<small className="opacity-70 overflow-hidden overflow-ellipsis whitespace-pre-wrap">
+								<small className="overflow-hidden whitespace-pre-wrap opacity-70 overflow-ellipsis">
 									{artists}
 								</small>
 							</div>

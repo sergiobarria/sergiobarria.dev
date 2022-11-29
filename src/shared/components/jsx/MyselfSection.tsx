@@ -38,8 +38,8 @@ const disclosureData = [
 
 export function MyselfSection() {
 	return (
-		<div className="mt-3 w-full">
-			<div className="w-full md:w-2/3 mx-auto space-y-3">
+		<div className="w-full mt-3">
+			<div className="w-full mx-auto md:w-2/3 space-y-3">
 				{disclosureData.map((data) => (
 					<Disclosure key={data.id}>
 						{({ open }) => (

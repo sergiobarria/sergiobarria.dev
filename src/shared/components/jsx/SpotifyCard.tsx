@@ -119,7 +119,7 @@ export function SpotifyCard() {
 			) : (
 				<SpotifyIcon />
 			)}
-			<div className="flex flex-col gap-1 w-full">
+			<div className="flex flex-col w-full gap-1">
 				<a href={data?.songUrl} className="text-sm font-semibold">
 					{data?.isPlaying ? <span>{data?.title}</span> : <span>Not Listening</span>}
 				</a>

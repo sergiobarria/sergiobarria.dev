@@ -1,5 +1,5 @@
 ---
-import { SEO, Props as SeoProps, Meta } from 'astro-seo';
+import { SEO, Props as SeoProps } from 'astro-seo';
 import '@fontsource/lato';
 import '@fontsource/ibm-plex-mono';
 import '@fontsource/permanent-marker';
@@ -133,7 +133,7 @@ const params = Astro.params;
 	<body class="flex flex-col h-full min-h-screen antialiased bg-surface-one text-font-one">
 		<Header />
 		<FloatingMobileMenu client:media="(max-width: 768px)" currentPath={pathname} />
-		<main class="container flex-1 px-4 mt-10 max-w-screen-lg">
+		<main class="container flex-1 max-w-screen-lg px-4 mt-10">
 			<!-- This slot is the entry point of the application -->
 			<slot />
 		</main>

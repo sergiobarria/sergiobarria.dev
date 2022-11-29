@@ -23,14 +23,14 @@ const pathname = new URL(Astro.request.url).pathname;
 				'md:items-start md:justify-between md:mb-0'
 			)}
 		>
-			<div class="hidden md:block w-24 hover:text-brand">
+			<div class="hidden w-24 md:block hover:text-brand">
 				<a href="/">
 					<LogoIcon />
 				</a>
 			</div>
 			<SpotifyCard client:load />
 		</div>
-		<div class="flex flex-col md:flex-1 items-center md:items-end">
+		<div class="flex flex-col items-center md:flex-1 md:items-end">
 			<div
 				class={clsx(
 					'relative flex items-center gap-3 text-brand-accent',
@@ -55,7 +55,7 @@ const pathname = new URL(Astro.request.url).pathname;
 				}
 			</div>
 			<SocialLinks />
-			<div class="text-center text-sm mt-4 md:text-right text-font-two">
+			<div class="mt-4 text-sm text-center md:text-right text-font-two">
 				<p>© {new Date().getFullYear()} - Designed and developed by Sergio Barria</p>
 				<p>
 					Built with <a

@@ -34,7 +34,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
 				</div>
 				<div className="flex flex-col justify-between h-full p-3">
 					<h3 className="hover:text-brand-accent">{title}</h3>
-					<div className="flex items-center text-font-two mt-2">
+					<div className="flex items-center mt-2 text-font-two">
 						<p className="flex items-center gap-3 mr-4 pr-4 border-r-[1px] border-font-two">
 							<CalendarIcon width={24} height={24} />
 							<time dateTime={publishDate.toUTCString()}>{formattedDate}</time>

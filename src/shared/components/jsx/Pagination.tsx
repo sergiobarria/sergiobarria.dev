@@ -48,7 +48,7 @@ export const Pagination = ({
 
 	return (
 		<nav className="flex items-center mt-5">
-			<ul className="flex items-center justify-center gap-6 w-full">
+			<ul className="flex items-center justify-center w-full gap-6">
 				{/* Left arrow */}
 				<li
 					onClick={onPrev}
