@@ -9,7 +9,6 @@ import { getPostsStats } from 'notion/client';
 import site from '../../site.json';
 
 const { total } = await getPostsStats();
-console.log('totalPosts', total);
 
 const metadata: SeoProps = {
 	title: 'Dashboard | Sergio Barria',
