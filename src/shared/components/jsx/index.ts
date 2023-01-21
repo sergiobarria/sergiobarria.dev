@@ -9,6 +9,5 @@ export * from './Settings';
 export * from './SocialLinks';
 export * from './FeaturedProjectsList';
 export * from './MyselfSection';
-export * from './SpotifyCard';
 export * from './Step';
 export * from './SnippetsList';

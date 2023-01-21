@@ -22,8 +22,6 @@ export const get: APIRoute = async () => {
 		};
 	}
 
-	console.log('res', response);
-
 	if (response.status === 204 || response.status > 400) {
 		return {
 			status: 500,
