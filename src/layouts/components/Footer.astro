@@ -2,10 +2,10 @@
 import clsx from 'clsx';
 
 import { SocialLinks } from '~/shared/components/jsx';
+import SpotifyCard from '~/shared/components/svelte/SpotifyCard.svelte';
 
 import { navLinks } from '../../../site.json';
 import { LogoIcon } from './jsx';
-import { SpotifyCard } from '~/shared/components/jsx';
 
 const pathname = new URL(Astro.request.url).pathname;
 ---
@@ -13,8 +13,8 @@ const pathname = new URL(Astro.request.url).pathname;
 <footer>
 	<div
 		class={clsx(
-			'container flex flex-col md:flex-row justify-center py-6 px-4 md:justify-between',
-			'border-t border-surface-three'
+			'flex flex-col md:flex-row justify-center py-6 px-4 md:justify-between',
+			'border-t border-surface-three mx-auto max-w-screen-xl'
 		)}
 	>
 		<div
