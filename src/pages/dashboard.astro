@@ -2,11 +2,14 @@
 import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
 
-import { TopTracks, Metrics } from '~/shared/components/jsx';
+import Metrics from '~/shared/components/svelte/Metrics.svelte';
+import TopTracks from '~/shared/components/svelte/TopTracks.svelte';
+import { getPostsStats } from 'notion/client';
 
 import site from '../../site.json';
 
-const posts = await Astro.glob('../content/blog/*.mdx');
+const { total } = await getPostsStats();
+console.log('totalPosts', total);
 
 const metadata: SeoProps = {
 	title: 'Dashboard | Sergio Barria',
@@ -43,7 +46,7 @@ const metadata: SeoProps = {
 
 	<section id="stats" class="my-8">
 		<h2>Metrics</h2>
-		<Metrics client:load totalPosts={posts.length} />
+		<Metrics client:load totalPosts={total} />
 	</section>
 
 	<section id="top-spotify-tracks" class="mb-8">
