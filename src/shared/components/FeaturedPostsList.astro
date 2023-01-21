@@ -1,0 +1,81 @@
+---
+import clsx from 'clsx';
+
+interface Post {
+	id: string;
+	title: string;
+	slug: string;
+	views: number;
+	readingTime?: number;
+}
+
+interface Props {
+	posts: Post[];
+}
+
+const { posts } = Astro.props as Props;
+console.log('posts', posts);
+---
+
+<div class="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+	{
+		posts.map((post) => (
+			<div
+				class={clsx(
+					'bg-surface-two p-3 rounded-lg transition-colors',
+					'duration-200 ease-in-out shadow-lg border-t-2 border-brand'
+				)}
+			>
+				<a href={post?.slug}>
+					<div class="flex flex-col h-full">
+						<h3 class="hover:text-brand">{post?.title}</h3>
+
+						<div class="flex items-center justify-between pt-2 mt-auto">
+							<div class="flex items-center gap-2 text-font-two">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-6 h-6"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z"
+									/>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+									/>
+								</svg>
+
+								<p>{`${post?.views ? post?.views.toLocaleString() : '--'} views`}</p>
+							</div>
+							<div class="flex items-center gap-2 text-font-two">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="currentColor"
+									class="w-6 h-6"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+									/>
+								</svg>
+
+								<p>{post?.readingTime} minutes read</p>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		))
+	}
+</div>

@@ -1,27 +1,22 @@
 ---
 import type { Props as SeoProps } from 'astro-seo';
-import { ArrowRightIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { FeaturedPostsList } from '~/shared/components/jsx';
+import FeaturedPostsList from '~/shared/components/FeaturedPostsList.astro';
+import Link from '~/shared/components/Link.astro';
 
-import {
-	SocialLinks,
-	FeaturedProjectsList,
-	MyselfSection,
-	CloudinaryImage,
-} from '~/shared/components/jsx';
+import { SocialLinks, FeaturedProjectsList, MyselfSection } from '~/shared/components/jsx';
 import { parseBlogPost } from './blog/_utils';
 import { parseProject } from './projects/_utils';
 
 import site from '../../site.json';
+import { getFeaturedPosts } from 'notion/client';
 
-const postsData = await Astro.glob('../content/blog/*.mdx');
+const featuredPosts = await getFeaturedPosts();
+
 const projectsData = await Astro.glob('../content/projects/*.mdx');
-const allPosts = await Promise.all(postsData?.map(parseBlogPost) ?? []);
 const allProjects = await Promise.all(projectsData?.map(parseProject) ?? []);
-const featuredPosts = allPosts.filter((post) => post.isFeatured);
 const featuredProjects = allProjects
 	.filter((project) => project.featured)
 	.sort((a, b) => a.order - b.order);
@@ -59,25 +54,25 @@ const metadata: SeoProps = {
 			<div class="hidden md:block w-full aspect-square max-w-[300px]">
 				<div class="relative">
 					<div class="blob-container"></div>
-					<picture>
-						<CloudinaryImage publicId="sergiobarria/spaceship-launch_lsag8o.png" alt="hero image" />
-					</picture>
+					<img
+						src="https://ik.imagekit.io/l5swuiqdn/personal-website/spaceship-launch_lsag8o.png"
+						width={300}
+						height={300}
+						alt="hero image"
+					/>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<section id="about" class="p-4 my-8 bg-surface-two rounded-xl">
+	<section id="about" class="p-4 my-10 bg-surface-two rounded-xl">
 		<h2 class="mb-3 text-center">About Me</h2>
 		<div class="flex flex-col items-center gap-8 md:flex-row">
 			<div class="w-52 h-52 md:w-auto md:h-auto">
-				<picture>
-					<CloudinaryImage
-						publicId="sergiobarria/4C59B2D2-E116-4D3A-8F83-E2D1DA064661_1_105_c_kpcrhr.jpg"
-						alt="profile image"
-						rounded
-					/>
-				</picture>
+				<img
+					src="https://ik.imagekit.io/l5swuiqdn/tr:r-max/profile-pic.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1673757504635"
+					alt="profile pic"
+				/>
 			</div>
 			<div>
 				<ul class="list-disc">
@@ -126,21 +121,20 @@ const metadata: SeoProps = {
 		</div>
 	</section>
 
-	<section id="feat-posts" class="mb-8">
+	<section id="feat-posts" class="mb-10">
 		<h2 class="text-center">Featured Posts</h2>
-		<FeaturedPostsList client:visible posts={featuredPosts} />
-		<div class="inline-flex items-center gap-3 mt-3 hover:text-brand-accent">
-			<a href="/blog">See All Posts</a>
-			<ArrowRightIcon width={18} height={18} />
+		<FeaturedPostsList posts={featuredPosts} />
+		<div class="flex justify-end pt-3">
+			<Link url="/blog">See all posts</Link>
 		</div>
 	</section>
 
-	<section id="feat-projects" class="mb-8">
+	<section id="feat-projects" class="mb-10">
 		<h2 class="text-center">Featured Projects</h2>
 		<FeaturedProjectsList client:visible projects={featuredProjects} />
 	</section>
 
-	<section id="doing-now" class="mb-8">
+	<section id="doing-now" class="mb-10">
 		<h2 class="text-center">Me, Myself and I</h2>
 		<MyselfSection client:visible />
 	</section>

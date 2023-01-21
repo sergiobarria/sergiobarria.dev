@@ -77,6 +77,8 @@ export default defineConfig({
 		host: 'localhost',
 		port: 8080,
 	},
+	// the following is needed for SSR
+	// see: https://docs.astro.build/en/guides/server-side-rendering/
 	output: 'server',
 	adapter: vercel(),
 });

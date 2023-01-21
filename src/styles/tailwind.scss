@@ -54,8 +54,8 @@
 	--brand-accent: hsl(48 100% 61%);
 	--text1: hsl(270 30% 85%);
 	--text2: hsl(270 40% 65%);
-	--text3: hsl(270 50% 45%);
-	--text4: hsl(270 40% 30%);
+	--text3: hsl(270, 44%, 61%);
+	--text4: rgb(122, 94, 149);
 	--selection-text: hsl(270 40% 30%);
 	--surface1: hsl(270 40% 20%);
 	--surface2: hsl(270 40% 25%);
@@ -116,14 +116,13 @@
 		--tw-surface3: 27 51 75;
 		--tw-surface4: 34 64 94;
 	}
-
 	:root[data-theme='grape'] {
 		--tw-brand: 102 31 244;
 		--tw-brand-accent: 255 189 46;
 		--tw-text1: 214 203 235;
 		--tw-text2: 155 129 207;
-		--tw-text3: 100 65 170;
-		--tw-text4: 56 36 96;
+		--tw-text3: 156 112 199;
+		--tw-text4: 122 94 149;
 		--tw-selection-text: 56 36 96;
 		--tw-surface1: 35 22 59;
 		--tw-surface2: 41 27 70;

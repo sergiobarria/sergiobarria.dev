@@ -4,7 +4,6 @@ export * from './Views';
 export * from './ViewCounter';
 export * from './BlogPostsList';
 export * from './SearchBar';
-export * from './FeaturedPostsList';
 export * from './PinnedReposList';
 export * from './Settings';
 export * from './SocialLinks';
