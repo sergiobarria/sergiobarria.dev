@@ -1,6 +1,5 @@
-import useSWR from 'swr';
+import { useSWR } from 'sswr';
 
-import { fetcher } from 'lib/fetcher';
 import { useServerFunctions } from './useServerFunctions';
 
 interface WakatimeAllData {
@@ -31,7 +30,7 @@ interface WakatimeAllData {
 
 export const useWakatimeAll = () => {
 	const { apiUrl } = useServerFunctions();
-	const { data, error } = useSWR<WakatimeAllData>(`${apiUrl}/wakatime/all-time-stats`, fetcher);
+	const { data, error } = useSWR<WakatimeAllData>(`${apiUrl}/wakatime/all-time.json`);
 
 	return {
 		data,

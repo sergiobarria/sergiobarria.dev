@@ -61,6 +61,7 @@ specifiers:
   rehype-pretty-code: ^0.5.0
   remark-code-titles: ^0.1.2
   sass: ^1.56.1
+  sswr: ^1.7.0
   svelte: ^3.46.4
   svelte-icons: ^2.1.0
   swr: ^1.3.0
@@ -108,6 +109,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-popper: 2.3.0_r6q5zrenym2zg7je7hgi674bti
   react-tidy: 1.3.6_react@18.2.0
+  sswr: 1.7.0_svelte@3.55.1
   svelte: 3.55.1
   svelte-icons: 2.1.0
   swr: 1.3.0_react@18.2.0
@@ -1468,6 +1470,10 @@ packages:
       '@typescript-eslint/types': 5.42.1
       eslint-visitor-keys: 3.3.0
     dev: true
+
+  /@ungap/event-target/0.2.3:
+    resolution: {integrity: sha512-7Bz0qdvxNGV9n0f+xcMKU7wsEfK6PNzo8IdAcOiBgMNyCuU0Mk9dv0Hbd/Kgr+MFFfn4xLHFbuOt820egT5qEA==}
+    dev: false
 
   /@vercel/analytics/0.1.5_react@18.2.0:
     resolution: {integrity: sha512-/k9N8Ea3Yc5A52GlkjzUEbi2vE/izClrOf++ryBkxEfrZM/OZwtHkdNw/QExZ1h/B67RCZLK7bCOnKKrhG7gTg==}
@@ -6076,6 +6082,15 @@ packages:
     resolution: {integrity: sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==}
     dev: false
 
+  /sswr/1.7.0_svelte@3.55.1:
+    resolution: {integrity: sha512-Scpq5YulJPPEC9WDgp6uiyIrhlxuuane8ax2Wybctqy6R6vKbL0aQzu34Wvuwo0nsEYHyDcmrw7HUkbcVo8+eQ==}
+    peerDependencies:
+      svelte: ^3.29.0
+    dependencies:
+      svelte: 3.55.1
+      swrev: 1.11.0
+    dev: false
+
   /string-width/4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==}
     engines: {node: '>=8'}
@@ -6293,6 +6308,12 @@ packages:
       react: ^16.11.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /swrev/1.11.0:
+    resolution: {integrity: sha512-bx8egJdPcnJ6k/MFjTJx1GlUhxQwR108emEEudYey10Vh/TKnSvXySMrlgczaGyO4sZm6X016NB/juuA6VtRvQ==}
+    dependencies:
+      '@ungap/event-target': 0.2.3
     dev: false
 
   /synckit/0.8.4:
