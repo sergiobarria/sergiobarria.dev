@@ -2,7 +2,7 @@
 import clsx from 'clsx';
 
 import { LogoIcon } from './jsx';
-import { Settings } from '~/shared/components/jsx';
+import ThemeSwitcher from '~/shared/components/svelte/ThemeSwitcher.svelte';
 
 import site from '../../../site.json';
 
@@ -40,7 +40,7 @@ const { navLinks } = site;
 					})
 				}
 			</nav>
-			<Settings client:load />
+			<ThemeSwitcher client:load />
 		</div>
 	</div>
 </header>
