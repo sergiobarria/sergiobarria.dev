@@ -1,15 +1,18 @@
 import { defineConfig } from 'astro/config';
-import remarkCodeTitles from 'remark-code-titles';
-import rehypePrettyCode from 'rehype-pretty-code';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import remarkCodeTitles from 'remark-code-titles'; // TODO: remove with MDX integration
+import rehypePrettyCode from 'rehype-pretty-code'; // TODO: remove with MDX integration
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // TODO: remove with MDX integration
 import { h } from 'hastscript';
 
 // Integrations
-import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
+import react from '@astrojs/react'; // TODO: remove React integration
+import svelte from '@astrojs/svelte';
+import mdx from '@astrojs/mdx'; // TODO: remove MDX integration
 import robotsTxt from 'astro-robots-txt';
 import sitemap from '@astrojs/sitemap';
 import tailwind from '@astrojs/tailwind';
+import image from '@astrojs/image'; // TODO: remove Astro Image integration if not used
+import vercel from '@astrojs/vercel/serverless';
 
 // App Plugins
 import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
@@ -56,8 +59,13 @@ export default defineConfig({
 		robotsTxt(),
 		sitemap(),
 		tailwind({
-			config: { applyAstroPreset: false, applyBaseStyles: true },
+			config: {
+				applyAstroPreset: false,
+				applyBaseStyles: true,
+			},
 		}),
+		svelte(),
+		image(),
 	],
 	vite: {
 		server: {
@@ -69,4 +77,6 @@ export default defineConfig({
 		host: 'localhost',
 		port: 8080,
 	},
+	output: 'server',
+	adapter: vercel(),
 });
