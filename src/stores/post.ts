@@ -1,7 +1,6 @@
-import type { MDXInstance } from 'astro';
 import { atom } from 'nanostores';
 
-import type { Post } from '~/shared/utils/blogPostsHelpers';
+import type { Post } from 'notion/client';
 
 export const posts = atom<Post[]>([]);
 export const searchQuery = atom<string>('');

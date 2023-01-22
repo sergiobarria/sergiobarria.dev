@@ -1,15 +1,13 @@
 ---
 import type { Props as SeoProps } from 'astro-seo';
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import { BlogPostsList, SearchBar } from '~/shared/components/jsx';
+import BlogPostsList from '~/shared/components/svelte/BlogPostsList.svelte';
 
-import { parseBlogPost, sortPosts } from './_utils';
+import { getAllPosts } from 'notion/client';
 
 import site from '../../../site.json';
 
-const data = await Astro.glob('../../content/blog/*.mdx');
-const allPosts = await Promise.all(data?.map(parseBlogPost) ?? []);
-const sortedPosts = allPosts.sort(sortPosts);
+const posts = await getAllPosts();
 
 const metadata: SeoProps = {
 	title: 'Blog | Sergio Barria',
@@ -37,11 +35,10 @@ const metadata: SeoProps = {
 		<section id="blog-list" class="my-8">
 			<h2>All My Posts</h2>
 			<p>
-				In total, I've written <strong>{sortedPosts.length}</strong> articles in this blog. You can find
-				them all below, or by searching for a post title.
+				In total, I've written <strong>{posts.length}</strong> articles in this blog. You can find them
+				all below, or by searching for a post title.
 			</p>
-			<SearchBar client:load />
-			<BlogPostsList client:load posts={sortedPosts} />
+			<BlogPostsList client:load {posts} />
 		</section>
 	</div>
 </BaseLayout>

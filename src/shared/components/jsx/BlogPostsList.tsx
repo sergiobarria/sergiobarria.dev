@@ -1,68 +1,70 @@
-import { Fragment, useState, useEffect, useMemo } from 'react';
-import { useStore } from '@nanostores/react';
+export const nothing = null;
 
-import { Pagination } from './Pagination';
-import type { Post } from '~/pages/blog/_utils';
-import { BlogPostCard } from './BlogPostCard';
-import { posts as nPosts, searchQuery as nSearchQuery } from '~/stores';
+// import { Fragment, useState, useEffect, useMemo } from 'react';
+// // import { useStore } from '@nanostores/react';
 
-interface BlogPostsListProps {
-	className?: string;
-	pageSize?: number;
-	posts: Post[];
-}
+// import { Pagination } from './Pagination';
+// import type { Post } from '~/pages/blog/_utils';
+// import { BlogPostCard } from './BlogPostCard';
+// import { posts as nPosts, searchQuery as nSearchQuery } from '~/stores';
 
-export const BlogPostsList = ({ posts, pageSize = 9 }: BlogPostsListProps) => {
-	const $storeSearchQuery = useStore(nSearchQuery);
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
+// interface BlogPostsListProps {
+// 	className?: string;
+// 	pageSize?: number;
+// 	posts: Post[];
+// }
 
-	useEffect(() => {
-		nPosts.set(posts);
-	}, []);
+// export const BlogPostsList = ({ posts, pageSize = 9 }: BlogPostsListProps) => {
+// 	// const $storeSearchQuery = useStore(nSearchQuery);
+// 	const [currentPage, setCurrentPage] = useState<number>(1);
+// 	const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
 
-	useEffect(() => {
-		const filteredPosts = posts.filter((post) => {
-			return post.title.toLowerCase().includes($storeSearchQuery.toLowerCase());
-		});
+// 	// useEffect(() => {
+// 	// 	nPosts.set(posts);
+// 	// }, []);
 
-		setFilteredPosts(filteredPosts);
-	}, [$storeSearchQuery]);
+// 	// useEffect(() => {
+// 	// 	const filteredPosts = posts.filter((post) => {
+// 	// 		return post.title.toLowerCase().includes($storeSearchQuery.toLowerCase());
+// 	// 	});
 
-	const currentData = useMemo(() => {
-		const firstPageIndex = (currentPage - 1) * pageSize;
-		const lastPageIndex = firstPageIndex + pageSize;
+// 	// 	setFilteredPosts(filteredPosts);
+// 	// }, [$storeSearchQuery]);
 
-		return filteredPosts.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, filteredPosts]);
+// 	const currentData = useMemo(() => {
+// 		const firstPageIndex = (currentPage - 1) * pageSize;
+// 		const lastPageIndex = firstPageIndex + pageSize;
 
-	if (!filteredPosts.length) {
-		return (
-			<div className="flex items-center justify-center">
-				<p className="text-font-two">No posts found for your search...</p>
-			</div>
-		);
-	}
+// 		return filteredPosts.slice(firstPageIndex, lastPageIndex);
+// 	}, [currentPage, filteredPosts]);
 
-	return (
-		<Fragment>
-			<div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{currentData.map((post) => {
-					const slug = post.url.split('/').pop();
+// 	if (!filteredPosts.length) {
+// 		return (
+// 			<div className="flex items-center justify-center">
+// 				<p className="text-font-two">No posts found for your search...</p>
+// 			</div>
+// 		);
+// 	}
 
-					return <BlogPostCard key={slug} post={post} />;
-				})}
-			</div>
+// 	return (
+// 		<Fragment>
+// 			<div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+// 				{currentData.map((post) => {
+// 					const slug = post.url.split('/').pop();
 
-			{filteredPosts.length > pageSize && (
-				<Pagination
-					currentPage={currentPage}
-					pageSize={pageSize}
-					onPageChange={(page) => setCurrentPage(page)}
-					total={posts.length}
-					className=""
-				/>
-			)}
-		</Fragment>
-	);
-};
+// 					return <BlogPostCard key={slug} post={post} />;
+// 				})}
+// 			</div>
+
+// 			{filteredPosts.length > pageSize && (
+// 				<Pagination
+// 					currentPage={currentPage}
+// 					pageSize={pageSize}
+// 					onPageChange={(page) => setCurrentPage(page)}
+// 					total={posts.length}
+// 					className=""
+// 				/>
+// 			)}
+// 		</Fragment>
+// 	);
+// };

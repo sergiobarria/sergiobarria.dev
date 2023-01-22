@@ -1,5 +1,3 @@
-import { useMemo } from 'react';
-
 export const SEPARATOR = '...';
 
 const range = (start: number, end: number) => {
@@ -22,7 +20,7 @@ export const usePagination = ({
 	currentPage,
 	siblingCount = 1,
 }: PaginationProps) => {
-	const paginationRange = useMemo(() => {
+	const paginationRange = () => {
 		const totalPageCount = Math.ceil(totalCount / pageSize);
 
 		// Pages count is determined as a siblingCount + firstPage + lastPage + currentPage + 2*separator
@@ -67,7 +65,7 @@ export const usePagination = ({
 		}
 
 		return [];
-	}, [totalCount, pageSize, currentPage, siblingCount]);
+	};
 
-	return paginationRange;
+	return paginationRange();
 };
