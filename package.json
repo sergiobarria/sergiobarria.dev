@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"dev": "astro dev",
-		"dev:cms": "cd cms && pnpm dev",
+		"cms": "cd cms && pnpm dev",
 		"generate:types": "cd cms && pnpm generate:types",
 		"generate:gql": "cd cms && pnpm generate:graphQLSchema",
 		"generate": "pnpm generate:types && pnpm generate:gql",

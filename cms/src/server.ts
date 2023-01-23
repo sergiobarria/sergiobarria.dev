@@ -22,5 +22,5 @@ payload.init({
 });
 
 // Add your own express routes here
-const PORT = process.env.PAYLOAD_API_PORT || 4000;
+const PORT = process.env.PAYLOAD_API_PORT || 1337;
 app.listen(PORT);
