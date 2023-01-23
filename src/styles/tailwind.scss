@@ -70,7 +70,7 @@
 		--font-size-fluid-0: clamp(0.75rem, 1.5vw, 1rem);
 		--font-size-fluid-1: clamp(1rem, 2vw, 1.5rem);
 		--font-size-fluid-2: clamp(1.5rem, 3vw, 2.5rem);
-		--font-size-fluid-3: clamp(2rem, 4vw, 3.5rem);
+		--font-size-fluid-3: clamp(1.75rem, 3.5vw, 3rem);
 	}
 
 	/* TAILWIND THEMES */
@@ -239,6 +239,12 @@
 
 	.border-tl-2 {
 		@apply border-t-2 border-l-2;
+	}
+
+	.code-inline {
+		@apply inline-block px-1 text-xs font-mono text-font-one bg-surface-three rounded;
+		@apply py-0.5 px-1 text-brand-accent;
+		@apply before:content-none after:content-none;
 	}
 }
 

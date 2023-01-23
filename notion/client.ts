@@ -56,6 +56,21 @@ export interface Post {
 	readingTime: number;
 	publishedDate: string;
 	type: string;
+	summary: string;
+}
+
+export function mapNotionObjToPost(obj: any): Post {
+	return {
+		id: obj.id,
+		title: obj?.Title?.title[0]?.plain_text,
+		slug: obj?.Slug?.rich_text[0]?.plain_text,
+		views: obj?.Views?.number ?? 0,
+		readingTime: obj['Reading Time']?.number ?? 0,
+		publishedDate: obj['Published Date']?.date?.start,
+		coverImage: obj['Cover Image']?.rich_text[0]?.plain_text,
+		type: obj?.Type?.select?.name,
+		summary: obj?.Summary?.rich_text[0]?.plain_text,
+	};
 }
 
 export async function getAllPosts() {
@@ -72,9 +87,6 @@ export async function getAllPosts() {
 		};
 	});
 
-	// console.log('RESPONSE: ', response);
-	// console.log('POSTS: ', posts[0]);
-
 	return posts.map((post) => ({
 		id: post.id,
 		title: post?.Title?.title[0]?.plain_text,
@@ -84,26 +96,9 @@ export async function getAllPosts() {
 		publishedDate: post['Published Date']?.date?.start,
 		coverImage: post['Cover Image']?.rich_text[0]?.plain_text,
 		type: post?.Type?.select?.name,
+		summary: post?.Summary?.rich_text[0]?.plain_text,
 	}));
 }
-
-// {
-// 	id: '4020cf85-cb94-48c2-941d-f619d24f993b',
-// 	'Published Date': { id: 'B_OZ', type: 'date', date: [Object] },
-// 	Type: { id: 'Ouab', type: 'select', select: [Object] },
-// 	Summary: { id: 'VS%60c', type: 'rich_text', rich_text: [Array] },
-// 	Views: { id: 'VY%5E%5C', type: 'number', number: 0 },
-// 	Number: { id: '%60%3ET%7C', type: 'number', number: 16 },
-// 	Tags: { id: 'aq%5Cw', type: 'multi_select', multi_select: [] },
-// 	'Updated Date': { id: 'eNfI', type: 'date', date: null },
-// 	'Cover Image': { id: 'jvC%3F', type: 'rich_text', rich_text: [Array] },
-// 	Keywords: { id: 'mv%3B%7C', type: 'multi_select', multi_select: [] },
-// 	Status: { id: 'plAj', type: 'status', status: [Object] },
-// 	'Reading Time': { id: 'wdUB', type: 'number', number: 13 },
-// 	'Is Featured': { id: 'x%5DGo', type: 'checkbox', checkbox: false },
-// 	Slug: { id: '~%7DfX', type: 'rich_text', rich_text: [Array] },
-// 	Name: { id: 'title', type: 'title', title: [Array] }
-// },
 
 export async function getFeaturedPosts() {
 	const response = await notion.databases.query({
@@ -119,8 +114,6 @@ export async function getFeaturedPosts() {
 		...item?.properties,
 	}));
 
-	console.log('POSTS: ', posts);
-
 	return posts.map((post) => ({
 		id: post?.id,
 		title: post?.Title?.title[0]?.plain_text,
@@ -130,14 +123,34 @@ export async function getFeaturedPosts() {
 	}));
 }
 
-export async function getPostById(id: string) {
-	const post = await notion.pages.retrieve({
-		page_id: id,
+export async function getPostBySlug(slug: string) {
+	const response = await notion.databases.query({
+		database_id: NOTION_POSTS_DATABASE_ID,
+		filter: {
+			and: [
+				{
+					property: 'Slug',
+					rich_text: {
+						equals: slug,
+					},
+				},
+			],
+		},
 	});
 
-	console.log('RESPONSE: ', post);
+	const pageId = response.results[0]?.id;
 
-	return post;
+	const pageBlocks = await notion.blocks.children.list({
+		block_id: pageId,
+		// page_size: 10,
+	});
+
+	return {
+		id: pageId,
+		// @ts-ignore wrong type in @notionhq/client
+		page: mapNotionObjToPost(response.results[0].properties),
+		pageBlocks,
+	};
 }
 
 export async function getPostsStats() {

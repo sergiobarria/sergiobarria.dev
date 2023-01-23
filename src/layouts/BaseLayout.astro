@@ -44,6 +44,11 @@ const params = Astro.params;
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 		<link rel="manifest" href="/favicon/site.webmanifest" />
+
+		<link
+			rel="stylesheet"
+			href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/dracula.min.css"
+		/>
 		<meta name="generator" content={Astro.generator} />
 		<SEO
 			title={metadata?.title ?? defaultTitle}
@@ -95,7 +100,7 @@ const params = Astro.params;
 				if (localStorage.getItem(storageKey)) {
 					return localStorage.getItem(storageKey);
 				} else if (window.matchMedia('prefers-color-scheme: dark').matches) {
-					return 'night-owl';
+					return 'night';
 				} else {
 					return 'night';
 				}
@@ -116,7 +121,14 @@ const params = Astro.params;
 				setColorPreference();
 			};
 		</script>
-		<script defer src="/_vercel/insights/script.js"></script>
+
+		<script is:inline src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+		></script>
+		<script is:inline>
+			hljs.highlightAll();
+		</script>
+		<!-- TODO: Add vercel script again 👇🏼 -->
+		<!-- <script defer src="/_vercel/insights/script.js"></script> -->
 		<!-- NOTE: Commented until finding a way to make it work with Astro -->
 		<!-- TODO: Add Vercel web vitals script -->
 		<!-- <script type="module" define:vars={{ pathname, analyticsId, params }}>

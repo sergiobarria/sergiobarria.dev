@@ -24,6 +24,6 @@ export const searchHandler = <T extends Record<PropertyKey, any>>(store: SearchS
 	const searchTerm = store.query.toLowerCase() || '';
 
 	store.results = store.data.filter((item: T) => {
-		return item.title.toLowerCase().includes(searchTerm);
+		return item.searchTerms.toLowerCase().includes(searchTerm);
 	});
 };

@@ -13,62 +13,63 @@ import site from '../../site.json';
 
 interface Props {
 	slug?: string;
-	frontmatter: PostFrontmatter;
-	headings: MarkdownHeading[];
+	frontmatter?: PostFrontmatter;
+	headings?: MarkdownHeading[];
 }
 
 const pathname = new URL(Astro.request.url).pathname;
 
-const {
-	frontmatter: { title, coverImage, summary, minutesRead, publishDate, keywords },
-	slug,
-	headings,
-} = Astro.props as Props;
-const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
+// const {
+// 	frontmatter: { title, coverImage, summary, minutesRead, publishDate, keywords },
+// 	slug,
+// 	headings,
+// } = Astro.props as Props;
+// const formattedDate = format(new Date(publishDate), 'MMM dd, yyyy');
 
-const CLOUDINARY_USER = import.meta.env.PUBLIC_CLOUDINARY_ID;
+// const CLOUDINARY_USER = import.meta.env.PUBLIC_CLOUDINARY_ID;
 
-const postKeywords = keywords ?? undefined;
+// const postKeywords = keywords ?? undefined;
 
-const metadata: SeoProps = {
-	title: 'Blog | Sergio Barria',
-	canonical: 'https://sergiobarria.com/blog',
-	openGraph: {
-		basic: {
-			title: title,
-			url: `https://sergiobarria.com/blog/${slug}`,
-			image: site.openGraph.images[0].url,
-			type: 'website',
-		},
-		article: {
-			authors: [site.author],
-			publishedTime: publishDate.toString(),
-			modifiedTime: publishDate.toString(), // TODO: add last modified date
-			section: 'Blog',
-			tags: [], // TODO: add tags
-		},
-		image: {
-			alt: title,
-			url: `https://res.cloudinary.com/${CLOUDINARY_USER}/image/upload/r_20/v1/sergiobarria/banners/${coverImage}`,
-			width: 1200,
-			height: 630,
-		},
-	},
-	extend: {
-		meta: [
-			{
-				...((postKeywords && {
-					name: 'keywords',
-					content: postKeywords?.replace(/,/g, ', '),
-				}) as any),
-			},
-		] as Partial<Meta>[],
-	},
-};
+// const metadata: SeoProps = {
+// 	title: 'Blog | Sergio Barria',
+// 	canonical: 'https://sergiobarria.com/blog',
+// 	openGraph: {
+// 		basic: {
+// 			title: title,
+// 			url: `https://sergiobarria.com/blog/${slug}`,
+// 			image: site.openGraph.images[0].url,
+// 			type: 'website',
+// 		},
+// 		article: {
+// 			authors: [site.author],
+// 			publishedTime: publishDate.toString(),
+// 			modifiedTime: publishDate.toString(), // TODO: add last modified date
+// 			section: 'Blog',
+// 			tags: [], // TODO: add tags
+// 		},
+// 		image: {
+// 			alt: title,
+// 			url: `https://res.cloudinary.com/${CLOUDINARY_USER}/image/upload/r_20/v1/sergiobarria/banners/${coverImage}`,
+// 			width: 1200,
+// 			height: 630,
+// 		},
+// 	},
+// 	extend: {
+// 		meta: [
+// 			{
+// 				...((postKeywords && {
+// 					name: 'keywords',
+// 					content: postKeywords?.replace(/,/g, ', '),
+// 				}) as any),
+// 			},
+// 		] as Partial<Meta>[],
+// 	},
+// };
 ---
 
-<BaseLayout metadata={metadata}>
-	<div class="container">
+<BaseLayout>
+	<slot />
+	<!-- <div class="container">
 		<section class="post">
 			<div>
 				<h1 class="text-center text-gradient">{title}</h1>
@@ -102,7 +103,7 @@ const metadata: SeoProps = {
 			</div>
 		</section>
 		<hr class="my-3" />
-		<!-- Content -->
+		<!-- Content
 		<div class="grid grid-cols-1 md:grid-cols-[auto,250px]">
 			<article id="content" class="custom-prose">
 				<slot />
@@ -128,10 +129,10 @@ const metadata: SeoProps = {
 				</div>
 			</aside>
 		</div>
-	</div>
+	</div> -->
 </BaseLayout>
 
-<script is:inline define:vars={{ headings }}>
+<!-- <script is:inline define:vars={{ headings }}>
 	const allHeadings = headings.map((heading) => document.querySelector(`#${heading.slug}`));
 	const tocLinks = document.querySelectorAll('#toc a');
 
@@ -163,4 +164,4 @@ const metadata: SeoProps = {
 	allHeadings.forEach((heading) => {
 		observer.observe(heading);
 	});
-</script>
+</script> -->

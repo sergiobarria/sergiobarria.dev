@@ -27,7 +27,6 @@ function LoadingCard() {
 
 function RepoCard({ repo }: { repo: Repo }) {
 	const { name, url, description, primaryLanguage, stargazerCount, homepageUrl } = repo;
-	console.log('repo', repo);
 
 	return (
 		<div
