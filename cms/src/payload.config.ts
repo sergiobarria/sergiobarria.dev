@@ -1,14 +1,13 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
-import Categories from './collections/Categories';
-import { Posts, Media } from './collections';
-import Tags from './collections/Tags';
-import Users from './collections/Users';
 
-// Plugins
+// Import collections
+import { Categories, Media, Posts, Tags, Users } from './collections';
+
+// Import Plugins
 import imagekitPlugin from 'payloadcms-plugin-imagekit';
 
-// Mocks
+// Import Mocks
 const mockModulePath = path.resolve(__dirname, 'mocks/emptyObject');
 
 export default buildConfig({

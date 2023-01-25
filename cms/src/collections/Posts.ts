@@ -1,32 +1,58 @@
 import { CollectionConfig } from 'payload/types';
 
+import { slugField } from '../fields/slug';
+
 export const Posts: CollectionConfig = {
 	slug: 'posts',
 	admin: {
-		defaultColumns: ['title', 'author', 'category', 'tags', 'status'],
+		defaultColumns: ['_id', 'title', 'author', 'category', 'tags', 'status'],
 		useAsTitle: 'title',
 	},
 	access: {
-		read: () => true,
+		// read: () => true, // Everyone can read
 	},
+	hooks: {},
 	fields: [
 		{
-			name: 'title',
-			type: 'text',
+			type: 'row',
+			fields: [
+				{
+					name: 'title',
+					type: 'text',
+					required: true,
+					unique: true,
+				},
+			],
+		},
+		slugField('title'),
+		{
+			type: 'row',
+			fields: [
+				{
+					name: 'author',
+					type: 'relationship',
+					relationTo: 'users',
+				},
+				{
+					name: 'publishedDate',
+					type: 'date',
+				},
+			],
 		},
 		{
-			name: 'author',
-			type: 'relationship',
-			relationTo: 'users',
-		},
-		{
-			name: 'publishedDate',
-			type: 'date',
-		},
-		{
-			name: 'category',
-			type: 'relationship',
-			relationTo: 'categories',
+			type: 'row',
+			fields: [
+				{
+					name: 'category',
+					type: 'relationship',
+					relationTo: 'categories',
+				},
+				{
+					name: 'views',
+					type: 'number',
+					defaultValue: 0,
+				},
+			],
 		},
 		{
 			name: 'tags',
@@ -38,6 +64,14 @@ export const Posts: CollectionConfig = {
 			name: 'coverImage',
 			type: 'upload',
 			relationTo: 'media',
+		},
+		{
+			name: 'excerpt',
+			type: 'textarea',
+		},
+		{
+			name: 'keywords',
+			type: 'text',
 		},
 		{
 			name: 'content',
@@ -57,6 +91,14 @@ export const Posts: CollectionConfig = {
 				},
 			],
 			defaultValue: 'draft',
+			admin: {
+				position: 'sidebar',
+			},
+		},
+		{
+			name: 'isFeatured',
+			type: 'checkbox',
+			defaultValue: false,
 			admin: {
 				position: 'sidebar',
 			},
