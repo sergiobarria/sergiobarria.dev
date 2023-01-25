@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
-import remarkCodeTitles from 'remark-code-titles'; // TODO: remove with MDX integration
-import rehypePrettyCode from 'rehype-pretty-code'; // TODO: remove with MDX integration
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // TODO: remove with MDX integration
+import remarkCodeTitles from 'remark-code-titles'; // TODO: remove with MDX integration if not needed
+import rehypePrettyCode from 'rehype-pretty-code'; // TODO: remove with MDX integration if not needed
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'; // TODO: remove with MDX integration if not needed
 import { h } from 'hastscript';
 
 // Integrations
