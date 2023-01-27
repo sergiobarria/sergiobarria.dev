@@ -50,9 +50,9 @@ export interface TopSpotifyTracks {
 const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = import.meta.env;
 
 const token = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
-export const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
-export const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;
-export const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+export const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
+export const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks';
+export const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 
 export const getAccessToken = async () => {
 	const data = new URLSearchParams({

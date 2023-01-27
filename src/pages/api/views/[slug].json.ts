@@ -12,7 +12,6 @@ const responseError = {
 
 export const get: APIRoute = async ({ params }) => {
 	const { slug } = params;
-	console.log('slug from api', slug);
 	const views = await getSingleRecord(slug as string);
 
 	if (!views) return responseError;

@@ -28,7 +28,6 @@ export const getAllRecords = async () => {
 export const getSingleRecord = async (slug: string) => {
 	if (!slug) return;
 
-	console.log('slug', slug);
 	const record = await pb.collection(COLLECTION).getFirstListItem(`slug="${slug}"`, {
 		expand: 'views',
 	});

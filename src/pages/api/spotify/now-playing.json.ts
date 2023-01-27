@@ -15,7 +15,7 @@ export const get: APIRoute = async () => {
 	if (!response.ok) {
 		return {
 			status: 500,
-			body: JSON.stringify({ message: 'Error fetching data' }),
+			body: JSON.stringify({ message: 'Error fetching data', error: response.statusText }),
 			headers: {
 				'content-type': 'application/json',
 			},
@@ -25,7 +25,7 @@ export const get: APIRoute = async () => {
 	if (response.status === 204 || response.status > 400) {
 		return {
 			status: 500,
-			body: JSON.stringify({ message: 'Error fetching data' }),
+			body: JSON.stringify({ message: 'No data available' }),
 			headers: {
 				'content-type': 'application/json',
 			},

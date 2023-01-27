@@ -1,11 +1,19 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import clsx from 'clsx';
-	import { useSWR } from 'sswr';
 
 	import type { SpotifyData } from 'lib/spotify';
 	import AnimatedBars from './AnimatedBars.svelte';
+	import { BASE_URL } from '~/shared/constants';
 
-	const { data } = useSWR<SpotifyData>('/api/spotify/now-playing.json');
+	let data: SpotifyData;
+
+	onMount(async () => {
+		const res = await fetch(`${BASE_URL}/api/spotify/now-playing.json`);
+		const json: SpotifyData = await res.json();
+
+		data = json;
+	});
 </script>
 
 <div
@@ -14,8 +22,8 @@
 		'rounded-md p-2 min-w-[250px]'
 	)}
 >
-	{#if $data?.isPlaying}
-		<img src={$data?.albumImageUrl} alt="album cover" width={40} height={40} />
+	{#if data?.isPlaying}
+		<img src={data?.albumImageUrl} alt="album cover" width={40} height={40} />
 	{:else}
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -36,17 +44,17 @@
 	{/if}
 
 	<div class="flex flex-col w-full gap-1">
-		<a href={$data?.songUrl} class="text-sm font-semibold">
-			{#if $data?.isPlaying}
-				<span>{$data?.title}</span>
+		<a href={data?.songUrl} class="text-sm font-semibold">
+			{#if data?.isPlaying}
+				<span>{data?.title}</span>
 			{:else}
 				<span>Not Listening</span>
 			{/if}
 		</a>
 
-		{#if $data?.isPlaying}
-			<div class="flex items-baseline justify-between w-full">
-				<span class="text-xs text-font-two opacity-80">{$data?.artist}</span>
+		{#if data?.isPlaying}
+			<div class="flex items-baseline justify-between w-full gap-3">
+				<span class="text-xs text-font-two opacity-80">{data?.artist}</span>
 
 				<AnimatedBars />
 			</div>
