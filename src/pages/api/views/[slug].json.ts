@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 
-import { getSingleRecord, updateRecord, login } from 'lib/pocketbase/pb';
-// import { updatePostViews, getPostViews } from 'lib/xata';
+import { getSingleRecord, updateRecord } from 'lib/pocketbase/pb';
 
 const responseError = {
 	status: 500,

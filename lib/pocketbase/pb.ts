@@ -35,9 +35,6 @@ export const getSingleRecord = async (slug: string) => {
 export const updateRecord = async (slug: string) => {
 	if (!slug) return;
 
-	// const userData = await login();
-	// console.log('userData', userData);
-
 	try {
 		const record = await pb.collection(COLLECTION).getFirstListItem(`slug="${slug}"`, {
 			expand: 'views',

@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 
 import { getAllRecords } from 'lib/pocketbase/pb';
-// import { getAllRecords } from 'lib/xata';
 
 export const get: APIRoute = async () => {
 	const totalViews = await getAllRecords();
