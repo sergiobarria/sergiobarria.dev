@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+
+import MetricCard from './MetricCard.astro';
+
+import {
+	getWakatimeStats,
+	getWakatimeAllTimeStats,
+	getGithubUserData,
+	getTotalViews,
+} from 'lib/stats';
+import { socialLinks } from '../../../site.json';
+
+const githubUrl = socialLinks.find((link) => link.name === 'gitHub')?.url ?? '';
+
+const totalViews = await getTotalViews();
+const blogEntries = await getCollection('blog');
+const totalPosts = blogEntries.length;
+const wakatime = await getWakatimeStats();
+const wakatimeAllTime = await getWakatimeAllTimeStats();
+const { user } = await getGithubUserData();
+
+const totalGithubStars =
+	user.repositories?.edges?.reduce((acc, { node }) => acc + node?.stargazerCount, 0) ?? 0;
+
+function convertTimeToDecimal(time: string) {
+	const hours = time.split(' ')[0];
+	const minutes = time.split(' ')[2];
+
+	const hoursToDecimal = parseInt(hours) + parseInt(minutes) / 60;
+
+	return Math.round(hoursToDecimal * 5) / 5 + ' hrs';
+}
+---
+
+<div class="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+	<MetricCard title="Total Posts" value={totalPosts} link="/blog" />
+
+	<MetricCard title="Total Posts Views" value={totalViews ?? '--'} link="/blog" />
+
+	<MetricCard
+		title="Total Github Followers"
+		value={user?.followers?.totalCount ?? '--'}
+		link={githubUrl}
+	/>
+
+	<MetricCard
+		title="Total Github Pull Requests"
+		value={user?.pullRequests?.totalCount ?? '--'}
+		link={githubUrl}
+	/>
+
+	<MetricCard title="Total Github Stars" value={totalGithubStars ?? '--'} link={githubUrl} />
+
+	<MetricCard
+		title="Wakatime*"
+		value={wakatime?.text?.split(' ').slice(0, 2).join(' ') ?? '--'}
+		link={githubUrl}
+	/>
+
+	<MetricCard
+		title="Daily Coding Average*"
+		value={wakatimeAllTime ? convertTimeToDecimal(wakatimeAllTime?.dailyAvg) : '--'}
+		link={githubUrl}
+	/>
+	<MetricCard
+		title="Top Language*"
+		value={wakatimeAllTime?.topLang?.name ?? '--'}
+		link={githubUrl}
+	/>
+	<MetricCard
+		title="Other Languages*"
+		value={wakatimeAllTime?.otherLang?.name ?? '--'}
+		link={githubUrl}
+	/>
+</div>
+<small>*Wakatime stats {wakatimeAllTime?.since ?? '--'}</small>

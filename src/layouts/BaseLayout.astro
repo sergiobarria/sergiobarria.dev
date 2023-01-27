@@ -45,10 +45,10 @@ const params = Astro.params;
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 		<link rel="manifest" href="/favicon/site.webmanifest" />
 
-		<link
+		<!-- <link
 			rel="stylesheet"
 			href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/base16/dracula.min.css"
-		/>
+		/> -->
 		<meta name="generator" content={Astro.generator} />
 		<SEO
 			title={metadata?.title ?? defaultTitle}
@@ -122,11 +122,11 @@ const params = Astro.params;
 			};
 		</script>
 
-		<script is:inline src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
+		<!-- <script is:inline src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"
 		></script>
 		<script is:inline>
 			hljs.highlightAll();
-		</script>
+		</script> -->
 		<!-- TODO: Add vercel script again 👇🏼 -->
 		<!-- <script defer src="/_vercel/insights/script.js"></script> -->
 		<!-- NOTE: Commented until finding a way to make it work with Astro -->
