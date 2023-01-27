@@ -1,7 +1,7 @@
 ---
 import clsx from 'clsx';
 
-import { LogoIcon } from './jsx';
+import LogoIcon from '~/shared/icons/LogoIcon.astro';
 import ThemeSwitcher from '~/shared/components/svelte/ThemeSwitcher.svelte';
 
 import site from '../../../site.json';
@@ -13,7 +13,7 @@ const { navLinks } = site;
 
 <header class="sticky top-0 z-30 h-20 text-font-one backdrop-blur-md">
 	<div class="flex items-center justify-between h-full px-4 w-full mx-auto max-w-screen-xl">
-		<div class="w-24 hover:text-brand">
+		<div class="w-24 hover:text-brand-accent">
 			<a href="/">
 				<LogoIcon />
 			</a>
