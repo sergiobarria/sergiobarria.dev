@@ -6,6 +6,10 @@ const COLLECTION = 'posts';
 
 export const pb = new Pocketbase(PB_URL);
 
+// This is required to be able to make multiple requests
+// see: https://github.com/pocketbase/js-sdk#auto-cancellation
+pb.autoCancellation(false);
+
 export const login = async () => {
 	const auth = await pb.admins.authWithPassword(PB_USER_EMAIL, PB_USER_PASSWORD);
 
