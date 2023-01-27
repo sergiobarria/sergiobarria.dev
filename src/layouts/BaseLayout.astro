@@ -100,9 +100,9 @@ const params = Astro.params;
 				if (localStorage.getItem(storageKey)) {
 					return localStorage.getItem(storageKey);
 				} else if (window.matchMedia('prefers-color-scheme: dark').matches) {
-					return 'night';
+					return 'dark';
 				} else {
-					return 'night';
+					return 'dark';
 				}
 			};
 

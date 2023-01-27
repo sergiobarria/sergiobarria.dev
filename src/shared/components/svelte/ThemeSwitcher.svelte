@@ -8,7 +8,7 @@
 	function toggleTheme(e: CustomEvent<boolean>) {
 		checked = e.detail;
 		const doc = document.firstElementChild;
-		const themePreference = checked ? 'night' : 'light';
+		const themePreference = checked ? 'dark' : 'light';
 
 		doc?.setAttribute('data-theme', themePreference);
 		localStorage.setItem('theme-preference', themePreference);
@@ -17,7 +17,7 @@
 	onMount(() => {
 		const themePreference = localStorage.getItem('theme-preference');
 		if (themePreference) {
-			checked = themePreference === 'night';
+			checked = themePreference === 'dark';
 		}
 	});
 </script>

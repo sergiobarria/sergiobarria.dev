@@ -28,7 +28,7 @@ const { navLinks } = site;
 								<a
 									href={link.href}
 									class={clsx('relative py-1', {
-										'text-brand font-semibold':
+										'text-brand-accent font-semibold':
 											pathname === link.href || pathname.includes(link.href),
 										'link-double-lines': pathname !== link.href,
 									})}

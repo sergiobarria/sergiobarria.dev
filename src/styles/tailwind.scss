@@ -7,6 +7,20 @@
 
 /* BASE THEMES */
 /* THEMES */
+:root[data-theme='dark'] {
+	--brand: hsl(261 80% 60%);
+	--brand-accent: hsl(51, 100%, 50%);
+	--text1: hsl(0, 0%, 85%);
+	--text2: hsl(0, 0%, 75%);
+	--text3: hsl(0, 0%, 65%);
+	--text4: hsl(0, 0%, 55%);
+	--selection-text: hsl(51, 100%, 50%);
+	--surface1: hsl(0, 0%, 5%);
+	--surface2: hsl(0, 0%, 10%);
+	--surface3: hsl(0, 0%, 15%);
+	--surface4: hsl(0, 0%, 20%);
+}
+
 :root[data-theme='night'] {
 	--brand: hsl(173 100% 66%);
 	--brand-accent: hsl(60 92% 71%);
@@ -75,6 +89,20 @@
 
 	/* TAILWIND THEMES */
 	/* Note: Only using RGB color channels to take advantage of Tailwind opacity values */
+	[data-theme='dark'] {
+		--tw-brand: 102 31 244;
+		--tw-brand-accent: 255 217 0;
+		--tw-text1: 217 217 217;
+		--tw-text2: 191 191 191;
+		--tw-text3: 166 166 166;
+		--tw-text4: 140 140 140;
+		--tw-selection-text: 255 217 0;
+		--tw-surface1: 13 13 13;
+		--tw-surface2: 26 26 26;
+		--tw-surface3: 38 38 38;
+		--tw-surface4: 51 51 51;
+	}
+
 	:root[data-theme='night'] {
 		--tw-brand: 82 255 235;
 		--tw-brand-accent: 249 249 113;
