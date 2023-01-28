@@ -1,22 +1,24 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
+	import type { CollectionEntry } from 'astro:content';
 
 	import BlogPostCard from './BlogPostCard.svelte';
 	import SearchBar from './SearchBar.svelte';
 	import { createSearchStore, searchHandler } from '~/stores/search';
-	import type { Post } from 'notion/client';
 
-	export let posts: Post[];
+	export let posts: CollectionEntry<'blog'>[];
 
 	const searchPosts = posts
 		.map((post) => ({
 			...post,
-			searchTerms: `${post.title}`,
+			searchTerms: `${post?.data?.title}`,
 		}))
-		.sort((a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime());
+		.sort(
+			(a, b) =>
+				new Date(b.data?.publishedDate).getTime() - new Date(a.data?.publishedDate).getTime()
+		);
 
 	const searchStore = createSearchStore(searchPosts);
-
 	const unsubscribe = searchStore.subscribe((model) => searchHandler(model));
 
 	// unsubscribe from searchStore when component is destroyed
@@ -29,7 +31,7 @@
 
 {#if $searchStore.results.length > 0}
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-6">
-		{#each $searchStore.results as post}
+		{#each $searchStore.results as post (post.id)}
 			<BlogPostCard {post} />
 		{/each}
 	</div>

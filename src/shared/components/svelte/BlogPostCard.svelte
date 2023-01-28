@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+	import type { CollectionEntry } from 'astro:content';
 	import clsx from 'clsx';
 	import { format } from 'date-fns';
 
-	import type { Post } from 'notion/client';
+	export let post: CollectionEntry<'blog'>;
 
-	export let post: Post;
+	const { title, coverImage, publishedDate, readingTime } = post?.data;
 
-	const { title, slug, coverImage, publishedDate, readingTime } = post;
 	const formattedDate = format(new Date(publishedDate), 'MMM dd, yyyy');
 </script>
 
@@ -15,13 +16,14 @@
 		'flex flex-col h-full bg-surface-two rounded-lg shadow-lg overflow-hidden',
 		'transition-all duration-200 ease-out hover:scale-105'
 	)}
+	transition:fade={{ duration: 200 }}
 >
 	<div class="relative rounded-tl-lg rounded-tr-lg">
 		<!-- TODO: Add image lazy loading -->
 		<img src={coverImage} alt={title} />
 	</div>
 	<div class="flex flex-col justify-between h-full p-3">
-		<a href={`/blog/${slug}`}>
+		<a href={`/blog/${post?.slug}`}>
 			<h3 class="hover:text-brand-accent cursor-pointer">{title}</h3>
 		</a>
 		<div class="flex items-center mt-2 text-font-two">
@@ -59,7 +61,7 @@
 					/>
 				</svg>
 
-				<span>{readingTime} min read</span>
+				<span>{readingTime ?? '--'} min read</span>
 			</p>
 		</div>
 	</div>
