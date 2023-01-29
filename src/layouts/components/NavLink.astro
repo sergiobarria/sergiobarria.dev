@@ -1,0 +1,28 @@
+---
+import clsx from 'clsx';
+
+interface Props {
+	link: {
+		id: number;
+		href: string;
+		label: string;
+		number: string;
+	};
+}
+
+const pathname = new URL(Astro.request.url).pathname;
+
+const { link } = Astro.props as Props;
+---
+
+<li>
+	<a
+		href={link.href}
+		class={clsx('relative block px-2 md:px-3 py-2 transition text-zinc-800 dark:text-zinc-100', {
+			'text-teal-500 dark:text-teal-400': pathname === link.href,
+			'hover:text-teal-500 dark:hover:text-teal-400': pathname !== link.href,
+		})}
+	>
+		<span>{link.label}</span>
+	</a>
+</li>

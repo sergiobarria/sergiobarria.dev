@@ -3,80 +3,45 @@ import clsx from 'clsx';
 
 import { SocialLinks } from '~/shared/components/jsx';
 import SpotifyCard from '~/shared/components/svelte/SpotifyCard.svelte';
+import Container from './Container.astro';
 
+import NavLink from './NavLink.astro';
 import { navLinks } from '../../../site.json';
-import LogoIcon from '~/shared/icons/LogoIcon.svelte';
-
-const pathname = new URL(Astro.request.url).pathname;
 ---
 
-<footer>
-	<div
-		class={clsx(
-			'flex flex-col md:flex-row justify-center py-6 px-4 md:justify-between',
-			'border-t border-surface-three mx-auto max-w-screen-xl'
-		)}
-	>
-		<div
-			class={clsx(
-				'flex flex-col md:flex-1 items-center w-full mb-6',
-				'md:items-start md:justify-between md:mb-0'
-			)}
-		>
-			<div class="hidden w-24 md:block hover:text-brand">
-				<a href="/">
-					<LogoIcon />
-				</a>
-			</div>
-			<SpotifyCard client:load />
-		</div>
-		<div class="flex flex-col items-center md:flex-1 md:items-end">
-			<div
-				class={clsx(
-					'relative flex items-center gap-3 text-brand-accent',
-					'transition-opacity duration-300 ease-in-out mb-4'
-				)}
-			>
-				{
-					navLinks.map((link) => (
-						<a
-							href={link.href}
-							class={clsx(
-								'relative inline-block opacity-90 text-sm md:text-base hover:opacity-100',
-								{
-									'animated-underline': pathname !== link.href,
-									'font-semibold': pathname === link.href,
-								}
-							)}
-						>
-							{link.label}
-						</a>
-					))
-				}
-			</div>
-			<SocialLinks />
-			<div class="mt-4 text-sm text-center md:text-right text-font-two">
-				<p>© {new Date().getFullYear()} - Designed and developed by Sergio Barria</p>
-				<p>
-					Built with <a
-						href="https://astro.build/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-brand-accent hover:opacity-90">Astro,</a
-					> styled with <a
-						href="https://tailwindcss.com/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-brand-accent hover:opacity-90">Tailwind CSS</a
-					> and content with
-					<a
-						href="https://mdxjs.com/"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="text-brand-accent hover:opacity-90">MDX</a
+<footer class="mt-32">
+	<Container>
+		<div class="border-t border-zinc-100 py-10 pb-16 dark:border-zinc-700/40">
+			<div class="relative px-4 sm:px-8 lg:px-12">
+				<div
+					class={clsx(
+						'flex flex-col items-center justify-between w-full',
+						'sm:flex-row lg:max-w-5xl lg:mx-auto'
+					)}
+				>
+					<div class="text-sm">
+						<SpotifyCard />
+						<ul class="flex items-center gap-1 md:gap-2">
+							{navLinks.map((link) => <NavLink link={link} />)}
+						</ul>
+					</div>
+					<div
+						class="flex flex-col items-center md:self-end pb-2 md:items-end text-sm text-zinc-400 dark:text-zinc-500"
 					>
-				</p>
+						<p>
+							Powered by <a
+								href="https://astro.build/"
+								target="_blank"
+								rel="noopener noreferrer"
+								class="hover:text-teal-500">Astro</a
+							>
+						</p>
+						<p>
+							&copy; {new Date().getFullYear()} Sergio Barria. All rights reserved
+						</p>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	</Container>
 </footer>
