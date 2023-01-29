@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # astro collections types (generated)
 .astro
+
+# others
+_old_pages/
