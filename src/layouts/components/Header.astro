@@ -3,8 +3,10 @@ import clsx from 'clsx';
 
 import LogoIcon from '~/shared/icons/LogoIcon.svelte';
 import DesktopNavigation from './DesktopNavigation.astro';
-import MobileNavigation from './MobileNavigation.astro';
+import MobileNavigation from './svelte/MobileNavigation.svelte';
 import ThemeSwitcher from '~/shared/components/svelte/ThemeSwitcher.svelte';
+
+const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header class="sticky top-0 z-50 mb-20">
@@ -23,7 +25,7 @@ import ThemeSwitcher from '~/shared/components/svelte/ThemeSwitcher.svelte';
 			</div>
 			<div class="flex justify-end flex-1 md:justify-center">
 				<DesktopNavigation />
-				<MobileNavigation />
+				<MobileNavigation client:load pathname={pathname} />
 			</div>
 			<div class="flex justify-end md:flex-1">
 				<ThemeSwitcher client:load />
