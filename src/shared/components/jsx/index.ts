@@ -5,7 +5,6 @@ export * from './ViewCounter';
 export * from './BlogPostsList';
 export * from './SearchBar';
 export * from './PinnedReposList';
-export * from './FeaturedProjectsList';
 export * from './MyselfSection';
 export * from './Step';
 export * from './SnippetsList';
