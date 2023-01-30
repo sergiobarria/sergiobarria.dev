@@ -19,9 +19,9 @@
 			placeholder="Search posts..."
 			aria-label="Search posts"
 			class={clsx(
-				'block w-full mt-6 pl-14 pr-4 py-3 bg-surface-two',
+				'block w-full mt-6 pl-14 pr-4 py-3 bg-zinc-100 dark:bg-zinc-800',
 				'text-font-two rounded-lg',
-				'focus:ring-brand-accent focus:border-none'
+				'focus:ring-teal-500 focus:border-none'
 			)}
 			bind:value={query}
 		/>

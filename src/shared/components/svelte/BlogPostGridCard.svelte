@@ -16,10 +16,10 @@
 		'flex flex-col h-full bg-surface-two rounded-lg shadow-lg overflow-hidden',
 		'transition-all duration-200 ease-out hover:scale-105'
 	)}
-	transition:fade={{ duration: 200 }}
+	transition:fade={{ duration: 100 }}
 >
 	<div class="relative rounded-tl-lg rounded-tr-lg">
-		<!-- TODO: Add image lazy loading -->
+		<!-- TODO: Add Lazy loading for cover image -->
 		<img src={coverImage} alt={title} />
 	</div>
 	<div class="flex flex-col justify-between h-full p-3">
