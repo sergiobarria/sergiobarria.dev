@@ -1,0 +1,83 @@
+---
+import clsx from 'clsx';
+
+import GithubIcon from '../icons/GithubIcon.svelte';
+import LinkedinIcon from '../icons/LinkedinIcon.svelte';
+import TwitterIcon from '../icons/TwitterIcon.svelte';
+import EnvelopeIcon from '../icons/EnvelopeIcon.svelte';
+import CodeSandboxIcon from '../icons/CodeSandboxIcon.svelte';
+
+import { socialLinks } from '../../../site.json';
+
+interface Props {
+	href: string;
+	icon: 'github' | 'linkedin' | 'twitter' | 'email' | 'codesandbox';
+}
+
+const { href, icon } = Astro.props as Props;
+---
+
+{
+	icon === 'github' && (
+		<a
+			href={href}
+			title="My Github"
+			data-tooltip-placement="top"
+			class="transition-colors duration-200 hover:text-teal-500 dark:hover:text-teal-500"
+		>
+			<GithubIcon styles="w-6 h-6" />
+		</a>
+	)
+}
+
+{
+	icon === 'linkedin' && (
+		<a
+			href={href}
+			title="My Linkedin"
+			data-tooltip-placement="top"
+			class="transition-colors duration-200 hover:text-teal-500 dark:hover:text-teal-500"
+		>
+			<LinkedinIcon styles="w-6 h-6" />
+		</a>
+	)
+}
+
+{
+	icon === 'email' && (
+		<a
+			href={href}
+			title="My Email"
+			data-tooltip-placement="top"
+			class="transition-colors duration-200 hover:text-teal-500 dark:hover:text-teal-500"
+		>
+			<EnvelopeIcon styles="w-6 h-6" />
+		</a>
+	)
+}
+
+{
+	icon === 'twitter' && (
+		<a
+			href={href}
+			title="My Twitter"
+			data-tooltip-placement="top"
+			class="transition-colors duration-200 hover:text-teal-500 dark:hover:text-teal-500"
+		>
+			<TwitterIcon styles="w-6 h-6" />
+		</a>
+	)
+}
+
+{
+	icon === 'codesandbox' && (
+		<a
+			href={href}
+			title="My CodeSandbox"
+			data-tooltip-placement="top"
+			class="transition-colors duration-200 hover:text-teal-500 dark:hover:text-teal-500"
+		>
+			<CodeSandboxIcon styles="w-6 h-6" />
+		</a>
+	)
+}

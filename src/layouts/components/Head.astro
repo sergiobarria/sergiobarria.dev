@@ -1,4 +1,6 @@
 ---
+import { Tooltips } from 'astro-tooltips';
+
 import Scripts from './Scripts.astro';
 
 import { defaultTitle } from '../../../site.json';
@@ -14,6 +16,8 @@ import { defaultTitle } from '../../../site.json';
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
 	<link rel="manifest" href="/favicon/site.webmanifest" />
 	<title>{defaultTitle}</title>
+
+	<Tooltips interactive={false} delay={[15, 10]} />
 
 	<!-- Load all the app inline scripts -->
 	<Scripts />
