@@ -39,7 +39,9 @@ export default defineConfig({
 	markdown: {
 		shikiConfig: {
 			// css-variables tells shiki to read the theme from CSS variables
-			theme: 'css-variables',
+			theme: 'material-ocean',
+			// theme: 'css-variables',
+			// theme: 'dracula',
 		},
 		rehypePlugins: [
 			rehypePrettyCode,
