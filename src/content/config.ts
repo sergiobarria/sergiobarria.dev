@@ -18,11 +18,16 @@ const blogCollection = defineCollection({
 
 const projectsCollection = defineCollection({
 	schema: z.object({
-		title: z.string(),
+		name: z.string(),
 		description: z.string(),
-		coverImage: z.string().optional(),
-		tags: z.array(z.string()),
-		isFeatured: z.boolean(),
+		stack: z.array(z.string()),
+		image: z.string().optional(),
+		liveUrl: z.string().optional(),
+		repo: z.string().optional(),
+		tags: z.array(z.string()).optional(),
+		isFeatured: z.boolean().optional(),
+		isCompleted: z.boolean().optional(),
+		draft: z.boolean().optional(),
 	}),
 });
 
