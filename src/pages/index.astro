@@ -1,12 +1,6 @@
 ---
 import MainLayout from '~/layouts/MainLayout.astro';
-import SocialLink from '~/shared/components/SocialLink.astro';
-import GithubIcon from '~/shared/icons/GithubIcon.svelte';
-import TwitterIcon from '~/shared/icons/TwitterIcon.svelte';
-import EnvelopeIcon from '~/shared/icons/EnvelopeIcon.svelte';
-import LinkedinIcon from '~/shared/icons/LinkedinIcon.svelte';
-
-import { socialLinks } from '../../site.json';
+import SocialLinks from '~/shared/components/SocialLinks.astro';
 ---
 
 <MainLayout>
@@ -21,35 +15,7 @@ import { socialLinks } from '../../site.json';
 				small space of the internet, where I write and share about different topics related to the
 				web.
 			</p>
-			<div class="mt-4 flex gap-6 text-zinc-700 dark:text-zinc-500">
-				<ul role="list" class="flex items-center gap-3">
-					<SocialLink
-						href={socialLinks.find((link) => link.name === 'github')?.url}
-						tooltip="My GitHub"
-					>
-						<GithubIcon styles="w-8 h-8" />
-					</SocialLink>
-					<SocialLink
-						href={socialLinks.find((link) => link.name === 'twitter')?.url}
-						tooltip="My Twitter"
-					>
-						<TwitterIcon styles="w-8 h-8" />
-					</SocialLink>
-					<SocialLink
-						href={socialLinks.find((link) => link.name === 'linkedin')?.url}
-						tooltip="My Linkedin"
-					>
-						<LinkedinIcon styles="w-8 h-8" />
-					</SocialLink>
-					<SocialLink
-						href={socialLinks.find((link) => link.name === 'email')?.url}
-						tooltip="My Email"
-					>
-						<EnvelopeIcon styles="w-8 h-8" />
-					</SocialLink>
-				</ul>
-				<!-- {socialLinks.map((link) => <SocialLink href={link.url} icon={link.name as any} />)} -->
-			</div>
+			<SocialLinks size="large" />
 		</div>
 	</section>
 </MainLayout>
