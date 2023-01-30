@@ -1,7 +1,55 @@
 ---
 import MainLayout from '~/layouts/MainLayout.astro';
+import SocialLink from '~/shared/components/SocialLink.astro';
+import GithubIcon from '~/shared/icons/GithubIcon.svelte';
+import TwitterIcon from '~/shared/icons/TwitterIcon.svelte';
+import EnvelopeIcon from '~/shared/icons/EnvelopeIcon.svelte';
+import LinkedinIcon from '~/shared/icons/LinkedinIcon.svelte';
+
+import { socialLinks } from '../../site.json';
 ---
 
 <MainLayout>
-	<div>Hello World</div>
+	<section id="hero">
+		<div class="max-w-2xl">
+			<h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+				Full-stack Developer, engineer, and amateur writer.
+			</h1>
+			<p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+				I’m Sergio, a full-stack web & mobile developer based in Panama. I work with the JavaScript
+				ecosystem, I love to learn new things and share my knowledge with others. Welcome to my
+				small space of the internet, where I write and share about different topics related to the
+				web.
+			</p>
+			<div class="mt-4 flex gap-6 text-zinc-700 dark:text-zinc-500">
+				<ul role="list" class="flex items-center gap-3">
+					<SocialLink
+						href={socialLinks.find((link) => link.name === 'github')?.url}
+						tooltip="My GitHub"
+					>
+						<GithubIcon styles="w-8 h-8" />
+					</SocialLink>
+					<SocialLink
+						href={socialLinks.find((link) => link.name === 'twitter')?.url}
+						tooltip="My Twitter"
+					>
+						<TwitterIcon styles="w-8 h-8" />
+					</SocialLink>
+					<SocialLink
+						href={socialLinks.find((link) => link.name === 'linkedin')?.url}
+						tooltip="My Linkedin"
+					>
+						<LinkedinIcon styles="w-8 h-8" />
+					</SocialLink>
+					<SocialLink
+						href={socialLinks.find((link) => link.name === 'email')?.url}
+						tooltip="My Email"
+					>
+						<EnvelopeIcon styles="w-8 h-8" />
+					</SocialLink>
+				</ul>
+				<!-- {socialLinks.map((link) => <SocialLink href={link.url} icon={link.name as any} />)} -->
+			</div>
+		</div>
+	</section>
 </MainLayout>

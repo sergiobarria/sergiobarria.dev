@@ -1,0 +1,27 @@
+---
+import clsx from 'clsx';
+
+interface Props {
+	href?: string;
+	label?: string;
+	styles?: string;
+	tooltip?: string;
+}
+
+const { href, label, styles, tooltip } = Astro.props as Props;
+---
+
+<li class={clsx(styles, 'flex')}>
+	<a
+		href={href}
+		class={clsx(
+			'group flex items-center text-sm font-medium text-zinc-800 transition',
+			'hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500'
+		)}
+		title={tooltip}
+		data-tooltip-placement="top"
+	>
+		<slot />
+		{label && <span class="ml-4">{label}</span>}
+	</a>
+</li>

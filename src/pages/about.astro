@@ -1,0 +1,89 @@
+---
+import MainLayout from '~/layouts/MainLayout.astro';
+import SocialLink from '~/shared/components/SocialLink.astro';
+import GithubIcon from '~/shared/icons/GithubIcon.svelte';
+import TwitterIcon from '~/shared/icons/TwitterIcon.svelte';
+import EnvelopeIcon from '~/shared/icons/EnvelopeIcon.svelte';
+import LinkedinIcon from '~/shared/icons/LinkedinIcon.svelte';
+
+import { socialLinks } from '../../site.json';
+---
+
+<MainLayout>
+	<div class="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
+		<div class="lg:pl-20">
+			<div class="max-w-xs px-2.5 lg:max-w-non">
+				<img
+					src="https://ik.imagekit.io/l5swuiqdn/tr:e-grayscale/profile-pic.jpeg"
+					sizes="(min-width: 1024px) 32rem, 20rem"
+					alt="profile"
+					class="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+				/>
+			</div>
+		</div>
+		<div class="lg:order-first lg:row-span-2">
+			<h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+				Hi, I’m Sergio. I live in Panama.
+			</h1>
+
+			<!-- TODO: Update this text -->
+			<div class="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+				<p>
+					I’ve loved building things for as long as I can remember, that's the reason I became a
+					<strong>Civil Engineer</strong>. I love to learn new things and I'm always looking for new
+					challenges. That's why I decided to become a <span>Software Engineer</span>.
+				</p>
+				<p>
+					I took my first programming course back in college and I fell in love with it. I started
+					learning by myself and I never stopped. I've been working as a Software Engineer for a few
+					years now, mostly with <strong>JavaScript</strong>.
+				</p>
+				<p>
+					I'm currently working as a Full Stack Developer involved in different projects in the
+					<strong>JavaScript</strong> ecosystem, both for mobile and web.
+				</p>
+				<p>
+					Besides JavaScript, I also love to learn about other technologies and programming
+					languages. Currently I'm learning <strong>Go</strong> and several other technologies, like
+					<em>Docker, DevOps, and more</em>. I also use <strong>Python</strong> for some of my projects,
+					tasks automatization and more.
+				</p>
+				<p>
+					When I'm not coding, I love to play video games, watch movies or series, and spend time
+					with my family.
+				</p>
+			</div>
+		</div>
+		<div class="lg:pl-20">
+			<ul role="list">
+				<SocialLink
+					href={socialLinks.find((link) => link.name === 'github')?.url}
+					label="Follow me on GitHub"
+				>
+					<GithubIcon styles="w-6 h-6" />
+				</SocialLink>
+				<SocialLink
+					href={socialLinks.find((link) => link.name === 'twitter')?.url}
+					label="Follow me on Twitter"
+					styles="mt-4"
+				>
+					<TwitterIcon styles="w-6 h-6" />
+				</SocialLink>
+				<SocialLink
+					href={socialLinks.find((link) => link.name === 'linkedin')?.url}
+					label="Follow me on LinkedIn"
+					styles="mt-4"
+				>
+					<LinkedinIcon styles="w-6 h-6" />
+				</SocialLink>
+				<SocialLink
+					href={socialLinks.find((link) => link.name === 'email')?.url}
+					label="Send me an email"
+					styles="pt-8 mt-8 border-t border-zinc-100 dark:border-zinc-700/40"
+				>
+					<EnvelopeIcon styles="w-6 h-6" />
+				</SocialLink>
+			</ul>
+		</div>
+	</div>
+</MainLayout>
