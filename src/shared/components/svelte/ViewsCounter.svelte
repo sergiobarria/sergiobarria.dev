@@ -15,4 +15,4 @@
 	});
 </script>
 
-<span>{`${views} views` ?? '--'}</span>
+<span class="text-sm">{`${views} views` ?? '--'}</span>

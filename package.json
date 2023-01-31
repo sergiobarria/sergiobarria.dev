@@ -48,6 +48,7 @@
 		"graphql": "^16.6.0",
 		"graphql-request": "^5.1.0",
 		"hamburger-react": "^2.5.0",
+		"imagekit": "^4.1.2",
 		"imagekit-javascript": "^1.5.4",
 		"motion": "^10.15.5",
 		"nanostores": "^0.7.1",

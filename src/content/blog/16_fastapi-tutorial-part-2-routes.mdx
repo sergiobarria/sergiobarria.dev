@@ -12,7 +12,8 @@ keywords:
   - REST
 ---
 
-import { CloudinaryImage, CalloutBox } from '~/shared/components/jsx';
+import { CloudinaryImage } from '~/shared/components/jsx';
+import CalloutBox from '~/shared/components/svelte/CalloutBox.svelte';
 
 ## Introduction
 
@@ -66,7 +67,7 @@ We create a new `core` folder in which we can manage all global related settings
 
 To create global settings all we have to do is create a new `Settings` class and extend Pydantic's `BaseSettings`, and then instantiate this class in a new `settings` variable. We have the following:
 
-```python:config.py
+```python
 from pydantic import BaseSettings
 
 
@@ -124,7 +125,7 @@ In the last post we created a simple `GET` route to retrieve dummy data from a p
 
 The first route we'll add is to `GET` a single book from the API using the book ID. To do this, we need to get the book ID from the URL. FastAPI makes this process simple, all we have to do is add the variable between curly brackets in the route decorator and then accept this variable as a parameter in the route function (operation) as follow:
 
-```python:books.py
+```python
 # code above omitted 👆
 
 @router.get("/{book_id}")
@@ -136,7 +137,7 @@ By adding the `book_id` to the path, FastAPI will read anything that goes after 
 
 Of course at the moment, python doesn't know what type is this variable, so it can't help us with any validation. To fix this, we can tell FastAPI that this ID should be of type `int` (integer), that way FastAPI will try to convert any string passed to this endpoint to an integer and if it can't then will raise a new exception.
 
-```python:books.py
+```python
 # code above omitted 👆
 
 @router.get("/{book_id}")
@@ -148,7 +149,7 @@ def get_book_by_id(book_id: int):
 
 Since we're not persisting data yet, at this point we can use any python way to get an item from a list. For this case I'm going to loop through the list since it's just 3 items. Later when we add a database we'll improve this code.
 
-```python:books.py
+```python
 # code above omitted 👆
 
 @router.get("/{book_id}")
@@ -169,7 +170,7 @@ Again, this may not be the most efficient way, but for the moment it will work. 
 
 The same way as before, I'm going to create a route for `POST`, `PUT`, and `DELETE`. We end up with the following `books.py` file:
 
-```python:books.py
+```python
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 
@@ -257,7 +258,7 @@ Let's take pagination as an example. To add pagination to our project, the clien
 
 To allow this in our endpoint, all we have to do is pass this two params (`limit` & `skip`) ass our function params:
 
-```python:books.py
+```python
 # code above omitted 👆
 
 @router.get("/")
@@ -296,7 +297,7 @@ Now that we have our books endpoints "ready". Let's create endpoints to get auth
 
 Let's create the endpoints and register the router the same way we did with the books. We have the following `authors.py` inside the `endpoints/` folder.
 
-```python:authors.py
+```python
 from fastapi import APIRouter
 
 router = APIRouter()
@@ -353,7 +354,7 @@ Later we'll add other endpoints, but for the moment this will work.
 
 Register this new router by updating the main `api_router` inside the `api.py` file.
 
-```python:api.py
+```python
 # from fastapi import APIRouter
 
 from . import books, authors
@@ -394,7 +395,7 @@ Of course you can allow all origins by using `*` as a wildcard (useful if your A
 
 In our case we will only list which origins are allowed. To do this, in our global config file `config.py`, we can add a list of allowed origins.
 
-```python:config.py
+```python
 from typing import List
 
 from pydantic import AnyHttpUrl, BaseSettings
@@ -417,7 +418,7 @@ Inside the list you can add something like `"http://localhost:3000"` for a clien
 
 Inside our `main.py` file, we add our CORS config to the API
 
-```python:main.py
+```python
 # from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 

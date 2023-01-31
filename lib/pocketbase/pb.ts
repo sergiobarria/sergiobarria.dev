@@ -28,11 +28,15 @@ export const getAllRecords = async () => {
 export const getSingleRecord = async (slug: string) => {
 	if (!slug) return;
 
-	const record = await pb.collection(COLLECTION).getFirstListItem(`slug="${slug}"`, {
-		expand: 'views',
-	});
+	try {
+		const record = await pb.collection(COLLECTION).getFirstListItem(`slug="${slug}"`, {
+			expand: 'views',
+		});
 
-	return record?.views;
+		return record?.views;
+	} catch (error) {
+		console.error(error);
+	}
 };
 
 export const updateRecord = async (slug: string) => {

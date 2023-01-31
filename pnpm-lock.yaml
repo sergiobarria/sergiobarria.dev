@@ -47,6 +47,7 @@ specifiers:
   graphql-request: ^5.1.0
   hamburger-react: ^2.5.0
   hastscript: ^7.2.0
+  imagekit: ^4.1.2
   imagekit-javascript: ^1.5.4
   mdast-util-to-string: ^3.1.0
   motion: ^10.15.5
@@ -104,6 +105,7 @@ dependencies:
   graphql: 16.6.0
   graphql-request: 5.1.0_graphql@16.6.0
   hamburger-react: 2.5.0_react@18.2.0
+  imagekit: 4.1.2
   imagekit-javascript: 1.5.4
   motion: 10.15.5
   nanostores: 0.7.1
@@ -1113,7 +1115,7 @@ packages:
       '@motionone/types': 10.15.1
       '@motionone/utils': 10.15.1
       hey-listen: 1.0.8
-      tslib: 2.4.0
+      tslib: 2.4.1
     dev: false
 
   /@motionone/easing/10.15.1:
@@ -2016,6 +2018,15 @@ packages:
       picocolors: 1.0.0
       postcss: 8.4.21
       postcss-value-parser: 4.2.0
+    dev: false
+
+  /axios/0.27.2:
+    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+    dependencies:
+      follow-redirects: 1.15.2
+      form-data: 4.0.0
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /axios/1.2.4:
@@ -3387,6 +3398,10 @@ packages:
       react: 18.2.0
     dev: false
 
+  /hamming-distance/1.0.0:
+    resolution: {integrity: sha512-hYz2IIKtyuZGfOqCs7skNiFEATf+v9IUNSOaQSr6Ll4JOxxWhOvXvc3mIdCW82Z3xW+zUoto7N/ssD4bDxAWoA==}
+    dev: false
+
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
@@ -3589,6 +3604,20 @@ packages:
 
   /imagekit-javascript/1.5.4:
     resolution: {integrity: sha512-TPwiq8EkOCOzG02DvuAoo76pOKakutExGD3JScpOUTejpoVO1W6X0XvWHBWLJY9LWE5Yf+gE/RP1ZzCgAFT/UA==}
+    dev: false
+
+  /imagekit/4.1.2:
+    resolution: {integrity: sha512-9MCZ5NWfRCRtXqIb6qX0+rEfb7LcL4M9dyIIiK+4XFKl5dOO/V7FT/Rhgc8Q0lEntH74tVHKSY3J2Iph0FLjKg==}
+    engines: {node: '>=10.0.0'}
+    dependencies:
+      axios: 0.27.2
+      form-data: 4.0.0
+      hamming-distance: 1.0.0
+      lodash: 4.17.21
+      tslib: 2.4.1
+      uuid: 8.3.2
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /immutable/4.2.2:
@@ -3869,7 +3898,6 @@ packages:
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-    dev: true
 
   /log-symbols/5.1.0:
     resolution: {integrity: sha512-l0x2DvrW294C9uDCoQe1VSU4gf529FkSZ6leBl4TiqZH/e+0R7hSfHQBNut2mNygDgHwvYHfFLn6Oxb3VWj2rA==}
@@ -6093,6 +6121,11 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  /uuid/8.3.2:
+    resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    hasBin: true
+    dev: false
 
   /uvu/0.5.6:
     resolution: {integrity: sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==}
