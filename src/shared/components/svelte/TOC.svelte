@@ -8,8 +8,6 @@
 	}
 
 	export let headings: Heading[];
-
-	console.log('HEADINGS FROM TOC', headings);
 </script>
 
 <div>
