@@ -7,7 +7,7 @@ coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/link-posts-to-git
 isFeatured: false
 ---
 
-import { CloudinaryImage } from '~/shared/components/jsx';
+import Image from '~/shared/components/svelte/Image.svelte';
 
 Hi!
 
@@ -31,7 +31,7 @@ Instead of wasting any time writing everything manually, we'll take advantage of
 
 1. Got to your Github profile page and open your README.md file for editing. Your Github profile link will be something like this:
 
-```bash:terminal
+```bash
 https://github.com/<USERNAME>/<USERNAME>
 ```
 
@@ -48,7 +48,7 @@ Alternatively, you can edit your profile from your text editor by cloning your G
 
 1. Now, on your repo root, create the following folder structure:
 
-```md
+```markdown
 .github
 └───workflows
 blog-post-workflow.yml
@@ -58,7 +58,7 @@ Make sure the files and folders names are correct.
 
 4. Add this content to the newly created `blog-post-workflow.yml` file:
 
-```yaml:blog-post-workflow.yml
+```yaml
 name: Latest blog post workflow
 on:
   schedule:
@@ -78,7 +78,7 @@ jobs:
 
 **Important:** Please note that I created my action to run every 2 days. You can set it to run automatically by changing this line with this:
 
-```yaml:blog-post-workflow.yml
+```yaml
 schedule:
   - cron: '0 * * * *'
 ```
@@ -93,22 +93,18 @@ To check on your newly created action, go to your Github profile repo. In the ac
 
 You can run this action manually by clicking on the Run workflow button.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/link-blog-post-to-github-profile/run-workflow_s2xbax"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/run-workflow_s2xbax.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673928054553"
 	alt="creating new posts"
-	width={385}
-	height={183}
 />
 
 Once your Github action finishes and assuming everything went well. You should have your latest blog post listed in your Github profile in the area you designated for this at the start of the guide.
 
 They should look like this:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/link-blog-post-to-github-profile/final-result_ugg9lc"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/final-result_ugg9lc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673928054565"
 	alt="creating new posts"
-	width={1918}
-	height={426}
 />
 
 ## That's it!

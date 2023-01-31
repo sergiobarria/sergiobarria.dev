@@ -17,17 +17,6 @@ In the last post, I wrote a short guide on [how to make a blog with Next.js and 
 
 Adding dynamic pages is easier than you may think. So, without further to do, let's get to work.
 
-## Table of Contents
-
-- [Table of Contents](#table-of-contents)
-- [Create a template for your routes](#create-a-template-for-your-routes)
-- [Fetching data from Sanity Studio](#fetching-data-from-sanity-studio)
-- [Generate dynamic routes: `getStaticPaths`](#generate-dynamic-routesgetstaticpaths)
-- [Get static content: `getStaticProps`](#get-static-contentgetstaticprops)
-- [Pass the fetched data to our template](#pass-the-fetched-data-to-our-template)
-- [Incremental Static Regeneration](#incremental-static-regeneration)
-- [That's it!](#thats-it)
-
 ## Create a template for your routes
 
 The first thing we need for our routes is a template. This template will be used to render all the pages that we need to look the same way. For example, let's say we are creating a blog, probably all our blog posts will have the same look (a header, a body content and a footer is a basic example). So, for our blog posts, we will create a template. Of course, the same example applies to any other content, a single product page for e-commerce, a podcast page, and so on.
@@ -38,7 +27,7 @@ To create the template, in your project folder navigate to your pages folder and
 
 Now, inside your template file is where you will create the model of how your page will look like. It will look something like this.
 
-```js:[slug].js
+```js
 /*
   Your imports here
 */
@@ -75,16 +64,16 @@ To fetch our data, we will make use of two Next.js functions. You can read more 
 
 First, we need to let Next know how many routes we want to render. For that, we use the `getStaticPaths` function to fetch something that will be unique for each newly created page. You could fetch for the id of each post but, that would not be very helpful from the User Experience point of view. So, with that in mind, we are going to fetch our _slug_.
 
-```js:[slug].js
+```js
 export async function getStaticPaths() {
-  const response = await sanityClient.fetch(postSlugsQuery)
-  const paths = response.map((slug) => ({
-    params: {slug}
-  }))
-  return {
-    paths: paths,
-    fallback: false,
-  }
+	const response = await sanityClient.fetch(postSlugsQuery);
+	const paths = response.map((slug) => ({
+		params: { slug },
+	}));
+	return {
+		paths: paths,
+		fallback: false,
+	};
 }
 ```
 
@@ -94,7 +83,7 @@ The `postSlugsQuery` prop is just a variable I created to manage my queries from
 
 Your query should look something like this.
 
-```js:query.js
+```js
 export const postSlugsQuery = `
   *[_type == "post" && defined(slug.current)][].slug.current
 `;
@@ -106,7 +95,7 @@ This will fetch all the slugs inside the content of type post. This query will r
 
 Now that we have our dynamic paths, we need to fetch the data for each one of them. For this, we use the `getStaticProps` function from Next. We will have something like this.
 
-```js:[slug].js
+```js
 ...
 export async function getStaticProps({ params }) {
   const allPosts = await sanityClient.fetch(
@@ -129,7 +118,7 @@ Our function automatically takes on a special prop called context from which we 
 
 Again we pass our sanity fetch function, this time using another parameter. First, a `postQuery`, note here that I removed the query from the function again just to make it look cleaner. Here let's say I'm looking to get the `\_id, title, slug, image, published date, and body` content from Sanity studio.
 
-```js:[slug].js
+```js
 export const postQuery = `
   *[_type == "post" && slug.current == $slug] [0] | order(date desc, _createdAt desc) {
     _id,
@@ -166,7 +155,7 @@ Luckily, Next got us cover. We can use [Incremental Static Regeneration](https:/
 
 To activate **ISR**, all we have to do is, on our template go to the **getStaticProps** function and add the revalidate option and the end of the return.
 
-```js:[slug].js
+```js
 ...
 export async function getStaticProps({ params }) {
   const allPosts = await sanityClient.fetch(
@@ -194,7 +183,7 @@ Here we have a gotcha moment. If our page is not ready at build time, and we kno
 
 To avoid this we have to go into our template component and add something like this.
 
-```js:[slug].js
+```js
 /*
   Your imports here
 */

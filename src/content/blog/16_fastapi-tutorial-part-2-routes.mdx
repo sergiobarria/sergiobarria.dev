@@ -12,7 +12,7 @@ keywords:
   - REST
 ---
 
-import { CloudinaryImage } from '~/shared/components/jsx';
+import Image from '~/shared/components/svelte/Image.svelte';
 import CalloutBox from '~/shared/components/svelte/CalloutBox.svelte';
 
 ## Introduction
@@ -107,12 +107,9 @@ app.include_router(api_router, prefix=settings.API_STR)
 
 Now, go to your API docs.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/api-title-description_r6kmoe"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/api-title-description_r6kmoe.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933288243"
 	alt="api title description inside swagger docs"
-	width={524}
-	height={148}
-	preview={true}
 />
 
 As you can see, our API title has changed and a new description was added.
@@ -273,22 +270,16 @@ def get_books(limit: int = 1, skip: int = 0):
 
 If you refresh your browser, you can see two new fields in your docs (skip & limit).
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/endpoint-with-query-params_wv2k0k"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/endpoint-with-query-params_wv2k0k.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933288657"
 	alt="endpoint with query params"
-	width={1442}
-	height={564}
-	preview={true}
-	client:visible
 />
 
 Since we're adding default values, you can test your API and notice that now you only get 1 result instead of all the books in the dummy list (3).
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/endpoint-with-query-params-response_idfryj"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/endpoint-with-query-params-response_idfryj.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933289708"
 	alt="endpoint with query params response"
-	width={1425}
-	height={561}
 />
 
 ## Authors Endpoints
@@ -367,11 +358,9 @@ api_router.include_router(authors.router, prefix="/authors", tags=["Authors"])
 
 In your API docs you should see something like this:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/api-books-authors-routes_mmzmdl"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/api-books-authors-routes_mmzmdl.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933288452"
 	alt="endpoint with query params response"
-	width={1439}
-	height={918}
 />
 
 <CalloutBox type='info'>

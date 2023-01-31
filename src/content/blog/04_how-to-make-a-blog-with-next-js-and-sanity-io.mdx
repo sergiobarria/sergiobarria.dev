@@ -7,7 +7,7 @@ coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/how-to-make-blog-
 isFeatured: true
 ---
 
-import { CloudinaryImage } from '~/shared/components/jsx';
+import Image from '~/shared/components/svelte/Image.svelte';
 
 I started using Sanity headless CMS a few weeks back and in general, although I hit a few bumps in the way the process was relatively simple. Nonetheless, I couldn't find any tutorials or information on how to use Next js and Sanity together. And a good part of what I found was a bit outdated.
 Because of this, I decided to write a small tutorial on how the general process works. There is a lot to do so, let's get to it.
@@ -39,11 +39,9 @@ Although you can create a Next.js project using one of the starter templates tha
 npx create-next-app your-blog-name-here
 ```
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/how-to-make-blog-with-next-sanity/create-new-post_oq3x9b"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/create-new-post.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673836619036"
 	alt="creating new posts"
-	width={1918}
-	height={426}
 />
 
 Once the process has finished you can type `npm run dev` in your terminal to start the developer server on `localhost:3000`. Now you can open your Next project in your text editor or IDE.
@@ -77,11 +75,9 @@ This will open a development server in the URL: `localhost:3333`
 
 Now you can go to `localhost:3333` in your web browser and you will be asked to log in. Remember to log in using the same method you used to register. If everything has gone correctly you should have something like the picture below in your web browser.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/how-to-make-blog-with-next-sanity/sanity-studio-local-server_zfbtmw"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/sanity-studio-local-server.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673836619652"
 	alt="sanity studio local server"
-	width={818}
-	height={295}
 />
 
 ## Connect Sanity and Next Js
@@ -90,13 +86,13 @@ Now you can go to `localhost:3333` in your web browser and you will be asked to 
 
 First, we're going to create a sanity client in order to tell Next where to fetch data. So inside your next project, create a file for the sanity client, for example, `client.js`. Inside we're going to type this:
 
-```js:client.js
+```js
 import sanityClient from '@sanity/client';
 
 export default sanityClient({
-  projectId: 'YOUR_PROJECT_ID',
-  dataset: 'production',
-  useCdn: true,
+	projectId: 'YOUR_PROJECT_ID',
+	dataset: 'production',
+	useCdn: true,
 });
 ```
 
@@ -107,11 +103,9 @@ Finally, your project ID can be found in 2 places.
 - Inside your studio folder, on the sanity.json file you can see the `projectId`.
 - In your browser navigate to sanity.io and log in. Inside your dashboard select your project and below your project name, you can see your project ID.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/how-to-make-blog-with-next-sanity/sanity-project-id_ebiqdp"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/sanity-project-id.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673836619147"
 	alt="sanity project id"
-	width={2138}
-	height={776}
 />
 
 ### Sanity to Next Connection
@@ -120,20 +114,14 @@ Now we need to tell sanity that our next project can be trusted. So, on the same
 
 Add your development server: `http://localhost:3000`
 
-<CloudinaryImage
-	mdx
-	publicId="sergiobarria/posts/how-to-make-blog-with-next-sanity/add-local-server_uxcpga"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/add-local-server.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673836619198"
 	alt="adding sanity studio local server to CORS origin"
-	width={1140}
-	height={471}
 />
 
-<CloudinaryImage
-	mdx
-	publicId="sergiobarria/posts/how-to-make-blog-with-next-sanity/adding-url_lg1rgo"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/adding-url.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673836619067"
 	alt="adding url to CORS origin"
-	width={975}
-	height={348}
 />
 
 **IMPORTANT:** Once we deploy our blog, we need to come back here and add our URL for deployment in order to be able to fetch data during production.
@@ -142,11 +130,9 @@ Add your development server: `http://localhost:3000`
 
 First, let's make sure we have some data to fetch. So, in our sanity studio, local server (in the browser) let's add a new post. You can start by using any "dummy data" for a start. Just type any data on the input boxes. In the case of the author and category, you can either leave it empty or create an author and category on the correspondent content tabs, you can read more about the content models in the sanity docs [here](https://www.sanity.io/guides/implementing-a-content-model-in-sanity-io). Remember to click the publish button once you have finished creating your dummy post.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/how-to-make-blog-with-next-sanity/create-new-post_oq3x9b"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/create-new-post.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673836619036"
 	alt="creating new posts"
-	width={1918}
-	height={426}
 />
 
 Now that we have some data to fetch, let's go to our next js pages and inside the index.js (or any page on which you want to fetch data).
@@ -159,7 +145,7 @@ Sanity provides two ways of data fetching. The first is using standard GraphQL. 
 
 Using GROQ is very simple and somewhat similar to GraphQL. To fetch our data, we're going to type something like this:
 
-```js:index.js
+```js
 import sanityClient from '../sanity'
 
 export default function index({posts}) {
@@ -222,12 +208,12 @@ npm i @sanity/block-content-to-react
 
 This package will help us to render our Rich text (portable text) very easily. Import the package in the corresponding component and use it like this.
 
-```js:YourComponent.js
+```js
 import BlockContent from '@sanity/block-content-to-react';
 
 export default function YourComponent(props) {
-  // your code here
-  return <BlockContent blocks={props.body} />;
+	// your code here
+	return <BlockContent blocks={props.body} />;
 }
 ```
 

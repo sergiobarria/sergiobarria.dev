@@ -21,7 +21,7 @@ Before adding pagination, we have to create a template that will be used to rend
 
 You can see on the code snippet below, we created a template page called `blog-list-template.js`. Inside this template, the most important part to adding pagination is, inside our graphql query we need to add two (2) query variables (skip and limit). These variables help us determine how many items we'll have per page and how many items we have to skip in order to create the next page.
 
-```js:postTemplate.js
+```js
 import React from 'react';
 import { graphql } from 'gatsby';
 
@@ -50,12 +50,12 @@ The rest of your template can be created according to what your project needs.
 
 ## 2. Create a gatsby-node function
 
-```js:gatsby-node.js
+```js
 const path = require('path');
 
 async function pagination({ graphql, actions }) {
-  const { createPage } = actions;
-  const { data } = await grapqhl(`
+	const { createPage } = actions;
+	const { data } = await grapqhl(`
     {
       allSanityPost {
         totalCount
@@ -63,21 +63,21 @@ async function pagination({ graphql, actions }) {
     }
   `);
 
-  const { totalCount } = data.allSanityPost;
-  const postsPerPage = 10;
-  const numPages = Math.ceil(totalCount / postsPerPage);
-  Array.from({ length: numPages }).forEach((_, i) => {
-    createPage({
-      path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-      component: path.resolve('./src/templates/blog-list-template.js'),
-      context: {
-        limit: postsPerPage,
-        skip: i * postsPerPage,
-        numPages,
-        currentPage: i + 1,
-      }
-    })
-  })
+	const { totalCount } = data.allSanityPost;
+	const postsPerPage = 10;
+	const numPages = Math.ceil(totalCount / postsPerPage);
+	Array.from({ length: numPages }).forEach((_, i) => {
+		createPage({
+			path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+			component: path.resolve('./src/templates/blog-list-template.js'),
+			context: {
+				limit: postsPerPage,
+				skip: i * postsPerPage,
+				numPages,
+				currentPage: i + 1,
+			},
+		});
+	});
 }
 ```
 
@@ -99,12 +99,12 @@ All these props are passed to our `template/page` via pageContext. For example, 
 
 The last thing to do is to export the `createPages` function and wait for all the promises to resolve. Now just restart the server and check on your newly created pages. If you used the same path as in the example that means that your first page will be on the route `/blog` after that the next pages will be on `/blog/:index`.
 
-```js:gatsby-node.js
+```js
 exports.createPages = async ({ graphql, actions }) => {
-  await Promise.all([
-    pagination({ graphql, actions }),
-    // rest of your functions
-  ]);
+	await Promise.all([
+		pagination({ graphql, actions }),
+		// rest of your functions
+	]);
 };
 ```
 

@@ -7,15 +7,13 @@ coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/create-github-pro
 isFeatured: false
 ---
 
-import { CloudinaryImage } from '~/shared/components/jsx';
+import Image from '~/shared/components/svelte/Image.svelte';
 
 As a developer, there is a good chance that as part of your job or training you've been using Github to store your projects or share them in order to collaborate with others. Depending on the time you have using Github you may have noticed how many features Github offers us. But, among this many features, it's possible you may have not noticed (especially if you're a beginner) that Github gives us the possibility of adding a custom profile to our Github page.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/github-profile/profile-with-readme_ntfga3"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/profile-with-readme_ntfga3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926196862"
 	alt="creating new profile with readme"
-	width={2500}
-	height={988}
 />
 
 In this short guide, let's see how we can create this profile and how we can style it in basically any way we want in order to make it look great.
@@ -24,23 +22,13 @@ In case you don't know what is a Github profile page, I will leave you a link he
 
 You can check my Github profile [here](https://github.com/sergiobarria).
 
-## Table of Contents
-
-- [Table of Contents](#table-of-contents)
-- [How to create a Github profile](#how-to-create-a-github-profile)
-- [How to add Icons and images](#how-to-add-icons-and-images)
-- [How to add stats](#how-to-add-stats)
-- [Skies are the limit...](#skies-are-the-limit)
-
 ## How to create a Github profile
 
 Creating your profile page is as easy as it gets. The only thing you have to do is **create a new repository** and as a repo name, you have to put the exact same name from your **user profile**. As you can see from the image below if your user name is "octocat", that's the exact name you have to use for this new repository (make sure to type it exactly as your username).
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/github-profile/repo-username-match_vpezej"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/repo-username-match_vpezej.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926190059"
 	alt="repo user name"
-	width={1494}
-	height={436}
 />
 
 As soon as you add the name for your new repository, a green box with a message will show telling you that you discovered a special Github repo for your profile page. Also, you can add the `README.md` file here or create it later, in this guide, we will leave this file for later.
@@ -51,7 +39,7 @@ Now, since our profile is nothing more than a `README.md` file, we can edit it i
 
 Inside this folder initialize a new git repo and link it to the repo that you created on Github for your profile (the same way as if this was any other regular project you're pushing), this way, every time you commit new changes you can push them to Github and your profile will be automatically updated.
 
-```bash:terminal
+```bash
 $ git init
 $ git add README.md
 $ git commit -m "first commit"
@@ -64,8 +52,9 @@ Once you create your new folder, inside create a file and call it `README.md`. T
 
 In order to test that we connected our repo correctly, we can test it by writing some basic content in our `README.md` inside our favorite text editor. Below you can find some basic markdown text you can copy and paste to your file. Save the changes and push them to Github.
 
-```md:README.md
+```markdown
 ## Hi there
+
 - 👷🏼‍♂️ I'm currently working on something cool!
 - 🤓 I'm currently learning JavaScript
 - 💬 Ask me about JavaScript
@@ -73,11 +62,9 @@ In order to test that we connected our repo correctly, we can test it by writing
 
 If everything went ok, you should have something like the image below on your Github profile.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/github-profile/profile-with-readme_ntfga3"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/profile-with-readme_ntfga3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926196862"
 	alt="stats card"
-	width={2500}
-	height={988}
 />
 
 Of course, creating your profile page is one thing. But there is a high chance that you want to personalize it even more and make it actually yours. There are plenty of things you can add so, let's get to it.
@@ -87,7 +74,7 @@ Of course, creating your profile page is one thing. But there is a high chance t
 The first thing we can add is some images, this can be static and other formats like `.gif` for example.
 To add images you can use `img` tags and add to them an `src` attribute like this:
 
-```md:README.md
+```markdown
 <img align="right" alt="GIF" src="https://github.com/abhisheknaiidu/abhisheknaiidu/blob/master/code.gif?raw=true" width="500" height="320" />
 ```
 
@@ -103,7 +90,7 @@ Note: In case you don't know how to use the shields website, there are some shor
 
 I'll add some more badges examples to help you out.
 
-```md:README.md
+```markdown
 [![HTML Badge](https://img.shields.io/badge/-html-E54C22?style=for-the-badge&labelColor=black&logo=html5&logoColor=E54C22)](#)
 [![React Badge](https://img.shields.io/badge/-React-61DBFB?style=for-the-badge&labelColor=black&logo=react&logoColor=61DBFB)](#)
 [![Python Badge](https://img.shields.io/badge/-python-3674A7?style=for-the-badge&labelColor=black&logo=python&logoColor=3674A7)](#)
@@ -120,11 +107,9 @@ To add your Github Stats Card is as simple as copying this line of code and past
 
 Now, add your username where is indicated in the above code. As soon as you push your new changes to Github, you should see something like this:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/github-profile/stats-card_bkrv59"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/stats-card_bkrv59.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926201830"
 	alt="stats card"
-	width={281}
-	height={116}
 />
 
 You can check the package repo in order to add more cards to your profile. Also, you can change stuff like themes, icons, and many other interesting things, and you can find them just with a quick search of the documentation.

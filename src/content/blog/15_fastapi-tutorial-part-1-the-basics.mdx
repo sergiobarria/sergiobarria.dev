@@ -7,7 +7,8 @@ coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/15-fastapi-tutori
 isFeatured: true
 ---
 
-import { CloudinaryImage, CalloutBox } from '~/shared/components/jsx';
+import CalloutBox from '~/shared/components/svelte/CalloutBox.svelte';
+import Image from '~/shared/components/svelte/Image.svelte';
 
 ## Introduction
 
@@ -75,7 +76,7 @@ Let's see both alternatives next.
 
 If you downloaded/cloned the starter project you can find a `main.py` file inside with the following content:
 
-```python:main.py
+```python
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -101,11 +102,9 @@ $ uvicorn app.main:app --reload
 
 In your browser, go to `http://localhost:8000`, if you see the following result, you're good to go.
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/server-hello-world-raw_j4ndbc"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/server-hello-world-raw_j4ndbc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142591"
 	alt="server response message"
-	width={250}
-	height={108}
 />
 
 <CalloutBox type="info">
@@ -152,7 +151,7 @@ I'm also using the `black` library as a code formatter, this is an optional step
 
 Finally, in your root directory create a folder called `app` (we will talk about why doing it this way later), inside this folder create this two files: `__init__.py` and a `main.py` file and add the following code to the `main.py` file and run it.
 
-```python:main.py
+```python
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -170,11 +169,9 @@ $ uvicorn app.main:app --reload
 
 If everything went ok, weather you created the project from scratch or copied it from Github, you should see the following result of running your server by navigating in your browser to `http://localhost:8000`:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/server-hello-world-raw_j4ndbc"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/server-hello-world-raw_j4ndbc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142591"
 	alt="server response message"
-	width={250}
-	height={108}
 />
 
 We should end up with the following folder structure.
@@ -209,7 +206,7 @@ So far, we're just getting started with our setup, but, before starting with the
 2. Then we install the main project dependencies: [FastAPI](https://fastapi.tiangolo.com/) and [Uvicorn](https://www.uvicorn.org/). Later we will install other dependencies, but, for the moment this is enough.
 3. Finally we create a `main.py` file inside our project's root. We end up with the following:
 
-```python:main.py
+```python
 from fastapi import FastAPI
 
 app = FastAPI()
@@ -227,11 +224,9 @@ If we run our `uvicorn` server, we see the following result on the default route
 $ uvicorn app.main:app --reload
 ```
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/server-hello-world-raw_j4ndbc"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/server-hello-world-raw_j4ndbc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142591"
 	alt="server response message"
-	width={250}
-	height={108}
 />
 
 <CalloutBox type="info">
@@ -283,7 +278,7 @@ First, let's work with the `endpoints` folder, inside it, let's create the 3 fil
 
 FastAPI allows us to create separated routers for our application, that way it's easier to separate our project in different files. For example, for our application, we'll have routes for `books`, `users`, `authors`; now, instead of creating 1 file for all our endpoints, with FastAPI router we can create 1 file for each part of our routing system (1 file for books, 1 for users, and so on...). To do this, inside our `books.py` file:
 
-```python:books.py
+```python
 from fastapi import APIRouter
 
 # Instanciate a new fastapi router
@@ -299,7 +294,7 @@ books = [
 
 The `router` variable has all the properties from the `APIRouter` class. This will allow us to create new decorators for each of the required HTTP methods (`GET`, `POST`, `PUT`, `DELETE`). Having this in mind, let's create a new route for our required methods.
 
-```python:books.py
+```python
 # code above omitted 👆
 
 @router.get("/")
@@ -315,7 +310,7 @@ The first method will be a `GET` method to retrieve books from our API. Now befo
 
 To connect our router, let's go to the `api.py` file created in the same level as our `books.py` file. Inside we copy the following code.
 
-```python:api.py
+```python
 from fastapi import APIRouter
 
 from . import books
@@ -334,7 +329,7 @@ Let's review the code:
 
 Finally, in our `main.py` we import this new router.
 
-```python:main.py
+```python
 # from fastapi import FastAPI
 
 from app.endpoints.api import api_router
@@ -365,31 +360,25 @@ Normally, when we create a new API, we use something like [Postman](https://www.
 
 To make use of the docs, all we have to do is, in our browser go to `http://localhost:8000/docs`. You should see something like this:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/get-all-books-base-route_dxwdjk"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/get-all-books-base-route_dxwdjk.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142277"
 	alt="server response for base route"
-	width={1697}
-	height={450}
 />
 
 You can see, we already have two new endpoints, one `GET` for the path `/api/books/` and one `GET` for our default `index` route created in the `main.py` file.
 
 You can expand this routes and will see something like this:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/get-books-route-details_wdpvla"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/get-books-route-details_wdpvla.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929143282"
 	alt="server response details in docs"
-	width={1436}
-	height={704}
 />
 
 You can try this endpoint by clicking on the `Try it out` button and then click the `Execute` button. You should get a response like this:
 
-<CloudinaryImage
-	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/get-books-response_vpgqwm"
+<Image
+	src="https://ik.imagekit.io/l5swuiqdn/personal-website/get-books-response_vpgqwm.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142515"
 	alt="get books response object"
-	width={1432}
-	height={701}
 />
 
 You notice, in the response body we get exactly the same 3 dummy books we created on our `books.py` file.
