@@ -6,6 +6,7 @@ import SocialLinks from '~/shared/components/SocialLinks.astro';
 import FeaturedPostCard from '~/shared/components/FeaturedPostCard.astro';
 import FeaturedProjects from '~/shared/components/FeaturedProjects.astro';
 
+export const prerender = true;
 const blogEntries = await getCollection('blog');
 const featuredPosts = blogEntries.filter((entry) => entry?.data?.isFeatured);
 ---

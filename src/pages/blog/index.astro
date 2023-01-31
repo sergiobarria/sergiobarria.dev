@@ -5,6 +5,7 @@ import MainLayout from '~/layouts/MainLayout.astro';
 import PageLayout from '~/shared/components/PageLayout.astro';
 import BlogPostsList from '~/shared/components/svelte/BlogPostsList.svelte';
 
+export const prerender = true;
 const blogEntries = await getCollection('blog');
 ---
 
