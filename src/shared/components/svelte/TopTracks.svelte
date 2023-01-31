@@ -23,7 +23,9 @@
 		<ul class="mt-4 md:columns-2 gap-x-10">
 			{#each data?.tracks as track, idx (track.id)}
 				<li
-					class={clsx('flex items-center justify-between border-b border-surface-four')}
+					class={clsx(
+						'flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800/50'
+					)}
 					transition:fade={{
 						duration: 500,
 						delay: idx * 100,

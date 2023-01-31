@@ -1,7 +1,26 @@
 ---
 import MainLayout from '~/layouts/MainLayout.astro';
+
+import PageLayout from '~/shared/components/PageLayout.astro';
+import Metrics from '~/shared/components/Metrics.astro';
+import TopTracks from '~/shared/components/svelte/TopTracks.svelte';
+
+export const prerender = true;
 ---
 
 <MainLayout>
-	<div>Dashboard page</div>
+	<PageLayout
+		title="Dashboard"
+		intro="Here I can track different metrics by collecting data from some of the platforms I use.That way I can see my personal coding stats, habits, progress..."
+	>
+		<section id="stats" class="my-16">
+			<h2 class="text-2xl font-bold text-font-two">Metrics</h2>
+			<Metrics />
+		</section>
+
+		<section id="top-spotify-tracks">
+			<h2 class="text-2xl font-bold text-font-two">Top Spotify Tracks</h2>
+			<TopTracks client:load />
+		</section>
+	</PageLayout>
 </MainLayout>
