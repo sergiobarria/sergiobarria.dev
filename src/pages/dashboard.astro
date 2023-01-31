@@ -5,7 +5,8 @@ import PageLayout from '~/shared/components/PageLayout.astro';
 import Metrics from '~/shared/components/Metrics.astro';
 import TopTracks from '~/shared/components/svelte/TopTracks.svelte';
 
-export const prerender = true;
+// NOTE: Cannot pre-render this page because it calls API endpoints
+// export const prerender = true;
 ---
 
 <MainLayout>

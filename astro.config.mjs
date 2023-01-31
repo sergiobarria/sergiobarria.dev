@@ -67,7 +67,7 @@ export default defineConfig({
 			},
 		}),
 		svelte(),
-		image(),
+		// image(),
 	],
 	vite: {
 		server: {
