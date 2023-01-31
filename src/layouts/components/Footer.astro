@@ -20,7 +20,7 @@ import { navLinks } from '../../../site.json';
 					)}
 				>
 					<div class="text-sm">
-						<SpotifyCard />
+						<SpotifyCard client:load />
 						<ul class="flex items-center gap-1 md:gap-2">
 							{navLinks.map((link) => <NavLink link={link} />)}
 						</ul>
