@@ -21,6 +21,7 @@ specifiers:
   '@radix-ui/react-icons': ^1.1.1
   '@rgossiaux/svelte-headlessui': ^1.0.2
   '@skeletonlabs/skeleton': ^0.99.5
+  '@tailwindcss/aspect-ratio': ^0.4.2
   '@tailwindcss/forms': ^0.5.3
   '@tailwindcss/typography': ^0.5.9
   '@types/node': ^18.11.18
@@ -127,6 +128,7 @@ dependencies:
 
 devDependencies:
   '@skeletonlabs/skeleton': 0.99.5
+  '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.4
   '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.4
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
   '@types/node': 18.11.18
@@ -1281,6 +1283,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /@tailwindcss/aspect-ratio/0.4.2_tailwindcss@3.2.4:
+    resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.2.4_postcss@8.4.21
+    dev: true
 
   /@tailwindcss/forms/0.5.3_tailwindcss@3.2.4:
     resolution: {integrity: sha512-y5mb86JUoiUgBjY/o6FJSFZSEttfb3Q5gllE4xoKjAAD+vBrnIhE4dViwUuow3va8mpH4s9jyUbUbrRGoRdc2Q==}

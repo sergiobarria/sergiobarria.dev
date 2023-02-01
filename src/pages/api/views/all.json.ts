@@ -6,7 +6,6 @@ export const get: APIRoute = async () => {
 	try {
 		const records = await prisma.post.findMany();
 		const views = records.reduce((acc, { views }) => acc + views, 0);
-		console.log('views', views);
 
 		return {
 			status: 200,

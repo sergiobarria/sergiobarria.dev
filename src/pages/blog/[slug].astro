@@ -58,7 +58,11 @@ const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
 					</time>
 
 					<!-- Cover Image -->
-					<Image src={data?.coverImage} alt={data?.title} styles="rounded-2xl" />
+					<!-- TODO: use a better Image component -->
+					<div class="aspect-h-[1.25] aspect-w-2 md:aspect-w-3 md:aspect-h-2">
+						<img src={data?.coverImage} alt={data?.title} class="rounded-2xl" />
+					</div>
+					<!-- <Image src={data?.coverImage} alt={data?.title} styles="rounded-2xl" /> -->
 
 					<!-- Post Meta -->
 					<div class="flex items-center gap-3 bg-zinc-200 dark:bg-zinc-700 p-3 my-3 rounded-2xl">
