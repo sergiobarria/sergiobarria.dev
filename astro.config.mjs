@@ -15,7 +15,6 @@ import image from '@astrojs/image'; // TODO: remove Astro Image integration if n
 import vercel from '@astrojs/vercel/serverless';
 
 // App Plugins
-import { remarkReadingTime } from './plugins/remark-reading-time.mjs';
 
 const AnchorLinkIcon = h(
 	'svg',
@@ -38,8 +37,8 @@ export default defineConfig({
 	site: 'https://sergiobarria.com',
 	markdown: {
 		shikiConfig: {
-			// css-variables tells shiki to read the theme from CSS variables
 			theme: 'material-ocean',
+			// css-variables tells shiki to read the theme from CSS variables
 			// theme: 'css-variables',
 			// theme: 'dracula',
 		},
@@ -53,7 +52,7 @@ export default defineConfig({
 				},
 			],
 		],
-		remarkPlugins: [remarkReadingTime, remarkCodeTitles],
+		remarkPlugins: [remarkCodeTitles],
 	},
 	integrations: [
 		react(),

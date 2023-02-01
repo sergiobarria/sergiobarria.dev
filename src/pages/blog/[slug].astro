@@ -2,6 +2,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import clsx from 'clsx';
 import { format } from 'date-fns';
+import readingTime from 'reading-time';
 
 import MainLayout from '~/layouts/MainLayout.astro';
 import BackLink from '~/shared/components/BackLink.astro';
@@ -27,6 +28,7 @@ const { entry } = Astro.props as Props;
 const { Content, headings } = await entry.render();
 const { slug, data } = entry;
 
+const readTime = readingTime(entry.body);
 const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
 ---
 
@@ -76,7 +78,7 @@ const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
 							</svg>
 
 							<!-- <span>{readingTime} min read</span> -->
-							<span class="text-sm">{data?.readingTime ?? '--'} min read</span>
+							<span class="text-sm">{readTime?.text}</span>
 						</p>
 						<p class="flex items-center gap-2">
 							<svg
