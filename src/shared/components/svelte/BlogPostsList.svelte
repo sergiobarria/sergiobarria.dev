@@ -42,7 +42,7 @@
 		<Button
 			id="toggle-view-list"
 			type="button"
-			class="py-3 rounded-2xl bg-zinc-200 dark:bg-zinc-800/90 focus:ring-0"
+			class="p-3 rounded-2xl bg-zinc-200 dark:bg-zinc-800/90 focus:ring-0"
 			on:click={() => (view = 'list')}
 		>
 			<svg
