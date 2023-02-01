@@ -14,7 +14,6 @@ interface Props {
 	entry: CollectionEntry<'blog'>;
 }
 
-export const prerender = true;
 export async function getStaticPaths() {
 	const blogEntries = await getCollection('blog');
 
@@ -30,11 +29,12 @@ const { slug, data } = entry;
 
 const readTime = readingTime(entry.body);
 const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
+
+export const prerender = true;
 ---
 
 <MainLayout>
-	<!-- <pre>{JSON.stringify(entry, null, 2)}</pre> -->
-	<div class="xl:relative">
+	<div class="lg:relative">
 		<div class="mx-auto max-w-2xl">
 			<BackLink href="/blog" />
 

@@ -1,9 +1,50 @@
 ---
+import { getCollection } from 'astro:content';
+import clsx from 'clsx';
+
 import MainLayout from '~/layouts/MainLayout.astro';
+import PageLayout from '~/shared/components/PageLayout.astro';
+
+const snippetsEntries = await getCollection('snippets');
+console.log('snippetsEntries', snippetsEntries);
 
 export const prerender = true;
 ---
 
 <MainLayout>
-	<div>Snippets page</div>
+	<PageLayout
+		title="My Snippets Collection"
+		intro="This is a collection of useful code snippets I've found and used in some of my projects"
+	>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+			{
+				snippetsEntries.map((entry) => (
+					<a
+						href={`/snippets/${entry?.slug}`}
+						class={clsx(
+							'block max-w-sm p-6 bg-white border border-zinc-200 rounded-xl shadow',
+							'hover:bg-zinc-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700'
+						)}
+					>
+						<h2 class="mb-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+							{entry?.data?.title}
+						</h2>
+						<p class="font-normal text-zinc-700 dark:text-zinc-400">{entry?.data?.description}</p>
+						<div class="flex flex-wrap gap-2 mt-2">
+							{entry.data?.tags?.map((tag) => (
+								<small
+									class={clsx(
+										'bg-zinc-100 text-zinc-800 text-xs font-medium px-2.5 py-0.5',
+										'rounded dark:bg-zinc-600 dark:text-zinc-300'
+									)}
+								>
+									{tag}
+								</small>
+							))}
+						</div>
+					</a>
+				))
+			}
+		</div>
+	</PageLayout>
 </MainLayout>
