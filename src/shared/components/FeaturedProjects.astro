@@ -35,10 +35,10 @@ const featuredProjects = projectsEntries.filter((entry) => entry.data.isFeatured
 							<div class="flex items-center justify-between">
 								<span>{data?.name}</span>
 								<span class="flex items-center gap-3">
-									<a href="" title="Source Code" data-tooltip-placement="top">
+									<a href={data?.repo} title="Source Code" data-tooltip-placement="top">
 										<GithubIcon styles="w-5 h-5 hover:fill-teal-500" />
 									</a>
-									<a href="" title="Live Website" data-tooltip-placement="top">
+									<a href={data?.liveUrl} title="Live Website" data-tooltip-placement="top">
 										<ExternalLink styles="w-5 h-5 hover:fill-teal-500" />
 									</a>
 								</span>
