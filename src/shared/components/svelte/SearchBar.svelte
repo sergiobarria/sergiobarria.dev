@@ -20,7 +20,7 @@
 			aria-label="Search posts"
 			class={clsx(
 				'block w-full mt-6 pl-14 pr-4 py-3 bg-zinc-100 dark:bg-zinc-800',
-				'text-font-two rounded-lg',
+				'text-font-two rounded-full',
 				'focus:ring-teal-500 focus:border-none'
 			)}
 			bind:value={query}

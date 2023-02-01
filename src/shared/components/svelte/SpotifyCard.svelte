@@ -19,7 +19,7 @@
 <div
 	class={clsx(
 		'flex items-center mx-auto gap-3 text-sm border border-zinc-100 dark:border-zinc-700/40',
-		'rounded-md p-2 max-w-[250px] md:mx-0 mb-3 text-zinc-800 dark:text-zinc-100'
+		'rounded-full p-2 max-w-[250px] md:mx-0 mb-3 text-zinc-800 dark:text-zinc-100'
 	)}
 >
 	{#if data?.isPlaying}
