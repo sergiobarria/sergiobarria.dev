@@ -17,6 +17,7 @@ specifiers:
   '@fontsource/permanent-marker': ^4.5.7
   '@headlessui/react': ^1.7.7
   '@popperjs/core': ^2.11.6
+  '@prisma/client': ^4.9.0
   '@radix-ui/react-icons': ^1.1.1
   '@rgossiaux/svelte-headlessui': ^1.0.2
   '@skeletonlabs/skeleton': ^0.99.5
@@ -56,6 +57,7 @@ specifiers:
   prettier: ^2.8.3
   prettier-plugin-astro: ^0.6.0
   prettier-plugin-tailwindcss: ^0.2.2
+  prisma: ^4.9.0
   react: ^18.2.0
   react-dom: ^18.2.0
   react-popper: ^2.3.0
@@ -92,6 +94,7 @@ dependencies:
   '@fontsource/permanent-marker': 4.5.7
   '@headlessui/react': 1.7.7_biqbaboplfbrettd7655fr4n2y
   '@popperjs/core': 2.11.6
+  '@prisma/client': 4.9.0_prisma@4.9.0
   '@radix-ui/react-icons': 1.1.1_react@18.2.0
   '@rgossiaux/svelte-headlessui': 1.0.2_svelte@3.55.1
   '@vercel/analytics': 0.1.8_react@18.2.0
@@ -144,6 +147,7 @@ devDependencies:
   prettier: 2.8.3
   prettier-plugin-astro: 0.6.0
   prettier-plugin-tailwindcss: 0.2.2_2qwvfblbwzrwh2qqwuf42fy6jy
+  prisma: 4.9.0
   reading-time: 1.5.0
   rehype-autolink-headings: 6.1.1
   rehype-pretty-code: 0.5.1_shiki@0.12.1
@@ -1186,6 +1190,28 @@ packages:
 
   /@popperjs/core/2.11.6:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
+
+  /@prisma/client/4.9.0_prisma@4.9.0:
+    resolution: {integrity: sha512-bz6QARw54sWcbyR1lLnF2QHvRW5R/Jxnbbmwh3u+969vUKXtBkXgSgjDA85nji31ZBlf7+FrHDy5x+5ydGyQDg==}
+    engines: {node: '>=14.17'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5
+      prisma: 4.9.0
+    dev: false
+
+  /@prisma/engines-version/4.9.0-42.ceb5c99003b99c9ee2c1d2e618e359c14aef2ea5:
+    resolution: {integrity: sha512-M16aibbxi/FhW7z1sJCX8u+0DriyQYY5AyeTH7plQm9MLnURoiyn3CZBqAyIoQ+Z1pS77usCIibYJWSgleBMBA==}
+    dev: false
+
+  /@prisma/engines/4.9.0:
+    resolution: {integrity: sha512-t1pt0Gsp+HcgPJrHFc+d/ZSAaKKWar2G/iakrE07yeKPNavDP3iVKPpfXP22OTCHZUWf7OelwKJxQgKAm5hkgw==}
+    requiresBuild: true
 
   /@proload/core/0.3.3:
     resolution: {integrity: sha512-7dAFWsIK84C90AMl24+N/ProHKm4iw0akcnoKjRvbfHifJZBLhaDsDus1QJmhG12lXj4e/uB/8mB/0aduCW+NQ==}
@@ -5000,6 +5026,14 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       parse-ms: 2.1.0
+
+  /prisma/4.9.0:
+    resolution: {integrity: sha512-bS96oZ5oDFXYgoF2l7PJ3Mp1wWWfLOo8B/jAfbA2Pn0Wm5Z/owBHzaMQKS3i1CzVBDWWPVnOohmbJmjvkcHS5w==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 4.9.0
 
   /prismjs/1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}

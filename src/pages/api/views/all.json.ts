@@ -1,25 +1,43 @@
 import type { APIRoute } from 'astro';
 
-import { getAllRecords } from 'lib/pocketbase/pb';
+import { prisma } from 'lib/prisma/client';
 
 export const get: APIRoute = async () => {
-	const totalViews = await getAllRecords();
+	try {
+		const records = await prisma.post.findMany();
+		const views = records.reduce((acc, { views }) => acc + views, 0);
+		console.log('views', views);
 
-	if (!totalViews) {
+		return {
+			status: 200,
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ total: views }),
+		};
+	} catch (error) {
+		console.error(error);
 		return {
 			status: 500,
-			body: JSON.stringify({ message: 'Error fetching data' }),
-			headers: {
-				'content-type': 'application/json',
-			},
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ error: 'Internal server error' }),
 		};
 	}
+	// const totalViews = await getAllRecords();
 
-	return {
-		status: 200,
-		headers: {
-			'content-type': 'application/json',
-		},
-		body: JSON.stringify({ total: totalViews }),
-	};
+	// if (!totalViews) {
+	// 	return {
+	// 		status: 500,
+	// 		body: JSON.stringify({ message: 'Error fetching data' }),
+	// 		headers: {
+	// 			'content-type': 'application/json',
+	// 		},
+	// 	};
+	// }
+
+	// return {
+	// 	status: 200,
+	// 	headers: {
+	// 		'content-type': 'application/json',
+	// 	},
+	// 	body: JSON.stringify({ total: totalViews }),
+	// };
 };
