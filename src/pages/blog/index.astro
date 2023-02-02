@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 
 import MainLayout from '~/layouts/MainLayout.astro';
 import PageLayout from '~/shared/components/PageLayout.astro';
-import BlogPostsList from '~/shared/components/svelte/BlogPostsList.svelte';
+import { BlogPostsList } from '~/shared/components/jsx';
 
 export const prerender = true;
 const blogEntries = await getCollection('blog');
