@@ -1,10 +1,13 @@
 ---
+import {
+	GitHubLogoIcon,
+	TwitterLogoIcon,
+	EnvelopeClosedIcon,
+	LinkedInLogoIcon,
+} from '@radix-ui/react-icons';
+
 import MainLayout from '~/layouts/MainLayout.astro';
 import SocialLink from '~/shared/components/SocialLink.astro';
-import GithubIcon from '~/shared/icons/GithubIcon.svelte';
-import TwitterIcon from '~/shared/icons/TwitterIcon.svelte';
-import EnvelopeIcon from '~/shared/icons/EnvelopeIcon.svelte';
-import LinkedinIcon from '~/shared/icons/LinkedinIcon.svelte';
 
 import { socialLinks } from '../../site.json';
 ---
@@ -61,28 +64,28 @@ import { socialLinks } from '../../site.json';
 					href={socialLinks.find((link) => link.name === 'github')?.url}
 					label="Follow me on GitHub"
 				>
-					<GithubIcon styles="w-6 h-6" />
+					<GitHubLogoIcon width={18} height={18} />
 				</SocialLink>
 				<SocialLink
 					href={socialLinks.find((link) => link.name === 'twitter')?.url}
 					label="Follow me on Twitter"
 					styles="mt-4"
 				>
-					<TwitterIcon styles="w-6 h-6" />
+					<TwitterLogoIcon width={18} height={18} />
 				</SocialLink>
 				<SocialLink
 					href={socialLinks.find((link) => link.name === 'linkedin')?.url}
 					label="Follow me on LinkedIn"
 					styles="mt-4"
 				>
-					<LinkedinIcon styles="w-6 h-6" />
+					<LinkedInLogoIcon width={18} height={18} />
 				</SocialLink>
 				<SocialLink
 					href={socialLinks.find((link) => link.name === 'email')?.url}
 					label="Send me an email"
 					styles="pt-8 mt-8 border-t border-zinc-100 dark:border-zinc-700/40"
 				>
-					<EnvelopeIcon styles="w-6 h-6" />
+					<EnvelopeClosedIcon width={18} height={18} />
 				</SocialLink>
 			</ul>
 		</div>
