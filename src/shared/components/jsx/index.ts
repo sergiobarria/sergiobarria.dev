@@ -1,2 +1,4 @@
 export * from './CloudinaryImage';
-export * from './MyselfSection';
+export * from './ThemeSwitcher';
+export * from './SpotifyCard';
+// export * from './MyselfSection';

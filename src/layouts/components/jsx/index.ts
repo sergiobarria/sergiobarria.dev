@@ -1,1 +1,1 @@
-export * from './FloatingMobileMenu';
+export * from './MobileNavigation';

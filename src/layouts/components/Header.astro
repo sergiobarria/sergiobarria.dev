@@ -1,10 +1,10 @@
 ---
 import clsx from 'clsx';
 
-import LogoIcon from '~/shared/icons/LogoIcon.svelte';
 import DesktopNavigation from './DesktopNavigation.astro';
-import MobileNavigation from './svelte/MobileNavigation.svelte';
-import ThemeSwitcher from '~/shared/components/svelte/ThemeSwitcher.svelte';
+import { MobileNavigation } from './jsx';
+import { ThemeSwitcher } from '~/shared/components/jsx';
+import { LogoIcon } from '~/shared/icons/LogoIcon';
 
 const pathname = new URL(Astro.request.url).pathname;
 ---
