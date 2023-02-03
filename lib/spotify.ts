@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export interface SpotifyData {
 	isPlaying: boolean;
 	title: string;
@@ -60,12 +58,16 @@ export const getAccessToken = async () => {
 		refresh_token: SPOTIFY_REFRESH_TOKEN!,
 	}).toString();
 
-	const res = await axios.post<{ access_token: string }>(TOKEN_ENDPOINT, data, {
+	const res = await fetch(TOKEN_ENDPOINT, {
+		method: 'POST',
 		headers: {
 			Authorization: `Basic ${token}`,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
+		body: data,
 	});
 
-	return res.data.access_token;
+	const json = (await res.json()) as { access_token: string };
+
+	return json.access_token;
 };
