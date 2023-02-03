@@ -7,3 +7,4 @@ export * from './Loader';
 export * from './ProgressBar';
 export * from './Metrics';
 export * from './TOC';
+export * from './Step';
