@@ -1,15 +1,13 @@
 import useSWR from 'swr';
 
 import { fetcher } from 'lib/fetcher';
-import { useServerFunctions } from './useServerFunctions';
 
 type Views = {
 	total: string;
 };
 
 export const useViews = (slug: string) => {
-	const { apiUrl } = useServerFunctions();
-	const { data, error } = useSWR<Views>(`${apiUrl}/views/${slug}`, fetcher);
+	const { data, error } = useSWR<Views>(`/api/views/${slug}.json`, fetcher);
 
 	return {
 		views: data?.total,
