@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
 import type { CollectionEntry } from 'astro:content';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
+import { animate, stagger } from 'motion';
 
 interface ListCardProps {
 	post: CollectionEntry<'blog'>;
@@ -11,6 +13,10 @@ function ListCard({ post }: ListCardProps) {
 	const { slug, data } = post;
 
 	const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
+
+	useEffect(() => {
+		animate('#card', { opacity: [0, 1] }, { duration: 0.75, delay: stagger(0.2) });
+	}, []);
 
 	return (
 		<article id="card" className="md:grid md:grid-cols-4 md:items-baseline">

@@ -32,7 +32,6 @@ const featuredPosts = blogEntries.filter((entry) => entry?.data?.isFeatured);
 		<section id="featured-posts">
 			<div class="flex flex-col gap-16">
 				<h2 class="text-3xl font-bold tracking-tight sm:text-4xl">Featured Posts</h2>
-				<!-- {featuredPosts?.map((post) => <PostCard as='' />)} -->
 				{featuredPosts?.map((post) => <FeaturedPostCard post={post} />)}
 			</div>
 		</section>
@@ -47,3 +46,14 @@ const featuredPosts = blogEntries.filter((entry) => entry?.data?.isFeatured);
 		</div>
 	</div>
 </MainLayout>
+
+<script>
+	import { animate, stagger } from 'motion';
+
+	const hero = document.querySelector('#hero');
+	const boxes = document.querySelectorAll('#feat-post');
+
+	if (hero) animate(hero, { x: [-20, 0], opacity: [0, 0.5, 1] }, { duration: 1 });
+	if (boxes)
+		animate(boxes, { y: [-20, 0], opacity: [0, 1] }, { duration: 1, delay: stagger(0.25) });
+</script>

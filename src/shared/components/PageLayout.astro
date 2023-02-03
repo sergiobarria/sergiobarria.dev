@@ -7,7 +7,7 @@ interface Props {
 const { title, intro } = Astro.props as Props;
 ---
 
-<header class="max-w-2xl">
+<header id="page-header" class="max-w-2xl">
 	<h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
 		{title}
 	</h1>
@@ -17,3 +17,11 @@ const { title, intro } = Astro.props as Props;
 	<!-- 👇🏼 Content Slot 👇🏼 -->
 	<slot />
 </div>
+
+<script>
+	import { animate, stagger } from 'motion';
+
+	const header = document.getElementById('page-header');
+	if (header)
+		animate(header, { x: [-20, 0], opacity: [0, 1] }, { duration: 1, delay: stagger(0.25) });
+</script>

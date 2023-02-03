@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import type { CollectionEntry } from 'astro:content';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
+import { animate, stagger } from 'motion';
 
 interface GridCardProps {
 	post: CollectionEntry<'blog'>;
@@ -9,8 +11,13 @@ interface GridCardProps {
 function GridCard({ post }: GridCardProps) {
 	const { slug, data } = post;
 
+	useEffect(() => {
+		animate('#card', { opacity: [0, 1] }, { duration: 0.75, delay: stagger(0.1) });
+	}, []);
+
 	return (
 		<div
+			id="card"
 			className={clsx(
 				'max-w-sm p-6 bg-white border border-zinc-200 rounded-lg shadow dark:bg-zinc-800 dark:border-zinc-700'
 			)}

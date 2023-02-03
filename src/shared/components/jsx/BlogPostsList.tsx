@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { CollectionEntry } from 'astro:content';
-import useSWR from 'swr';
 import { ListBulletIcon, GridIcon } from '@radix-ui/react-icons';
 import { Tooltip } from 'react-tooltip';
 import clsx from 'clsx';
