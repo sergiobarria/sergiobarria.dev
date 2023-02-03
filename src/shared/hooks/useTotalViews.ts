@@ -1,18 +1,17 @@
-import { useSWR } from 'sswr';
+import useSWR from 'swr';
 
-import { useServerFunctions } from './useServerFunctions';
+import { fetcher } from 'lib/fetcher';
 
 type Views = {
 	total: string;
 };
 
 export const useTotalViews = () => {
-	const { apiUrl } = useServerFunctions();
-	const { data, error } = useSWR<Views>(`${apiUrl}/posts/views.json`);
+	const { data: views, error } = useSWR<{ total: string }>('/api/views/all.json', fetcher);
 
 	return {
-		views: data,
-		isLoading: !error && !data,
+		views,
+		isLoading: !error && !views,
 		isError: error,
 	};
 };

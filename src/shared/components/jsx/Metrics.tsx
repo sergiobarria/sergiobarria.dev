@@ -1,10 +1,10 @@
-import { m, LazyMotion, domAnimation } from 'framer-motion';
+import { useEffect } from 'react';
 import useSWR from 'swr';
+import { animate, stagger } from 'motion';
 
 import { gqlFetcher, GET_USER_METRICS, User } from 'lib/gql';
-import type { Wakatime, WakatimeAllTime } from '~/shared/types';
 
-import { fetcher } from 'lib/fetcher';
+import { useTotalViews, useWakaStats, useWakaAllTime } from '~/shared/hooks';
 
 interface MetricsCardProps {
 	title: string;
@@ -13,18 +13,24 @@ interface MetricsCardProps {
 }
 
 export function MetricsCard({ title, value, index }: MetricsCardProps) {
+	useEffect(() => {
+		animate(
+			'#metrics-card',
+			{ opacity: [0, 1], x: [index % 2 === 0 ? -10 : 10, 0], y: [-10, 0] },
+			{ duration: 0.5, delay: stagger(0.2) }
+		);
+	}, []);
+
 	return (
-		<m.div
-			initial={{ opacity: 0, translateX: index % 2 === 0 ? -10 : 10, translateY: -10 }}
-			animate={{ opacity: 1, translateX: 0, translateY: 0 }}
-			transition={{ duration: 0.7, delay: index * 0.1 }}
+		<div
+			id="metrics-card"
 			className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p6 dark:bg-zinc-800"
 		>
 			<dt className="truncate text-sm font-medium text-zinc-500 dark:text-zinc-400">{title}</dt>
 			<dd className="mt-1 text-3xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-200">
 				{value}
 			</dd>
-		</m.div>
+		</div>
 	);
 }
 
@@ -33,18 +39,9 @@ interface MetricsProps {
 }
 
 export function Metrics({ totalPosts }: MetricsProps) {
-	const { data: views, error: isViewsError } = useSWR<{ total: string }>(
-		'/api/views/all.json',
-		fetcher
-	);
-	const { data: wakaStats, error: isWakaStatsError } = useSWR<Wakatime>(
-		'/api/wakatime/stats.json',
-		fetcher
-	);
-	const { data: wakaAllTime, error: isWakaAllTimeError } = useSWR<WakatimeAllTime>(
-		'/api/wakatime/all-time.json',
-		fetcher
-	);
+	const { views, isError: isViewsError } = useTotalViews();
+	const { wakaStats, isError: isWakaStatsError } = useWakaStats();
+	const { wakaAllTime, isError: isWakaAllTimeError } = useWakaAllTime();
 
 	const { data: githubUser, error: isGithubError } = useSWR<User>(GET_USER_METRICS, gqlFetcher);
 
@@ -68,7 +65,7 @@ export function Metrics({ totalPosts }: MetricsProps) {
 	};
 
 	return (
-		<LazyMotion features={domAnimation}>
+		<>
 			<div className="mt-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 				<MetricsCard title="Total Posts" value={totalPosts} index={1} />
 
@@ -114,6 +111,6 @@ export function Metrics({ totalPosts }: MetricsProps) {
 					There was an error fetching one or more stats, please try again later
 				</p>
 			)}
-		</LazyMotion>
+		</>
 	);
 }
