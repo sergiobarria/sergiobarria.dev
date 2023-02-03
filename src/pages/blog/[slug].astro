@@ -8,7 +8,7 @@ import { ClockIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 import MainLayout from '~/layouts/MainLayout.astro';
 import BackLink from '~/shared/components/BackLink.astro';
 import Image from '~/shared/components/svelte/Image.svelte';
-import TOC from '~/shared/components/svelte/TOC.svelte';
+import { TOC } from '~/shared/components/jsx';
 import ViewsCounter from '~/shared/components/svelte/ViewsCounter.svelte';
 import { ProgressBar } from '~/shared/components/jsx';
 
@@ -84,7 +84,7 @@ export const prerender = true;
 				</header>
 
 				<!-- Post Content -->
-				<TOC {headings} />
+				<TOC headings={headings} />
 				<div class="prose dark:prose-invert">
 					<Content />
 				</div>
