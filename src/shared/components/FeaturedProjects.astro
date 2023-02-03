@@ -2,9 +2,6 @@
 import { getCollection } from 'astro:content';
 import { RocketIcon, GitHubLogoIcon, ExternalLinkIcon } from '@radix-ui/react-icons';
 
-import GithubIcon from '../icons/GithubIcon.svelte';
-import ExternalLink from '../icons/ExternalLink.svelte';
-
 const projectsEntries = await getCollection('projects');
 const featuredProjects = projectsEntries.filter((entry) => entry.data.isFeatured);
 ---
@@ -12,7 +9,7 @@ const featuredProjects = projectsEntries.filter((entry) => entry.data.isFeatured
 <div class="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40">
 	<h2 class="flex gap-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
 		<RocketIcon width={24} height={24} className="text-teal-500" />
-		<span>Featured Projects!</span>
+		<span>Featured Projects</span>
 	</h2>
 
 	<!-- Featured Projects List -->

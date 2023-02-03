@@ -1,0 +1,63 @@
+---
+import { StackIcon, CheckCircledIcon, BackpackIcon } from '@radix-ui/react-icons';
+
+const stack = [
+	{ id: 0, label: 'Frontend', name: 'React, Next.js' },
+	{ id: 1, label: 'Backend', name: 'Node.js, Express' },
+	{ id: 2, label: 'Database', name: 'MongoDB' },
+	{ id: 3, label: 'Mobile', name: 'React Native' },
+	{ id: 4, label: 'Styling', name: 'Tailwind CSS' },
+];
+
+const learning = [
+	{ id: 0, label: 'Frontend', name: 'Vue.js, Svelte' },
+	{ id: 1, label: 'Backend', name: 'Go' },
+	{ id: 2, label: 'Database', name: 'PostgreSQL' },
+	{ id: 2, label: 'DevOps', name: 'Docker' },
+];
+---
+
+<div class="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40">
+	<h2 class="flex items-center gap-3 text-sm mb-6 font-semibold text-zinc-900 dark:text-zinc-100">
+		<StackIcon width={24} height={24} className="text-teal-500" aria-hidden="true" />
+		<span>Favorite Stack</span>
+	</h2>
+
+	{
+		stack.map((item) => (
+			<p class="mt-2 gap-3 flex items-center text-sm text-zinc-900 dark:text-zinc-100">
+				<CheckCircledIcon
+					width={18}
+					height={18}
+					className="mr-2 text-teal-500"
+					aria-hidden="true"
+				/>
+				<span>
+					<span class="font-semibold">{item.label}:</span> {item.name}
+				</span>
+			</p>
+		))
+	}
+	<hr class="my-6 border-zinc-100 dark:border-zinc-700/40" />
+
+	<h2 class="flex items-center gap-3 text-sm mb-6 font-semibold text-zinc-900 dark:text-zinc-100">
+		<BackpackIcon width={18} height={18} className="text-teal-500" aria-hidden="true" />
+		<span>What I'm Learning right now</span>
+	</h2>
+
+	{
+		learning.map((item) => (
+			<p class="mt-2 gap-3 flex items-center text-sm text-zinc-900 dark:text-zinc-100">
+				<CheckCircledIcon
+					width={18}
+					height={18}
+					className="mr-2 text-teal-500"
+					aria-hidden="true"
+				/>
+				<span>
+					<span class="font-semibold">{item.label}:</span> {item.name}
+				</span>
+			</p>
+		))
+	}
+</div>

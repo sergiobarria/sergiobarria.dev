@@ -5,6 +5,7 @@ import MainLayout from '~/layouts/MainLayout.astro';
 import SocialLinks from '~/shared/components/SocialLinks.astro';
 import FeaturedPostCard from '~/shared/components/FeaturedPostCard.astro';
 import FeaturedProjects from '~/shared/components/FeaturedProjects.astro';
+import FavoriteStack from '~/shared/components/FavoriteStack.astro';
 
 export const prerender = true;
 const blogEntries = await getCollection('blog');
@@ -39,8 +40,9 @@ const featuredPosts = blogEntries.filter((entry) => entry?.data?.isFeatured);
 			<section id="featured-projects">
 				<FeaturedProjects />
 			</section>
-			<!-- TODO: Create this components -->
-			<section id="favorite-stack">favorite stack</section>
+			<section id="favorite-stack">
+				<FavoriteStack />
+			</section>
 			<!-- <section id="latest">latest</section> -->
 			<!-- TODO: Newsletter component? 👇🏼 -->
 		</div>
