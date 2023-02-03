@@ -85,7 +85,6 @@ function AnimatedBars() {
 
 export function SpotifyCard() {
 	const { data } = useSWR<SpotifyData>('/api/spotify/now-playing.json', fetcher);
-	console.log('data', data);
 
 	return (
 		<div

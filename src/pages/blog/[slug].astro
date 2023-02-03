@@ -10,6 +10,7 @@ import BackLink from '~/shared/components/BackLink.astro';
 import Image from '~/shared/components/svelte/Image.svelte';
 import TOC from '~/shared/components/svelte/TOC.svelte';
 import ViewsCounter from '~/shared/components/svelte/ViewsCounter.svelte';
+import { ProgressBar } from '~/shared/components/jsx';
 
 interface Props {
 	entry: CollectionEntry<'blog'>;
@@ -35,6 +36,7 @@ export const prerender = true;
 ---
 
 <MainLayout>
+	<ProgressBar client:load />
 	<div class="lg:relative">
 		<div class="mx-auto max-w-2xl">
 			<BackLink href="/blog" />
