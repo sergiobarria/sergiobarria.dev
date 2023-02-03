@@ -65,7 +65,8 @@ export function Metrics({ totalPosts }: MetricsProps) {
 	};
 
 	return (
-		<>
+		<section id="stats" className="my-16">
+			<h2 className="text-2xl font-bold text-font-two">Metrics</h2>
 			<div className="mt-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
 				<MetricsCard title="Total Posts" value={totalPosts} index={1} />
 
@@ -111,6 +112,6 @@ export function Metrics({ totalPosts }: MetricsProps) {
 					There was an error fetching one or more stats, please try again later
 				</p>
 			)}
-		</>
+		</section>
 	);
 }

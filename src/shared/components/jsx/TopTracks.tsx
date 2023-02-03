@@ -54,12 +54,14 @@ export function TopTracks() {
 	if (error) return <p className="mt-8 text-center opacity-70">No data available...</p>;
 
 	return (
-		data && (
+		<section id="top-spotify-tracks">
+			<h2 className="text-2xl font-bold text-font-two">Top Spotify Tracks</h2>
+
 			<ul className="mt-4 md:columns-2 gap-x-10">
-				{data.tracks.map((track, idx) => (
+				{data?.tracks.map((track, idx) => (
 					<TrackItem key={track.id} track={track} idx={idx} />
 				))}
 			</ul>
-		)
+		</section>
 	);
 }
