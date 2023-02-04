@@ -1,41 +1,35 @@
-import { useState, useEffect } from 'react';
+import clsx from 'clsx';
 import { MagnifyingGlassIcon } from '@radix-ui/react-icons';
 
-import { searchQuery as nSearchQuery } from '~/stores';
-import { useDebounce } from '~/shared/hooks';
+interface SearchBarProps {
+	label: string;
+	setQuery: (query: string) => void;
+}
 
-import clsx from 'clsx';
-
-export const SearchBar = () => {
-	const [searchQuery, setSearchQuery] = useState<string>('');
-	const debouncedSearchQuery = useDebounce(searchQuery, 500);
-
-	useEffect(() => {
-		nSearchQuery.set(debouncedSearchQuery);
-	}, [debouncedSearchQuery]);
-
+export function SearchBar({ label, setQuery }: SearchBarProps) {
 	return (
 		<form>
-			<label htmlFor="search-bar" className="sr-only">
-				Search
+			<label htmlFor="posts-search-bar" className="sr-only">
+				{' '}
+				{label}{' '}
 			</label>
 			<div className="relative mb-7">
 				<div className="absolute top-0 bottom-0 left-0 flex items-center pl-6">
-					<MagnifyingGlassIcon width={24} height={24} />
+					<MagnifyingGlassIcon />
 				</div>
 				<input
-					id="search-bar"
+					id="posts-search-bar"
 					type="text"
-					placeholder="Search posts by names..."
-					aria-label="Search posts by names"
-					onChange={(e) => setSearchQuery(e.target.value)}
+					placeholder="Search posts..."
+					aria-label="Search posts"
 					className={clsx(
-						'block w-full mt-6 pl-14 pr-4 py-3 bg-surface-two',
-						'text-font-two rounded-lg',
-						'focus:ring-brand-accent focus:border-none'
+						'block w-full mt-6 pl-14 pr-4 py-3 bg-zinc-100 dark:bg-zinc-800',
+						'text-font-two rounded-full',
+						'focus:ring-teal-500 focus:border-none'
 					)}
+					onChange={(e) => setQuery(e.target.value)}
 				/>
 			</div>
 		</form>
 	);
-};
+}

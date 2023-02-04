@@ -20,4 +20,8 @@ pnpm-debug.log*
 .DS_Store
 .vercel
 
-old_pages/
+# astro collections types (generated)
+.astro
+
+# others
+_old_pages/

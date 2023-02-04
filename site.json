@@ -1,9 +1,12 @@
 {
-	"title": "",
-	"titleTemplate": "%s | Sergio Barria",
-	"defaultTitle": "Sergio Barria | Engineer, developer and writer",
+	"title": "Sergio Barria | Engineer, developer and writer",
 	"description": "Sergio Barria is a Full Stack Developer from Panama City, Panama. He is a passionate developer who loves to learn new things and share his knowledge with others.",
 	"url": "https://sergiobarria.com",
+	"keywords": "developer, website, javascript, engineer, typescript, nodejs",
+	"image": {
+		"src": "/images/banner.png",
+		"alt": "website banner"
+	},
 	"author": "Sergio Barria",
 	"canonical": "https://www.sergiobarria.com/",
 	"openGraph": {
@@ -60,6 +63,7 @@
 		}
 	],
 	"navLinks": [
+		{ "id": 0, "href": "/about", "label": "About", "number": "01." },
 		{ "id": 1, "href": "/blog", "label": "Blog", "number": "01." },
 		{ "id": 2, "href": "/projects", "label": "Projects", "number": "02." },
 		{ "id": 3, "href": "/snippets", "label": "Snippets", "number": "03." },

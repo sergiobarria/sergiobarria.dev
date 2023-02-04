@@ -1,0 +1,43 @@
+---
+import clsx from 'clsx';
+import {
+	GitHubLogoIcon,
+	LinkedInLogoIcon,
+	TwitterLogoIcon,
+	EnvelopeClosedIcon,
+} from '@radix-ui/react-icons';
+
+import SocialLink from '~/shared/components/SocialLink.astro';
+
+import { socialLinks } from '../../../site.json';
+
+interface Props {
+	size?: number;
+	styles?: string;
+}
+
+const { size = 18, styles } = Astro.props as Props;
+---
+
+<div class={clsx('mt-4 flex gap-6 text-zinc-700 dark:text-zinc-500', styles)}>
+	<ul role="list" class="flex items-center gap-4">
+		<SocialLink href={socialLinks.find((link) => link.name === 'github')?.url} tooltip="My GitHub">
+			<GitHubLogoIcon width={size} height={size} />
+		</SocialLink>
+		<SocialLink
+			href={socialLinks.find((link) => link.name === 'twitter')?.url}
+			tooltip="My Twitter"
+		>
+			<TwitterLogoIcon width={size} height={size} />
+		</SocialLink>
+		<SocialLink
+			href={socialLinks.find((link) => link.name === 'linkedin')?.url}
+			tooltip="My Linkedin"
+		>
+			<LinkedInLogoIcon width={size} height={size} />
+		</SocialLink>
+		<SocialLink href={socialLinks.find((link) => link.name === 'email')?.url} tooltip="My Email">
+			<EnvelopeClosedIcon width={size} height={size} />
+		</SocialLink>
+	</ul>
+</div>

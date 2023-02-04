@@ -1,56 +1,23 @@
 ---
-import type { Props as SeoProps } from 'astro-seo';
-import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
+import MainLayout from '~/layouts/MainLayout.astro';
+
+import PageLayout from '~/shared/components/PageLayout.astro';
 import { TopTracks, Metrics } from '~/shared/components/jsx';
 
-import site from '../../site.json';
+const blogEntries = await getCollection('blog');
 
-const posts = await Astro.glob('../content/blog/*.mdx');
-
-const metadata: SeoProps = {
-	title: 'Dashboard | Sergio Barria',
-	canonical: 'https://sergiobarria.com/dashboard',
-	openGraph: {
-		basic: {
-			title: 'Dashboard page',
-			url: 'https://sergiobarria.com/dashboard',
-			image: site.openGraph.images[0].url,
-			type: 'website',
-		},
-		image: {
-			alt: 'Website Cover',
-		},
-	},
-};
+export const prerender = true;
 ---
 
-<BaseLayout metadata={metadata}>
-	<section id="header">
-		<h1>Dashboard</h1>
-		<p>
-			This dashboard is inspired by <a
-				href="https://leerob.io/dashboard"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="underline text-brand-accent decoration-wavy decoration-brand-accent hover:text-brand-accent/90"
-				>Lee Robinson's Website.</a
-			> My main goal with this page was to track some of my personal coding stats, while consuming different
-			API's and getting up to date live data.
-		</p>
-		<hr class="my-3" />
-	</section>
+<MainLayout title="Dashboard | Sergio Barria">
+	<PageLayout
+		title="Dashboard"
+		intro="Here I can track different metrics by collecting data from some of the platforms I use. That way I can see my personal coding stats, habits, progress..."
+	>
+		<Metrics client:load totalPosts={blogEntries.length} />
 
-	<section id="stats" class="my-8">
-		<h2>Metrics</h2>
-		<Metrics client:load totalPosts={posts.length} />
-	</section>
-
-	<section id="top-spotify-tracks" class="mb-8">
-		<h2>Top Spotify Tracks</h2>
-		<p>
-			Want to know what I'm currently listening the most? Here's my top tracks list from Spotify
-		</p>
 		<TopTracks client:load />
-	</section>
-</BaseLayout>
+	</PageLayout>
+</MainLayout>

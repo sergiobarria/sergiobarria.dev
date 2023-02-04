@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import { RocketIcon, GitHubLogoIcon, ExternalLinkIcon } from '@radix-ui/react-icons';
+
+const projectsEntries = await getCollection('projects');
+const featuredProjects = projectsEntries.filter((entry) => entry.data.isFeatured);
+---
+
+<section id="featured-projects">
+	<div class="p-6 border rounded-2xl border-zinc-100 dark:border-zinc-700/40">
+		<h2 class="flex gap-3 text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+			<RocketIcon width={24} height={24} className="text-teal-500" />
+			<span>Featured Projects</span>
+		</h2>
+
+		<!-- Featured Projects List -->
+		<ol class="mt-6 space-y-4 divide-y divide-zinc-400 dark:divide-zinc-700/40">
+			{
+				featuredProjects.map(({ slug, data }) => (
+					<li>
+						<dl class="flex flex-wrap mt-3 flex-auto gap-x-2">
+							<dt class="sr-only">Project</dt>
+							<dd class="flex-none w-full text-sm font-medium text-zinc-900 dark:text-zinc-100">
+								<div class="flex items-center justify-between">
+									<span>{data?.name}</span>
+									<span class="flex items-center gap-3">
+										<a href={data?.repo} title="Source Code" data-tooltip-placement="top">
+											<GitHubLogoIcon
+												width={18}
+												height={18}
+												className="text-zinc-600 dark:text-zinc-500 hover:text-teal-500 hover:dark:text-teal-500"
+											/>
+										</a>
+										<a href={data?.liveUrl} title="Live Website" data-tooltip-placement="top">
+											<ExternalLinkIcon
+												width={18}
+												height={18}
+												className="text-zinc-600 dark:text-zinc-500 hover:text-teal-500 hover:dark:text-teal-500"
+											/>
+										</a>
+									</span>
+								</div>
+							</dd>
+
+							<dt class="sr-only">Description</dt>
+							<dd class="flex-none w-full mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+								{data?.description.substring(0, 100)}...
+							</dd>
+
+							<dt class="sr-only">Stack</dt>
+							<dd class="flex-none w-full mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+								{data?.stack.map((stack) => (
+									<span class="inline-flex items-center px-2 py-0.5 mr-1 text-xs font-medium leading-4 text-zinc-900 bg-zinc-100 rounded-full dark:text-zinc-100 dark:bg-zinc-700">
+										{stack}
+									</span>
+								))}
+							</dd>
+						</dl>
+					</li>
+				))
+			}
+		</ol>
+	</div>
+</section>

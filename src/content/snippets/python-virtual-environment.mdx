@@ -1,11 +1,15 @@
 ---
 title: 'Create python virtual environment'
-description: 'how to create a python virtual environment using pip or poetry'
-tags: 'python,poetry,pip,virtual environment'
+description: 'How to create a python virtual environment using pip or poetry'
+tags:
+  - Python
+  - Poetry
+  - Virtual Environment
+  - Pip
 order: 1
 ---
 
-import { Step } from '~/shared/components/jsx';
+import { Step } from '~/shared/components/jsx/Step.tsx';
 
 ### With Pip
 
@@ -27,7 +31,7 @@ $ poetry add DEPENDENCY_NAME
 
 `pyproject.toml` file example:
 
-```toml:pyproject.toml
+```toml
 [tool.poetry]
 name = "project name"
 version = "0.1.0"

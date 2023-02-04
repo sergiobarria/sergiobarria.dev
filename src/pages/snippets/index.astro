@@ -1,43 +1,51 @@
 ---
-import type { Props as SeoProps } from 'astro-seo';
-import BaseLayout from '~/layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import clsx from 'clsx';
 
-import { SnippetsList } from '~/shared/components/jsx';
-import { parseSnippet } from './_utils';
+import MainLayout from '~/layouts/MainLayout.astro';
+import PageLayout from '~/shared/components/PageLayout.astro';
 
-import site from '../../../site.json';
+const snippetsEntries = await getCollection('snippets');
 
-const data = await Astro.glob('../../content/snippets/*.mdx');
-const allSnippets = await Promise.all(data?.map(parseSnippet));
-
-const metadata: SeoProps = {
-	title: 'Snippets | Sergio Barria',
-	canonical: 'https://sergiobarria.com/snippets',
-	openGraph: {
-		basic: {
-			title: 'Snippets page',
-			url: 'https://sergiobarria.com/',
-			image: site.openGraph.images[0].url,
-			type: 'website',
-		},
-		image: {
-			alt: 'Website Cover',
-		},
-	},
-};
+export const prerender = true;
 ---
 
-<BaseLayout metadata={metadata}>
-	<section id="header">
-		<h1>Library</h1>
-		<hr />
-	</section>
-
-	<section id="snippets" class="mt-8">
-		<h2>All Snippets</h2>
-		<p>Here is a list of all snippets I've created</p>
-		<!-- TODO: Add Search bar -->
-		<!-- <span>Search Bar</span> -->
-		<SnippetsList client:visible snippets={allSnippets} />
-	</section>
-</BaseLayout>
+<MainLayout title="Snippets | Sergio Barria">
+	<PageLayout
+		title="My Snippets Collection"
+		intro="This is a collection of useful code snippets I've found and used in some of my projects"
+	>
+		<section id="snippets">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+				{
+					snippetsEntries.map((entry) => (
+						<a
+							href={`/snippets/${entry?.slug}`}
+							class={clsx(
+								'block md:max-w-sm p-6 bg-white border border-zinc-200 rounded-xl shadow',
+								'hover:bg-zinc-100 dark:bg-zinc-800 dark:border-zinc-700 dark:hover:bg-zinc-700'
+							)}
+						>
+							<h2 class="mb-2 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">
+								{entry?.data?.title}
+							</h2>
+							<p class="font-normal text-zinc-700 dark:text-zinc-400">{entry?.data?.description}</p>
+							<div class="flex flex-wrap gap-2 mt-2">
+								{entry.data?.tags?.map((tag) => (
+									<small
+										class={clsx(
+											'bg-zinc-100 text-zinc-800 text-xs font-medium px-2.5 py-0.5',
+											'rounded dark:bg-zinc-600 dark:text-zinc-300'
+										)}
+									>
+										{tag}
+									</small>
+								))}
+							</div>
+						</a>
+					))
+				}
+			</div>
+		</section>
+	</PageLayout>
+</MainLayout>

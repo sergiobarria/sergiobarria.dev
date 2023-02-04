@@ -1,49 +1,67 @@
-import useSWR from 'swr';
+import { useEffect } from 'react';
 import clsx from 'clsx';
+import useSWR from 'swr';
+import { animate, stagger } from 'motion';
 
 import { fetcher } from 'lib/fetcher';
 import type { TopSpotifyTracks, Track } from 'lib/spotify';
+import { Loader } from './Loader';
 
-export function TopTracks() {
-	const { data } = useSWR<TopSpotifyTracks>('/api/top-tracks', fetcher);
-
-	if (!data?.tracks) return <p className="mt-8 text-center opacity-70">No data available...</p>;
+function TrackItem({ track, idx }: { track: Track; idx: number }) {
+	useEffect(() => {
+		animate('#track', { opacity: [0, 1], y: [20, 0] }, { duration: 0.5, delay: stagger(0.1) });
+	}, []);
 
 	return (
-		<ul className="mt-4 md:columns-2 gap-x-10">
-			{data?.tracks.map((track: Track, idx: number) => {
-				const { id, artists, songUrl, title, images } = track;
-
-				return (
-					<li
-						key={id}
-						className={clsx('flex items-center justify-between border-b border-surface-four')}
+		<li
+			id="track"
+			key={track?.id}
+			className={clsx(
+				'flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800/50 pawn'
+			)}
+		>
+			<div id="pawn" className="first-of-type:flex first-of-type:items-baseline">
+				<span className="text-sm font-medium text-font-two opacity-70">{idx + 1}</span>
+				<div className="flex flex-col p-5 pl-3">
+					<a
+						href={track.songUrl}
+						className={clsx(
+							'overflow-hidden overflow-ellipsis whitespace-pre-wrap hover:underline',
+							'underline-offset-2 hover:text-brand decoration-wavy'
+						)}
+						target="_blank"
+						rel="noopener noreferrer"
 					>
-						<div className="first-of-type:flex first-of-type:items-baseline">
-							<span className="text-sm font-medium text-font-two opacity-70">{idx + 1}</span>
-							<div className="flex flex-col p-5 pl-3">
-								<a
-									href={songUrl}
-									className={clsx(
-										'overflow-hidden overflow-ellipsis whitespace-pre-wrap hover:underline',
-										'underline-offset-2 hover:text-brand decoration-wavy'
-									)}
-									target="_blank"
-									rel="noopener noreferrer"
-								>
-									{title}
-								</a>
-								<small className="overflow-hidden whitespace-pre-wrap opacity-70 overflow-ellipsis">
-									{artists}
-								</small>
-							</div>
-						</div>
-						<div>
-							<img src={images[0].url} width={40} height={40} />
-						</div>
-					</li>
-				);
-			})}
-		</ul>
+						{track.title}
+					</a>
+					<small className="overflow-hidden whitespace-pre-wrap opacity-70 overflow-ellipsis">
+						{track.artists}
+					</small>
+				</div>
+			</div>
+			<div>
+				<img src={track.images[0].url} width={40} height={40} alt={track.title} />
+			</div>
+		</li>
+	);
+}
+
+export function TopTracks() {
+	const { data, error } = useSWR<TopSpotifyTracks>('/api/spotify/top-tracks.json', fetcher);
+
+	if (!data && !error) return <Loader />;
+
+	if (error) return <p className="mt-8 text-center opacity-70">No data available...</p>;
+
+	return (
+		<section id="top-spotify-tracks">
+			<h2 className="text-2xl font-bold text-font-two">Top Spotify Tracks</h2>
+
+			<ul className="mt-4 md:columns-2 gap-x-10">
+				{data?.tracks.map((track, idx) => (
+					<TrackItem key={track.id} track={track} idx={idx} />
+				))}
+			</ul>
+		</section>
 	);
 }

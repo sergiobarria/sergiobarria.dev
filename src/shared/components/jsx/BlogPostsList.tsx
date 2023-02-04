@@ -1,68 +1,88 @@
-import { Fragment, useState, useEffect, useMemo } from 'react';
-import { useStore } from '@nanostores/react';
+import { useState } from 'react';
+import type { CollectionEntry } from 'astro:content';
+import { ListBulletIcon, GridIcon } from '@radix-ui/react-icons';
+import { Tooltip } from 'react-tooltip';
+import clsx from 'clsx';
 
-import { Pagination } from './Pagination';
-import type { Post } from '~/pages/blog/_utils';
-import { BlogPostCard } from './BlogPostCard';
-import { posts as nPosts, searchQuery as nSearchQuery } from '~/stores';
+import { SearchBar } from './SearchBar';
+import { PostsListView } from './PostsListView';
+import { PostsGridView } from './PostsGridView';
 
-interface BlogPostsListProps {
-	className?: string;
-	pageSize?: number;
-	posts: Post[];
+interface BlogPostListProps {
+	posts: CollectionEntry<'blog'>[];
 }
 
-export const BlogPostsList = ({ posts, pageSize = 9 }: BlogPostsListProps) => {
-	const $storeSearchQuery = useStore(nSearchQuery);
-	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [filteredPosts, setFilteredPosts] = useState<Post[]>(posts);
+export function BlogPostsList({ posts }: BlogPostListProps) {
+	const [isListView, setIsListView] = useState<boolean>(true);
+	const [query, setQuery] = useState<string>('');
 
-	useEffect(() => {
-		nPosts.set(posts);
-	}, []);
-
-	useEffect(() => {
-		const filteredPosts = posts.filter((post) => {
-			return post.title.toLowerCase().includes($storeSearchQuery.toLowerCase());
-		});
-
-		setFilteredPosts(filteredPosts);
-	}, [$storeSearchQuery]);
-
-	const currentData = useMemo(() => {
-		const firstPageIndex = (currentPage - 1) * pageSize;
-		const lastPageIndex = firstPageIndex + pageSize;
-
-		return filteredPosts.slice(firstPageIndex, lastPageIndex);
-	}, [currentPage, filteredPosts]);
-
-	if (!filteredPosts.length) {
-		return (
-			<div className="flex items-center justify-center">
-				<p className="text-font-two">No posts found for your search...</p>
-			</div>
+	const searchPosts = posts
+		.map((post) => ({
+			...post,
+			searchterms: `${post?.data?.title}`,
+		}))
+		.sort(
+			(a, b) =>
+				new Date(b.data?.publishedDate).getTime() - new Date(a.data?.publishedDate).getTime()
 		);
-	}
+
+	const filteredPosts = searchPosts.filter((post) => {
+		return post.searchterms.toLowerCase().includes(query.toLowerCase());
+	});
 
 	return (
-		<Fragment>
-			<div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-				{currentData.map((post) => {
-					const slug = post.url.split('/').pop();
+		<>
+			<div className="flex items-center gap-6">
+				<div className="flex-1">
+					<SearchBar label="Search posts..." setQuery={setQuery} />
+				</div>
 
-					return <BlogPostCard key={slug} post={post} />;
-				})}
+				<div className="flex items-center gap-4 text-zinc-500 dark:text-zinc-600">
+					<button
+						id="list-btn"
+						type="button"
+						onClick={() => setIsListView(true)}
+						className="p-3 rounded-full bg-zinc-200 dark:bg-zinc-800/90 focus:ring-0"
+						data-tooltip-content="List View"
+					>
+						<ListBulletIcon
+							width={24}
+							height={24}
+							className={clsx(isListView ? 'text-teal-500' : 'text-zinc-500 dark:text-zinc-600')}
+						/>
+					</button>
+					<button
+						id="grid-btn"
+						type="button"
+						onClick={() => setIsListView(false)}
+						className="p-3 rounded-full bg-zinc-200 dark:bg-zinc-800/90 focus:ring-0"
+						data-tooltip-content="Grid View"
+					>
+						<GridIcon
+							width={24}
+							height={24}
+							className={clsx(!isListView ? 'text-teal-500' : 'text-zinc-500 dark:text-zinc-600')}
+						/>
+					</button>
+				</div>
+				<Tooltip anchorId="list-btn" />
+				<Tooltip anchorId="grid-btn" />
 			</div>
 
-			{filteredPosts.length > pageSize && (
-				<Pagination
-					currentPage={currentPage}
-					pageSize={pageSize}
-					onPageChange={(page) => setCurrentPage(page)}
-					total={posts.length}
-					className=""
-				/>
+			{/* Render Posts */}
+			{filteredPosts.length > 0 ? (
+				isListView ? (
+					<PostsListView posts={filteredPosts} />
+				) : (
+					<PostsGridView posts={filteredPosts} />
+				)
+			) : (
+				<div className="text-center">
+					<h2 className="text-2xl font-bold text-font-two">No posts found 🙁</h2>
+					<p className="text-font-two">Oopps! Sorry, there are no results for: "{query}"</p>
+					<p className="text-font-two">Try searching for something else</p>
+				</div>
 			)}
-		</Fragment>
+		</>
 	);
-};
+}

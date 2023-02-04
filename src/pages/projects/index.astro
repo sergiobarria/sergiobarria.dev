@@ -1,37 +1,110 @@
 ---
-import type { Props as SeoProps } from 'astro-seo';
-import BaseLayout from '~/layouts/BaseLayout.astro';
-import { PinnedReposList } from '~/shared/components/jsx';
+import { getCollection } from 'astro:content';
+import clsx from 'clsx';
 
-import site from '../../../site.json';
+import MainLayout from '~/layouts/MainLayout.astro';
+import PageLayout from '~/shared/components/PageLayout.astro';
+import { CldImage } from '~/shared/components/jsx';
 
-const metadata: SeoProps = {
-	title: 'Projects | Sergio Barria',
-	canonical: 'https://sergiobarria.com/projects',
-	openGraph: {
-		basic: {
-			title: 'Projects page',
-			url: 'https://sergiobarria.com/projects',
-			image: site.openGraph.images[0].url,
-			type: 'website',
-		},
-		image: {
-			alt: 'Website Cover',
-		},
-	},
-};
+const projectsEntries = await getCollection('projects');
+
+export const prerender = true;
 ---
 
-<BaseLayout metadata={metadata}>
-	<section class="header" id="header">
-		<h1>My Portfolio</h1>
-		<p>Here is a summary of some of the personal and profesional projects I've work on.</p>
-		<hr />
-	</section>
+<MainLayout title="Portfolio | Sergio Barria">
+	<PageLayout
+		title="My Portfolio"
+		intro="Here is a summary of some of the personal and profesional projects I've work on."
+	>
+		<section id="projects">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mx-auto">
+				{
+					projectsEntries.map(({ data }) => (
+						<div
+							class={clsx(
+								'flex flex-col p-6 bg-white border border-zinc-200 rounded-lg shadow',
+								'dark:bg-zinc-800 dark:border-zinc-700 h-full'
+							)}
+						>
+							<CldImage
+								publicId="sergiobarria/spaceship-launch_lsag8o.png"
+								alt="rocket icon"
+								className="w-10 h-10 mb-2"
+								isGrayscale
+							/>
 
-	<section id="pinned" class="my-8">
-		<h2>Github Pinned Projects</h2>
-		<p>These are the projects pinned in my Github Profile and fetched via Github GraphQL API.</p>
-		<PinnedReposList client:visible />
-	</section>
-</BaseLayout>
+							<h5 class="mb-2 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white">
+								{data?.name}
+							</h5>
+
+							<p class="mb-3 text-sm font-normal text-zinc-500 dark:text-zinc-400">
+								{data?.description}
+							</p>
+
+							<div class="flex flex-wrap gap-2 mt-auto">
+								{data?.stack?.map((tag) => (
+									<small
+										class={clsx(
+											'bg-zinc-100 text-zinc-800 text-xs font-medium px-2.5 py-0.5',
+											'rounded dark:bg-zinc-600 dark:text-zinc-300'
+										)}
+									>
+										{tag}
+									</small>
+								))}
+							</div>
+
+							<div class="flex items-center justify-between text-sm mt-2">
+								{data?.liveUrl && (
+									<a
+										href={data.liveUrl}
+										class={clsx(
+											'inline-flex items-center justify-center p-1 text-sm font-medium text-teal-500',
+											'rounded-lg bg-zinc-50 hover:text-zinc-900 hover:bg-zinc-100 dark:text-teal-400',
+											'dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-teal-500 gap-1'
+										)}
+										target="_blank"
+										rel="noopener noreferrer"
+									>
+										<svg
+											class="w-5 h-5"
+											fill="currentColor"
+											viewBox="0 0 20 20"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+											<path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+										</svg>
+										<span class="w-full">Live Demo</span>
+									</a>
+								)}
+
+								<a
+									href={data?.repo}
+									class={clsx(
+										'inline-flex items-center justify-center p-1 text-sm font-medium text-teal-500',
+										'rounded-lg bg-zinc-50 hover:text-zinc-900 hover:bg-zinc-100 dark:text-teal-400',
+										'dark:bg-zinc-800 dark:hover:bg-zinc-700 dark:hover:text-teal-500 gap-1'
+									)}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<svg
+										class="w-5 h-5"
+										fill="currentColor"
+										viewBox="0 0 20 20"
+										xmlns="http://www.w3.org/2000/svg"
+									>
+										<path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+										<path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+									</svg>
+									<span class="w-full">Source Code</span>
+								</a>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</section>
+	</PageLayout>
+</MainLayout>
