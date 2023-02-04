@@ -100,9 +100,13 @@ export function SpotifyCard() {
 			)}
 
 			<div className="flex flex-col w-full gap-1">
-				<a href={data?.songUrl} className="text-sm font-semibold">
-					{data?.isPlaying ? <span>{data?.title}</span> : <span>Not Listening</span>}
-				</a>
+				{data?.isPlaying ? (
+					<a href={data?.songUrl} className="text-sm font-semibold">
+						{data?.title}
+					</a>
+				) : (
+					<span>Not Listening</span>
+				)}
 
 				{data?.isPlaying ? (
 					<div className="flex items-baseline justify-between w-full gap-3">
