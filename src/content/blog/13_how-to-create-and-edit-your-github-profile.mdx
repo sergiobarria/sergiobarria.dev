@@ -3,16 +3,16 @@ title: 'How to create and edit your Github profile'
 slug: 'how-to-create-and-edit-your-github-profile'
 publishedDate: '2021-08-06'
 summary: "In this how to guide, let's see how we can create a Github profile page and styling it to display stats, images, and much more to make it look the way we like it"
-coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/create-github-profile_y2dpbd.png'
+coverImage: 'sergiobarria/banners/create-github-profile_y2dpbd.png'
 isFeatured: false
 ---
 
-import Image from '~/shared/components/svelte/Image.svelte';
+import { CldImage } from '~/shared/components/jsx';
 
 As a developer, there is a good chance that as part of your job or training you've been using Github to store your projects or share them in order to collaborate with others. Depending on the time you have using Github you may have noticed how many features Github offers us. But, among this many features, it's possible you may have not noticed (especially if you're a beginner) that Github gives us the possibility of adding a custom profile to our Github page.
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/profile-with-readme_ntfga3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926196862"
+<CldImage
+	publicId="sergiobarria/posts/github-profile/profile-with-readme_ntfga3.png"
 	alt="creating new profile with readme"
 />
 
@@ -26,8 +26,8 @@ You can check my Github profile [here](https://github.com/sergiobarria).
 
 Creating your profile page is as easy as it gets. The only thing you have to do is **create a new repository** and as a repo name, you have to put the exact same name from your **user profile**. As you can see from the image below if your user name is "octocat", that's the exact name you have to use for this new repository (make sure to type it exactly as your username).
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/repo-username-match_vpezej.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926190059"
+<CldImage
+	publicId="sergiobarria/posts/github-profile/repo-username-match_vpezej.png"
 	alt="repo user name"
 />
 
@@ -62,10 +62,7 @@ In order to test that we connected our repo correctly, we can test it by writing
 
 If everything went ok, you should have something like the image below on your Github profile.
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/profile-with-readme_ntfga3.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926196862"
-	alt="stats card"
-/>
+<CldImage publicId="sergiobarria/posts/github-profile/stats-card_bkrv59.png" alt="stats card" />
 
 Of course, creating your profile page is one thing. But there is a high chance that you want to personalize it even more and make it actually yours. There are plenty of things you can add so, let's get to it.
 
@@ -107,10 +104,7 @@ To add your Github Stats Card is as simple as copying this line of code and past
 
 Now, add your username where is indicated in the above code. As soon as you push your new changes to Github, you should see something like this:
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/stats-card_bkrv59.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673926201830"
-	alt="stats card"
-/>
+<CldImage publicId="sergiobarria/posts/github-profile/stats-card_bkrv59.png" alt="stats card" />
 
 You can check the package repo in order to add more cards to your profile. Also, you can change stuff like themes, icons, and many other interesting things, and you can find them just with a quick search of the documentation.
 

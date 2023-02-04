@@ -3,7 +3,7 @@ title: 'FastAPI Tutorial (Part 2) - Routes'
 slug: 'fastapi-tutorial-part-2-routes'
 publishedDate: '2022-04-04'
 summary: "Let's see how to build an API using Python's framework FastAPI. This is part 2 of a series of posts where we build an API for a fictional book store. The project includes all the main topics required to build an API like: endpoints, authentication/authorization, databases, ORM's and  more. In this part of the series, we focus on creating differents endpoints to create, read, update and delete (CRUD) books from our API."
-coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/16-fastapi-tutorial-p2_i6lk0e.png'
+coverImage: 'sergiobarria/banners/16-fastapi-tutorial-p2_i6lk0e.png'
 isFeatured: false
 keywords:
   - FastAPI
@@ -12,8 +12,7 @@ keywords:
   - REST
 ---
 
-import Image from '~/shared/components/svelte/Image.svelte';
-import { CalloutBox } from '~/shared/components/jsx';
+import { CalloutBox, CldImage } from '~/shared/components/jsx';
 
 ## Introduction
 
@@ -107,8 +106,8 @@ app.include_router(api_router, prefix=settings.API_STR)
 
 Now, go to your API docs.
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/api-title-description_r6kmoe.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933288243"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/api-title-description_r6kmoe.png"
 	alt="api title description inside swagger docs"
 />
 
@@ -270,15 +269,15 @@ def get_books(limit: int = 1, skip: int = 0):
 
 If you refresh your browser, you can see two new fields in your docs (skip & limit).
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/endpoint-with-query-params_wv2k0k.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933288657"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/endpoint-with-query-params_wv2k0k.png"
 	alt="endpoint with query params"
 />
 
 Since we're adding default values, you can test your API and notice that now you only get 1 result instead of all the books in the dummy list (3).
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/endpoint-with-query-params-response_idfryj.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933289708"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/endpoint-with-query-params-response_idfryj.png"
 	alt="endpoint with query params response"
 />
 
@@ -358,8 +357,8 @@ api_router.include_router(authors.router, prefix="/authors", tags=["Authors"])
 
 In your API docs you should see something like this:
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/api-books-authors-routes_mmzmdl.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673933288452"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-2-routes/api-books-authors-routes_mmzmdl.png"
 	alt="endpoint with query params response"
 />
 

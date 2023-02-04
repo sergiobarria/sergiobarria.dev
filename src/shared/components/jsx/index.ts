@@ -1,4 +1,3 @@
-export * from './CloudinaryImage';
 export * from './ThemeSwitcher';
 export * from './SpotifyCard';
 export * from './BlogPostsList';
@@ -10,3 +9,4 @@ export * from './TOC';
 export * from './Step';
 export * from './ViewsCounter';
 export * from './CalloutBox';
+export * from './CldImage';

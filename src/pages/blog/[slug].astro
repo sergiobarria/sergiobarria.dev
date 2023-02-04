@@ -7,7 +7,7 @@ import { ClockIcon, EyeOpenIcon } from '@radix-ui/react-icons';
 
 import MainLayout from '~/layouts/MainLayout.astro';
 import BackLink from '~/shared/components/BackLink.astro';
-import { TOC, ViewsCounter, ProgressBar } from '~/shared/components/jsx';
+import { TOC, ViewsCounter, ProgressBar, CldImage } from '~/shared/components/jsx';
 
 interface Props {
 	entry: CollectionEntry<'blog'>;
@@ -58,11 +58,12 @@ export const prerender = true;
 					</time>
 
 					<!-- Cover Image -->
-					<!-- TODO: use a better Image component -->
-					<div class="aspect-h-[1.25] aspect-w-2 md:aspect-w-3 md:aspect-h-2">
-						<img src={data?.coverImage} alt={data?.title} class="rounded-2xl" />
-					</div>
-					<!-- <Image src={data?.coverImage} alt={data?.title} styles="rounded-2xl" /> -->
+					<CldImage
+						publicId={data?.coverImage}
+						alt={data?.title}
+						radius={50}
+						className="aspect-w-4 aspect-h-[2.5]"
+					/>
 
 					<!-- Post Meta -->
 					<div class="flex items-center gap-3 bg-zinc-200 dark:bg-zinc-700 p-3 my-3 rounded-2xl">

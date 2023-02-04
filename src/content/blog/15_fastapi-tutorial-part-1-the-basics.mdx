@@ -3,12 +3,11 @@ title: 'FastAPI Tutorial (Part 1) - The Basics'
 slug: 'fastapi-tutorial-part-1-the-basics'
 publishedDate: '2022-03-25'
 summary: "Let's learn how to build an API using Python framework FastAPI, by creating a online book store ecommerce service."
-coverImage: 'https://ik.imagekit.io/l5swuiqdn/personal-website/15-fastapi-tutorial_nxmyaz.png'
+coverImage: 'sergiobarria/banners/15-fastapi-tutorial_nxmyaz.png'
 isFeatured: true
 ---
 
-import { CalloutBox } from '~/shared/components/jsx';
-import Image from '~/shared/components/svelte/Image.svelte';
+import { CalloutBox, CldImage } from '~/shared/components/jsx';
 
 ## Introduction
 
@@ -102,8 +101,8 @@ $ uvicorn app.main:app --reload
 
 In your browser, go to `http://localhost:8000`, if you see the following result, you're good to go.
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/server-hello-world-raw_j4ndbc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142591"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/server-hello-world_mjyut7.png"
 	alt="server response message"
 />
 
@@ -169,8 +168,8 @@ $ uvicorn app.main:app --reload
 
 If everything went ok, weather you created the project from scratch or copied it from Github, you should see the following result of running your server by navigating in your browser to `http://localhost:8000`:
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/server-hello-world-raw_j4ndbc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142591"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/server-hello-world-raw_j4ndbc.png"
 	alt="server response message"
 />
 
@@ -224,8 +223,8 @@ If we run our `uvicorn` server, we see the following result on the default route
 $ uvicorn app.main:app --reload
 ```
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/server-hello-world-raw_j4ndbc.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142591"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/server-hello-world-raw_j4ndbc.png"
 	alt="server response message"
 />
 
@@ -360,8 +359,8 @@ Normally, when we create a new API, we use something like [Postman](https://www.
 
 To make use of the docs, all we have to do is, in our browser go to `http://localhost:8000/docs`. You should see something like this:
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/get-all-books-base-route_dxwdjk.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142277"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/get-all-books-base-route_dxwdjk.png"
 	alt="server response for base route"
 />
 
@@ -369,15 +368,15 @@ You can see, we already have two new endpoints, one `GET` for the path `/api/boo
 
 You can expand this routes and will see something like this:
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/get-books-route-details_wdpvla.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929143282"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/get-books-route-details_wdpvla.png"
 	alt="server response details in docs"
 />
 
 You can try this endpoint by clicking on the `Try it out` button and then click the `Execute` button. You should get a response like this:
 
-<Image
-	src="https://ik.imagekit.io/l5swuiqdn/personal-website/get-books-response_vpgqwm.png?ik-sdk-version=javascript-1.4.3&updatedAt=1673929142515"
+<CldImage
+	publicId="sergiobarria/posts/fastapi-tutorial-part-1-the-basics/get-books-response_vpgqwm.png"
 	alt="get books response object"
 />
 
