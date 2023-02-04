@@ -8,53 +8,49 @@
 
 # sergiobarria.com (With Astro)
 
-This is my personal website, blog and portfolio showcase. Built with Astro, Vercel Functions and SCSS. Written using TypeScript and content managed with MDX.
+This is my personal website, blog and portfolio showcase. Built with Astro, deploy to Vercel and Tailwind CSS. Written using TypeScript and content managed with MDX.
 
 ## Overview
 
-Previously my website was built with Next.js, but I wanted to try Astro, so I decided to rebuild it from scratch. I'm using Vercel Functions to handle API requests and communication with different platforms. I'm also using Cloudinary to store the images.
+Previously my website was built with Next.js, but I wanted to try Astro, so I decided to rebuild it from scratch. I'm using Astro SSR and API Routes to handle API requests and communication with different platforms. I'm also using Cloudinary to store the images.
 
 ## Files and Folders Structure
 
 ```
 .
-├── api
 ├── lib
-├── plugins
+├── prisma
 ├── public
 ├── src/
 │   ├── content
 │   ├── layouts
 │   ├── pages
 │   ├── shared
-│   ├── stores
 │   └── styles
 └── ...(other root files)
 ```
 
 ### Explanation
 
-- `api`: Contains the Vercel Functions.
 - `lib`: Contains the different functions used in the project.
-- `plugins`: Contains the different speciffic plugins used by Astro in this project.
+- `prisma`: Prisma schema definitions for planetscale db.
 - `public`: Contains the different static files used in the project.
 - `src`: Contains source files used in the project.
-  - `content`: Contains MDX files used in the project.
+  - `content`: Contains MDX files used in the project, uses Astro collections.
   - `layouts`: Contains layouts used in the project.
   - `pages`: Contains pages used in the project.
   - `shared`: Contains shared components, hooks, helpers used in the project.
-  - `stores`: Contains nano stores used in the project.
   - `styles`: Contains `scss` styles used in the project.
 
 ## Tech Stack
 
 **Language:** TypeScript
-**Client Framework:** Astro
-**Server Framework:** Vercel Functions
-**Styles:** SCSS, SCSS Modules
+**Client Framework:** Astro/React
+**Server Framework:** Astro SSR API Routes
+**Styles:** TailwindCSS
 **Content:** MDX
 **APIs:** Cloudinary, GitHub, Wakatime, Vercel, Spotify
-**Database:** Xata.io
+**Database:** PlanetScale
 
 ## Run Locally
 
@@ -66,13 +62,13 @@ $  cd sergiobarria.com-astro
 $  pnpm install
 ```
 
-- Create `.env` file similar to `.env.example` and fill the variables.
+- Create `.env` file similar to `.env.example` and fill the variables with your own.
 
 - Run the project
 
 ```bash
-$  pnpm dev --> if not using serverless functions
-$  pnpm sertve --> if using serverless functions
+$  pnpm dev --> runs astro client and local planetscale db connection
+$  pnpm studio --> runs prisma studio
 ```
 
 ## Contributing
