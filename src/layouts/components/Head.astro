@@ -1,0 +1,71 @@
+---
+import { Tooltips } from 'astro-tooltips';
+
+import Scripts from './Scripts.astro';
+
+import site from '../../../site.json';
+
+interface Props {
+	url?: URL;
+	title?: string;
+	description?: string;
+	image?: {
+		src?: string;
+		alt?: string;
+	};
+	frontmatter?: any;
+	keywords?: string;
+}
+
+const { url, title, description, image, frontmatter, keywords } = Astro.props;
+---
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Favicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+	<link rel="manifest" href="/favicon/site.webmanifest" />
+	<title>{title || site?.title}</title>
+
+	<!-- Astro tooltips package -->
+	<Tooltips interactive={false} delay={[15, 10]} />
+
+	<!-- SEO Tags -->
+	<link rel="canonical" href={url} />
+	<meta name="description" content={description || site?.description} />
+	<meta name="keywords" content={keywords || site?.keywords} />
+	<meta name="author" content={site?.author} />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow" />
+
+	<!-- Open Graph -->
+	<meta property="og:site_name" content="My astro personal website" />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description || site.description} />
+	<meta property="og:url" content={url} />
+	<meta property="og:image" content={image?.src || site?.image?.src} />
+	<meta property="og:image:url" content={image?.src || site?.image?.src} />
+	<meta property="og:image:secure_url" content={image?.src || site?.image?.src} />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="600" />
+	<meta property="og:image:alt" content={image?.alt || site.image.alt} />
+
+	<!-- Twitter -->
+	<meta name="twitter:title" content={title} />
+	<meta name="twitter:description" content={description || site.description} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content={image?.src || site.image.src} />
+	<meta name="twitter:image:alt" content={title} />
+	<meta name="twitter:domain" content={import.meta.env.SITE} />
+	<meta name="twitter:site" content={site?.twitter?.site} />
+	<meta name="twitter:creator" content={site?.twitter?.handle} />
+
+	<!-- Load all the app inline scripts -->
+	<Scripts />
+</head>

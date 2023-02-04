@@ -1,46 +1,35 @@
 ---
 import clsx from 'clsx';
 
-import { LogoIcon } from './jsx';
-import { Settings } from '~/shared/components/jsx';
-
-import site from '../../../site.json';
+import DesktopNavigation from './DesktopNavigation.astro';
+import { MobileNavigation } from './jsx';
+import { ThemeSwitcher } from '~/shared/components/jsx';
+import { LogoIcon } from '~/shared/icons/LogoIcon';
 
 const pathname = new URL(Astro.request.url).pathname;
-
-const { navLinks } = site;
 ---
 
-<header class="sticky top-0 z-30 h-20 text-font-one backdrop-blur-md">
-	<div class="container flex items-center justify-between h-full px-4">
-		<div class="w-24 hover:text-brand">
-			<a href="/">
-				<LogoIcon />
-			</a>
-		</div>
-		<div class="flex items-center gap-6">
-			<nav class="hidden md:flex gap-6">
-				{
-					navLinks.map((link) => {
-						return (
-							<span>
-								<span class="text-brand-accent">{link.number}</span>
-								<a
-									href={link.href}
-									class={clsx('relative py-1', {
-										'text-brand font-semibold':
-											pathname === link.href || pathname.includes(link.href),
-										'link-double-lines': pathname !== link.href,
-									})}
-								>
-									{link.label}
-								</a>
-							</span>
-						);
-					})
-				}
-			</nav>
-			<Settings client:load />
+<header class="sticky top-0 inset-x-0 z-50 mb-20 backdrop-blur-md">
+	<div class="container mx-auto w-full max-w-screen-xl h-20 pt-6 px-4 sm:px-8 lg:px-20">
+		<div class="relative flex items-center justify-between gap-4 sm:px-8 lg:px-12">
+			<div class="flex-1 transition-colors duration-200">
+				<a
+					href="/"
+					class={clsx(
+						'inline-block w-20 md:w-24 text-zinc-800 hover:text-teal-500',
+						'dark:text-white dark:hover:text-teal-500'
+					)}
+				>
+					<LogoIcon />
+				</a>
+			</div>
+			<div class="flex justify-end flex-1 md:justify-center">
+				<DesktopNavigation />
+				<MobileNavigation client:load pathname={pathname} />
+			</div>
+			<div class="flex justify-end md:flex-1">
+				<ThemeSwitcher client:load />
+			</div>
 		</div>
 	</div>
 </header>

@@ -1,0 +1,25 @@
+---
+import SocialLinks from '~/shared/components/SocialLinks.astro';
+---
+
+<section id="hero">
+	<div class="max-w-2xl">
+		<h1 class="text-4xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">
+			Full-stack Developer, engineer, and amateur writer.
+		</h1>
+		<p class="mt-6 text-base text-zinc-600 dark:text-zinc-400">
+			I’m Sergio, a full-stack web & mobile developer based in Panama. I work with the JavaScript
+			ecosystem, I love to learn new things and share my knowledge with others. Welcome to my small
+			space of the internet, where I write and share about different topics related to the web.
+		</p>
+		<SocialLinks size={28} />
+	</div>
+</section>
+
+<script>
+	import { animate } from 'motion';
+
+	const hero = document.querySelector('#hero');
+
+	if (hero) animate(hero, { x: [-20, 0], opacity: [0, 0.5, 1] }, { duration: 1 });
+</script>

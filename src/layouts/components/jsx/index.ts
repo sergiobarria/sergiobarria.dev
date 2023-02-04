@@ -1,2 +1,1 @@
-export * from './FloatingMobileMenu';
-export * from './LogoIcon';
+export * from './MobileNavigation';

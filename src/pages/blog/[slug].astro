@@ -1,32 +1,103 @@
 ---
-import type { MDXInstance } from 'astro';
+import { type CollectionEntry, getCollection } from 'astro:content';
+import clsx from 'clsx';
+import { format } from 'date-fns';
+import readingTime from 'reading-time';
+import { ClockIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Cloudinary } from '@cloudinary/url-gen';
 
-import BlogPostLayout from '~/layouts/BlogPostLayout.astro';
-
-import { getSlugFromFilePath } from '~/shared/utils/helpers';
-import type { Post } from './_utils';
+import MainLayout from '~/layouts/MainLayout.astro';
+import BackLink from '~/shared/components/BackLink.astro';
+import { TOC, ViewsCounter, ProgressBar, CldImage } from '~/shared/components/jsx';
 
 interface Props {
-	post: MDXInstance<Post>;
+	entry: CollectionEntry<'blog'>;
 }
 
 export async function getStaticPaths() {
-	const allPosts = await Astro.glob<Post>('../../content/blog/*.mdx');
+	const blogEntries = await getCollection('blog');
 
-	return allPosts.map((post) => ({
-		params: {
-			slug: getSlugFromFilePath(post.file),
-		},
-		props: { post },
+	return blogEntries.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
 	}));
 }
 
-const { slug } = Astro.params;
-const {
-	post: { frontmatter, Content, getHeadings },
-} = Astro.props as Props;
+const { entry } = Astro.props as Props;
+const { Content, headings } = await entry.render();
+const { slug, data } = entry;
+
+const readTime = readingTime(entry.body);
+const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
+
+const cld = new Cloudinary({
+	cloud: {
+		cloudName: 'sbarria-dev',
+	},
+});
+
+export const prerender = true;
 ---
 
-<BlogPostLayout frontmatter={frontmatter} slug={slug as string} headings={getHeadings()}>
-	<Content />
-</BlogPostLayout>
+<MainLayout
+	title="Blog | Sergio Barria"
+	description={data?.summary}
+	image={{ src: cld.image(data?.coverImage).toURL(), alt: data?.title }}
+	keywords={data?.keywords?.join(', ')}
+>
+	<ProgressBar client:load />
+	<div class="lg:relative">
+		<div class="mx-auto max-w-2xl">
+			<BackLink href="/blog" />
+
+			<!-- Post Content -->
+			<article>
+				<header class="flex flex-col mb-6">
+					<h1
+						class={clsx(
+							'my-6 text-4xl font-bold tracking-tight text-zin-800',
+							'dark:text-zinc-100 sm:text-5xl'
+						)}
+					>
+						{data.title}
+					</h1>
+					<time
+						datetime={data.publishedDate}
+						class="order-first flex items-center text-base text-zinc-400 dark:text-zinc-500"
+					>
+						<span class="h-4 w-0.5 rounded-full bg-zinc-200 dark:bg-zinc-500"></span>
+						<span class="ml-3">{formattedDate}</span>
+					</time>
+
+					<!-- Cover Image -->
+					<CldImage
+						publicId={data?.coverImage}
+						alt={data?.title}
+						radius={50}
+						className="aspect-w-4 aspect-h-[2.5]"
+					/>
+
+					<!-- Post Meta -->
+					<div class="flex items-center gap-3 bg-zinc-200 dark:bg-zinc-700 p-3 my-3 rounded-2xl">
+						<p class="flex items-center pr-3 border-r border-zinc-400 dark:border-zinc-500 gap-2">
+							<ClockIcon width={16} height={16} />
+
+							<span class="text-sm">{readTime?.text}</span>
+						</p>
+						<p class="flex items-center gap-2">
+							<EyeOpenIcon width={16} height={16} />
+
+							<ViewsCounter client:load slug={slug as string} />
+						</p>
+					</div>
+				</header>
+
+				<!-- Post Content -->
+				<TOC headings={headings} />
+				<div class="prose dark:prose-invert">
+					<Content />
+				</div>
+			</article>
+		</div>
+	</div>
+</MainLayout>

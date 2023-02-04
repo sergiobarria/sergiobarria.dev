@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export interface SpotifyData {
 	isPlaying: boolean;
 	title: string;
@@ -47,51 +45,29 @@ export interface TopSpotifyTracks {
 	tracks: Track[];
 }
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const refresh_token = process.env.SPOTIFY_REFRESH_TOKEN;
+const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = import.meta.env;
 
-const token = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
-const NOW_PLAYING_ENDPOINT = `https://api.spotify.com/v1/me/player/currently-playing`;
-const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks`;
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+const token = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
+export const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
+export const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks';
+export const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 
-const getAccessToken = async () => {
+export const getAccessToken = async () => {
 	const data = new URLSearchParams({
 		grant_type: 'refresh_token',
-		refresh_token: refresh_token!,
+		refresh_token: SPOTIFY_REFRESH_TOKEN!,
 	}).toString();
 
-	const res = await axios.post<{ access_token: string }>(TOKEN_ENDPOINT, data, {
+	const res = await fetch(TOKEN_ENDPOINT, {
+		method: 'POST',
 		headers: {
 			Authorization: `Basic ${token}`,
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
+		body: data,
 	});
 
-	return res.data.access_token;
-};
+	const json = (await res.json()) as { access_token: string };
 
-export const getNowPlaying = async () => {
-	const access_token = await getAccessToken();
-
-	return axios.get<SpotifyResponse>(NOW_PLAYING_ENDPOINT, {
-		headers: {
-			Authorization: `Bearer ${access_token}`,
-		},
-	});
-};
-
-export const getTopTracks = async () => {
-	const access_token = await getAccessToken();
-
-	return axios.get<any>(TOP_TRACKS_ENDPOINT, {
-		headers: {
-			Authorization: `Bearer ${access_token}`,
-		},
-		params: {
-			time_range: 'short_term',
-			limit: 10,
-		},
-	});
+	return json.access_token;
 };

@@ -1,6 +1,0 @@
-{
-  "databaseURL": "https://Sergio-s-workspace-j88unm.us-east-1.xata.sh/db/sergiobarria_com_astro",
-  "codegen": {
-    "output": "lib/xata/__codegen__.ts"
-  }
-}
