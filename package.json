@@ -11,7 +11,7 @@
 		"dev:client": "astro dev",
 		"dev:db": "pscale connect sergiobarria_com dev --port 3309",
 		"dev": "concurrently \"npm run dev:client\" \"npm run dev:db\"",
-		"studio": "npmx prisma studio",
+		"studio": "pnpx prisma studio",
 		"sync": "astro sync",
 		"start": "concurrently \"pnpm run dev\" \"pnpm run db\"",
 		"build": "astro build",
