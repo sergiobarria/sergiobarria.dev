@@ -68,4 +68,18 @@ const { url, title, description, image, frontmatter, keywords } = Astro.props;
 
 	<!-- Load all the app inline scripts -->
 	<Scripts />
+
+	<!-- Google tag (gtag.js) -->
+	<script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-DNKCVEP9TZ"
+	></script>
+	<script type="text/partytown">
+		// @ts-nocheck
+		window.dataLayer = window.dataLayer || [];
+		function gtag() {
+			dataLayer.push(arguments);
+		}
+		gtag('js', new Date());
+
+		gtag('config', 'G-DNKCVEP9TZ');
+	</script>
 </head>
