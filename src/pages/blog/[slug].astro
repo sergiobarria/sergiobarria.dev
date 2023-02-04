@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { format } from 'date-fns';
 import readingTime from 'reading-time';
 import { ClockIcon, EyeOpenIcon } from '@radix-ui/react-icons';
+import { Cloudinary } from '@cloudinary/url-gen';
 
 import MainLayout from '~/layouts/MainLayout.astro';
 import BackLink from '~/shared/components/BackLink.astro';
@@ -29,10 +30,23 @@ const { slug, data } = entry;
 const readTime = readingTime(entry.body);
 const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
 
+const cld = new Cloudinary({
+	cloud: {
+		cloudName: 'sbarria-dev',
+	},
+});
+
+console.log('data', data);
+
 export const prerender = true;
 ---
 
-<MainLayout>
+<MainLayout
+	title="Blog | Sergio Barria"
+	description={data?.summary}
+	image={{ src: cld.image(data?.coverImage).toURL(), alt: data?.title }}
+	keywords={data?.keywords?.join(', ')}
+>
 	<ProgressBar client:load />
 	<div class="lg:relative">
 		<div class="mx-auto max-w-2xl">

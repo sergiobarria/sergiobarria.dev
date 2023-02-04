@@ -4,13 +4,14 @@ import clsx from 'clsx';
 
 import MainLayout from '~/layouts/MainLayout.astro';
 import PageLayout from '~/shared/components/PageLayout.astro';
+import { CldImage } from '~/shared/components/jsx';
 
 const projectsEntries = await getCollection('projects');
 
 export const prerender = true;
 ---
 
-<MainLayout>
+<MainLayout title="Portfolio | Sergio Barria">
 	<PageLayout
 		title="My Portfolio"
 		intro="Here is a summary of some of the personal and profesional projects I've work on."
@@ -25,9 +26,11 @@ export const prerender = true;
 								'dark:bg-zinc-800 dark:border-zinc-700 h-full'
 							)}
 						>
-							<img
-								src="https://ik.imagekit.io/l5swuiqdn/personal-website/tr:e-grayscale/spaceship-launch_lsag8o.png"
-								class="w-10 h-10 mb-2"
+							<CldImage
+								publicId="sergiobarria/spaceship-launch_lsag8o.png"
+								alt="rocket icon"
+								className="w-10 h-10 mb-2"
+								isGrayscale
 							/>
 
 							<h5 class="mb-2 text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white">
