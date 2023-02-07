@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { CollectionEntry } from 'astro:content';
 import clsx from 'clsx';
 import { format } from 'date-fns';
 import { ChevronRightIcon } from '@radix-ui/react-icons';
-import { animate, stagger } from 'motion';
+import autoAnimate from '@formkit/auto-animate';
 
 interface ListCardProps {
 	post: CollectionEntry<'blog'>;
@@ -13,10 +13,6 @@ function ListCard({ post }: ListCardProps) {
 	const { slug, data } = post;
 
 	const formattedDate = format(new Date(data.publishedDate), 'MMMM dd, yyyy');
-
-	useEffect(() => {
-		animate('#card', { opacity: [0, 1] }, { duration: 0.75, delay: stagger(0.2) });
-	}, []);
 
 	return (
 		<article id="card" className="md:grid md:grid-cols-4 md:items-baseline">
@@ -77,9 +73,15 @@ interface PostsListViewProps {
 }
 
 export function PostsListView({ posts }: PostsListViewProps) {
+	const listContainer = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		listContainer.current && autoAnimate(listContainer.current);
+	}, [listContainer]);
+
 	return (
 		<div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
-			<div className="flex max-w-3xl flex-col space-y-16 mt-16">
+			<div ref={listContainer} className="flex max-w-3xl flex-col space-y-16 mt-16">
 				{posts.map((post) => (
 					<ListCard key={post?.id} post={post} />
 				))}

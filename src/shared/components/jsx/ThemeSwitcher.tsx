@@ -28,14 +28,14 @@ export function ThemeSwitcher() {
 			<MoonIcon
 				strokeWidth={0.5}
 				className={clsx(
-					'hidden h-6 w-6 fill-zinc-700 stroke-teal-500 transition dark:block',
+					'hidden h-6 w-6 fill-teal-700 stroke-teal-500 transition dark:block',
 					'[@media(prefers-color-scheme:dark)]:group-hover:stroke-teal-400',
 					'[@media_not_(prefers-color-scheme:dark)]:fill-teal-400/10',
 					'[@media_not_(prefers-color-scheme:dark)]:stroke-teal-500'
 				)}
 			/>
 			<SunIcon
-				strokeWidth={0.5}
+				strokeWidth={1}
 				className={clsx(
 					'h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200',
 					' group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50',
