@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import type { CollectionEntry } from 'astro:content';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
-import { animate, stagger } from 'motion';
+import autoAnimate from '@formkit/auto-animate';
 
 interface GridCardProps {
 	post: CollectionEntry<'blog'>;
@@ -10,10 +10,6 @@ interface GridCardProps {
 
 function GridCard({ post }: GridCardProps) {
 	const { slug, data } = post;
-
-	useEffect(() => {
-		animate('#card', { opacity: [0, 1] }, { duration: 0.75, delay: stagger(0.1) });
-	}, []);
 
 	return (
 		<div
@@ -50,8 +46,14 @@ interface PostsListViewProps {
 }
 
 export function PostsGridView({ posts }: PostsListViewProps) {
+	const gridContainer = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		gridContainer.current && autoAnimate(gridContainer.current);
+	}, [gridContainer]);
+
 	return (
-		<div className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
+		<div ref={gridContainer} className="grid grid-cols-1 gap-6 mt-6 sm:grid-cols-2 lg:grid-cols-3">
 			{posts.map((post) => (
 				<GridCard key={post.id} post={post} />
 			))}
