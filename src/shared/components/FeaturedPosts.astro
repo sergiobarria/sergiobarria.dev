@@ -4,7 +4,11 @@ import { getCollection } from 'astro:content';
 import FeaturedPostCard from '~/shared/components/FeaturedPostCard.astro';
 
 const blogEntries = await getCollection('blog');
-const featuredPosts = blogEntries.filter((entry) => entry?.data?.isFeatured);
+const featuredPosts = blogEntries
+	.filter((entry) => entry?.data?.isFeatured)
+	.sort(
+		(a, b) => new Date(b.data.publishedDate).getDate() - new Date(a.data.publishedDate).getDate()
+	);
 ---
 
 <section id="featured-posts">
