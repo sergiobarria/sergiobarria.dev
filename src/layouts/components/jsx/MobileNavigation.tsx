@@ -41,7 +41,7 @@ export function MobileNavigation({ pathname }: MobileNavigationProps) {
 	const links = [{ id: 99, label: 'Home', href: '/', number: 0 }, ...navLinks];
 
 	return (
-		<Popover className="relative">
+		<Popover className="relative md:hidden">
 			{({ open }) => (
 				<>
 					<Popover.Button
