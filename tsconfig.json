@@ -11,8 +11,8 @@
 		// Enable JSON imports.
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
-		// Enable stricter transpilation for better output.
-		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
+		"ignoreDeprecations": "5.0",
 		"baseUrl": ".",
 		"paths": {
 			"~/*": ["src/*"]
