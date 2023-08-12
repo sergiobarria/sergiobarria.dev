@@ -4,11 +4,12 @@ const postCollection = defineCollection({
     type: 'content',
     schema: z.object({
         title: z.string(),
-        publishedAt: z.date().optional(),
+        publishedAt: z.date(),
         summary: z.string().optional(),
         isArchived: z.boolean().optional().default(false),
         keywords: z.array(z.string()).optional(),
-        toc: z.boolean().optional().default(true)
+        toc: z.boolean().optional().default(true),
+        draft: z.boolean().optional().default(false)
     })
 })
 
