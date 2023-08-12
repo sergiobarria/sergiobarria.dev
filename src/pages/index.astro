@@ -6,6 +6,7 @@ import readingTime from 'reading-time'
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import ArrowUpRightIcon from '@/components/ArrowUpRightIcon.astro'
 import { formatDate } from '@/lib/utils'
+import { getAllPostsViews } from '@/lib/planetscale'
 import profile from '@/assets/profile-2.png'
 
 import config from '@/config'
@@ -13,6 +14,8 @@ import config from '@/config'
 const { socials } = config
 
 const posts = await getCollection('posts')
+const allViews = await getAllPostsViews()
+const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
 ---
 
 <BaseLayout>
@@ -74,7 +77,7 @@ const posts = await getCollection('posts')
                             ></polyline><polyline points="16 7 22 7 22 13"
                             ></polyline></svg
                         >
-                        {0} total post views
+                        {totalViews} total posts views
                     </p>
 
                     <div class="flex gap-4 text-xs">
@@ -114,10 +117,12 @@ const posts = await getCollection('posts')
                     const { title, publishedAt } = data
                     const formattedDate = formatDate(publishedAt)
                     const readTime = readingTime(body)?.text
+                    const views =
+                        allViews.find(post => post.slug === slug)?.views ?? 0
 
                     return (
                         <a
-                            href={`/blog/${slug}sss`}
+                            href={`/blog/${slug}`}
                             class="group flex justify-between border-b border-neutral-600 py-3"
                         >
                             <div>
@@ -127,7 +132,7 @@ const posts = await getCollection('posts')
                                 <p class="flex gap-2 text-xs opacity-90">
                                     <span>{formattedDate}</span>
                                     <span>•</span>
-                                    <span>{0} views</span>
+                                    <span>{views} views</span>
                                     <span>•</span>
                                     <span>{readTime}</span>
                                 </p>

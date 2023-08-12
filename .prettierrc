@@ -5,6 +5,10 @@
     "trailingComma": "none",
     "semi": false,
     "bracketSpacing": true,
-    "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+    "plugins": [
+        "prettier-plugin-astro",
+        "prettier-plugin-svelte",
+        "prettier-plugin-tailwindcss"
+    ],
     "pluginSearchDirs": false
 }

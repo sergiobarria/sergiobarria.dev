@@ -1,19 +1,31 @@
 ---
-import { getEntry } from 'astro:content'
+import { getCollection, CollectionEntry } from 'astro:content'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
+import ViewsCounter from '@/components/ViewsCounter.astro'
 
-const { slug } = Astro.params as { slug: string }
-if (!slug) throw new Error('slug is required')
+interface Props {
+    entry: CollectionEntry<'posts'>
+}
 
-const entry = await getEntry('posts', slug)
-if (!entry) return Astro.redirect('/404')
+export async function getStaticPaths() {
+    const postEntries = await getCollection('posts')
+    return postEntries.map(entry => ({
+        params: { slug: entry.slug },
+        props: { entry }
+    }))
+}
 
+const { entry } = Astro.props as Props
+const {
+    slug,
+    data: { title }
+} = entry
 const { Content } = await entry.render()
-
-export const prerender = false
 ---
 
 <BaseLayout>
     <div>dynamic route slug: {slug}</div>
+    <div>dynamic route title: {title}</div>
+    <ViewsCounter slug={slug} />
 </BaseLayout>

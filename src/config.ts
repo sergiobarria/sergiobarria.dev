@@ -14,5 +14,14 @@ export default {
             name: 'email',
             url: 'mailto:sbarria.dev@gmail.com'
         }
-    ]
+    ],
+    baseUrl: import.meta.env.PROD
+        ? import.meta.env.SITE
+        : 'http://localhost:3000',
+    mode: import.meta.env.MODE,
+    database: {
+        host: import.meta.env.DATABASE_HOST,
+        username: import.meta.env.DATABASE_USERNAME,
+        password: import.meta.env.DATABASE_PASSWORD
+    }
 }

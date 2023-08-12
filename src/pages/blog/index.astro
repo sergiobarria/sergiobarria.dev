@@ -4,8 +4,10 @@ import readingTime from 'reading-time'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate } from '@/lib/utils'
+import { getAllPostsViews } from '@/lib/planetscale'
 
 const posts = await getCollection('posts')
+const allViews = await getAllPostsViews()
 ---
 
 <BaseLayout>
@@ -20,8 +22,9 @@ const posts = await getCollection('posts')
                 const { title, publishedAt } = data
                 const formattedDate = formatDate(publishedAt)
                 const readTime = readingTime(body).text
+                const views =
+                    allViews.find(view => view.slug === slug)?.views ?? 0
 
-                // TODO: Add views
                 return (
                     <li class="mb-4">
                         <a href={`/blog/${slug}`} class="">
@@ -29,7 +32,7 @@ const posts = await getCollection('posts')
                             <p class="text-sm text-neutral-400">
                                 <span>{formattedDate}</span>
                                 <span>•</span>
-                                <span>{0} views</span>
+                                <span>{views} views</span>
                                 <span>•</span>
                                 <span>{readTime}</span>
                             </p>

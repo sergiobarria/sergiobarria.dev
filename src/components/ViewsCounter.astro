@@ -1,0 +1,14 @@
+---
+interface Props {
+    slug: string
+}
+
+const { slug } = Astro.props as Props
+const res = await fetch(Astro.url.origin + '/api/views/' + slug + '.json', {
+    method: 'POST'
+})
+const { views } = await res.json()
+export const prerender = false
+---
+
+<span>{views} views</span>
