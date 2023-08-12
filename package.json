@@ -10,10 +10,13 @@
         "astro": "astro"
     },
     "dependencies": {
+        "@astrojs/mdx": "^0.19.7",
         "@astrojs/tailwind": "^4.0.0",
+        "@astrojs/vercel": "^3.8.1",
         "@fontsource-variable/readex-pro": "^5.0.8",
         "astro": "^2.10.7",
         "clsx": "^2.0.0",
+        "reading-time": "^1.5.0",
         "tailwind-merge": "^1.14.0"
     },
     "devDependencies": {

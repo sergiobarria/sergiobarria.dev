@@ -1,0 +1,19 @@
+---
+import { getEntry } from 'astro:content'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const { slug } = Astro.params as { slug: string }
+if (!slug) throw new Error('slug is required')
+
+const entry = await getEntry('posts', slug)
+if (!entry) return Astro.redirect('/404')
+
+const { Content } = await entry.render()
+
+export const prerender = false
+---
+
+<BaseLayout>
+    <div>dynamic route slug: {slug}</div>
+</BaseLayout>

@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content'
+import readingTime from 'reading-time'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { formatDate } from '@/lib/utils'
+
+const posts = await getCollection('posts')
+---
+
+<BaseLayout>
+    <h1 class="mb-6 text-2xl font-bold md:text-3xl">Blog</h1>
+    <p class="mb-8">
+        In total, I&apos;ve written {posts.length} articles. You can find them
+        all below.
+    </p>
+    <ul>
+        {
+            posts.map(({ data, slug, body }) => {
+                const { title, publishedAt } = data
+                const formattedDate = formatDate(publishedAt)
+                const readTime = readingTime(body).text
+
+                // TODO: Add views
+                return (
+                    <li class="mb-4">
+                        <a href={`/blog/${slug}`} class="">
+                            <h2>{title}</h2>
+                            <p class="text-sm text-neutral-400">
+                                <span>{formattedDate}</span>
+                                <span>•</span>
+                                <span>{0} views</span>
+                                <span>•</span>
+                                <span>{readTime}</span>
+                            </p>
+                        </a>
+                    </li>
+                )
+            })
+        }
+    </ul>
+</BaseLayout>

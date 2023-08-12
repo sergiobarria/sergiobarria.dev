@@ -1,13 +1,18 @@
 ---
 import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
+import readingTime from 'reading-time'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import ArrowUpRightIcon from '@/components/ArrowUpRightIcon.astro'
+import { formatDate } from '@/lib/utils'
 import profile from '@/assets/profile-2.png'
 
 import config from '@/config'
 
 const { socials } = config
+
+const posts = await getCollection('posts')
 ---
 
 <BaseLayout>
@@ -97,6 +102,43 @@ const { socials } = config
                 <strong>Django</strong>, <strong>MySQL</strong>, and other tools
                 for web development.
             </p>
+        </section>
+
+        <section id="latest-articles">
+            <h2 class="mb-3 text-xl font-semibold md:text-2xl lg:text-3xl">
+                Latest Articles
+            </h2>
+
+            {
+                posts.slice(0, 3).map(({ data, slug, body }) => {
+                    const { title, publishedAt } = data
+                    const formattedDate = formatDate(publishedAt)
+                    const readTime = readingTime(body)?.text
+
+                    return (
+                        <a
+                            href={`/blog/${slug}sss`}
+                            class="group flex justify-between border-b border-neutral-600 py-3"
+                        >
+                            <div>
+                                <h3 class="font-semibold group-hover:opacity-80">
+                                    {title}
+                                </h3>
+                                <p class="flex gap-2 text-xs opacity-90">
+                                    <span>{formattedDate}</span>
+                                    <span>•</span>
+                                    <span>{0} views</span>
+                                    <span>•</span>
+                                    <span>{readTime}</span>
+                                </p>
+                            </div>
+                            <div>
+                                <ArrowUpRightIcon />
+                            </div>
+                        </a>
+                    )
+                })
+            }
         </section>
     </div>
 </BaseLayout>
