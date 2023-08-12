@@ -24,4 +24,4 @@ pnpm-debug.log*
 .astro
 
 # others
-_old_pages/
+_old
