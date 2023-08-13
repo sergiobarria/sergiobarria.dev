@@ -23,5 +23,10 @@ export default {
         host: import.meta.env.DATABASE_HOST,
         username: import.meta.env.DATABASE_USERNAME,
         password: import.meta.env.DATABASE_PASSWORD
+    },
+    spotify: {
+        refreshToken: import.meta.env.SPOTIFY_REFRESH_TOKEN,
+        clientId: import.meta.env.SPOTIFY_CLIENT_ID,
+        clientSecret: import.meta.env.SPOTIFY_CLIENT_SECRET
     }
 }

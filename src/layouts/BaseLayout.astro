@@ -2,6 +2,7 @@
 import '@fontsource-variable/readex-pro'
 
 import Sidebar from '@/components/Sidebar.astro'
+import Footer from '@/components/Footer.astro'
 import config from '@/config'
 
 import '../styles/globals.css'
@@ -39,10 +40,13 @@ const { title } = config
     <body class="font-light antialiased">
         <div class="mx-auto my-16 max-w-screen-md gap-6 px-5 md:flex md:px-0">
             <Sidebar />
-            <main class="mt-5 flex-grow md:mt-0">
-                <!-- 👇🏼 This is the entry point of the application -->
-                <slot />
-            </main>
+            <div class="mt-5 flex-grow md:mt-0">
+                <main>
+                    <!-- 👇🏼 This is the entry point of the application -->
+                    <slot />
+                </main>
+                <Footer />
+            </div>
         </div>
     </body>
 </html>
