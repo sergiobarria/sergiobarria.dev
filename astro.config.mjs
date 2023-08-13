@@ -1,50 +1,67 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from 'astro/config'
 
-// Integrations
-import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
-import robotsTxt from 'astro-robots-txt';
-import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel/serverless';
-import partytown from '@astrojs/partytown';
+import tailwind from '@astrojs/tailwind'
+import mdx from '@astrojs/mdx'
+import vercel from '@astrojs/vercel/serverless'
+import svelte from '@astrojs/svelte'
+import remarkGfm from 'remark-gfm'
+import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypePrettyCode from 'rehype-pretty-code'
+import rehypeSlug from 'rehype-slug'
+import prefetch from '@astrojs/prefetch'
+
+const rehypePrettyCodeOptions = {
+    theme: 'rose-pine',
+    // theme: 'poimandres',
+    tokensMap: {
+        // VScode command palette: Inspect Editor Tokens and Scopes
+        // https://github.com/Binaryify/OneDark-Pro/blob/47c66a2f2d3e5c85490e1aaad96f5fab3293b091/themes/OneDark-Pro.json
+        fn: 'entity.name.function',
+        objKey: 'meta.object-literal.key'
+    },
+    onVisitLine(node) {
+        // Prevent lines from collapsing in `display: grid` mode, and
+        // allow empty lines to be copy/pasted
+        if (node.children.length === 0) {
+            node.children = [
+                {
+                    type: 'text',
+                    value: ' '
+                }
+            ]
+        }
+        node.properties.className = ['']
+    }
+}
+const rehypeAutolinkHeadingsOptions = {
+    properties: {
+        className: ['anchor']
+    }
+}
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://sergiobarria.com',
-	markdown: {
-		shikiConfig: {
-			theme: 'material-ocean',
-			// css-variables tells shiki to read the theme from CSS variables
-			// theme: 'css-variables',
-			// theme: 'dracula',
-		},
-	},
-	integrations: [
-		react(),
-		mdx(),
-		robotsTxt(),
-		sitemap(),
-		tailwind({
-			config: {
-				applyAstroPreset: false,
-				applyBaseStyles: true,
-			},
-		}),
-		partytown(),
-	],
-	vite: {
-		server: {
-			open: true,
-		},
-		ssr: {},
-	},
-	server: {
-		host: 'localhost',
-		port: 8080,
-	},
-	// the following is needed for SSR
-	// see: https://docs.astro.build/en/guides/server-side-rendering/
-	output: 'server',
-	adapter: vercel(),
-});
+    site: 'https://sergiobarria.dev',
+    integrations: [tailwind(), svelte(), mdx(), prefetch()],
+    markdown: {
+        extendDefaultPlugins: true,
+        syntaxHighlight: false,
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+            rehypeSlug,
+            [rehypePrettyCode, rehypePrettyCodeOptions],
+            [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions]
+        ]
+    },
+    experimental: {
+        assets: true
+    },
+    output: 'hybrid',
+    adapter: vercel({
+        analytics: true,
+        imageService: true,
+        imagesConfig: {
+            sizes: [320, 640, 1280]
+        }
+    })
+})

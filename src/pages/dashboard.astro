@@ -1,23 +1,145 @@
 ---
-import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets'
+import { getCollection } from 'astro:content'
 
-import MainLayout from '~/layouts/MainLayout.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import MetricCard from '@/components/MetricCard.astro'
+import type { TopTracksResponse } from '@/lib/spotify'
+import { getWakaAllTimeStats, getWakaStats } from '@/lib/wakatime'
+import { convertTimeToDecimal } from '@/lib/utils'
+import { getAllPostsViews } from '@/lib/planetscale'
+import { getGithubUserMetrics } from '@/lib/github'
 
-import PageLayout from '~/shared/components/PageLayout.astro';
-import { TopTracks, Metrics } from '~/shared/components/jsx';
+import config from '@/config'
 
-const blogEntries = await getCollection('blog');
+const posts = await getCollection('posts')
+const allViews = await getAllPostsViews()
+const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
 
-export const prerender = true;
+const res = await fetch(Astro.url.origin + '/api/spotify/top-tracks.json')
+const { data: tracks }: TopTracksResponse = await res.json()
+
+const wakaStats = await getWakaStats()
+const wakaAllTime = await getWakaAllTimeStats()
+const wakatime = wakaStats?.text?.split(' ').slice(0, 2).join(' ')
+const dailyAvg = convertTimeToDecimal(wakaAllTime?.dailyAvg)
+const topLang = wakaAllTime?.topLang.name
+const otherLang = wakaAllTime?.otherLang.name
+
+const githubMetrics = await getGithubUserMetrics()
+const followers = githubMetrics?.user?.followers.totalCount
+const pullRequests = githubMetrics?.user?.pullRequests.totalCount
+const githubStars = githubMetrics?.user?.repositories?.edges?.reduce(
+    (acc, { node }) => acc + node?.stargazerCount,
+    0
+)
+
+const githubUrl = config.socials.find(link => link.name === 'github')?.url
 ---
 
-<MainLayout title="Dashboard | Sergio Barria">
-	<PageLayout
-		title="Dashboard"
-		intro="Here I can track different metrics by collecting data from some of the platforms I use. That way I can see my personal coding stats, habits, progress..."
-	>
-		<Metrics client:load totalPosts={blogEntries.length} />
+<BaseLayout>
+    <div class="space-y-12">
+        <header class="space-y-3">
+            <h1 class="text-3xl font-bold tracking-tight text-neutral-300">
+                Dashboard
+            </h1>
+            <p class="text-zinc-400">
+                Here I can track different metrics by collecting data from some
+                of the platforms I use. That way I can see my personal coding
+                stats, habits, progress...
+            </p>
+        </header>
 
-		<TopTracks client:visible />
-	</PageLayout>
-</MainLayout>
+        <section id="metrics">
+            <h2 class="mb-3 text-2xl font-bold tracking-tight text-neutral-300">
+                Metrics
+            </h2>
+            <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+                <MetricCard
+                    title="Total Posts"
+                    value={posts.length ?? '--'}
+                    href="/blog"
+                />
+                <MetricCard
+                    title="Total Posts Views"
+                    value={totalViews ?? '--'}
+                    href="/blog"
+                />
+
+                <MetricCard
+                    title="GitHub Followers"
+                    value={followers ?? '--'}
+                    href={githubUrl}
+                />
+                <MetricCard
+                    title="Pull Requests"
+                    value={pullRequests ?? '--'}
+                    href={githubUrl}
+                />
+                <MetricCard
+                    title="GitHub Stars"
+                    value={githubStars ?? '--'}
+                    href={githubUrl}
+                />
+
+                {/* Wakatime stats */}
+                <MetricCard title="Wakatime*" value={wakatime ?? '--'} />
+                <MetricCard title="Daily Average*" value={dailyAvg ?? '--'} />
+                <MetricCard title="Top Language" value={topLang ?? '--'} />
+                <MetricCard title="Other Language" value={otherLang ?? '--'} />
+            </div>
+        </section>
+
+        <section id="top-tracks">
+            <h2 class="mb-3 text-2xl font-bold tracking-tight text-neutral-300">
+                My Top Spotify Tracks
+            </h2>
+            <p class="mb-6 mt-3 text-zinc-400">
+                Here is a list of what I&apos;ve been listening latetly.
+            </p>
+            {
+                tracks?.length && (
+                    <ul class="columns-1 gap-4 md:columns-2">
+                        {tracks.map((track, index) => {
+                            const { title, artists, images, songUrl } = track
+                            return (
+                                <li class="flex items-center border-b border-neutral-800 p-2">
+                                    <span class="mr-2 text-xs text-neutral-500">
+                                        {index + 1}
+                                    </span>
+                                    <div class="w-[200px] flex-grow">
+                                        <a
+                                            href={songUrl}
+                                            class="block truncate text-sm text-neutral-100 hover:text-neutral-300 hover:underline"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >
+                                            {title}
+                                        </a>
+                                        <small class="block text-xs text-neutral-500">
+                                            {artists}
+                                        </small>
+                                    </div>
+                                    <Image
+                                        src={images.at(0)?.url ?? ''}
+                                        width={30}
+                                        height={30}
+                                        alt={title}
+                                        class="h-8 w-8"
+                                    />
+                                </li>
+                            )
+                        })}
+                    </ul>
+                )
+            }
+            {
+                !tracks?.length && (
+                    <p class="mt-8 text-center opacity-70">
+                        No tracks data available...
+                    </p>
+                )
+            }
+        </section>
+    </div>
+</BaseLayout>

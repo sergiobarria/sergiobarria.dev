@@ -1,0 +1,45 @@
+---
+import { getCollection, CollectionEntry } from 'astro:content'
+import readingTime from 'reading-time'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { cn, formatDate } from '@/lib/utils'
+
+interface Props {
+    entry: CollectionEntry<'snippets'>
+}
+
+export async function getStaticPaths() {
+    const snippetsEntries = await getCollection(
+        'snippets',
+        ({ data }) => !data.draft
+    )
+    return snippetsEntries.map(entry => ({
+        params: { slug: entry.slug },
+        props: { entry }
+    }))
+}
+
+const { entry } = Astro.props as Props
+const {
+    body,
+    data: { title }
+} = entry
+const { Content } = await entry.render()
+---
+
+<BaseLayout>
+    <section>
+        <h1 class="text-2xl font-bold tracking-tighter">
+            {title}
+        </h1>
+        <div
+            class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-600"
+        >
+            <span>{readingTime(body)?.text}</span>
+        </div>
+        <article class="prose-quoteless prose prose-invert">
+            <Content />
+        </article>
+    </section>
+</BaseLayout>
