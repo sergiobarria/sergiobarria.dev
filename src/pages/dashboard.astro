@@ -35,6 +35,8 @@ const githubStars = githubMetrics?.user?.repositories?.edges?.reduce(
 )
 
 const githubUrl = config.socials.find(link => link.name === 'github')?.url
+
+export const prerender = false
 ---
 
 <BaseLayout>

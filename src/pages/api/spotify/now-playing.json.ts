@@ -6,8 +6,8 @@ export const prerender = false
 
 export const get: APIRoute = async () => {
     const result = await getNowPlaying()
-    const isPlaying = result?.isPlaying
-    const song = result?.song
+    const isPlaying = result?.isPlaying || false
+    const song = result?.song || {}
 
     return new Response(JSON.stringify({ isPlaying, data: song }), {
         status: 200,

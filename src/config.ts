@@ -31,5 +31,11 @@ export default {
     wakatime: {
         apiKey: import.meta.env.WAKATIME_API_KEY,
         username: import.meta.env.WAKATIME_USER
-    }
+    },
+    mode: import.meta.env.MODE,
+    site: import.meta.env.SITE,
+    baseUrl:
+        import.meta.env.MODE === 'development'
+            ? 'http://localhost:3000'
+            : import.meta.env.SITE
 }

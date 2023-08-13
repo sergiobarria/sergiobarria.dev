@@ -11,7 +11,9 @@ interface Props {
 }
 
 export async function getStaticPaths() {
-    const postEntries = await getCollection('posts')
+    const postEntries = await getCollection('posts', ({ data }) => {
+        return !data.draft && !data.isArchived
+    })
     return postEntries.map(entry => ({
         params: { slug: entry.slug },
         props: { entry }
@@ -39,7 +41,7 @@ const { Content, headings } = await entry.render()
             <p class="text-sm">{formatDate(publishedAt)}</p>
             <hr />
             <p class="space-x-2">
-                <ViewsCounter slug={slug} />
+                <!-- <ViewsCounter slug={slug} /> -->
                 <span>•</span>
                 <span>{readTime}</span>
             </p>
@@ -69,7 +71,7 @@ const { Content, headings } = await entry.render()
         </ul>
 
         <!-- Content -->
-        <article class="prose-quoteless prose prose-invert">
+        <article class="prose prose-invert prose-quoteless">
             <Content />
         </article>
     </section>

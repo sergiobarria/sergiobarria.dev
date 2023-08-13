@@ -1,5 +1,5 @@
 ---
-import SpotifyCard from '@/components/SpotifyCard.astro'
+import SpotifyCard from '@/components/svelte/SpotifyCard.svelte'
 import ArrowUpRightIcon from './ArrowUpRightIcon.astro'
 import { cn } from '@/lib/utils'
 
@@ -11,9 +11,9 @@ const links = [
 const pathname = new URL(Astro.url).pathname.split('/')[1]
 ---
 
-<footer class="mt-10">
+<footer class="mt-7">
     <div class="flex justify-between">
-        <SpotifyCard />
+        <SpotifyCard client:load />
         <div class="flex items-center gap-3">
             {
                 links.map(({ href, name }) => (

@@ -6,7 +6,7 @@ export const prerender = false
 
 export const get: APIRoute = async () => {
     const result = await getTopTracks()
-    const data = result?.length ? result : null
+    const data = result?.length ? result : []
 
     return new Response(JSON.stringify({ data }), {
         status: 200,
