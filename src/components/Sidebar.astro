@@ -29,6 +29,7 @@ const pathname = new URL(Astro.url).pathname.split('/')[1]
                 return (
                     <a
                         href={href}
+                        rel="prefetch"
                         class={cn(
                             'rounded-md px-3 py-1 text-sm',
                             isActive

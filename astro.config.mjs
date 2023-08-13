@@ -4,11 +4,11 @@ import tailwind from '@astrojs/tailwind'
 import mdx from '@astrojs/mdx'
 import vercel from '@astrojs/vercel/serverless'
 import svelte from '@astrojs/svelte'
-
 import remarkGfm from 'remark-gfm'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
+import prefetch from '@astrojs/prefetch'
 
 const rehypePrettyCodeOptions = {
     theme: 'rose-pine',
@@ -23,12 +23,16 @@ const rehypePrettyCodeOptions = {
         // Prevent lines from collapsing in `display: grid` mode, and
         // allow empty lines to be copy/pasted
         if (node.children.length === 0) {
-            node.children = [{ type: 'text', value: ' ' }]
+            node.children = [
+                {
+                    type: 'text',
+                    value: ' '
+                }
+            ]
         }
         node.properties.className = ['']
     }
 }
-
 const rehypeAutolinkHeadingsOptions = {
     properties: {
         className: ['anchor']
@@ -38,7 +42,7 @@ const rehypeAutolinkHeadingsOptions = {
 // https://astro.build/config
 export default defineConfig({
     site: 'https://sergiobarria.dev',
-    integrations: [tailwind(), svelte(), mdx()],
+    integrations: [tailwind(), svelte(), mdx(), prefetch()],
     markdown: {
         extendDefaultPlugins: true,
         syntaxHighlight: false,

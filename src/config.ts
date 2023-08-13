@@ -15,10 +15,6 @@ export default {
             url: 'mailto:sbarria.dev@gmail.com'
         }
     ],
-    baseUrl: import.meta.env.PROD
-        ? import.meta.env.SITE
-        : 'http://localhost:3000',
-    mode: import.meta.env.MODE,
     database: {
         host: import.meta.env.DATABASE_HOST,
         username: import.meta.env.DATABASE_USERNAME,
@@ -28,5 +24,12 @@ export default {
         refreshToken: import.meta.env.SPOTIFY_REFRESH_TOKEN,
         clientId: import.meta.env.SPOTIFY_CLIENT_ID,
         clientSecret: import.meta.env.SPOTIFY_CLIENT_SECRET
+    },
+    github: {
+        accessToken: import.meta.env.GITHUB_ACCESS_TOKEN
+    },
+    wakatime: {
+        apiKey: import.meta.env.WAKATIME_API_KEY,
+        username: import.meta.env.WAKATIME_USER
     }
 }
