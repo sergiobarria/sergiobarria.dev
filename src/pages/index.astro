@@ -13,7 +13,12 @@ import config from '@/config'
 
 const { socials } = config
 
-const posts = await getCollection('posts')
+const postsEntries = await getCollection('posts', ({ data }) => {
+    return data.draft !== true
+})
+const posts = postsEntries
+    .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+    .slice(0, 3)
 const allViews = await getAllPostsViews()
 const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
 ---
@@ -113,7 +118,7 @@ const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
             </h2>
 
             {
-                posts.slice(0, 3).map(({ data, slug, body }) => {
+                posts.map(({ data, slug, body }) => {
                     const { title, publishedAt } = data
                     const formattedDate = formatDate(publishedAt)
                     const readTime = readingTime(body)?.text

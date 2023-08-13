@@ -1,8 +1,10 @@
 ---
 import { getCollection, CollectionEntry } from 'astro:content'
+import readingTime from 'reading-time'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import ViewsCounter from '@/components/ViewsCounter.astro'
+import { cn, formatDate } from '@/lib/utils'
 
 interface Props {
     entry: CollectionEntry<'posts'>
@@ -19,13 +21,56 @@ export async function getStaticPaths() {
 const { entry } = Astro.props as Props
 const {
     slug,
-    data: { title }
+    body,
+    data: { title, publishedAt }
 } = entry
-const { Content } = await entry.render()
+const readTime = readingTime(body)?.text
+const { Content, headings } = await entry.render()
 ---
 
 <BaseLayout>
-    <div>dynamic route slug: {slug}</div>
-    <div>dynamic route title: {title}</div>
-    <ViewsCounter slug={slug} />
+    <section>
+        <h1 class="text-2xl font-bold tracking-tighter">
+            {title}
+        </h1>
+        <div
+            class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400"
+        >
+            <p class="text-sm">{formatDate(publishedAt)}</p>
+            <hr />
+            <p class="space-x-2">
+                <ViewsCounter slug={slug} />
+                <span>•</span>
+                <span>{readTime}</span>
+            </p>
+        </div>
+
+        <!-- TOC -->
+        <h2 class="text-2xl font-semibold">On this page</h2>
+        <ul class="mb-6">
+            {
+                headings.map(({ depth, slug, text }) => (
+                    <li
+                        class={cn({
+                            'ml-0': depth === 2,
+                            'ml-4': depth === 3,
+                            'ml-8': depth === 4
+                        })}
+                    >
+                        <a
+                            href={`#${slug}`}
+                            class="py-1 font-light text-neutral-400 transition duration-200 hover:text-white"
+                        >
+                            {text}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+
+        <!-- Content -->
+        <article class="prose-quoteless prose prose-invert">
+            <Content />
+        </article>
+    </section>
 </BaseLayout>
