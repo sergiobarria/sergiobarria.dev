@@ -6,7 +6,9 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import { formatDate } from '@/lib/utils'
 import { getAllPostsViews } from '@/lib/planetscale'
 
-const postsEntries = await getCollection('posts')
+const postsEntries = await getCollection('posts', ({ data }) => {
+    return !data.draft && !data.isArchived
+})
 const posts = postsEntries.sort(
     (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
 )

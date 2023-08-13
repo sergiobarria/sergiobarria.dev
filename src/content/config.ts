@@ -13,6 +13,32 @@ const postCollection = defineCollection({
     })
 })
 
+const snippetCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        tags: z.array(z.string()).optional(),
+        draft: z.boolean().optional().default(false)
+    })
+})
+
+const projectCollection = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        stack: z.array(z.string()),
+        cover: z.string(),
+        isArchived: z.boolean().optional().default(false),
+        draft: z.boolean().optional().default(false),
+        live: z.string().optional(),
+        source: z.string().optional()
+    })
+})
+
 export const collections = {
-    posts: postCollection
+    posts: postCollection,
+    snippets: snippetCollection,
+    projects: projectCollection
 }

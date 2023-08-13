@@ -8,6 +8,7 @@
         "build": "astro build",
         "preview": "astro preview",
         "astro": "astro",
+        "sync": "pnpm astro sync",
         "migration-generate": "pnpm drizzle-kit generate:mysql",
         "migration-up": "pnpm drizzle-kit push:mysql"
     },
