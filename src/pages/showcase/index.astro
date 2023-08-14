@@ -1,0 +1,145 @@
+---
+import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import ArrowUpRightIcon from '@/components/ArrowUpRightIcon.astro'
+
+const projects = await getCollection('projects', ({ data }) => {
+    return !data.draft
+})
+
+const snippets = await getCollection('snippets', ({ data }) => {
+    return !data.draft
+})
+---
+
+<BaseLayout>
+    <div class="space-y-12">
+        <header class="space-y-3">
+            <h1 class="text-3xl font-bold tracking-tight text-neutral-300">
+                Showcase
+            </h1>
+            <p class="text-zinc-400">
+                Welcome to my personal showcase. Here you can find some of the
+                projects I&apos;ve worked on and useful code snippets I use
+                regularly.
+            </p>
+        </header>
+
+        <section id="projects">
+            <h2 class="mb-3 text-2xl font-bold tracking-tight text-neutral-300">
+                Projects
+            </h2>
+            <p class="mb-6 mt-3 text-zinc-400">
+                These are some of the projects I&apos;ve developed, including
+                links to live versions and source code.
+            </p>
+
+            {
+                projects.map(project => {
+                    const { title, description, cover, live, source, stack } =
+                        project.data
+
+                    return (
+                        <div class="flex h-full flex-col items-center gap-3 rounded border border-neutral-600 p-3 md:flex-row">
+                            <Image
+                                src={cover}
+                                alt="project cover"
+                                width={100}
+                                height={100}
+                                class="h-33 mx-auto mb-4 hidden w-44 rounded grayscale md:mb-0 md:block md:h-24 md:w-32"
+                            />
+
+                            <div class="flex flex-grow flex-col justify-between">
+                                <div class="text-center md:text-start">
+                                    <h3 class="font-semibold group-hover:opacity-80">
+                                        {title}
+                                    </h3>
+                                    <p class="mt-1 text-sm opacity-80">
+                                        {description}
+                                    </p>
+                                </div>
+
+                                <div class="flex flex-col items-center space-y-3 md:flex-row md:items-end md:justify-between md:space-y-0">
+                                    <div class="mt-6 flex flex-wrap gap-y-2">
+                                        {stack.map(tag => (
+                                            <span class="mr-2 rounded bg-neutral-800 px-2 py-1 text-[10px] text-neutral-100">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    <div class="flex items-center gap-3">
+                                        <p class="flex items-center gap-1 text-neutral-400 hover:opacity-80">
+                                            <a
+                                                href={live}
+                                                class="text-xs"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                live
+                                            </a>
+                                            <ArrowUpRightIcon class="h-3 w-3 self-end" />
+                                        </p>
+                                        <p class="flex items-center gap-1 text-neutral-400 hover:opacity-80">
+                                            <a
+                                                href={source}
+                                                class="text-xs"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                github
+                                            </a>
+                                            <ArrowUpRightIcon class="h-3 w-3 self-end" />
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
+        </section>
+
+        <section id="snippets">
+            <h2 class="mb-3 text-2xl font-bold tracking-tight text-neutral-300">
+                Code Snippets
+            </h2>
+            <p class="mb-6 mt-3 text-zinc-400">
+                These are useful code snippets that I use regularly in my work.
+                Click on each to see more details.
+            </p>
+            <div class="grid h-full grid-cols-1 gap-4 md:grid-cols-2">
+                {
+                    snippets.map(
+                        ({ slug, data: { title, description, tags } }) => {
+                            return (
+                                <a href={`/showcase/${slug}`}>
+                                    <div class="flex h-full flex-col rounded border border-neutral-800 p-4 shadow-md hover:cursor-pointer hover:bg-neutral-800">
+                                        <h3 class="text-lg font-semibold">
+                                            {title}
+                                        </h3>
+                                        <p class="mb-auto text-sm text-gray-500">
+                                            {description}
+                                        </p>
+
+                                        {tags && (
+                                            <div class="mt-2 flex flex-wrap gap-y-2">
+                                                {tags.map(tag => (
+                                                    <span class="mr-2 rounded bg-neutral-800 px-2 py-1 text-[10px] text-neutral-100">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                </a>
+                            )
+                        }
+                    )
+                }
+            </div>
+        </section>
+    </div>
+</BaseLayout>

@@ -1,0 +1,34 @@
+---
+import '@fontsource-variable/readex-pro'
+
+import Head from '@/components/Head.astro'
+import Sidebar from '@/components/Sidebar.astro'
+import Footer from '@/components/Footer.astro'
+import config from '@/config'
+
+import '../styles/globals.css'
+
+interface Props {
+    title?: string
+    description?: string
+}
+
+const { title: defaultTitle, description: defaultDescription } = config
+const { title, description } = Astro.props as Props
+---
+
+<html lang="en" class="scroll-smooth bg-[#0e0f0f] text-[#e9ecef]">
+    <Head title={title ?? defaultTitle} description={description ?? defaultDescription} />
+    <body class="font-light antialiased">
+        <div class="mx-auto my-16 max-w-screen-md gap-6 px-5 md:flex md:px-0">
+            <Sidebar />
+            <div class="mt-5 flex-grow md:mt-0">
+                <main>
+                    <!-- 👇🏼 This is the entry point of the application -->
+                    <slot />
+                </main>
+                <Footer />
+            </div>
+        </div>
+    </body>
+</html>

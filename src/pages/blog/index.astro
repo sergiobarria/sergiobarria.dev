@@ -1,19 +1,49 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content'
+import readingTime from 'reading-time'
 
-import MainLayout from '~/layouts/MainLayout.astro';
-import PageLayout from '~/shared/components/PageLayout.astro';
-import { BlogPostsList } from '~/shared/components/jsx';
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { formatDate } from '@/lib/utils'
+import { getAllPostsViews } from '@/lib/planetscale'
 
-export const prerender = true;
-const blogEntries = await getCollection('blog');
+const postsEntries = await getCollection('posts', ({ data }) => {
+    return !data.draft && !data.isArchived
+})
+const posts = postsEntries.sort(
+    (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+)
+const allViews = await getAllPostsViews()
 ---
 
-<MainLayout title="Blog | Sergio Barria">
-	<PageLayout
-		title="Here is a collection of my posts on Web Development"
-		intro="In total, I've written 16 articles in this blog. You can find them all below, or by searching for a post title."
-	>
-		<BlogPostsList client:load posts={blogEntries} />
-	</PageLayout>
-</MainLayout>
+<BaseLayout title="Blog | Sergio Barria">
+    <h1 class="mb-6 text-2xl font-bold md:text-3xl">Blog</h1>
+    <p class="mb-8">
+        In total, I&apos;ve written {posts.length} articles. You can find them all below.
+    </p>
+    <ul>
+        {
+            posts.map(({ data, slug, body }) => {
+                const { title, publishedAt } = data
+                const formattedDate = formatDate(publishedAt)
+                const readTime = readingTime(body).text
+                const views = allViews.find(view => view.slug === slug)?.views ?? 0
+
+                return (
+                    <li class="mb-4">
+                        <a href={`/blog/${slug}`} class="">
+                            <h2>{title}</h2>
+                            <p class="text-sm text-neutral-400">
+                                <span>{formattedDate}</span>
+                                <span>•</span>
+                                <span>{views} views</span>
+                                <span>•</span>
+                                <span>{readTime}</span>
+                            </p>
+                        </a>
+                    </li>
+                )
+            })
+        }
+    </ul>
+    <hr class="my-8 border-neutral-500/50" />
+</BaseLayout>
