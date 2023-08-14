@@ -3,7 +3,8 @@ import { getCollection, CollectionEntry } from 'astro:content'
 import readingTime from 'reading-time'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import ViewsCounter from '@/components/ViewsCounter.astro'
+import { ViewsCounter } from '@/components/svelte'
+import { getViewsBySlug } from '@/lib/planetscale'
 import { cn, formatDate } from '@/lib/utils'
 
 interface Props {
@@ -27,6 +28,7 @@ const {
     data: { title, publishedAt }
 } = entry
 const readTime = readingTime(body)?.text
+const views = await getViewsBySlug(slug)
 const { Content, headings } = await entry.render()
 ---
 
@@ -35,13 +37,11 @@ const { Content, headings } = await entry.render()
         <h1 class="text-2xl font-bold tracking-tighter">
             {title}
         </h1>
-        <div
-            class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400"
-        >
+        <div class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400">
             <p class="text-sm">{formatDate(publishedAt)}</p>
             <hr />
             <p class="space-x-2">
-                <!-- <ViewsCounter slug={slug} /> -->
+                <ViewsCounter {views} {slug} client:load />
                 <span>•</span>
                 <span>{readTime}</span>
             </p>

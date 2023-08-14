@@ -19,10 +19,17 @@ export async function increment(slug: string) {
     const result = await db.select().from(posts).where(eq(posts.slug, slug))
     const views = result.length ? result[0].views : 0
 
-    return await db
+    await db
         .insert(posts)
-        .values({ slug, views })
+        .values({ slug, views: 1 })
         .onDuplicateKeyUpdate({ set: { views: views + 1 } })
+
+    const updatedViews = await db
+        .select({ views: posts.views })
+        .from(posts)
+        .where(eq(posts.slug, slug))
+
+    return updatedViews.length ? updatedViews[0].views : 0
 }
 
 export async function getAllPostsViews(): Promise<DBPost[]> {
@@ -30,8 +37,6 @@ export async function getAllPostsViews(): Promise<DBPost[]> {
 }
 
 export async function getViewsBySlug(slug: string) {
-    return await db
-        .select({ views: posts.views })
-        .from(posts)
-        .where(eq(posts.slug, slug))
+    const result = await db.select({ views: posts.views }).from(posts).where(eq(posts.slug, slug))
+    return result.length ? result[0].views : 0
 }
