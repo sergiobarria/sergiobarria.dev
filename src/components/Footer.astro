@@ -4,8 +4,8 @@ import ArrowUpRightIcon from './ArrowUpRightIcon.astro'
 import { cn } from '@/lib/utils'
 
 const links = [
-    { name: 'showcase', href: '/showcase' },
-    { name: 'dashboard', href: '/dashboard' }
+    // { name: 'showcase', href: '/showcase' },
+    // { name: 'dashboard', href: '/dashboard' }
 ]
 
 const pathname = new URL(Astro.url).pathname.split('/')[1]
@@ -14,7 +14,7 @@ const pathname = new URL(Astro.url).pathname.split('/')[1]
 <footer class="mt-7">
     <div class="flex justify-between">
         <SpotifyCard client:load />
-        <div class="flex items-center gap-3">
+        <!-- <div class="flex items-center gap-3">
             {
                 links.map(({ href, name }) => (
                     <a
@@ -32,6 +32,6 @@ const pathname = new URL(Astro.url).pathname.split('/')[1]
                     </a>
                 ))
             }
-        </div>
+        </div> -->
     </div>
 </footer>

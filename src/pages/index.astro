@@ -9,6 +9,7 @@ import { formatDate } from '@/lib/utils'
 import { getAllPostsViews } from '@/lib/planetscale'
 import { getStargazersCount } from '@/lib/github'
 import profile from '@/assets/profile-2.png'
+import HomeIcons from '@/components/HomeIcons.astro'
 
 import config from '@/config'
 
@@ -104,6 +105,7 @@ const stargazersCount = await getStargazersCount()
                     </div>
                 </div>
             </div>
+            <HomeIcons />
             <p class="mt-8">
                 Welcome to my small space of the internet, where I write and
                 share about different topics related to the web. I&apos;m

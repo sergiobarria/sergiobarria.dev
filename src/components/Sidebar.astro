@@ -2,13 +2,13 @@
 import { Image } from 'astro:assets'
 
 import { cn } from '@/lib/utils'
-import logo from '@/assets/logo.png'
+import logo from '@/assets/logo-2.png'
 
 const links = [
     { name: 'home', href: '/' },
     { name: 'about', href: '/about' },
-    { name: 'blog', href: '/blog' },
-    { name: 'showcase', href: '/showcase' }
+    { name: 'blog', href: '/blog' }
+    // { name: 'showcase', href: '/showcase' }
 ]
 const pathname = new URL(Astro.url).pathname.split('/')[1]
 ---
@@ -17,7 +17,7 @@ const pathname = new URL(Astro.url).pathname.split('/')[1]
     <Image
         src={logo}
         alt="logo"
-        width={30}
+        width={40}
         height={50}
         class="mb-3 pl-3 md:mb-4"
     />
