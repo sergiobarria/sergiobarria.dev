@@ -1,44 +1,41 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
-    import type { NowPlayingResponse } from '@/lib/spotify'
     import AnimatedBars from './AnimatedBars.svelte'
     import config from '@/config'
 
     const { mode, site } = config
 
-    let data: NowPlayingResponse
+    let isPlaying: boolean
+    let data: {
+        title: string
+        album: string
+        artist: string
+        albumImageUrl: string
+        songUrl: string
+    }
 
     onMount(async () => {
         const baseUrl = mode === 'development' ? 'http://localhost:3000' : site
-        const res = await fetch(baseUrl + '/api/spotify/now-playing.json')
-        data = await res.json()
+        const res = await fetch(baseUrl + '/api/now-playing.json')
+        const json = await res.json()
+        isPlaying = json.isPlaying
+        data = json.data
     })
 </script>
 
-{#if data?.isPlaying}
+{#if isPlaying}
     <div
-        class="flex items-center gap-3 rounded border border-neutral-700/70 p-2 text-sm text-neutral-300 md:max-w-[250px]"
+        class="flex min-w-[175px] items-center gap-3 rounded border border-neutral-700/70 p-2 text-sm text-neutral-300 md:max-w-[250px]"
     >
-        <img
-            src={data?.data?.albumImageUrl}
-            alt="album cover"
-            width={40}
-            height={40}
-            class="flex-none"
-        />
+        <img src={data?.albumImageUrl} alt="album cover" width={40} height={40} class="flex-none" />
         <div class="flex min-w-0 flex-grow flex-col justify-between">
-            <a
-                href={data?.data?.songUrl}
-                class="truncate text-start text-xs font-medium"
-            >
-                {data?.data?.title}
+            <a href={data?.songUrl} class="truncate text-start text-xs font-medium">
+                {data?.title}
             </a>
-            <div
-                class="flex items-baseline justify-between gap-3 space-y-1 md:space-y-0"
-            >
+            <div class="flex items-baseline justify-between gap-3 space-y-1 md:space-y-0">
                 <span class="truncate text-start text-xs opacity-80">
-                    {data?.data?.artist}
+                    {data?.artist}
                 </span>
                 <AnimatedBars />
             </div>

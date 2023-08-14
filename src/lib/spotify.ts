@@ -2,8 +2,7 @@ import config from '@/config'
 
 const { refreshToken, clientId, clientSecret } = config.spotify
 const token = Buffer.from(`${clientId}:${clientSecret}`).toString('base64')
-const NOW_PLAYING_ENDPOINT =
-    'https://api.spotify.com/v1/me/player/currently-playing'
+const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing'
 const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks'
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token'
 
@@ -31,29 +30,6 @@ interface SpotifyResponse {
         }
     }
     currently_playing_type: string
-}
-
-export interface NowPlayingResponse {
-    isPlaying: boolean
-    data: {
-        title: string
-        album: string
-        artist: string
-        albumImageUrl: string
-        songUrl: string
-    }
-}
-
-interface TopTrack {
-    id: string
-    artists: string
-    songUrl: string
-    title: string
-    images: Array<{ height: number; width: number; url: string }>
-}
-
-export interface TopTracksResponse {
-    data: Array<TopTrack>
 }
 
 export async function getAccessToken() {
@@ -112,9 +88,7 @@ export async function getNowPlaying() {
         song: {
             title: json.item.name,
             album: json.item.album.name,
-            artist: json?.item?.album?.artists
-                ?.map(artist => artist.name)
-                .join(', '),
+            artist: json?.item?.album?.artists?.map(artist => artist.name).join(', '),
             albumImageUrl: json.item.album.images[0].url,
             songUrl: json.item.external_urls.spotify
         }

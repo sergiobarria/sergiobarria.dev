@@ -5,6 +5,7 @@
     "trailingComma": "none",
     "semi": false,
     "bracketSpacing": true,
+    "printWidth": 100,
     "plugins": [
         "prettier-plugin-astro",
         "prettier-plugin-svelte",
