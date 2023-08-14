@@ -9,10 +9,6 @@ export default {
         {
             name: 'linkedin',
             url: 'https://www.linkedin.com/in/sergiobarria/'
-        },
-        {
-            name: 'email',
-            url: 'mailto:sbarria.dev@gmail.com'
         }
     ],
     database: {
@@ -34,8 +30,5 @@ export default {
     },
     mode: import.meta.env.MODE,
     site: import.meta.env.SITE,
-    baseUrl:
-        import.meta.env.MODE === 'development'
-            ? 'http://localhost:3000'
-            : import.meta.env.SITE
+    baseUrl: import.meta.env.MODE === 'development' ? 'http://localhost:3000' : import.meta.env.SITE
 }
