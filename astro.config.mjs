@@ -58,10 +58,6 @@ export default defineConfig({
     },
     output: 'hybrid',
     adapter: vercel({
-        analytics: true,
-        imageService: true,
-        imagesConfig: {
-            sizes: [320, 640, 1280]
-        }
+        analytics: true
     })
 })
