@@ -30,13 +30,10 @@ const stargazersCount = await getStargazersCount()
     <div class="space-y-10">
         <section id="hero">
             <h1 class="text-2xl font-bold md:text-3xl">Sergio Barria</h1>
-            <p class="text-sm text-neutral-400">
-                developer, engineer and amateur writer
-            </p>
+            <p class="text-sm text-neutral-400">developer, engineer and amateur writer</p>
             <p class="mt-3">
-                Hey there!, I&apos;m Sergio, a civil engineer from Panama turn
-                into web developer. I work as a full stack developer building
-                web and mobile apps, mostly around the <strong
+                Hey there!, I&apos;m Sergio, a civil engineer from Panama turn into web developer. I
+                work as a full stack developer building web and mobile apps, mostly around the <strong
                     >JavaScript</strong
                 > ecosystem.
             </p>
@@ -81,9 +78,8 @@ const stargazersCount = await getStargazersCount()
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             class="lucide lucide-trending-up h-5 w-5"
-                            ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"
-                            ></polyline><polyline points="16 7 22 7 22 13"
-                            ></polyline></svg
+                            ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline
+                                points="16 7 22 7 22 13"></polyline></svg
                         >
                         {totalViews} total posts views
                     </p>
@@ -107,27 +103,23 @@ const stargazersCount = await getStargazersCount()
             </div>
             <HomeIcons />
             <p class="mt-8">
-                Welcome to my small space of the internet, where I write and
-                share about different topics related to the web. I&apos;m
-                constantly exploring new technologies, currently focusing on
-                improving my knowledge with:{' '}
-                <strong>Django</strong>, <strong>MySQL</strong>, and other tools
-                for web development.
+                Welcome to my small space of the internet, where I write and share about different
+                topics related to the web. I&apos;m constantly exploring new technologies, currently
+                focusing on improving my knowledge with:{' '}
+                <strong>Django</strong>, <strong>MySQL</strong>, and other tools for web
+                development.
             </p>
         </section>
 
         <section id="latest-articles">
-            <h2 class="mb-3 text-xl font-semibold md:text-2xl lg:text-3xl">
-                Latest Articles
-            </h2>
+            <h2 class="mb-3 text-xl font-semibold md:text-2xl lg:text-3xl">Latest Articles</h2>
 
             {
                 posts.map(({ data, slug, body }) => {
                     const { title, publishedAt } = data
                     const formattedDate = formatDate(publishedAt)
                     const readTime = readingTime(body)?.text
-                    const views =
-                        allViews.find(post => post.slug === slug)?.views ?? 0
+                    const views = allViews.find(post => post.slug === slug)?.views ?? 0
 
                     return (
                         <a
@@ -135,9 +127,7 @@ const stargazersCount = await getStargazersCount()
                             class="group flex justify-between border-b border-neutral-600 py-3"
                         >
                             <div>
-                                <h3 class="font-semibold group-hover:opacity-80">
-                                    {title}
-                                </h3>
+                                <h3 class="font-semibold group-hover:opacity-80">{title}</h3>
                                 <p class="flex gap-2 text-xs opacity-90">
                                     <span>{formattedDate}</span>
                                     <span>•</span>
