@@ -25,14 +25,14 @@ const { entry } = Astro.props as Props
 const {
     slug,
     body,
-    data: { title, publishedAt }
+    data: { title, publishedAt, summary }
 } = entry
 const readTime = readingTime(body)?.text
 const views = await getViewsBySlug(slug)
 const { Content, headings } = await entry.render()
 ---
 
-<BaseLayout>
+<BaseLayout title={title} description={summary}>
     <section>
         <h1 class="text-2xl font-bold tracking-tighter">
             {title}

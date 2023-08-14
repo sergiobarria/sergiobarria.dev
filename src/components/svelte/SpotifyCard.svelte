@@ -2,9 +2,6 @@
     import { onMount } from 'svelte'
 
     import AnimatedBars from './AnimatedBars.svelte'
-    import config from '@/config'
-
-    const { mode, site } = config
 
     let isPlaying: boolean
     let data: {
@@ -18,7 +15,6 @@
     onMount(async () => {
         const res = await fetch('/api/now-playing.json')
         const json = await res.json()
-        console.log(json)
         isPlaying = json.isPlaying
         data = json.data
     })

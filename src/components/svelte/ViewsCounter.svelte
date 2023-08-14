@@ -1,10 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte'
 
-    import config from '@/config'
-
-    const { mode, site } = config
-
     let count: number
     export let views: number
     export let slug: string

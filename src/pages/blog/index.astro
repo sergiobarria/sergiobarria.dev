@@ -15,11 +15,10 @@ const posts = postsEntries.sort(
 const allViews = await getAllPostsViews()
 ---
 
-<BaseLayout>
+<BaseLayout title="Blog | Sergio Barria">
     <h1 class="mb-6 text-2xl font-bold md:text-3xl">Blog</h1>
     <p class="mb-8">
-        In total, I&apos;ve written {posts.length} articles. You can find them
-        all below.
+        In total, I&apos;ve written {posts.length} articles. You can find them all below.
     </p>
     <ul>
         {
@@ -27,8 +26,7 @@ const allViews = await getAllPostsViews()
                 const { title, publishedAt } = data
                 const formattedDate = formatDate(publishedAt)
                 const readTime = readingTime(body).text
-                const views =
-                    allViews.find(view => view.slug === slug)?.views ?? 0
+                const views = allViews.find(view => view.slug === slug)?.views ?? 0
 
                 return (
                     <li class="mb-4">

@@ -4,11 +4,13 @@ import tailwind from '@astrojs/tailwind'
 import mdx from '@astrojs/mdx'
 import vercel from '@astrojs/vercel/serverless'
 import svelte from '@astrojs/svelte'
+import prefetch from '@astrojs/prefetch'
+import partytown from '@astrojs/partytown'
+import sitemap from '@astrojs/sitemap'
 import remarkGfm from 'remark-gfm'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
-import prefetch from '@astrojs/prefetch'
 
 const rehypePrettyCodeOptions = {
     theme: 'rose-pine',
@@ -42,7 +44,7 @@ const rehypeAutolinkHeadingsOptions = {
 // https://astro.build/config
 export default defineConfig({
     site: 'https://sergiobarria.dev',
-    integrations: [tailwind(), svelte(), mdx(), prefetch()],
+    integrations: [tailwind(), svelte(), mdx(), prefetch(), partytown(), sitemap()],
     markdown: {
         extendDefaultPlugins: true,
         syntaxHighlight: false,
