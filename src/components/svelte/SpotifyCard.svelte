@@ -16,9 +16,9 @@
     }
 
     onMount(async () => {
-        const baseUrl = mode === 'development' ? 'http://localhost:3000' : site
-        const res = await fetch(baseUrl + '/api/now-playing.json')
+        const res = await fetch('/api/now-playing.json')
         const json = await res.json()
+        console.log(json)
         isPlaying = json.isPlaying
         data = json.data
     })

@@ -10,8 +10,7 @@
     export let slug: string
 
     onMount(async () => {
-        const baseUrl = mode === 'development' ? 'http://localhost:3000' : site
-        const response = await fetch(baseUrl + '/api/views/' + slug + '.json', {
+        const response = await fetch('/api/views/' + slug + '.json', {
             method: 'POST'
         })
         const data: { views: number } = await response.json()
