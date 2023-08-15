@@ -56,7 +56,8 @@ export default defineConfig({
         ]
     },
     experimental: {
-        assets: true
+        assets: true,
+        viewTransitions: true
     },
     output: 'hybrid',
     adapter: vercel({
