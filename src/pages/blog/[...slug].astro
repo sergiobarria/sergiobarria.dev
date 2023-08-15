@@ -3,7 +3,7 @@ import { getCollection, CollectionEntry } from 'astro:content'
 import readingTime from 'reading-time'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import { ViewsCounter } from '@/components/svelte'
+import { ViewsCounter, ProgressBar } from '@/components/svelte'
 import { getViewsBySlug } from '@/lib/planetscale'
 import { cn, formatDate } from '@/lib/utils'
 
@@ -34,6 +34,7 @@ const { Content, headings } = await entry.render()
 
 <BaseLayout title={title} description={summary}>
     <section>
+        <ProgressBar client:visible />
         <h1 class="text-2xl font-bold tracking-tighter">
             {title}
         </h1>
