@@ -3,10 +3,7 @@ import { SpotifyCard } from '@/components/svelte'
 import ArrowUpRightIcon from './ArrowUpRightIcon.astro'
 import { cn } from '@/lib/utils'
 
-const links = [
-    // { name: 'showcase', href: '/showcase' },
-    // { name: 'dashboard', href: '/dashboard' }
-]
+const links = [{ name: 'gists', href: 'https://gist.github.com/sergiobarria' }]
 
 const pathname = new URL(Astro.url).pathname.split('/')[1]
 ---
@@ -14,12 +11,14 @@ const pathname = new URL(Astro.url).pathname.split('/')[1]
 <footer class="mt-7">
     <div class="flex justify-between">
         <SpotifyCard client:load />
-        <!-- <div class="flex items-center gap-3">
+        <div class="flex items-center gap-3">
             {
                 links.map(({ href, name }) => (
                     <a
                         href={href}
                         rel="prefetch"
+                        target={href.startsWith('/') ? '_self' : '_blank'}
+                        rel={href.startsWith('/') ? '' : 'noopener noreferrer'}
                         class={cn(
                             'flex items-center gap-1 text-sm',
                             pathname === href.slice(1)
@@ -32,6 +31,6 @@ const pathname = new URL(Astro.url).pathname.split('/')[1]
                     </a>
                 ))
             }
-        </div> -->
+        </div>
     </div>
 </footer>
