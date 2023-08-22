@@ -24,6 +24,7 @@ const posts = postsEntries
 const allViews = await getAllPostsViews()
 const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
 const stargazersCount = await getStargazersCount()
+export const prerender = false
 ---
 
 <BaseLayout>
