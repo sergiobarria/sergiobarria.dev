@@ -5,8 +5,8 @@ import readingTime from 'reading-time'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import ArrowUpRightIcon from '@/components/ArrowUpRightIcon.astro'
+import ShowViews from '@/components/ShowViews.astro'
 import { formatDate } from '@/lib/utils'
-import { getAllPostsViews } from '@/lib/planetscale'
 import { getStargazersCount } from '@/lib/github'
 import profile from '@/assets/profile.jpg'
 import HomeIcons from '@/components/HomeIcons.astro'
@@ -21,10 +21,8 @@ const postsEntries = await getCollection('posts', ({ data }) => {
 const posts = postsEntries
     .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
     .slice(0, 3)
-const allViews = await getAllPostsViews()
-const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
+
 const stargazersCount = await getStargazersCount()
-export const prerender = false
 ---
 
 <BaseLayout>
@@ -82,7 +80,8 @@ export const prerender = false
                             ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline
                                 points="16 7 22 7 22 13"></polyline></svg
                         >
-                        {totalViews} total posts views
+                        <ShowViews showTotal />
+                        <span>total posts views</span>
                     </p>
 
                     <div class="flex gap-4 text-xs">
@@ -120,7 +119,7 @@ export const prerender = false
                     const { title, publishedAt } = data
                     const formattedDate = formatDate(publishedAt)
                     const readTime = readingTime(body)?.text
-                    const views = allViews.find(post => post.slug === slug)?.views ?? 0
+                    // const views = allViews.find(post => post.slug === slug)?.views ?? 0
 
                     return (
                         <a
@@ -132,7 +131,9 @@ export const prerender = false
                                 <p class="flex gap-2 text-xs opacity-90">
                                     <span>{formattedDate}</span>
                                     <span>•</span>
-                                    <span>{views} views</span>
+                                    <span>
+                                        <ShowViews slug={slug} /> views
+                                    </span>
                                     <span>•</span>
                                     <span>{readTime}</span>
                                 </p>
