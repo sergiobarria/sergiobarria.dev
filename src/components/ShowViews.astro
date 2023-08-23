@@ -1,0 +1,19 @@
+---
+import { getAllPostsViews } from '@/lib/planetscale'
+
+interface Props {
+    showTotal?: boolean
+    slug?: string
+}
+
+const { showTotal = false, slug } = Astro.props as Props
+const allViews = await getAllPostsViews()
+const totalViews = allViews.reduce((acc, curr) => acc + curr.views, 0)
+const postViews = slug ? allViews.find(v => v.slug === slug)?.views : null
+
+export const prerender = false
+---
+
+{showTotal && <span>{totalViews}</span>}
+
+{!showTotal && slug && postViews && <span>{postViews}</span>}
