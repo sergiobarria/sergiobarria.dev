@@ -67,6 +67,9 @@ export default defineConfig({
         define: {
             'import.meta.env.PUBLIC_VERCEL_ANALYTICS_ID': JSON.stringify(
                 process.env.VERCEL_ANALYTICS_ID
+            ),
+            'import.meta.env.VITE_VERCEL_ANALYTICS_ID': JSON.stringify(
+                process.env.VERCEL_ANALYTICS_ID
             )
         }
     }
