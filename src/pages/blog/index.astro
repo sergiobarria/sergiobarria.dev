@@ -1,18 +1,18 @@
 ---
-import { getCollection } from 'astro:content'
-import readingTime from 'reading-time'
+import { getCollection } from 'astro:content';
+import readingTime from 'reading-time';
 
-import BaseLayout from '@/layouts/BaseLayout.astro'
-import { formatDate } from '@/lib/utils'
-import { getAllPostsViews } from '@/lib/planetscale'
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import { formatDate } from '~/lib/utils';
+import { getAllPostsViews } from '~/lib/planetscale';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
-    return !data.draft && !data.isArchived
-})
+    return !data.draft && !data.isArchived;
+});
 const posts = postsEntries.sort(
     (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
-)
-const allViews = await getAllPostsViews()
+);
+const allViews = await getAllPostsViews();
 ---
 
 <BaseLayout title="Blog | Sergio Barria">
@@ -23,10 +23,10 @@ const allViews = await getAllPostsViews()
     <ul>
         {
             posts.map(({ data, slug, body }) => {
-                const { title, publishedAt } = data
-                const formattedDate = formatDate(publishedAt)
-                const readTime = readingTime(body).text
-                const views = allViews.find(view => view.slug === slug)?.views ?? 0
+                const { title, publishedAt } = data;
+                const formattedDate = formatDate(publishedAt);
+                const readTime = readingTime(body).text;
+                const views = allViews.find(view => view.slug === slug)?.views ?? 0;
 
                 return (
                     <li class="mb-4">
@@ -41,7 +41,7 @@ const allViews = await getAllPostsViews()
                             </p>
                         </a>
                     </li>
-                )
+                );
             })
         }
     </ul>

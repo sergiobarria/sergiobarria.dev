@@ -31,4 +31,4 @@ export default {
     mode: import.meta.env.MODE,
     site: import.meta.env.SITE,
     baseUrl: import.meta.env.MODE === 'development' ? 'http://localhost:3000' : import.meta.env.SITE
-}
+};

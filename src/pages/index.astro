@@ -3,15 +3,16 @@ import { Image } from 'astro:assets'
 import { getCollection } from 'astro:content'
 import readingTime from 'reading-time'
 
-import BaseLayout from '@/layouts/BaseLayout.astro'
-import ArrowUpRightIcon from '@/components/ArrowUpRightIcon.astro'
-import { ShowViews } from '@/components/svelte'
-import { formatDate } from '@/lib/utils'
-import { getStargazersCount } from '@/lib/github'
-import profile from '@/assets/profile.jpg'
-import HomeIcons from '@/components/HomeIcons.astro'
+import BaseLayout from '~/layouts/BaseLayout.astro'
+import ArrowUpRightIcon from '~/components/ArrowUpRightIcon.astro'
+// import { ShowViews } from '~/components/svelte'
+import ShowViews from '~/components/vue/ShowViews.vue'
+import { formatDate } from '~/lib/utils'
+import { getStargazersCount } from '~/lib/github'
+import profile from '~/assets/profile.jpg'
+import HomeIcons from '~/components/HomeIcons.astro'
 
-import config from '@/config'
+import config from '~/config'
 
 const { socials } = config
 
