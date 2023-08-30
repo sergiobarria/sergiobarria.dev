@@ -1,50 +1,44 @@
-<script setup lang="ts">
-import { onMounted, ref } from 'vue';
+<script lang="ts">
+    import { onMount } from 'svelte';
 
-import AnimatedBars from './AnimatedBars.vue';
+    import AnimatedBars from './AnimatedBars.svelte';
 
-const isPlaying = ref<boolean>(false);
-const data = ref<{
-    title: string;
-    album: string;
-    artist: string;
-    albumImageUrl: string;
-    songUrl: string;
-}>();
+    let isPlaying: boolean;
+    let data: {
+        title: string;
+        album: string;
+        artist: string;
+        albumImageUrl: string;
+        songUrl: string;
+    };
 
-onMounted(async () => {
-    const res = await fetch('/api/now-playing.json');
-    const json = await res.json();
-
-    isPlaying.value = json.isPlaying;
-    data.value = { ...json.data };
-});
+    onMount(async () => {
+        const res = await fetch('/api/now-playing.json');
+        const json = await res.json();
+        isPlaying = json.isPlaying;
+        data = json.data;
+    });
 </script>
 
-<template>
+{#if isPlaying}
     <div
-        v-if="isPlaying"
         class="flex min-w-[175px] items-center gap-3 rounded border border-neutral-700/70 p-2 text-sm text-neutral-300 md:max-w-[250px]"
     >
-        <img
-            :src="data?.albumImageUrl"
-            :alt="data?.title + ' album cover'"
-            :width="40"
-            :height="40"
-            class="flex-none"
-        />
+        <img src={data?.albumImageUrl} alt="album cover" width={40} height={40} class="flex-none" />
         <div class="flex min-w-0 flex-grow flex-col justify-between">
-            <a :href="data?.songUrl" class="truncate text-start text-xs font-medium">
-                {{ data?.title }}
+            <a href={data?.songUrl} class="truncate text-start text-xs font-medium">
+                {data?.title}
             </a>
             <div class="flex items-baseline justify-between gap-3 space-y-1 md:space-y-0">
-                <span class="truncate text-start text-xs opacity-80"> {{ data?.artist }} </span>
+                <span class="truncate text-start text-xs opacity-80">
+                    {data?.artist}
+                </span>
                 <AnimatedBars />
             </div>
         </div>
     </div>
+{:else}
     <div
-        v-if="!isPlaying"
         class="inline-flex items-center gap-3 rounded border border-neutral-700/70 p-2 text-sm text-neutral-300"
     >
         <svg
@@ -68,4 +62,4 @@ onMounted(async () => {
             <span class="text-xs opacity-80">Not Listening</span>
         </div>
     </div>
-</template>
+{/if}

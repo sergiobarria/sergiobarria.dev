@@ -1,28 +1,28 @@
 ---
-import { Image } from 'astro:assets'
-import { getCollection } from 'astro:content'
-import readingTime from 'reading-time'
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import readingTime from 'reading-time';
 
-import BaseLayout from '~/layouts/BaseLayout.astro'
-import ArrowUpRightIcon from '~/components/ArrowUpRightIcon.astro'
-import ShowViews from '~/components/vue/ShowViews.vue'
-import { formatDate } from '~/lib/utils'
-import { getStargazersCount } from '~/lib/github'
-import profile from '~/assets/profile.jpg'
-import HomeIcons from '~/components/HomeIcons.astro'
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ArrowUpRightIcon from '~/components/ArrowUpRightIcon.astro';
+import { ShowViews } from '~/components/svelte';
+import { formatDate } from '~/lib/utils';
+import { getStargazersCount } from '~/lib/github';
+import profile from '~/assets/profile.jpg';
+import HomeIcons from '~/components/HomeIcons.astro';
 
-import config from '~/config'
+import config from '~/config';
 
-const { socials } = config
+const { socials } = config;
 
 const postsEntries = await getCollection('posts', ({ data }) => {
-    return !data.draft && !data.isArchived
-})
+    return !data.draft && !data.isArchived;
+});
 const posts = postsEntries
     .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
-    .slice(0, 3)
+    .slice(0, 3);
 
-const stargazersCount = await getStargazersCount()
+const stargazersCount = await getStargazersCount();
 ---
 
 <BaseLayout>
@@ -116,9 +116,9 @@ const stargazersCount = await getStargazersCount()
 
             {
                 posts.map(({ data, slug, body }) => {
-                    const { title, publishedAt } = data
-                    const formattedDate = formatDate(publishedAt)
-                    const readTime = readingTime(body)?.text
+                    const { title, publishedAt } = data;
+                    const formattedDate = formatDate(publishedAt);
+                    const readTime = readingTime(body)?.text;
 
                     return (
                         <a
@@ -141,7 +141,7 @@ const stargazersCount = await getStargazersCount()
                                 <ArrowUpRightIcon />
                             </div>
                         </a>
-                    )
+                    );
                 })
             }
         </section>
