@@ -1,6 +1,6 @@
-import config from '@/config'
+import config from '~/config';
 
-const { accessToken } = config.github
+const { accessToken } = config.github;
 
 const STARGAZERS_COUNT_QUERY = `
     query getStargazersCount {
@@ -17,12 +17,12 @@ const STARGAZERS_COUNT_QUERY = `
             }
         }
     }
-`
+`;
 
 interface Node {
-    id: string
-    stargazerCount: number
-    name: string
+    id: string;
+    stargazerCount: number;
+    name: string;
 }
 
 export async function getStargazersCount() {
@@ -34,16 +34,16 @@ export async function getStargazersCount() {
                 Authorization: `Bearer ${accessToken}`
             },
             body: JSON.stringify({ query: STARGAZERS_COUNT_QUERY })
-        })
-        const { data } = await response.json()
+        });
+        const { data } = await response.json();
         const stargazerCount = data?.user?.repositories?.edges?.reduce(
             (acc: number, { node }: { node: Node }) => acc + node?.stargazerCount,
             0
-        )
+        );
 
-        return stargazerCount
+        return stargazerCount;
     } catch (error) {
-        console.error(error)
-        return 0
+        console.error(error);
+        return 0;
     }
 }

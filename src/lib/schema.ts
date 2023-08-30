@@ -1,12 +1,5 @@
-import {
-    mysqlTable,
-    serial,
-    varchar,
-    int,
-    uniqueIndex,
-    mysqlEnum
-} from 'drizzle-orm/mysql-core'
-import type { InferModel } from 'drizzle-orm'
+import { mysqlTable, serial, varchar, int, uniqueIndex, mysqlEnum } from 'drizzle-orm/mysql-core';
+import type { InferModel } from 'drizzle-orm';
 
 // ===== DATABASE SCHEMAS =====
 export const posts = mysqlTable(
@@ -20,8 +13,8 @@ export const posts = mysqlTable(
     posts => ({
         slugIndex: uniqueIndex('slug_idx').on(posts.slug)
     })
-)
+);
 
 // ===== DATABASE TYPES =====
-export type DBPost = InferModel<typeof posts>
-export type NewDBPost = InferModel<typeof posts, 'insert'>
+export type DBPost = InferModel<typeof posts>;
+export type NewDBPost = InferModel<typeof posts, 'insert'>;

@@ -51,21 +51,21 @@ The rest of your template can be created according to what your project needs.
 ## 2. Create a gatsby-node function
 
 ```js
-const path = require('path')
+const path = require('path');
 
 async function pagination({ graphql, actions }) {
-    const { createPage } = actions
+    const { createPage } = actions;
     const { data } = await grapqhl(`
     {
       allSanityPost {
         totalCount
       }
     }
-  `)
+  `);
 
-    const { totalCount } = data.allSanityPost
-    const postsPerPage = 10
-    const numPages = Math.ceil(totalCount / postsPerPage)
+    const { totalCount } = data.allSanityPost;
+    const postsPerPage = 10;
+    const numPages = Math.ceil(totalCount / postsPerPage);
     Array.from({ length: numPages }).forEach((_, i) => {
         createPage({
             path: i === 0 ? `/blog` : `/blog/${i + 1}`,
@@ -76,8 +76,8 @@ async function pagination({ graphql, actions }) {
                 numPages,
                 currentPage: i + 1
             }
-        })
-    })
+        });
+    });
 }
 ```
 
@@ -104,8 +104,8 @@ exports.createPages = async ({ graphql, actions }) => {
     await Promise.all([
         pagination({ graphql, actions })
         // rest of your functions
-    ])
-}
+    ]);
+};
 ```
 
 **Note:** There are several ways to organize your `gatsby-node.js` functions. Here I'm just creating all my functions first and then calling them at the end of the file and awaiting all the promises.

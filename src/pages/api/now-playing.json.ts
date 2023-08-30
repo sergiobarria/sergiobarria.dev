@@ -1,13 +1,13 @@
-import type { APIRoute } from 'astro'
+import type { APIRoute } from 'astro';
 
-import { getNowPlaying } from '@/lib/spotify'
+import { getNowPlaying } from '~/lib/spotify';
 
-export const prerender = false
+export const prerender = false;
 
-export const get: APIRoute = async () => {
-    const result = await getNowPlaying()
-    const isPlaying = result?.isPlaying || false
-    const song = result?.song || {}
+export const GET: APIRoute = async () => {
+    const result = await getNowPlaying();
+    const isPlaying = result?.isPlaying || false;
+    const song = result?.song || {};
 
     return new Response(JSON.stringify({ isPlaying, data: song }), {
         status: 200,
@@ -15,5 +15,5 @@ export const get: APIRoute = async () => {
             'Content-Type': 'application/json',
             'Cache-Control': 's-maxage=1, stale-while-revalidate'
         }
-    })
-}
+    });
+};

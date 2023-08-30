@@ -1,4 +1,4 @@
-import { z, defineCollection } from 'astro:content'
+import { z, defineCollection } from 'astro:content';
 
 const postCollection = defineCollection({
     type: 'content',
@@ -11,7 +11,7 @@ const postCollection = defineCollection({
         toc: z.boolean().optional().default(true),
         draft: z.boolean().optional().default(false)
     })
-})
+});
 
 const snippetCollection = defineCollection({
     type: 'content',
@@ -21,7 +21,7 @@ const snippetCollection = defineCollection({
         tags: z.array(z.string()).optional(),
         draft: z.boolean().optional().default(false)
     })
-})
+});
 
 const projectCollection = defineCollection({
     type: 'content',
@@ -35,10 +35,10 @@ const projectCollection = defineCollection({
         live: z.string().optional(),
         source: z.string().optional()
     })
-})
+});
 
 export const collections = {
     posts: postCollection,
     snippets: snippetCollection,
     projects: projectCollection
-}
+};

@@ -1,5 +1,5 @@
 ---
-import { cn } from '@/lib/utils'
+import { cn } from '~/lib/utils';
 
 const calloutTypeMappings = {
     tip: {
@@ -22,24 +22,18 @@ const calloutTypeMappings = {
         background: 'bg-blue-400/40',
         text: 'text-blue-200'
     }
-}
+};
 
 interface Props {
-    type: keyof typeof calloutTypeMappings
+    type: keyof typeof calloutTypeMappings;
 }
 
-const { type } = Astro.props as Props
-const typeMapping = calloutTypeMappings[type]
+const { type } = Astro.props as Props;
+const typeMapping = calloutTypeMappings[type];
 ---
 
 <div class={cn('my-8 rounded border', typeMapping.border)}>
-    <span
-        class={cn(
-            'flex items-center gap-3 p-3',
-            typeMapping.background,
-            typeMapping.text
-        )}
-    >
+    <span class={cn('flex items-center gap-3 p-3', typeMapping.background, typeMapping.text)}>
         {
             type === 'tip' && (
                 <svg

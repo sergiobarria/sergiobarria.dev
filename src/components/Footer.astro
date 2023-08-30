@@ -1,11 +1,11 @@
 ---
-import { SpotifyCard } from '@/components/svelte'
-import ArrowUpRightIcon from './ArrowUpRightIcon.astro'
-import { cn } from '@/lib/utils'
+import SpotifyCard from '~/components/vue/SpotifyCard.vue';
+import ArrowUpRightIcon from './ArrowUpRightIcon.astro';
+import { cn } from '~/lib/utils';
 
-const links = [{ name: 'gists', href: 'https://gist.github.com/sergiobarria' }]
+const links = [{ name: 'gists', href: 'https://gist.github.com/sergiobarria' }];
 
-const pathname = new URL(Astro.url).pathname.split('/')[1]
+const pathname = new URL(Astro.url).pathname.split('/')[1];
 ---
 
 <footer class="mt-7">

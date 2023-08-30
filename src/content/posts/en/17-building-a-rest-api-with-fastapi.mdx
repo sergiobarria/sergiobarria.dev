@@ -7,7 +7,7 @@ isArchived: false
 draft: false
 ---
 
-import Callout from '../../../components/Callout.astro'
+import Callout from '../../../components/Callout.astro';
 
 ## Introduction
 
@@ -69,9 +69,8 @@ $ pip install fastapi "uvicorn[standard]" "databases[aiosqlite]" sqlalchemy pyda
 ```
 
 <Callout type="info">
-    To see the list of installed packages, run{' '}
-    <code>pip freeze > requirements.txt</code>. This will create a{' '}
-    <code>requirements.txt</code> file in your project root directory.
+    To see the list of installed packages, run <code>pip freeze > requirements.txt</code>. This will
+    create a <code>requirements.txt</code> file in your project root directory.
 </Callout>
 
 ### FastAPI Setup
@@ -112,8 +111,8 @@ Go to `http://localhost:8000` in your browser and you should see the following:
 ![fastapi hello world](../../../assets/posts/17/hello-world.png)
 
 <Callout type="info">
-    Your browser may show the result in a different way, I'm using a chrome
-    extension called JSON Viewer to format the JSON response.
+    Your browser may show the result in a different way, I'm using a chrome extension called JSON
+    Viewer to format the JSON response.
 </Callout>
 
 ### FastAPI Interactive Docs
@@ -131,9 +130,8 @@ The interactive docs are generated using [Swagger UI](https://swagger.io/tools/s
 By the end of this posts, we'll connect to a PostgreSQL database. But, to make the progress easier to follow, we'll use SQLite for now. SQLite is a lightweight database that doesn't require a server to run. It's perfect for development and testing.
 
 <Callout type="info">
-    SQLAlchemy is a Python SQL ORM (Object Relational Mapper) that makes it easy
-    to interact with a database using Python. It supports multiple database
-    engines including SQLite and PostgreSQL.
+    SQLAlchemy is a Python SQL ORM (Object Relational Mapper) that makes it easy to interact with a
+    database using Python. It supports multiple database engines including SQLite and PostgreSQL.
 </Callout>
 
 ```python title="database.py"
@@ -226,10 +224,9 @@ If you restart the server, you should see a `data.db` file created in your proje
 ![database loaded from dbeaver](../../../assets/posts/17/database.png)
 
 <Callout type="warn">
-    Because this is a simple example, we're creating the database and table as
-    soon as our application starts. In a real productions application, you'll
-    probably want to use something like Alembic to manage your database
-    migrations.
+    Because this is a simple example, we're creating the database and table as soon as our
+    application starts. In a real productions application, you'll probably want to use something
+    like Alembic to manage your database migrations.
 </Callout>
 
 ## CRUD Operations
@@ -303,9 +300,8 @@ async def get_book(book_id: int):
 ```
 
 <Callout type="info">
-    Notice the use of an `HTTPException` to raise a 404 response if the book is
-    not found. We import the <code>HTTPException</code> class from the{' '}
-    <code>fastapi.exceptions</code> module.
+    Notice the use of an `HTTPException` to raise a 404 response if the book is not found. We import
+    the <code>HTTPException</code> class from the <code>fastapi.exceptions</code> module.
 </Callout>
 
 Go to your docs and you should see the new `GET` endpoint `/books/{book_id}`. Open it and click the `Try it out` button. Add a book `id`, you should see the following response:
@@ -338,10 +334,9 @@ async def update_book(book_id: int, book: BookUpdate):
 ```
 
 <Callout type="info">
-    Notice the use of the <code>BookUpdate</code> model. This model is similar
-    to the <code>Book</code> model but it doesn't have the <code>id</code>{' '}
-    field. This is because we don't want to allow the user to update the{' '}
-    <code>id</code> field.
+    Notice the use of the <code>BookUpdate</code> model. This model is similar to the{' '}
+    <code>Book</code> model but it doesn't have the <code>id</code> field. This is because we don't
+    want to allow the user to update the <code>id</code> field.
 </Callout>
 
 Let's break this code down:

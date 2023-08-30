@@ -1,35 +1,36 @@
 ---
-import { getCollection, CollectionEntry } from 'astro:content'
-import readingTime from 'reading-time'
+import { getCollection, type CollectionEntry } from 'astro:content';
+import readingTime from 'reading-time';
 
-import BaseLayout from '@/layouts/BaseLayout.astro'
-import { ViewsCounter, ProgressBar } from '@/components/svelte'
-import { getViewsBySlug } from '@/lib/planetscale'
-import { cn, formatDate } from '@/lib/utils'
+import BaseLayout from '~/layouts/BaseLayout.astro';
+import ProgressBar from '~/components/vue/ProgressBar.vue';
+import ViewsCounter from '~/components/vue/ViewsCounter.vue';
+import { getViewsBySlug } from '~/lib/planetscale';
+import { cn, formatDate } from '~/lib/utils';
 
 interface Props {
-    entry: CollectionEntry<'posts'>
+    entry: CollectionEntry<'posts'>;
 }
 
 export async function getStaticPaths() {
     const postEntries = await getCollection('posts', ({ data }) => {
-        return !data.draft && !data.isArchived
-    })
+        return !data.draft && !data.isArchived;
+    });
     return postEntries.map(entry => ({
         params: { slug: entry.slug },
         props: { entry }
-    }))
+    }));
 }
 
-const { entry } = Astro.props as Props
+const { entry } = Astro.props as Props;
 const {
     slug,
     body,
     data: { title, publishedAt, summary }
-} = entry
-const readTime = readingTime(body)?.text
-const views = await getViewsBySlug(slug)
-const { Content, headings } = await entry.render()
+} = entry;
+const readTime = readingTime(body)?.text;
+const views = await getViewsBySlug(slug);
+const { Content, headings } = await entry.render();
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -42,7 +43,7 @@ const { Content, headings } = await entry.render()
             <p class="text-sm">{formatDate(publishedAt)}</p>
             <hr />
             <p class="space-x-2">
-                <ViewsCounter {views} {slug} client:load />
+                <ViewsCounter views={views} slug={slug} client:load />
                 <span>•</span>
                 <span>{readTime}</span>
             </p>

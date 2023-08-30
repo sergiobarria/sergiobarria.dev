@@ -65,14 +65,14 @@ First, we need to let Next know how many routes we want to render. For that, we 
 
 ```js
 export async function getStaticPaths() {
-    const response = await sanityClient.fetch(postSlugsQuery)
+    const response = await sanityClient.fetch(postSlugsQuery);
     const paths = response.map(slug => ({
         params: { slug }
-    }))
+    }));
     return {
         paths: paths,
         fallback: false
-    }
+    };
 }
 ```
 
@@ -85,7 +85,7 @@ Your query should look something like this.
 ```js
 export const postSlugsQuery = `
   *[_type == "post" && defined(slug.current)][].slug.current
-`
+`;
 ```
 
 This will fetch all the slugs inside the content of type post. This query will return all the slugs that are in your _Sanity Studio_ and _Next.Js_ will take care of generating one `.html` file for each `slug`.
@@ -131,7 +131,7 @@ export const postQuery = `
     },
     publishedAt,
     body,
-  }`
+  }`;
 ```
 
 The second parameter is the id for our single post, in this case, we use the slug. This will tell Next.js which specific content should be fetched for each `.html` page generated. The rest of the queries are just examples of what you can query for. Our function then returns data that can be passed as props to our `[slug].js` component.

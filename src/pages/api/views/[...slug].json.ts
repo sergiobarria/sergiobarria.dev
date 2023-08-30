@@ -1,12 +1,12 @@
-import type { APIRoute } from 'astro'
+import type { APIRoute } from 'astro';
 
-import { increment } from '@/lib/planetscale'
+import { increment } from '~/lib/planetscale';
 
-export const prerender = false
+export const prerender = false;
 
-export const post: APIRoute = async ({ params }) => {
-    const { slug } = params as { slug: string }
-    const views = await increment(slug)
+export const POST: APIRoute = async ({ params }) => {
+    const { slug } = params as { slug: string };
+    const views = await increment(slug);
 
     return new Response(JSON.stringify({ views }), {
         status: 200,
@@ -14,5 +14,5 @@ export const post: APIRoute = async ({ params }) => {
             'Content-Type': 'application/json',
             'Cache-Control': 's-maxage=1, stale-while-revalidate'
         }
-    })
-}
+    });
+};

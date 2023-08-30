@@ -37,9 +37,9 @@ npm i -D gray-matter
 Now, create a new JavaScript file, this will be the file where we're going to write our script. You can save it where you want (your project root could be a good idea).
 
 ```js
-const fs = require('fs')
-const path = require('path')
-const RSS = require('rss')
+const fs = require('fs');
+const path = require('path');
+const RSS = require('rss');
 // create basic rss feed with high level data
 // You can add more options (check the package github page)
 const feed = new RSS({
@@ -53,13 +53,13 @@ const feed = new RSS({
     language: 'en',
     pubDate: new Date().toLocaleString(),
     ttl: '60'
-})
+});
 
 // generate the xml to send to clients
-const xml = feed.xml()
+const xml = feed.xml();
 // Write file to public directory
 // this is where next js looks for static files
-fs.writeFileSync(path.resolve(__dirname, 'public') + '/rss.xml', xml)
+fs.writeFileSync(path.resolve(__dirname, 'public') + '/rss.xml', xml);
 ```
 
 With the above code, we're ready to test if it works. You can run it from your console:
@@ -76,14 +76,14 @@ Now you just need to add the content you want inside the `rss.xml` feed, blog po
 In my case, all my content is inside `.mdx` files in the `/data/blog/` directory. This is the content I want for my RSS feed. Now I can add the next few lines to my `rss-script`. You can see the final result next:
 
 ```js
-const fs = require('fs')
-const path = require('path')
-const RSS = require('rss')
-const frontMatter = require('front-matter')
+const fs = require('fs');
+const path = require('path');
+const RSS = require('rss');
+const frontMatter = require('front-matter');
 
 // NEW LINES
 // blog post directory path
-const postsDir = path.resolve(__dirname, 'data', 'blog')
+const postsDir = path.resolve(__dirname, 'data', 'blog');
 const feed = new RSS({
     title: 'Your title here',
     description: 'Your description here',
@@ -95,16 +95,16 @@ const feed = new RSS({
     language: 'en',
     pubDate: new Date().toLocaleString(),
     ttl: '60'
-})
+});
 
 // NEW LINES
 // Read all the files in the blog directory and add them to the RSS feed
 fs.readdirSync(postsDir)
     .map(fileName => {
-        const fullPath = path.join(postsDir, fileName)
-        const file = fs.readFileSync(fullPath, 'utf-8')
-        const { attributes } = frontMatter(file)
-        return { ...attributes, fileName }
+        const fullPath = path.join(postsDir, fileName);
+        const file = fs.readFileSync(fullPath, 'utf-8');
+        const { attributes } = frontMatter(file);
+        return { ...attributes, fileName };
     })
     // title, excerpt, publishedAt, author are properties from my posts metadata
     // you should add yours instead
@@ -115,16 +115,16 @@ fs.readdirSync(postsDir)
             url: `https://example.com/blog/${fileName.replace('.mdx', '')}`,
             author,
             date: publishedAt
-        })
-    })
+        });
+    });
 
 // Note that before you add each item to the `feed` you can arrange them
 // however you like for example, you can sort each file by date using the
 // Js sort method or remove what you dont' want. If you have any trouble,
 // just store each step in a variable and go one line at the time, at the end
 // of the day this is a single file you can run and test as many times as you want.
-const xml = feed.xml()
-fs.writeFileSync(path.resolve(__dirname, 'public') + '/rss.xml', xml)
+const xml = feed.xml();
+fs.writeFileSync(path.resolve(__dirname, 'public') + '/rss.xml', xml);
 ```
 
 Now, run the script again to see if it worked. If you see the additional content inside your rss.xml file, congratulations, you just created your RSS Feed.
