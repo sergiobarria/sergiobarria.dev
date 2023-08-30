@@ -80,7 +80,7 @@ const stargazersCount = await getStargazersCount();
                             ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline
                                 points="16 7 22 7 22 13"></polyline></svg
                         >
-                        <ShowViews showTotal client:load />
+                        <ShowViews showTotal client:only />
                         <span>total posts views</span>
                     </p>
 
@@ -131,7 +131,7 @@ const stargazersCount = await getStargazersCount();
                                     <span>{formattedDate}</span>
                                     <span>•</span>
                                     <span>
-                                        <ShowViews {slug} client:load /> views
+                                        <ShowViews {slug} client:only /> views
                                     </span>
                                     <span>•</span>
                                     <span>{readTime}</span>
