@@ -26,7 +26,8 @@
         "@astrojs/vue": "^3.0.0",
         "@fontsource-variable/readex-pro": "^5.0.8",
         "@planetscale/database": "^1.10.0",
-        "astro": "^3.0.2",
+        "astro": "^3.0.3",
+        "clsx": "^2.0.0",
         "drizzle-orm": "^0.28.2",
         "motion": "^10.16.2",
         "reading-time": "^1.5.0",
@@ -34,9 +35,8 @@
         "rehype-pretty-code": "^0.10.0",
         "rehype-slug": "^5.1.0",
         "remark-gfm": "^3.0.1",
-        "sharp": "^0.32.5",
         "tailwind-merge": "^1.14.0",
-        "vue": "^3.3.4"
+        "vue": "^3.2.30"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.9",
@@ -47,6 +47,7 @@
         "prettier-plugin-astro": "^0.12.0",
         "prettier-plugin-svelte": "^3.0.3",
         "prettier-plugin-tailwindcss": "^0.5.2",
-        "tailwindcss": "^3.3.3"
+        "tailwindcss": "^3.3.3",
+        "typescript": "^5.2.2"
     }
 }

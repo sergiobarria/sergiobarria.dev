@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-import type { DBPost } from '~/lib/schema';
 import { onMounted, ref } from 'vue';
+import type { DBPost } from '~/lib/schema';
 
-const totalViews = ref(0);
+const totalViews = ref<number>(0);
 const { showTotal, slug } = defineProps<{
     slug?: string;
     showTotal?: boolean;

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 
-const count = ref(0);
+const count = ref<number>(0);
 const { views, slug } = defineProps<{
     views: number;
     slug: string;
