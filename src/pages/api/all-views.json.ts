@@ -4,7 +4,6 @@ export const prerender = false;
 
 export async function GET() {
     const views = await getAllPostsViews();
-    console.log('This function ran!');
 
     return new Response(JSON.stringify(views), {
         status: 200,
