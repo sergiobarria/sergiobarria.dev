@@ -5,7 +5,8 @@ import readingTime from 'reading-time';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ArrowUpRightIcon from '~/components/ArrowUpRightIcon.astro';
-import { ShowViews } from '~/components/svelte';
+// import { ShowViews } from '~/components/svelte';
+import Views from '~/components/Views.astro';
 import { formatDate } from '~/lib/utils';
 import { getStargazersCount } from '~/lib/github';
 import profile from '~/assets/profile.jpg';
@@ -80,7 +81,8 @@ const stargazersCount = await getStargazersCount();
                             ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline
                                 points="16 7 22 7 22 13"></polyline></svg
                         >
-                        <ShowViews showTotal client:load />
+                        <!-- <ShowViews showTotal client:load /> -->
+                        <Views showTotal />
                         <span>total posts views</span>
                     </p>
 
@@ -130,9 +132,7 @@ const stargazersCount = await getStargazersCount();
                                 <p class="flex gap-2 text-xs opacity-90">
                                     <span>{formattedDate}</span>
                                     <span>•</span>
-                                    <span>
-                                        <ShowViews {slug} client:load /> views
-                                    </span>
+                                    <Views slug={slug} /> views
                                     <span>•</span>
                                     <span>{readTime}</span>
                                 </p>
