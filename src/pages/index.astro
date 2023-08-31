@@ -5,7 +5,7 @@ import readingTime from 'reading-time';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ArrowUpRightIcon from '~/components/ArrowUpRightIcon.astro';
-import { ShowViews } from '~/components/svelte';
+import ShowViews from '~/components/vue/ShowViews.vue';
 import { formatDate } from '~/lib/utils';
 import { getStargazersCount } from '~/lib/github';
 import profile from '~/assets/profile.jpg';
@@ -23,7 +23,6 @@ const posts = postsEntries
     .slice(0, 3);
 
 const stargazersCount = await getStargazersCount();
-export const prerender = false;
 ---
 
 <BaseLayout>

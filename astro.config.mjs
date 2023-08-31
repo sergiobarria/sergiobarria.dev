@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
-import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
-import vercel from '@astrojs/vercel/serverless';
+import vue from '@astrojs/vue';
+import vercelServerless from '@astrojs/vercel/serverless';
 import prefetch from '@astrojs/prefetch';
 import partytown from '@astrojs/partytown';
 import sitemap from '@astrojs/sitemap';
@@ -43,7 +43,7 @@ const rehypeAutolinkHeadingsOptions = {
 // https://astro.build/config
 export default defineConfig({
     site: 'https://sergiobarria.dev',
-    integrations: [tailwind(), mdx(), prefetch(), partytown(), sitemap(), svelte()],
+    integrations: [tailwind(), mdx(), prefetch(), partytown(), sitemap(), vue()],
     markdown: {
         extendDefaultPlugins: true,
         syntaxHighlight: false,
@@ -55,7 +55,7 @@ export default defineConfig({
         ]
     },
     output: 'hybrid',
-    adapter: vercel({
+    adapter: vercelServerless({
         analytics: true
     })
 });

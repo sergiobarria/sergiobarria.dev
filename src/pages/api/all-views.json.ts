@@ -1,6 +1,6 @@
 import { getAllPostsViews } from '~/lib/planetscale';
 
-export const prerender = false;
+export const prerender = true;
 
 export async function GET() {
     const views = await getAllPostsViews();
