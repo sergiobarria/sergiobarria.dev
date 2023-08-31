@@ -4,7 +4,7 @@ import { getNowPlaying } from '~/lib/spotify';
 
 export const prerender = false;
 
-export const GET: APIRoute = async () => {
+export async function GET() {
     const result = await getNowPlaying();
     const isPlaying = result?.isPlaying || false;
     const song = result?.song || {};
@@ -16,4 +16,4 @@ export const GET: APIRoute = async () => {
             'Cache-Control': 's-maxage=1, stale-while-revalidate'
         }
     });
-};
+}

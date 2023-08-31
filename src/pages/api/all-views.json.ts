@@ -1,10 +1,8 @@
-import type { APIRoute } from 'astro';
-
 import { getAllPostsViews } from '~/lib/planetscale';
 
-export const prerender = false;
+export const prerender = true;
 
-export const GET: APIRoute = async () => {
+export async function GET() {
     const views = await getAllPostsViews();
 
     return new Response(JSON.stringify(views), {
@@ -14,4 +12,4 @@ export const GET: APIRoute = async () => {
             'Cache-Control': 's-maxage=1, stale-while-revalidate' // 1 second
         }
     });
-};
+}

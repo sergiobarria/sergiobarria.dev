@@ -1,10 +1,8 @@
-import type { APIRoute } from 'astro';
-
 import { increment } from '~/lib/planetscale';
 
 export const prerender = false;
 
-export const POST: APIRoute = async ({ params }) => {
+export async function GET({ params }: { params: Record<string, string> }) {
     const { slug } = params as { slug: string };
     const views = await increment(slug);
 
@@ -15,4 +13,4 @@ export const POST: APIRoute = async ({ params }) => {
             'Cache-Control': 's-maxage=1, stale-while-revalidate'
         }
     });
-};
+}
