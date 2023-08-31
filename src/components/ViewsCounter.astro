@@ -1,0 +1,31 @@
+---
+interface Props {
+    slug: string;
+    views: number;
+}
+
+const { slug, views } = Astro.props as Props;
+---
+
+<span id="views">-- views</span>
+
+<script define:vars={{ slug, views }}>
+    const viewsEl = document.getElementById('views');
+
+    async function updateViews() {
+        try {
+            const res = await fetch(`/api/views/${slug}.json`, {
+                method: 'POST'
+            });
+            const data = await res.json();
+
+            viewsEl.textContent = `${data.views} views`;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    window.onload = function () {
+        updateViews();
+    };
+</script>

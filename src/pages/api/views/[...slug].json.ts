@@ -2,7 +2,7 @@ import { increment } from '~/lib/planetscale';
 
 export const prerender = false;
 
-export async function GET({ params }: { params: Record<string, string> }) {
+export async function POST({ params }: { params: Record<string, string> }) {
     const { slug } = params as { slug: string };
     const views = await increment(slug);
 

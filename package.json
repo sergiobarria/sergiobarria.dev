@@ -23,7 +23,6 @@
         "@astrojs/sitemap": "^3.0.0",
         "@astrojs/tailwind": "^5.0.0",
         "@astrojs/vercel": "^4.0.0",
-        "@astrojs/vue": "^3.0.0",
         "@fontsource-variable/readex-pro": "^5.0.8",
         "@planetscale/database": "^1.10.0",
         "astro": "^3.0.3",
@@ -35,8 +34,7 @@
         "rehype-pretty-code": "^0.10.0",
         "rehype-slug": "^5.1.0",
         "remark-gfm": "^3.0.1",
-        "tailwind-merge": "^1.14.0",
-        "vue": "^3.3.4"
+        "tailwind-merge": "^1.14.0"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.5.9",

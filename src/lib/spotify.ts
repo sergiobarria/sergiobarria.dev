@@ -16,19 +16,21 @@ interface SpotifyTrack {
     };
 }
 
-interface SpotifyResponse {
-    is_playing: boolean;
-    item: {
+export interface SpotifyTrackData {
+    name: string;
+    album: {
         name: string;
-        album: {
-            name: string;
-            artists: Array<{ name: string }>;
-            images: [{ url: string }];
-        };
-        external_urls: {
-            spotify: string;
-        };
+        artists: Array<{ name: string }>;
+        images: [{ url: string }];
     };
+    external_urls: {
+        spotify: string;
+    };
+}
+
+export interface SpotifyResponse {
+    is_playing: boolean;
+    item: SpotifyTrackData;
     currently_playing_type: string;
 }
 

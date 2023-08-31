@@ -1,8 +1,17 @@
-<script setup lang="ts">
-import { onMounted } from 'vue';
-import { animate } from 'motion';
+---
 
-onMounted(() => {
+---
+
+<div id="animated-bars" class="flex w-auto items-end gap-0.5 overflow-hidden">
+    <span id="bar1" class="h-2 w-[1px] bg-green-500"></span>
+    <span id="bar2" class="h-1 w-[1px] bg-green-500"></span>
+    <span id="bar3" class="h-3 w-[1px] bg-green-500"></span>
+    <span id="bar4" class="h-1 w-[1px] bg-green-500"></span>
+</div>
+
+<script>
+    import { animate } from 'motion';
+
     animate(
         '#bar1',
         {
@@ -66,14 +75,4 @@ onMounted(() => {
             easing: ['ease-in-out']
         }
     );
-});
 </script>
-
-<template>
-    <div class="flex w-auto items-end gap-0.5 overflow-hidden">
-        <span id="bar1" class="h-2 w-[1px] bg-green-500"></span>
-        <span id="bar2" class="h-1 w-[1px] bg-green-500"></span>
-        <span id="bar3" class="h-3 w-[1px] bg-green-500"></span>
-        <span id="bar4" class="h-1 w-[1px] bg-green-500"></span>
-    </div>
-</template>
