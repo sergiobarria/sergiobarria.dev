@@ -1,0 +1,32 @@
+---
+interface Props {
+    slug: string;
+    views: number;
+}
+
+const { slug, views } = Astro.props as Props;
+---
+
+<span id="views" data-slug={slug} data-views={views}>-- views</span>
+
+<script>
+    async function updateViews() {
+        const viewsEl = document.getElementById('views') as HTMLSpanElement;
+
+        try {
+            const res = await fetch(`/api/views/${viewsEl.dataset.slug}.json`, {
+                method: 'POST'
+            });
+            const data = await res.json();
+
+            viewsEl.textContent = `${data.views} views`;
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    updateViews();
+    document.addEventListener('astro:after-swap', () => {
+        if (window.location.pathname.startsWith('/blog/')) updateViews();
+    });
+</script>

@@ -19,16 +19,15 @@ const { title, description } = Astro.props as Props;
 
 <html lang="en" class="scroll-smooth bg-[#0e0f0f] text-[#e9ecef]">
     <Head title={title ?? defaultTitle} description={description ?? defaultDescription} />
-    <body class="font-light antialiased">
-        <div class="mx-auto my-16 max-w-screen-md gap-6 px-5 md:flex md:px-0">
+    <body class="mt-6 font-light antialiased">
+        <div class="mx-auto max-w-screen-md md:flex">
             <Sidebar />
-            <div class="mt-5 flex-grow md:mt-0">
-                <main>
-                    <!-- 👇🏼 This is the entry point of the application -->
-                    <slot />
-                </main>
+
+            <!-- 👇🏼 This is the entry point of the application -->
+            <main class="mx-auto max-w-[600px] p-4 md:w-3/4">
+                <slot />
                 <Footer />
-            </div>
+            </main>
         </div>
     </body>
 </html>

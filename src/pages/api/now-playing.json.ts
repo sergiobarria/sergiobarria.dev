@@ -1,5 +1,3 @@
-import type { APIRoute } from 'astro';
-
 import { getNowPlaying } from '~/lib/spotify';
 
 export const prerender = false;

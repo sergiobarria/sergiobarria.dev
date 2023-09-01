@@ -3,8 +3,7 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import readingTime from 'reading-time';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import ProgressBar from '~/components/vue/ProgressBar.vue';
-import ViewsCounter from '~/components/vue/ViewsCounter.vue';
+import ViewsCounter from '~/components/ViewsCounter.astro';
 import { getViewsBySlug } from '~/lib/planetscale';
 import { cn, formatDate } from '~/lib/utils';
 
@@ -35,7 +34,11 @@ const { Content, headings } = await entry.render();
 
 <BaseLayout title={title} description={summary}>
     <section>
-        <ProgressBar client:visible />
+        <div
+            id="progress-bar"
+            class="fixed inset-x-0 top-0 h-1 origin-[0%] scale-x-0 transform bg-neutral-200"
+        >
+        </div>
         <h1 class="text-2xl font-bold tracking-tighter">
             {title}
         </h1>
@@ -43,7 +46,7 @@ const { Content, headings } = await entry.render();
             <p class="text-sm">{formatDate(publishedAt)}</p>
             <hr />
             <p class="space-x-2">
-                <ViewsCounter views={views} slug={slug} client:load />
+                <ViewsCounter views={views} slug={slug} />
                 <span>•</span>
                 <span>{readTime}</span>
             </p>
@@ -95,3 +98,9 @@ const { Content, headings } = await entry.render();
         <hr class="my-8 border-neutral-500/50" />
     </section>
 </BaseLayout>
+
+<script>
+    import { animate, scroll } from 'motion';
+
+    scroll(animate('#progress-bar', { scale: [0, 1] }));
+</script>

@@ -13,7 +13,7 @@ const links = [
 const pathname = new URL(Astro.url).pathname.split('/')[1];
 ---
 
-<aside class="min-w-[100px]">
+<aside class="top-0 w-1/4 max-w-[150px] p-4 md:sticky md:h-screen">
     <Image src={logo} alt="logo" width={40} height={50} class="mb-3 pl-3 md:mb-4" />
     <nav class="flex md:flex-col md:items-start">
         {
