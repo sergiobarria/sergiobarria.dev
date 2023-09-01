@@ -22,10 +22,10 @@
         "@astrojs/rss": "^3.0.0",
         "@astrojs/sitemap": "^3.0.0",
         "@astrojs/tailwind": "^5.0.0",
-        "@astrojs/vercel": "^4.0.0",
+        "@astrojs/vercel": "^4.0.1",
         "@fontsource-variable/readex-pro": "^5.0.8",
         "@planetscale/database": "^1.10.0",
-        "astro": "^3.0.3",
+        "astro": "^3.0.5",
         "clsx": "^2.0.0",
         "drizzle-orm": "^0.28.2",
         "motion": "^10.16.2",
@@ -34,6 +34,7 @@
         "rehype-pretty-code": "^0.10.0",
         "rehype-slug": "^5.1.0",
         "remark-gfm": "^3.0.1",
+        "sharp": "^0.32.5",
         "tailwind-merge": "^1.14.0"
     },
     "devDependencies": {

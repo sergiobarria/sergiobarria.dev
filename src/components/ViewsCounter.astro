@@ -7,14 +7,14 @@ interface Props {
 const { slug, views } = Astro.props as Props;
 ---
 
-<span id="views">-- views</span>
+<span id="views" data-slug={slug} data-views={views}>-- views</span>
 
-<script define:vars={{ slug, views }}>
-    const viewsEl = document.getElementById('views');
-
+<script>
     async function updateViews() {
+        const viewsEl = document.getElementById('views') as HTMLSpanElement;
+
         try {
-            const res = await fetch(`/api/views/${slug}.json`, {
+            const res = await fetch(`/api/views/${viewsEl.dataset.slug}.json`, {
                 method: 'POST'
             });
             const data = await res.json();
@@ -25,7 +25,8 @@ const { slug, views } = Astro.props as Props;
         }
     }
 
-    window.onload = function () {
-        updateViews();
-    };
+    updateViews();
+    document.addEventListener('astro:after-swap', () => {
+        if (window.location.pathname.startsWith('/blog/')) updateViews();
+    });
 </script>

@@ -39,6 +39,7 @@ import AnimatedBars from './AnimatedBars.astro';
         <span class="text-xs opacity-80">Not Listening</span>
     </div>
 </div>
+
 <script>
     interface SongData {
         title: string;
@@ -48,32 +49,43 @@ import AnimatedBars from './AnimatedBars.astro';
         songUrl: string;
     }
 
-    const playingCardEl = document.getElementById('playing') as HTMLDivElement;
-    const notPlayingCardEl = document.getElementById('not-playing') as HTMLDivElement;
+    function updateCardElements(isPlaying: boolean, data: SongData) {
+        const playingCardEl = document.getElementById('playing') as HTMLDivElement;
+        const notPlayingCardEl = document.getElementById('not-playing') as HTMLDivElement;
+        const imgEl = playingCardEl.querySelector('img') as HTMLImageElement;
+        const titleEl = playingCardEl.querySelector('a') as HTMLAnchorElement;
+        const artistEl = playingCardEl.querySelector('span') as HTMLSpanElement;
 
-    function updateIsPlayingCard(data: SongData) {
-        const [imgEl, titleEl, artistEl] = ['img', 'a', 'span'].map(
-            tag => playingCardEl.querySelector(tag) as HTMLElement
-        );
+        imgEl.src = data.albumImageUrl;
+        imgEl.alt = data.album;
+        titleEl.textContent = data.title;
+        titleEl.href = data.songUrl;
 
-        Object.assign(imgEl, { src: data.albumImageUrl, alt: data.album });
-        Object.assign(titleEl, { textContent: data.title, href: data.songUrl });
+        toggleCardDisplay(playingCardEl, notPlayingCardEl, isPlaying);
         artistEl.textContent = data.artist;
     }
 
-    async function getNowPlayingData() {
+    function toggleCardDisplay(
+        playingCardEl: HTMLDivElement,
+        notPlayingCardEl: HTMLDivElement,
+        isPlaying: boolean
+    ) {
+        playingCardEl.classList.toggle('hidden', !isPlaying);
+        playingCardEl.classList.toggle('flex', isPlaying);
+        notPlayingCardEl.classList.toggle('hidden', isPlaying);
+    }
+
+    async function fetchNowPlayingData() {
         const res = await fetch('/api/now-playing.json');
         const { data, isPlaying } = (await res.json()) as {
             isPlaying: boolean;
             data: SongData;
         };
 
-        playingCardEl.classList.toggle('hidden', !isPlaying);
-        playingCardEl.classList.toggle('flex', isPlaying);
-        notPlayingCardEl.classList.toggle('hidden', isPlaying);
-
-        if (isPlaying) updateIsPlayingCard(data);
+        if (isPlaying) updateCardElements(isPlaying, data);
     }
 
-    getNowPlayingData();
+    fetchNowPlayingData();
+
+    document.addEventListener('astro:after-swap', fetchNowPlayingData);
 </script>

@@ -85,7 +85,7 @@ const posts = postsEntries
                                 href={url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="flex items-center gap-1"
+                                class="flex items-center gap-1 hover:text-neutral-200"
                             >
                                 <span>{name}</span>
                                 <ArrowUpRightIcon className="w-3 h-3" />
@@ -124,7 +124,7 @@ const posts = postsEntries
                             <p class="flex gap-2 text-xs opacity-90">
                                 <span>{formattedDate}</span>
                                 <span>•</span>
-                                <span id="post-views">--</span>
+                                <span id="post-views">-- views</span>
                                 <span>•</span>
                                 <span>{readTime}</span>
                             </p>
@@ -142,17 +142,6 @@ const posts = postsEntries
 <script>
     import type { DBPost } from '~/lib/schema';
 
-    const startgazerEl = document.getElementById('stargazer-count') as HTMLSpanElement;
-    const totalViewsEl = document.getElementById('total-views') as HTMLSpanElement;
-    const postLinks = document.querySelectorAll('a#post-link') as NodeListOf<HTMLAnchorElement>;
-    const postViewsEls = document.querySelectorAll(
-        'span#post-views'
-    ) as NodeListOf<HTMLSpanElement>;
-
-    const slugs = Array.from(postLinks).map(link =>
-        new URL(link.href).pathname.replace('/blog/', '')
-    );
-
     async function getAllPostsViews() {
         const res = await fetch('/api/all-views.json');
         return (await res.json()) as DBPost[];
@@ -163,15 +152,34 @@ const posts = postsEntries
         return (await res.json()) as number;
     }
 
-    const allViews = await getAllPostsViews();
-    const totalStars = await getStargazersCount();
-    const total = allViews.reduce((acc, curr) => acc + curr.views, 0);
+    async function updateViewsAndStars() {
+        const startgazerEl = document.getElementById('stargazer-count') as HTMLSpanElement;
+        const totalViewsEl = document.getElementById('total-views') as HTMLSpanElement;
+        const postLinks = document.querySelectorAll('a#post-link') as NodeListOf<HTMLAnchorElement>;
+        const postViewsEls = document.querySelectorAll(
+            'span#post-views'
+        ) as NodeListOf<HTMLSpanElement>;
 
-    slugs.forEach((slug, index) => {
-        const views = allViews.find(post => post.slug === slug)?.views || 0;
-        postViewsEls[index].textContent = views.toLocaleString();
+        const slugs = Array.from(postLinks).map(link =>
+            new URL(link.href).pathname.replace('/blog/', '')
+        );
+
+        const allViews = await getAllPostsViews();
+        const totalStars = await getStargazersCount();
+        const total = allViews.reduce((acc, curr) => acc + curr.views, 0);
+
+        slugs.forEach((slug, index) => {
+            const views = allViews.find(post => post.slug === slug)?.views || 0;
+            postViewsEls[index].textContent = `${views.toLocaleString()} views`;
+        });
+
+        startgazerEl.textContent = `${totalStars.toLocaleString()} Github stars`;
+        totalViewsEl.textContent = `${total.toLocaleString()} total posts views`;
+    }
+
+    updateViewsAndStars();
+
+    document.addEventListener('astro:after-swap', () => {
+        if (window.location.pathname === '/') updateViewsAndStars();
     });
-
-    startgazerEl.textContent = `${totalStars.toLocaleString()} Github stars`;
-    totalViewsEl.textContent = `${total.toLocaleString()} total posts views`;
 </script>

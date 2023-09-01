@@ -55,6 +55,7 @@ export default defineConfig({
     },
     output: 'hybrid',
     adapter: vercelServerless({
-        analytics: true
+        analytics: true,
+        functionPerRoute: false
     })
 });
