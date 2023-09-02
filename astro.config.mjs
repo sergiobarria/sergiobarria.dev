@@ -11,8 +11,8 @@ import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeSlug from 'rehype-slug';
 
 const rehypePrettyCodeOptions = {
-    theme: 'rose-pine',
-    // theme: 'poimandres',
+    // theme: 'rose-pine',
+    theme: 'poimandres',
     tokensMap: {
         // VScode command palette: Inspect Editor Tokens and Scopes
         // https://github.com/Binaryify/OneDark-Pro/blob/47c66a2f2d3e5c85490e1aaad96f5fab3293b091/themes/OneDark-Pro.json

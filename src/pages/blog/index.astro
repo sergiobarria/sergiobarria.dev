@@ -75,7 +75,7 @@ const posts = postsEntries.sort(
 
     updateViewsAndStars();
 
-    document.addEventListener('astro:after-swap', () => {
+    document.addEventListener('astro:page-load', () => {
         if (window.location.pathname === '/blog') updateViewsAndStars();
     });
 </script>

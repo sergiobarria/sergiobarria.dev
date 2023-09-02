@@ -2,7 +2,7 @@
 
 # sergiobarria.dev
 
-This is my personal website, blog and portfolio, built with Astro. Written using TypeScript and PlanetScale.
+This is my personal website, blog and portfolio, powered by Astro. Written using TypeScript and Xata.io database.
 
 ## Overview
 
@@ -10,10 +10,10 @@ This is my personal website, blog and portfolio, built with Astro. Written using
 
 ```markdown
 .
-├── .vscode/
+├── vscode/
 │ └── ...all vscode config files
-├── drizzle/
-│ └── ...drizzle migration files
+├── .xata/
+│ └── ...xata db migration files
 ├── public/
 │ └── ...all public assets (favicon, images...)
 ├── src/
@@ -36,7 +36,7 @@ This is my personal website, blog and portfolio, built with Astro. Written using
 **Styling:** TailwindCSS
 **Content:** Astro Collections, MDX
 **APIs:** GitHub, Wakatime, Spotify
-**Database:** PlanetScale
+**Database:** [Xata.io](https://xata.io/)
 
 ## Run locally
 
