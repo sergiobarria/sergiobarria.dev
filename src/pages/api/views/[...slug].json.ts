@@ -1,4 +1,4 @@
-import { increment } from '~/lib/planetscale';
+import { increment } from '~/lib/xata';
 
 export const prerender = false;
 

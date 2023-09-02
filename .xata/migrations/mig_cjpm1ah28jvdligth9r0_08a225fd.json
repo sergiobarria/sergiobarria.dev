@@ -1,0 +1,17 @@
+{
+  "id": "mig_cjpm1ah28jvdligth9r0",
+  "parentID": "mig_cjpm12p28jvdligth9q0",
+  "checksum": "1:08a225fde36081f03c4109b882bf41cc3500e3005c69c1b2106f0bb8b6215c7c",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "language",
+          "type": "string",
+          "defaultValue": "en"
+        },
+        "table": "posts"
+      }
+    }
+  ]
+}

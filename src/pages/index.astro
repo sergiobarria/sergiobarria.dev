@@ -149,11 +149,11 @@ const posts = postsEntries
 </BaseLayout>
 
 <script>
-    import type { DBPost } from '~/lib/schema';
+    import type { Posts } from '~/lib/generated';
 
     async function getAllPostsViews() {
         const res = await fetch('/api/all-views.json');
-        return (await res.json()) as DBPost[];
+        return (await res.json()) as Omit<Posts, 'lang'>[];
     }
 
     async function getStargazersCount() {
