@@ -9,7 +9,7 @@ export async function GET() {
         status: 200,
         headers: {
             'Content-Type': 'application/json',
-            'Cache-Control': 's-maxage=60, stale-while-revalidate' // 1 minute cache
+            'Cache-Control': 's-maxage=1, stale-while-revalidate' // 1 second cache
         }
     });
 }
