@@ -30,12 +30,17 @@ const allViews = await getAllPostsViews();
 
                 return (
                     <li class="mb-4">
-                        <a href={`/blog/${slug}`} class="">
-                            <h1>{title}</h1>
+                        <a href={`/blog/${slug}`}>
+                            <div class="flex items-start justify-between gap-1">
+                                <h1 transition:name={title}>{title}</h1>
+                                <small class="inline-block whitespace-nowrap opacity-80">
+                                    {views} views
+                                </small>
+                            </div>
                             <p class="space-x-1 text-sm text-neutral-400">
-                                <span>{formattedDate}</span>
-                                <span>•</span>
-                                <span>{views} views</span>
+                                <span transition:name={'date:' + formattedDate}>
+                                    {formattedDate}
+                                </span>
                                 <span>•</span>
                                 <span>{readTime}</span>
                             </p>
