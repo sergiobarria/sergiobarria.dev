@@ -120,13 +120,22 @@ const posts = postsEntries
                         class="group flex justify-between border-b border-neutral-600 py-3"
                     >
                         <div>
-                            <h3 class="font-semibold group-hover:opacity-80">{title}</h3>
+                            <h3
+                                class="font-semibold group-hover:opacity-80"
+                                transition:name={title}
+                            >
+                                {title}
+                            </h3>
                             <p class="flex gap-2 text-xs opacity-90">
-                                <span>{formattedDate}</span>
+                                <span transition:name={'date:' + formattedDate}>
+                                    {formattedDate}
+                                </span>
                                 <span>•</span>
-                                <span id="post-views">-- views</span>
+                                <span id="post-views" transition:name={'views:' + slug}>
+                                    -- views
+                                </span>
                                 <span>•</span>
-                                <span>{readTime}</span>
+                                <span transition:name={'readTime:' + readTime}>{readTime}</span>
                             </p>
                         </div>
                         <div class="ml-1">
@@ -140,11 +149,11 @@ const posts = postsEntries
 </BaseLayout>
 
 <script>
-    import type { DBPost } from '~/lib/schema';
+    import type { Posts } from '~/lib/generated';
 
     async function getAllPostsViews() {
         const res = await fetch('/api/all-views.json');
-        return (await res.json()) as DBPost[];
+        return (await res.json()) as Omit<Posts, 'lang'>[];
     }
 
     async function getStargazersCount() {

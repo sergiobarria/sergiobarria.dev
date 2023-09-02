@@ -4,7 +4,6 @@ import readingTime from 'reading-time';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import ViewsCounter from '~/components/ViewsCounter.astro';
-import { getViewsBySlug } from '~/lib/planetscale';
 import { cn, formatDate } from '~/lib/utils';
 
 interface Props {
@@ -28,7 +27,7 @@ const {
     data: { title, publishedAt, summary }
 } = entry;
 const readTime = readingTime(body)?.text;
-const views = await getViewsBySlug(slug);
+const formattedDate = formatDate(publishedAt);
 const { Content, headings } = await entry.render();
 ---
 
@@ -39,16 +38,18 @@ const { Content, headings } = await entry.render();
             class="fixed inset-x-0 top-0 h-1 origin-[0%] scale-x-0 transform bg-neutral-200"
         >
         </div>
-        <h1 class="text-2xl font-bold tracking-tighter">
+        <h1 class="text-2xl font-bold tracking-tighter" transition:name={title}>
             {title}
         </h1>
         <div class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400">
-            <p class="text-sm">{formatDate(publishedAt)}</p>
+            <p class="text-sm" transition:name={'date:' + formattedDate}>
+                {formattedDate}
+            </p>
             <hr />
             <p class="space-x-2">
-                <ViewsCounter views={views} slug={slug} />
+                <ViewsCounter slug={slug} />
                 <span>•</span>
-                <span>{readTime}</span>
+                <span transition:name={'readTime:' + readTime}>{readTime}</span>
             </p>
         </div>
 

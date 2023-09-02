@@ -4,7 +4,6 @@ import readingTime from 'reading-time';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
 import { formatDate } from '~/lib/utils';
-import { getAllPostsViews } from '~/lib/planetscale';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
     return !data.draft && !data.isArchived;
@@ -12,7 +11,6 @@ const postsEntries = await getCollection('posts', ({ data }) => {
 const posts = postsEntries.sort(
     (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
 );
-const allViews = await getAllPostsViews();
 ---
 
 <BaseLayout title="Blog | Sergio Barria">
@@ -22,28 +20,62 @@ const allViews = await getAllPostsViews();
     </p>
     <ul>
         {
-            posts.map(({ data, slug, body }) => {
-                const { title, publishedAt } = data;
-                const formattedDate = formatDate(publishedAt);
-                const readTime = readingTime(body).text;
-                const views = allViews.find(view => view.slug === slug)?.views ?? 0;
-
-                return (
-                    <li class="mb-4">
-                        <a href={`/blog/${slug}`} class="">
-                            <h1>{title}</h1>
-                            <p class="space-x-1 text-sm text-neutral-400">
-                                <span>{formattedDate}</span>
-                                <span>•</span>
-                                <span>{views} views</span>
-                                <span>•</span>
-                                <span>{readTime}</span>
-                            </p>
-                        </a>
-                    </li>
-                );
-            })
+            posts.map(({ data, slug, body }) => (
+                <li class="mb-4">
+                    <a id="post-link" href={`/blog/${slug}`}>
+                        <div class="flex items-start justify-between gap-1">
+                            <h1 transition:name={data.title}>{data.title}</h1>
+                            <span
+                                id="post-views"
+                                class="inline-block whitespace-nowrap text-xs text-neutral-400"
+                            >
+                                -- views
+                            </span>
+                        </div>
+                        <p class="space-x-1 text-sm text-neutral-400">
+                            <span transition:name={'date:' + formatDate(data.publishedAt)}>
+                                {formatDate(data.publishedAt)}
+                            </span>
+                            <span>•</span>
+                            <span>{readingTime(body).text}</span>
+                        </p>
+                    </a>
+                </li>
+            ))
         }
     </ul>
     <hr class="my-8 border-neutral-500/50" />
 </BaseLayout>
+
+<script>
+    import type { Posts } from '~/lib/generated';
+
+    async function getAllPostsViews() {
+        const res = await fetch('/api/all-views.json');
+        return (await res.json()) as Omit<Posts, 'lang'>[];
+    }
+
+    async function updateViewsAndStars() {
+        const postLinks = document.querySelectorAll('a#post-link') as NodeListOf<HTMLAnchorElement>;
+        const postViewsEls = document.querySelectorAll(
+            'span#post-views'
+        ) as NodeListOf<HTMLSpanElement>;
+
+        const slugs = Array.from(postLinks).map(link =>
+            new URL(link.href).pathname.replace('/blog/', '')
+        );
+
+        const allViews = await getAllPostsViews();
+
+        slugs.forEach((slug, index) => {
+            const views = allViews.find(post => post.slug === slug)?.views || 0;
+            postViewsEls[index].textContent = `${views.toLocaleString()} views`;
+        });
+    }
+
+    updateViewsAndStars();
+
+    document.addEventListener('astro:after-swap', () => {
+        if (window.location.pathname === '/blog') updateViewsAndStars();
+    });
+</script>

@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Sergio-s-workspace-j88unm.us-east-1.xata.sh/db/sergiobarria_dev",
+  "codegen": {
+    "output": "src/lib/generated.ts"
+  }
+}

@@ -1,13 +1,12 @@
 ---
 interface Props {
     slug: string;
-    views: number;
 }
 
-const { slug, views } = Astro.props as Props;
+const { slug } = Astro.props as Props;
 ---
 
-<span id="views" data-slug={slug} data-views={views}>-- views</span>
+<span id="views" data-slug={slug}>-- views</span>
 
 <script>
     async function updateViews() {
