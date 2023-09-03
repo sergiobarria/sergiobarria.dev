@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@astrojs/alpinejs':
+    specifier: ^0.3.0
+    version: 0.3.0(@types/alpinejs@3.7.2)(alpinejs@3.13.0)
   '@astrojs/mdx':
     specifier: ^1.0.0
     version: 1.0.0(astro@3.0.7)
@@ -32,6 +35,9 @@ dependencies:
   '@xata.io/client':
     specifier: ^0.26.3
     version: 0.26.3(typescript@5.2.2)
+  alpinejs:
+    specifier: ^3.13.0
+    version: 3.13.0
   astro:
     specifier: ^3.0.7
     version: 3.0.7(@types/node@20.5.7)
@@ -67,6 +73,9 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: ^0.5.9
     version: 0.5.9(tailwindcss@3.3.3)
+  '@types/alpinejs':
+    specifier: ^3.7.2
+    version: 3.7.2
   '@types/node':
     specifier: ^20.4.10
     version: 20.5.7
@@ -101,6 +110,16 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.19
+    dev: false
+
+  /@astrojs/alpinejs@0.3.0(@types/alpinejs@3.7.2)(alpinejs@3.13.0):
+    resolution: {integrity: sha512-vxyCZqDay5Eg6MFc2MgvrDF/r07sWVdQNi95qP+OhCB7gIYCAF+6tGk3qMxXHSw0Ywt7n6ZzILlokvaw8NIUtA==}
+    peerDependencies:
+      '@types/alpinejs': ^3.0.0
+      alpinejs: ^3.0.0
+    dependencies:
+      '@types/alpinejs': 3.7.2
+      alpinejs: 3.13.0
     dev: false
 
   /@astrojs/compiler@1.8.2:
@@ -1054,6 +1073,11 @@ packages:
       '@types/estree': 1.0.1
     dev: false
 
+  /@types/alpinejs@3.7.2:
+    resolution: {integrity: sha512-M/PAVysvGxOlhifP/6XmO8bj5HW9w+Ygr03PdryM3tCb1KuQEaAAvVcyeZc5T75PbjH3dCzy/M/w/nJEE0FTSg==}
+    dependencies:
+      '@vue/reactivity': 3.3.4
+
   /@types/babel__core@7.20.1:
     resolution: {integrity: sha512-aACu/U/omhdk15O4Nfb+fHgH/z3QsfQzpnvRZhYhThms83ZnAOZz7zZAWO7mn2yyNQaA4xTO8GLK3uqFU4bYYw==}
     dependencies:
@@ -1179,6 +1203,24 @@ packages:
       - supports-color
     dev: false
 
+  /@vue/reactivity@3.1.5:
+    resolution: {integrity: sha512-1tdfLmNjWG6t/CsPldh+foumYFo3cpyCHgBYQ34ylaMsJ+SNHQ1kApMIa8jN+i593zQuaw3AdWH0nJTARzCFhg==}
+    dependencies:
+      '@vue/shared': 3.1.5
+    dev: false
+
+  /@vue/reactivity@3.3.4:
+    resolution: {integrity: sha512-kLTDLwd0B1jG08NBF3R5rqULtv/f8x3rOFByTDz4J53ttIQEDmALqKqXY0J+XQeN0aV2FBxY8nJDf88yvOPAqQ==}
+    dependencies:
+      '@vue/shared': 3.3.4
+
+  /@vue/shared@3.1.5:
+    resolution: {integrity: sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA==}
+    dev: false
+
+  /@vue/shared@3.3.4:
+    resolution: {integrity: sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==}
+
   /@xata.io/client@0.26.3(typescript@5.2.2):
     resolution: {integrity: sha512-JUSLO38QtP54xp/JOh7oOAkLDZWNK4DnbJq4KQd75brPlMZ0822ekqUXOO3Np3gkXoeUcfUDJn1Mh6T7KMfyXw==}
     peerDependencies:
@@ -1212,6 +1254,12 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /alpinejs@3.13.0:
+    resolution: {integrity: sha512-7FYR1Yz3evIjlJD1mZ3SYWSw+jlOmQGeQ1QiSufSQ6J84XMQFkzxm6OobiZ928SfqhGdoIp2SsABNsS4rXMMJw==}
+    dependencies:
+      '@vue/reactivity': 3.1.5
     dev: false
 
   /ansi-align@3.0.1:

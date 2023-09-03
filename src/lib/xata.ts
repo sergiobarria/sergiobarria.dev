@@ -20,3 +20,10 @@ export async function increment(slug: string) {
 
     return updatedPost?.views ?? 0;
 }
+
+export async function getPostViewsBySlug(slug: string) {
+    const post = await xata.db.posts.filter({ slug }).getFirst();
+    if (!post) return 0;
+
+    return post.views;
+}

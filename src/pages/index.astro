@@ -58,7 +58,15 @@ const posts = postsEntries
                             d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"
                         ></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg
                     >
-                    <span id="stargazer-count">-- Github stars</span>
+                    <span
+                        x-data={`{ 
+                        stars: 0,
+                        async getStargazers() { this.stars = (await fetch('/api/stargazers.json')).json(); }
+                    }`}
+                        x-init=" getStargazers() "
+                    >
+                        <span x-text="stars"></span> GitHub stars</span
+                    >
                 </p>
                 <p class="mb-3 flex items-center gap-3">
                     <svg
@@ -75,7 +83,15 @@ const posts = postsEntries
                         ><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"></polyline><polyline
                             points="16 7 22 7 22 13"></polyline></svg
                     >
-                    <span id="total-views">-- total posts views</span>
+                    <span
+                        x-data={`{ 
+                        views: 0,
+                        async getViews() { this.views = (await fetch('/api/all-views.json')).json(); }
+                    }`}
+                        x-init=" getViews() "
+                    >
+                        <span x-text="views"></span> total views</span
+                    >
                 </p>
 
                 <div class="flex gap-4 text-xs">
@@ -96,7 +112,7 @@ const posts = postsEntries
             </div>
         </div>
         <HomeIcons />
-        <p class="mt-8">
+        <p class="mt-3">
             Welcome to my small space of the internet, where I write and share about different
             topics related to the web. I&apos;m constantly exploring new technologies, currently
             focusing on improving my knowledge with:{' '}
@@ -104,91 +120,48 @@ const posts = postsEntries
         </p>
     </section>
 
-    <section id="latest-articles" class="mt-10">
-        <h2 class="mb-3 text-xl font-semibold md:text-2xl lg:text-3xl">Latest Articles</h2>
+    <section id="latest-articles" class="mt-6">
+        <h2 class="text-xl font-semibold md:text-2xl lg:text-3xl">Latest Articles</h2>
 
         {
-            posts.map(({ data, slug, body }) => {
-                const { title, publishedAt } = data;
-                const formattedDate = formatDate(publishedAt);
-                const readTime = readingTime(body)?.text;
-
-                return (
-                    <a
-                        id="post-link"
-                        href={`/blog/${slug}`}
-                        class="group flex justify-between border-b border-neutral-600 py-3"
-                    >
-                        <div>
-                            <h3
-                                class="font-semibold group-hover:opacity-80"
-                                transition:name={title}
+            posts.map(({ data, slug, body }) => (
+                <a
+                    id="post-link"
+                    href={`/blog/${slug}`}
+                    class="group flex justify-between border-b border-neutral-600 py-3"
+                >
+                    <div>
+                        <h3
+                            class="font-semibold group-hover:opacity-80"
+                            transition:name={data.title}
+                        >
+                            {data.title}
+                        </h3>
+                        <p class="flex gap-2 text-xs opacity-90">
+                            <span transition:name={'date:' + formatDate(data.publishedAt)}>
+                                {formatDate(data.publishedAt)}
+                            </span>
+                            <span>•</span>
+                            <span
+                                x-data={`{ 
+                                views: 0, 
+                                async getViews() { this.views = await (await fetch('/api/views/${slug}.json')).json(); }
+                            }`}
+                                x-init=" getViews() "
                             >
-                                {title}
-                            </h3>
-                            <p class="flex gap-2 text-xs opacity-90">
-                                <span transition:name={'date:' + formattedDate}>
-                                    {formattedDate}
-                                </span>
-                                <span>•</span>
-                                <span id="post-views" transition:name={'views:' + slug}>
-                                    -- views
-                                </span>
-                                <span>•</span>
-                                <span transition:name={'readTime:' + readTime}>{readTime}</span>
-                            </p>
-                        </div>
-                        <div class="ml-1">
-                            <ArrowUpRightIcon />
-                        </div>
-                    </a>
-                );
-            })
+                                <span x-text="views" /> views
+                            </span>
+                            <span>•</span>
+                            <span transition:name={'readTime:' + readingTime(body)?.text}>
+                                {readingTime(body)?.text}
+                            </span>
+                        </p>
+                    </div>
+                    <div class="ml-1">
+                        <ArrowUpRightIcon />
+                    </div>
+                </a>
+            ))
         }
     </section>
 </BaseLayout>
-
-<script>
-    import type { Posts } from '~/lib/generated';
-
-    async function getAllPostsViews() {
-        const res = await fetch('/api/all-views.json');
-        return (await res.json()) as Omit<Posts, 'lang'>[];
-    }
-
-    async function getStargazersCount() {
-        const res = await fetch('/api/stargazers.json');
-        return (await res.json()) as number;
-    }
-
-    async function updateViewsAndStars() {
-        const startgazerEl = document.getElementById('stargazer-count') as HTMLSpanElement;
-        const totalViewsEl = document.getElementById('total-views') as HTMLSpanElement;
-        const postLinks = document.querySelectorAll('a#post-link') as NodeListOf<HTMLAnchorElement>;
-        const postViewsEls = document.querySelectorAll(
-            'span#post-views'
-        ) as NodeListOf<HTMLSpanElement>;
-
-        const slugs = Array.from(postLinks).map(link =>
-            new URL(link.href).pathname.replace('/blog/', '')
-        );
-
-        const allViews = await getAllPostsViews();
-        const totalStars = await getStargazersCount();
-        const total = allViews.reduce((acc, curr) => acc + curr.views, 0);
-
-        slugs.forEach((slug, index) => {
-            const views = allViews.find(post => post.slug === slug)?.views || 0;
-            postViewsEls[index].textContent = `${views.toLocaleString()} views`;
-        });
-
-        startgazerEl.textContent = `${totalStars.toLocaleString()} Github stars`;
-        totalViewsEl.textContent = `${total.toLocaleString()} total posts views`;
-    }
-
-    updateViewsAndStars();
-
-    document.addEventListener('astro:page-load', () => {
-        if (window.location.pathname === '/') updateViewsAndStars();
-    });
-</script>
