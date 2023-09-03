@@ -55,7 +55,9 @@ const { Content, headings } = await entry.render();
                     }
                 }`}
                     x-init=" updateViews "
-                    x-text="views"></span>
+                >
+                    <span x-text="views"></span> views
+                </span>
                 <span>•</span>
                 <span transition:name={'readTime:' + readTime}>{readTime}</span>
             </p>

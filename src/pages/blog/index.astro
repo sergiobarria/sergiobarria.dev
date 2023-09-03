@@ -28,14 +28,6 @@ const posts = postsEntries.sort(
                                 {data.title}
                             </h1>
                             <p class="flex items-center gap-1 text-xs text-neutral-400">
-                                <span
-                                    x-data={`{ 
-                                    views: 0, 
-                                    async getViews() { this.views = await (await fetch('/api/views/${slug}.json')).json(); }
-                                }`}
-                                    x-init=" getViews() "
-                                    x-text="views"
-                                />
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -53,6 +45,14 @@ const posts = postsEntries.sort(
                                         <circle cx="12" cy="12" r="3" />
                                     </>
                                 </svg>
+                                <span
+                                    x-data={`{ 
+                                    views: 0, 
+                                    async getViews() { this.views = await (await fetch('/api/views/${slug}.json')).json(); }
+                                }`}
+                                    x-init=" getViews() "
+                                    x-text="views"
+                                />
                             </p>
                         </div>
                         <p class="space-x-1 text-sm text-neutral-400">
