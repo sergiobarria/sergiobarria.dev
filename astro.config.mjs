@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import alpine from '@astrojs/alpinejs';
 import mdx from '@astrojs/mdx';
 import vercelServerless from '@astrojs/vercel/serverless';
 import prefetch from '@astrojs/prefetch';
@@ -42,7 +43,7 @@ const rehypeAutolinkHeadingsOptions = {
 // https://astro.build/config
 export default defineConfig({
     site: 'https://sergiobarria.dev',
-    integrations: [tailwind(), mdx(), prefetch(), partytown(), sitemap()],
+    integrations: [tailwind(), alpine(), mdx(), prefetch(), partytown(), sitemap()],
     markdown: {
         extendDefaultPlugins: true,
         syntaxHighlight: false,

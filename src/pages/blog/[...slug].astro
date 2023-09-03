@@ -3,7 +3,6 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 import readingTime from 'reading-time';
 
 import BaseLayout from '~/layouts/BaseLayout.astro';
-import ViewsCounter from '~/components/ViewsCounter.astro';
 import { cn, formatDate } from '~/lib/utils';
 
 interface Props {
@@ -47,7 +46,18 @@ const { Content, headings } = await entry.render();
             </p>
             <hr />
             <p class="space-x-2">
-                <ViewsCounter slug={slug} />
+                <span
+                    x-data={`{ 
+                    views: 0, 
+                    async updateViews() {
+                        const res = await fetch('/api/views/${slug}.json', { method: 'POST' });
+                        this.views = await res.json();
+                    }
+                }`}
+                    x-init=" updateViews "
+                >
+                    <span x-text="views"></span> views
+                </span>
                 <span>•</span>
                 <span transition:name={'readTime:' + readTime}>{readTime}</span>
             </p>
