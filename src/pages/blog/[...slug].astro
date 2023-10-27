@@ -2,7 +2,7 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import readingTime from 'reading-time';
 
-import BaseLayout from '~/layouts/BaseLayout.astro';
+import Layout from '~/layouts/Layout.astro';
 import { cn, formatDate } from '~/lib/utils';
 
 interface Props {
@@ -30,7 +30,7 @@ const formattedDate = formatDate(publishedAt);
 const { Content, headings } = await entry.render();
 ---
 
-<BaseLayout title={title} description={summary}>
+<Layout title={title} description={summary}>
     <section>
         <div
             id="progress-bar"
@@ -108,7 +108,7 @@ const { Content, headings } = await entry.render();
         </a>
         <hr class="my-8 border-neutral-500/50" />
     </section>
-</BaseLayout>
+</Layout>
 
 <script>
     import { animate, scroll } from 'motion';

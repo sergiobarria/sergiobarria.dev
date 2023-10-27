@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import readingTime from 'reading-time';
 
-import BaseLayout from '~/layouts/BaseLayout.astro';
+import Layout from '~/layouts/Layout.astro';
 import { formatDate } from '~/lib/utils';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
@@ -13,7 +13,7 @@ const posts = postsEntries.sort(
 );
 ---
 
-<BaseLayout title="Blog | Sergio Barria">
+<Layout title="Blog | Sergio Barria">
     <h1 class="mb-6 text-2xl font-bold md:text-3xl">Blog</h1>
     <p class="mb-8">
         In total, I&apos;ve written {posts.length} articles. You can find them all below.
@@ -68,4 +68,4 @@ const posts = postsEntries.sort(
         }
     </ul>
     <hr class="my-8 border-neutral-500/50" />
-</BaseLayout>
+</Layout>
