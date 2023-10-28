@@ -17,7 +17,7 @@ export function Sidebar() {
 
     return (
         <aside className="sticky">
-            <Image src="/logo.png" alt="logo" width={40} height={40} />
+            <Image src="/images/logo.png" width={30} height={30} alt="logo" />
 
             <nav className="mt-6 flex min-w-[100px] md:flex-col">
                 {links.map(link => (

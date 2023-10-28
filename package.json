@@ -9,7 +9,9 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@tailwindcss/typography": "^0.5.10",
         "clsx": "^2.0.0",
+        "lucide-react": "^0.290.0",
         "next": "14.0.0",
         "react": "^18",
         "react-dom": "^18",

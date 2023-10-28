@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
-        <html lang="en" className="scroll-smooth bg-black text-neutral-100">
+        <html lang="en" className="scroll-smooth bg-[#111010] text-neutral-100">
             <body
                 className={cn(
                     font.className,
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
                 <Sidebar />
 
-                <main className="flex-1 border">{children}</main>
+                <main className="flex-1 pb-8">{children}</main>
             </body>
         </html>
     );
