@@ -5,10 +5,10 @@ export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(...inputs));
 }
 
-export function formatDate(date: Date | undefined) {
+export function formatDate(date: string | undefined) {
     if (!date) return '';
 
-    return new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(date);
+    return new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(new Date(date));
 }
 
 export function convertTimeToDecimal(time?: string) {

@@ -57,7 +57,7 @@ $ venv\Scripts\activate.bat # for Windows
 
 You should see the name of the virtual environment in your terminal prompt. This means that the virtual environment is active.
 
-![virtual environment activated in terminal](../../../assets/posts/17/python-venv.png)
+<Image src="/posts/17/python-venv.png" alt="python-venv" width={331} height={66} />
 
 Next, install the project dependencies:
 
@@ -105,7 +105,7 @@ This will start the application in development mode. The `--reload` flag tells U
 
 Go to `http://localhost:8000` in your browser and you should see the following:
 
-![fastapi hello world](../../../assets/posts/17/hello-world.png)
+<Image src="/posts/17/hello-world.png" alt="hello-world" width={374} height={142} />
 
 <Callout type="info">
     Your browser may show the result in a different way, I'm using a chrome extension called JSON
@@ -118,7 +118,7 @@ One of the best features of FastAPI is the interactive docs. FastAPI automatical
 
 With your server still running, go to `http://localhost:8000/docs` in your browser and you should see the following:
 
-![fastapi interactive docs](../../../assets/posts/17/docs.png)
+<Image src="/posts/17/docs.png" alt="docs" width={2860} height={1490} />
 
 The interactive docs are generated using [Swagger UI](https://swagger.io/tools/swagger-ui/). You can click on the `Try it out` button to test the endpoint and see the response. You should see the same response as before.
 
@@ -218,7 +218,7 @@ We import the `db` object from the `database` module. We then define two app eve
 
 If you restart the server, you should see a `data.db` file created in your project root directory. You can connect to the database with your tool of choice. Here, I'm using [DBeaver](https://dbeaver.io/).
 
-![database loaded from dbeaver](../../../assets/posts/17/database.png)
+<Image src="/posts/17/database.png" alt="database" width={1136} height={709} />
 
 <Callout type="warn">
     Because this is a simple example, we're creating the database and table as soon as our
@@ -249,15 +249,15 @@ async def create_book(book: BookIn):
 
 Go to your interactive docs and you should see the new `POST` endpoint `/books`. Open it and click the `Try it out` button. You should see the following:
 
-![create new book record](../../../assets/posts/17/create-book.png)
+<Image src="/posts/17/create-book.png" alt="create book" width={2312} height={1306} />
 
 Enter the required data and click the `Execute` button. You should get a `201` response with the new book record. You can also check the database to see if the record was created.
 
-![created record](../../../assets/posts/17/created-record.png)
+<Image src="/posts/17/created-record.png" alt="created record" width={1136} height={344} />
 
 You can add a few more books to the database before we continue. Here's what my database looks like:
 
-![all created records](../../../assets/posts/17/all-created-books.png)
+<Image src="/posts/17/all-created-books.png" alt="all created books" width={823} height={226} />
 
 ### Read
 
@@ -276,7 +276,7 @@ async def get_books():
 
 Go to your interactive docs and you should see the new `GET` endpoint `/books`. Open it and click the `Try it out` button. You should see the following:
 
-![list all books](../../../assets/posts/17/list-books.png)
+<Image src="/posts/17/list-books.png" alt="list all books" width={2800} height={1806} />
 
 #### Get a single book
 
@@ -303,7 +303,7 @@ async def get_book(book_id: int):
 
 Go to your docs and you should see the new `GET` endpoint `/books/{book_id}`. Open it and click the `Try it out` button. Add a book `id`, you should see the following response:
 
-![get a single book](../../../assets/posts/17/single-book.png)
+<Image src="/posts/17/single-book.png" alt="show single book" width={2796} height={1546} />
 
 ### Update
 
@@ -347,7 +347,7 @@ Let's break this code down:
 
 Go to your docs and you should see the new `PATCH` endpoint `/books/{book_id}`. Open it and click the `Try it out` button. Add a book `id` and the data you want to update. In our case, I'm updating the book price to 49.99 You should see the following response:
 
-![update a book](../../../assets/posts/17/update-book.png)
+<Image src="/posts/17/update-book.png" alt="update book" width={2106} height={1682} />
 
 ### Delete
 
@@ -363,7 +363,7 @@ async def delete_book(book_id: int):
 
 Go to your docs and you should see the new `DELETE` endpoint `/books/{book_id}`. Open it and click the `Try it out` button. Add a book `id`, you should see the following response:
 
-![delete a book](../../../assets/posts/17/delete-book.png)
+<Image src="/posts/17/delete-book.png" alt="delete book" width={2866} height={1482} />
 
 ## Conclusion
 

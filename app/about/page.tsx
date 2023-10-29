@@ -1,3 +1,9 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'About | Sergio Barria'
+};
+
 export default function About() {
     return (
         <div>

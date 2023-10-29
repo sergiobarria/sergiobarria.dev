@@ -6,15 +6,28 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "typecheck": "tsc --noEmit",
+        "codegen": "xata codegen"
     },
     "dependencies": {
+        "@planetscale/database": "^1.11.0",
         "@tailwindcss/typography": "^0.5.10",
         "clsx": "^2.0.0",
+        "contentlayer": "^0.3.4",
+        "date-fns": "^2.30.0",
+        "geist": "^1.0.0",
+        "github-slugger": "^2.0.0",
         "lucide-react": "^0.290.0",
         "next": "14.0.0",
+        "next-contentlayer": "^0.3.4",
         "react": "^18",
         "react-dom": "^18",
+        "react-wrap-balancer": "^1.1.0",
+        "rehype-autolink-headings": "^6.1.1",
+        "rehype-pretty-code": "^0.10.2",
+        "rehype-slug": "^6.0.0",
+        "remark-gfm": "^3.0.1",
         "tailwind-merge": "^1.14.0"
     },
     "devDependencies": {
