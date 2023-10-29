@@ -8,24 +8,22 @@ const config = {
 
 export const conn = connect(config);
 
-type Post = {
+type DBPost = {
     id: number;
     slug: string;
     views: number;
 };
 
 export async function getTotalViews() {
-    const rows = (await conn.execute('SELECT id, views FROM posts'))?.rows as Omit<Post, 'slug'>[];
+    const rows = (await conn.execute('SELECT id, views FROM posts'))?.rows as Omit<
+        DBPost,
+        'slug'
+    >[];
 
     return rows.reduce((acc, { views }) => acc + views, 0);
 }
 
-export async function getViewsForSlug(slug: string) {
-    const result = await conn.execute('SELECT views FROM posts WHERE slug = ?', [slug]);
-    console.log(result);
-}
-
 export async function getAllPostViews() {
     const result = await conn.execute('SELECT id, slug, views FROM posts');
-    return result?.rows as Post[];
+    return result?.rows as DBPost[];
 }

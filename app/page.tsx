@@ -1,15 +1,27 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { GithubIcon, TrendingUpIcon } from 'lucide-react';
+import { GithubIcon, TrendingUpIcon, ArrowUpRightIcon } from 'lucide-react';
 
 import { HomeIcons } from '@/components/home-icons';
 import { getStargazersCount } from '@/lib/github';
-import { getTotalViews } from '@/lib/planetscale';
+import { getAllPostViews } from '@/lib/planetscale';
+import { allPosts } from 'contentlayer/generated';
 
 export default async function Home() {
     const startgazers = await getStargazersCount();
-    const totalViews = await getTotalViews();
+    const allPostViews = await getAllPostViews();
+    const totalViews = allPostViews.reduce((acc, { views }) => acc + views, 0);
+
+    const latestPosts = allPosts
+        .filter(post => !post.draft && !post.archived)
+        .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+        .slice(0, 3);
+
+    const posts = latestPosts.map(post => ({
+        ...post,
+        views: allPostViews.find(p => p.slug === post.slug)?.views ?? 0
+    }));
 
     return (
         <>
@@ -81,8 +93,25 @@ export default async function Home() {
                 </div>
             </section>
 
-            <section id="latest-articles" className="my-6">
-                <h2 className="text-xl font-semibold md:text-2xl lg:text-3xl">Latest Articles</h2>
+            <section id="latest-articles" className="my-8">
+                <h2 className="mb-4 text-xl font-semibold md:text-2xl lg:text-3xl">
+                    Latest Articles
+                </h2>
+
+                <ul className="space-y-3">
+                    {posts.map(post => (
+                        <li key={post._id} className="border-b border-neutral-600 pb-2">
+                            <Link
+                                href={'/blog/' + post.slug}
+                                className="flex justify-between hover:text-neutral-300"
+                            >
+                                <h2 className="font-light tracking-tighter">{post.title}</h2>
+                                <ArrowUpRightIcon className="h-4 w-4 text-neutral-500" />
+                            </Link>
+                            <p className="text-sm text-neutral-400">{post.views} views</p>
+                        </li>
+                    ))}
+                </ul>
             </section>
         </>
     );

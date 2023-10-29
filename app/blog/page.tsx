@@ -23,7 +23,12 @@ export default async function Blog() {
 
     return (
         <>
-            <h1 className="mb-6 text-2xl font-bold md:text-3xl">My Blog</h1>
+            <h1 className="text-2xl font-bold md:text-3xl">My Blog</h1>
+
+            <p className="prose prose-invert mb-6">
+                Here is a list of all the posts I&apos;ve published. In total I have written{' '}
+                <strong>{posts.length}</strong> posts.
+            </p>
 
             <ul className="space-y-3">
                 {postsList.map(post => {
