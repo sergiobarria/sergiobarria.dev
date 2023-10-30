@@ -21,10 +21,6 @@ interface Props {
     };
 }
 
-export async function generateStaticParams() {
-    return allPosts.map(post => ({ slug: post.slug }));
-}
-
 export default async function PostPage({ params }: Props) {
     const post = allPosts.find(post => post.slug === params.slug);
 
