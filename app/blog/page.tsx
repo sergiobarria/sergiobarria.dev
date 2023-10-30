@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { allPosts } from 'contentlayer/generated';
 import { getAllPostViews } from '@/lib/planetscale';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
     title: 'Blog',
     description: 'Read my thoughts on different topics related to the web.'
