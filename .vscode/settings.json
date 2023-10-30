@@ -3,7 +3,4 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 4,
     "editor.indentSize": "tabSize",
-    "[svelte]": {
-        "editor.defaultFormatter": "svelte.svelte-vscode"
-    }
 }
