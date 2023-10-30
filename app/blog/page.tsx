@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -37,7 +38,13 @@ export default async function Blog() {
                             <Link href={'/blog/' + post.slug} className="hover:text-neutral-300">
                                 <h2 className="font-light tracking-tighter">{post.title}</h2>
                             </Link>
-                            <p className="text-sm text-neutral-400">{post.views} views</p>
+                            <Suspense
+                                fallback={
+                                    <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
+                                }
+                            >
+                                <p className="text-sm text-neutral-400">{post.views} views</p>
+                            </Suspense>
                         </li>
                     );
                 })}
