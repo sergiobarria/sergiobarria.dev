@@ -10,6 +10,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
     description: 'Engineer, developer, amateur writer',
+    metadataBase: new URL('https://sergiobarria.dev'),
     title: {
         default: 'Home | Sergio Barria',
         template: '%s | Sergio Barria'
