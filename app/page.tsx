@@ -46,14 +46,14 @@ export default async function Home() {
                         className="rounded-full"
                     />
 
-                    <div className="space-y-2 text-neutral-400">
+                    <div className="space-y-2 text-sm text-neutral-400">
                         <a
                             href="https://github.com/sergiobarria"
                             className="flex items-center gap-3 hover:text-neutral-50"
                             target="_blank"
                             rel="noopener noreferrer"
                         >
-                            <GithubIcon />
+                            <GithubIcon className="h-4 w-4" />
                             <Suspense
                                 fallback={
                                     <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
@@ -67,7 +67,7 @@ export default async function Home() {
                             href="/blog"
                             className="flex items-center gap-3 hover:text-neutral-50"
                         >
-                            <TrendingUpIcon />
+                            <TrendingUpIcon className="h-4 w-4" />
                             <Suspense
                                 fallback={
                                     <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
@@ -78,7 +78,7 @@ export default async function Home() {
                         </Link>
 
                         <p className="flex items-center gap-3 hover:text-neutral-50">
-                            <Code2Icon />
+                            <Code2Icon className="h-4 w-4" />
                             <Suspense
                                 fallback={
                                     <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
@@ -89,6 +89,27 @@ export default async function Home() {
                                 </span>
                             </Suspense>
                         </p>
+
+                        <div className="flex items-center gap-5">
+                            <a
+                                href="https://github.com/sergiobarria"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-0.5 underline hover:text-neutral-500"
+                            >
+                                github
+                                <ArrowUpRightIcon className="h-3 w-3" />
+                            </a>
+                            <a
+                                href="https://github.com/sergiobarria"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-0.5 underline hover:text-neutral-500"
+                            >
+                                linkedin
+                                <ArrowUpRightIcon className="h-3 w-3" />
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -124,7 +145,13 @@ export default async function Home() {
                                 <h2 className="font-light tracking-tighter">{post.title}</h2>
                                 <ArrowUpRightIcon className="h-4 w-4 text-neutral-500" />
                             </Link>
-                            <p className="text-sm text-neutral-400">{post.views} views</p>
+                            <Suspense
+                                fallback={
+                                    <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
+                                }
+                            >
+                                <p className="text-sm text-neutral-400">{post.views} views</p>
+                            </Suspense>
                         </li>
                     ))}
                 </ul>
