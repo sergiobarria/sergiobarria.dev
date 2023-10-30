@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Balancer from 'react-wrap-balancer';
@@ -8,6 +7,7 @@ import { allPosts } from 'contentlayer/generated';
 import { cn, formatDate } from '@/lib/utils';
 import { ViewCounter } from '@/components/view-counter';
 import { getAllPostViews } from '@/lib/planetscale';
+import { ProgressBar } from '@/components/progress-bar';
 
 interface Heading {
     heading: number;
@@ -35,6 +35,7 @@ export default async function PostPage({ params }: Props) {
 
     return (
         <>
+            <ProgressBar />
             <h1 className="text-2xl font-semibold tracking-tighter">
                 <Balancer>{post.title}</Balancer>
             </h1>

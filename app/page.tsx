@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GithubIcon, TrendingUpIcon, ArrowUpRightIcon, Code2Icon } from 'lucide-react';

@@ -5,7 +5,7 @@ import { allPosts } from 'contentlayer/generated';
 import { getAllPostViews } from '@/lib/planetscale';
 
 export const metadata: Metadata = {
-    title: 'Blog | Sergio Barria',
+    title: 'Blog',
     description: 'Read my thoughts on different topics related to the web.'
 };
 

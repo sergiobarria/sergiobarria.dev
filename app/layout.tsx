@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { GeistMono, GeistSans } from 'geist/font';
+import { Analytics } from '@vercel/analytics/react';
+import PlausibleProvider from 'next-plausible';
 
 import { cn } from '@/lib/utils';
 import { Sidebar } from '@/components/sidebar';
@@ -7,8 +9,34 @@ import { SpotifyCard } from '@/components/spotify-card';
 import './globals.css';
 
 export const metadata: Metadata = {
-    title: 'Home | Sergio Barria',
-    description: 'Engineer, developer, amateur writer'
+    description: 'Engineer, developer, amateur writer',
+    title: {
+        default: 'Home | Sergio Barria',
+        template: '%s | Sergio Barria'
+    },
+    openGraph: {
+        title: 'Sergio Barria',
+        description: 'Engineer, developer, amateur writer',
+        url: 'https://sergiobarria.dev',
+        siteName: 'Sergio Barria',
+        locale: 'en_US',
+        type: 'website'
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1
+        }
+    },
+    twitter: {
+        title: 'Sergio Barria',
+        card: 'summary_large_image'
+    }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,6 +49,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 GeistMono.variable
             )}
         >
+            <head>
+                <PlausibleProvider domain="sergiobarria.dev" />
+            </head>
             <body
                 className={cn(
                     'flex min-h-screen max-w-screen-md flex-col gap-6 px-5 pt-10 antialiased',
@@ -38,6 +69,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                         </div>
                     </footer>
                 </main>
+
+                <Analytics />
             </body>
         </html>
     );

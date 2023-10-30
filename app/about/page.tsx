@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'About | Sergio Barria'
+    title: 'About'
 };
 
 export default function About() {
@@ -95,14 +95,13 @@ export default function About() {
                         Tailwind CSS
                     </a>
                     , (yes, I&apos;m part of the Tailwind cult 😌) and I use it every time I can.
-                    For a database I decided to explore{' '}
-                    <a href="https://xata.io/" target="_blank" rel="noopener noreferrer">
-                        Xata.io
+                    For a database I decided to go with{' '}
+                    <a href="https://planetscale.com/" target="_blank" rel="noopener noreferrer">
+                        Planetscale
                     </a>
-                    , so far it has been a greate DX. Previously I was using Prisma as my ORM with
-                    Planetscale but again, I wanted to try something different and given that Xata
-                    also give me a query client it could leave a smaller footprint than the previous
-                    two.
+                    , and, so far it has been a great DX. Previously I was using Prisma as my ORM
+                    with Planetscale but I decided to remove it and use Planescale JavaScript
+                    driver.
                 </p>
 
                 <p>
