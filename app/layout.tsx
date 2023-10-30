@@ -3,6 +3,7 @@ import { GeistMono, GeistSans } from 'geist/font';
 
 import { cn } from '@/lib/utils';
 import { Sidebar } from '@/components/sidebar';
+import { SpotifyCard } from '@/components/spotify-card';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -28,7 +29,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             >
                 <Sidebar />
 
-                <main className="max-w-[600px] flex-1 pb-8">{children}</main>
+                <main className="max-w-[600px] flex-1 pb-8">
+                    {children}
+
+                    <footer className="mt-7">
+                        <div className="flex justify-between">
+                            <SpotifyCard />
+                        </div>
+                    </footer>
+                </main>
             </body>
         </html>
     );

@@ -1,16 +1,18 @@
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { GithubIcon, TrendingUpIcon, ArrowUpRightIcon } from 'lucide-react';
+import { GithubIcon, TrendingUpIcon, ArrowUpRightIcon, Code2Icon } from 'lucide-react';
 
 import { HomeIcons } from '@/components/home-icons';
 import { getStargazersCount } from '@/lib/github';
 import { getAllPostViews } from '@/lib/planetscale';
+import { getFavoriteLanguages } from '@/lib/wakatime';
 import { allPosts } from 'contentlayer/generated';
 
 export default async function Home() {
     const startgazers = await getStargazersCount();
     const allPostViews = await getAllPostViews();
+    const favLanguages = await getFavoriteLanguages();
     const totalViews = allPostViews.reduce((acc, { views }) => acc + views, 0);
 
     const latestPosts = allPosts
@@ -73,6 +75,19 @@ export default async function Home() {
                                 <span>{totalViews} total posts views</span>
                             </Suspense>
                         </Link>
+
+                        <p className="flex items-center gap-3 hover:text-neutral-50">
+                            <Code2Icon />
+                            <Suspense
+                                fallback={
+                                    <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
+                                }
+                            >
+                                <span>
+                                    Most used language: {favLanguages.languages.at(0)?.name}
+                                </span>
+                            </Suspense>
+                        </p>
                     </div>
                 </div>
 
