@@ -1,20 +1,22 @@
 import type { Config } from 'tailwindcss';
-import defaultTheme from 'tailwindcss/defaultTheme';
 import typography from '@tailwindcss/typography';
 
 export default {
-    content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+    content: [
+        './pages/**/*.{js,ts,jsx,tsx,mdx}',
+        './components/**/*.{js,ts,jsx,tsx,mdx}',
+        './app/**/*.{js,ts,jsx,tsx,mdx}'
+    ],
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Readex Pro Variable', ...defaultTheme.fontFamily.sans]
+                sans: ['var(--font-geist-sans)'],
+                mono: ['var(--font-geist-mono)']
             },
             typography: {
                 quoteless: {
                     css: {
-                        'blockquote p:first-of-type::before': {
-                            content: 'none'
-                        },
+                        'blockquote p:first-of-type::before': { content: 'none' },
                         'blockquote p:first-of-type::after': { content: 'none' }
                     }
                 }
