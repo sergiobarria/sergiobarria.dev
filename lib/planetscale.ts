@@ -1,4 +1,7 @@
+import 'server-only';
+
 import { connect, Config } from '@planetscale/database';
+import { unstable_cache } from 'next/cache';
 
 const config = {
     host: process.env.DATABASE_HOST,
@@ -14,16 +17,24 @@ type DBPost = {
     views: number;
 };
 
-export async function getTotalViews() {
-    const rows = (await conn.execute('SELECT id, views FROM posts'))?.rows as Omit<
-        DBPost,
-        'slug'
-    >[];
+export const getTotalViews = unstable_cache(
+    async () => {
+        const rows = (await conn.execute('SELECT id, views FROM posts'))?.rows as Omit<
+            DBPost,
+            'slug'
+        >[];
 
-    return rows.reduce((acc, { views }) => acc + views, 0);
-}
+        return rows.reduce((acc, { views }) => acc + views, 0);
+    },
+    ['posts-views-total'],
+    { revalidate: 5 }
+);
 
-export async function getAllPostViews() {
-    const result = await conn.execute('SELECT id, slug, views FROM posts');
-    return result?.rows as DBPost[];
-}
+export const getAllPostViews = unstable_cache(
+    async () => {
+        const result = await conn.execute('SELECT id, slug, views FROM posts');
+        return result?.rows as DBPost[];
+    },
+    ['single-post-views'],
+    { revalidate: 5 }
+);

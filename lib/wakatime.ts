@@ -1,3 +1,5 @@
+import 'server-only';
+
 const { WAKATIME_USER, WAKATIME_API_KEY } = process.env;
 
 interface WakaAllTime {
@@ -43,7 +45,8 @@ interface AlltimeSinceToday {
 
 export async function getFavoriteLanguages() {
     const res = await fetch(
-        `https://wakatime.com/api/v1/users/${WAKATIME_USER}/stats/all_time?api_key=${WAKATIME_API_KEY}`
+        `https://wakatime.com/api/v1/users/${WAKATIME_USER}/stats/all_time?api_key=${WAKATIME_API_KEY}`,
+        { next: { revalidate: 60 * 60 * 24 } }
     );
 
     if (!res.ok) throw new Error('Failed to fetch Wakatime stats');

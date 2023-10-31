@@ -10,8 +10,6 @@ import { getFavoriteLanguages } from '@/lib/wakatime';
 import { allPosts } from 'contentlayer/generated';
 import { ViewCounter } from '@/components/view-counter';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Home() {
     const startgazers = await getStargazersCount();
     const allPostViews = await getAllPostViews();
