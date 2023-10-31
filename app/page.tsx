@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GithubIcon, TrendingUpIcon, ArrowUpRightIcon, Code2Icon } from 'lucide-react';
@@ -9,6 +8,9 @@ import { getStargazersCount } from '@/lib/github';
 import { getAllPostViews } from '@/lib/planetscale';
 import { getFavoriteLanguages } from '@/lib/wakatime';
 import { allPosts } from 'contentlayer/generated';
+import { ViewCounter } from '@/components/view-counter';
+
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
     const startgazers = await getStargazersCount();
@@ -150,7 +152,7 @@ export default async function Home() {
                                     <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
                                 }
                             >
-                                <p className="text-sm text-neutral-400">{post.views} views</p>
+                                <ViewCounter views={post.views} slug={post.slug} />
                             </Suspense>
                         </li>
                     ))}

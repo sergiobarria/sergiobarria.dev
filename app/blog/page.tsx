@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 import { allPosts } from 'contentlayer/generated';
 import { getAllPostViews } from '@/lib/planetscale';
+import { ViewCounter } from '@/components/view-counter';
 
 export const metadata: Metadata = {
     title: 'Blog',
@@ -43,7 +44,7 @@ export default async function Blog() {
                                     <span className="h-3 w-4 animate-pulse rounded bg-neutral-500" />
                                 }
                             >
-                                <p className="text-sm text-neutral-400">{post.views} views</p>
+                                <ViewCounter views={post.views} slug={post.slug} />
                             </Suspense>
                         </li>
                     );

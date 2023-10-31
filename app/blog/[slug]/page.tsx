@@ -39,7 +39,7 @@ export default async function PostPage({ params }: Props) {
             <div className="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400">
                 <p className="text-sm">{formatDate(post.publishedAt)}</p>
 
-                <ViewCounter views={views} slug={post.slug} />
+                <ViewCounter views={views} slug={post.slug} track />
             </div>
 
             <h2 className="text-lg font-semibold tracking-tighter">Table of Contents</h2>
