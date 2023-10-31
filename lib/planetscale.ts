@@ -27,7 +27,7 @@ export const getTotalViews = unstable_cache(
         return rows.reduce((acc, { views }) => acc + views, 0);
     },
     ['posts-views-total'],
-    { revalidate: 5 }
+    { revalidate: 1 }
 );
 
 export const getAllPostViews = unstable_cache(
@@ -36,5 +36,5 @@ export const getAllPostViews = unstable_cache(
         return result?.rows as DBPost[];
     },
     ['single-post-views'],
-    { revalidate: 5 }
+    { revalidate: 1 }
 );

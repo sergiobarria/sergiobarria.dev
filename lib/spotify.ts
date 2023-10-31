@@ -55,7 +55,8 @@ async function getAccessToken() {
 export async function getNowPlaying() {
     const accessToken = await getAccessToken();
     const res = await fetch(NOW_PLAYING_ENDPOINT, {
-        headers: { Authorization: `Bearer ${accessToken}` }
+        headers: { Authorization: `Bearer ${accessToken}` },
+        next: { revalidate: 5 }
     });
 
     if (!res.ok || res.status === 204 || res.status > 400) {
