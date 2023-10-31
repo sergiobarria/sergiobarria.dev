@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { connect, Config } from '@planetscale/database';
 
 const config = {
@@ -14,16 +16,16 @@ type DBPost = {
     views: number;
 };
 
-export async function getTotalViews() {
+export const getTotalViews = async () => {
     const rows = (await conn.execute('SELECT id, views FROM posts'))?.rows as Omit<
         DBPost,
         'slug'
     >[];
 
     return rows.reduce((acc, { views }) => acc + views, 0);
-}
+};
 
-export async function getAllPostViews() {
+export const getAllPostViews = async () => {
     const result = await conn.execute('SELECT id, slug, views FROM posts');
     return result?.rows as DBPost[];
-}
+};

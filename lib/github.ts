@@ -1,3 +1,5 @@
+import 'server-only';
+
 const ACCESS_TOKEN = process.env.GITHUB_ACCESS_TOKEN;
 
 const STARGAZERS_COUNT_QUERY = `
@@ -31,7 +33,8 @@ export async function getStargazersCount() {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${ACCESS_TOKEN}`
             },
-            body: JSON.stringify({ query: STARGAZERS_COUNT_QUERY })
+            body: JSON.stringify({ query: STARGAZERS_COUNT_QUERY }),
+            next: { revalidate: 60 * 60 * 24 } // 1 day
         });
 
         const { data } = await response.json();

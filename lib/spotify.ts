@@ -1,3 +1,5 @@
+import 'server-only';
+
 const { SPOTIFY_REFRESH_TOKEN, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
 
 const token = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
@@ -53,7 +55,8 @@ async function getAccessToken() {
 export async function getNowPlaying() {
     const accessToken = await getAccessToken();
     const res = await fetch(NOW_PLAYING_ENDPOINT, {
-        headers: { Authorization: `Bearer ${accessToken}` }
+        headers: { Authorization: `Bearer ${accessToken}` },
+        next: { revalidate: 5 }
     });
 
     if (!res.ok || res.status === 204 || res.status > 400) {
