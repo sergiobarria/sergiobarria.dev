@@ -1,7 +1,7 @@
 /* Register your custom font family and tell the browser where to find it. */
 @font-face {
     font-family: 'Geist';
-    src: url('/fonts/Geist-Ligth.woff2') format('woff2');
+    src: url('/fonts/Geist-Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
