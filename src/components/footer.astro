@@ -1,0 +1,69 @@
+---
+import SpotifyCard from './spotify-card.astro';
+---
+
+<footer class="mt-7">
+    <div class="flex flex-col justify-between space-y-3 md:flex-row md:items-center md:space-y-0">
+        <SpotifyCard />
+        <div
+            class="flex flex-col items-center space-y-2 text-xs font-light text-neutral-400 md:items-end"
+        >
+            <div class="flex items-center space-x-4">
+                <a
+                    href="https://github.com/sergiobarria"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-0.5 hover:underline"
+                >
+                    github
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-up-right h-3 w-3"
+                        ><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg
+                    >
+                </a>
+
+                <a
+                    href="https://github.com/sergiobarria"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-0.5 hover:underline"
+                >
+                    linkedin
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="lucide lucide-arrow-up-right h-3 w-3"
+                        ><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg
+                    >
+                </a>
+            </div>
+
+            <p>
+                Powered by <a
+                    href="https://astro.build/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="transition-colors duration-200 ease-in-out hover:text-white hover:underline"
+                >
+                    Astro
+                </a>
+            </p>
+        </div>
+    </div>
+</footer>

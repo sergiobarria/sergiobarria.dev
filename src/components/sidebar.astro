@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 
 import { cn } from '~/lib/utils';
+import logo from '~/assets/images/logo.png';
 
 const links = [
     { label: 'home', href: '/' },
@@ -12,9 +13,9 @@ const links = [
 const pathname = new URL(Astro.url).pathname.split('/')[1];
 ---
 
-<aside class="top-10 md:sticky md:h-screen">
+<aside class="top-10 md:sticky">
     <div class="h-auto w-[35px]">
-        <Image src="/images/logo.png" width={225} height={346} alt="logo" class="-pl-2.5" />
+        <Image src={logo} width={225} height={346} alt="logo" class="-pl-2.5" />
     </div>
 
     <nav class="-ml-2.5 mt-6 flex min-w-[100px] md:flex-col">

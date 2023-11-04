@@ -1,0 +1,10 @@
+---
+import { getTotalViews } from '~/lib/planetscale';
+
+export const partial = true;
+export const prerender = false;
+
+const totalViews = await getTotalViews();
+---
+
+<span>{totalViews}</span>

@@ -35,7 +35,7 @@ Although you can create a Next.js project using one of the starter templates tha
 npx create-next-app your-blog-name-here
 ```
 
-<Image src="/posts/04/create-new-post.png" alt="create new post" width={2800} height={1806} />
+![create new post](../../assets/posts/04/create-new-post.png)
 
 Once the process has finished you can type `npm run dev` in your terminal to start the developer server on `localhost:3000`. Now you can open your Next project in your text editor or IDE.
 
@@ -68,7 +68,7 @@ This will open a development server in the URL: `localhost:3333`
 
 Now you can go to `localhost:3333` in your web browser and you will be asked to log in. Remember to log in using the same method you used to register. If everything has gone correctly you should have something like the picture below in your web browser.
 
-![sanity local server](../../posts/04/assets/sanity-studio-local-server.png)
+![sanity local server](../../assets/posts/04/sanity-studio-local-server.png)
 
 ## Connect Sanity and Next Js
 
@@ -93,7 +93,7 @@ Finally, your project ID can be found in 2 places.
 -   Inside your studio folder, on the sanity.json file you can see the `projectId`.
 -   In your browser navigate to sanity.io and log in. Inside your dashboard select your project and below your project name, you can see your project ID.
 
-![sanity project id](../../posts/04/assets/sanity-project-id.png)
+![sanity project id](../../assets/posts/04/sanity-project-id.png)
 
 ### Sanity to Next Connection
 
@@ -101,7 +101,7 @@ Now we need to tell sanity that our next project can be trusted. So, on the same
 
 Add your development server: `http://localhost:3000`
 
-![add local server](../../posts/04/assets/add-local-server.png)
+![add local server](../../assets/posts/04/add-local-server.png)
 
 **IMPORTANT:** Once we deploy our blog, we need to come back here and add our URL for deployment in order to be able to fetch data during production.
 
@@ -109,7 +109,7 @@ Add your development server: `http://localhost:3000`
 
 First, let's make sure we have some data to fetch. So, in our sanity studio, local server (in the browser) let's add a new post. You can start by using any "dummy data" for a start. Just type any data on the input boxes. In the case of the author and category, you can either leave it empty or create an author and category on the correspondent content tabs, you can read more about the content models in the sanity docs [here](https://www.sanity.io/guides/implementing-a-content-model-in-sanity-io). Remember to click the publish button once you have finished creating your dummy post.
 
-![create new post](../../posts/04/assets/create-new-post.png)
+![create new post](../../assets/posts/04/create-new-post.png)
 
 Now that we have some data to fetch, let's go to our next js pages and inside the index.js (or any page on which you want to fetch data).
 

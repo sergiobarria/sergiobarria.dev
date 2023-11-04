@@ -1,0 +1,11 @@
+---
+import { getFavoriteLanguages } from '~/lib/wakatime';
+
+export const partial = true;
+export const prerender = false;
+
+const langs = await getFavoriteLanguages();
+const favorite = langs.at(0)?.name;
+---
+
+<span>{favorite}</span>
