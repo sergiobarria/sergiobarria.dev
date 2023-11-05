@@ -1,0 +1,17 @@
+{
+  "id": "mig_cl3j6is0mi1nj31b0ubg",
+  "parentID": "mig_cl3j6e75ndlbrb9ulut0",
+  "checksum": "1:8d46324f6e414c43a32ba5679a6df8a46f4beab3e7adff209583f013084ac016",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "views",
+          "type": "int",
+          "defaultValue": "0"
+        },
+        "table": "posts"
+      }
+    }
+  ]
+}
