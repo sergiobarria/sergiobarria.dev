@@ -5,13 +5,21 @@ import { getCollection } from 'astro:content';
 import Layout from '~/layouts/main-layout.astro';
 import HomeIcons from '~/components/home-icons.astro';
 import profile from '~/assets/images/profile-4.png';
+import { getAllPostViews } from '~/lib/planetscale';
 
-const posts = await getCollection('posts', ({ data }) => {
+const postsEntries = await getCollection('posts', ({ data }) => {
     return !data.draft && !data.archived;
 });
-const sortedPosts = posts
+const sortedPosts = postsEntries
     .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
     .slice(0, 3);
+
+const allViews = await getAllPostViews();
+
+const posts = sortedPosts.map(post => ({
+    ...post,
+    views: allViews.find(p => p.slug === post.slug)?.views ?? 0
+}));
 ---
 
 <Layout>
@@ -135,7 +143,7 @@ const sortedPosts = posts
 
         <ul class="space-y-3">
             {
-                sortedPosts.map(post => (
+                posts.map(post => (
                     <li class="border-b border-neutral-600 pb-2">
                         <a
                             href={'/blog/' + post.slug}
@@ -160,7 +168,7 @@ const sortedPosts = posts
                                 </>
                             </svg>
                         </a>
-                        <span class="text-sm text-neutral-400">0 views</span>
+                        <span class="text-sm text-neutral-400">{post.views} views</span>
                     </li>
                 ))
             }

@@ -7,18 +7,18 @@ export const prerender = false;
 async function updatePostCount() {
     const searchParams = new URLSearchParams(new URL(Astro.url).search);
     const slug = searchParams.get('slug');
+    const track = searchParams.get('track');
+    let views: number | undefined;
 
     if (!slug) return;
 
-    await increment(slug);
-    const views = await getViewsForSlug(slug);
+    if (track) await increment(slug);
+    views = await getViewsForSlug(slug);
 
     return views;
 }
 
 const views = updatePostCount();
-
-const { initialViews } = Astro.props as { initialViews?: number };
 ---
 
-<span>{views ?? initialViews} views</span>
+<span>{views} views</span>

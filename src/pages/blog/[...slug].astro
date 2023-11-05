@@ -30,6 +30,12 @@ const views = await getViewsForSlug(entry.slug);
 ---
 
 <Layout>
+    <div
+        id="progress-bar"
+        class="fixed inset-x-0 top-0 h-1 origin-[0%] scale-x-0 transform bg-neutral-200"
+    >
+    </div>
+
     <h1 class="text-2xl font-semibold tracking-tighter">
         {title}
     </h1>
@@ -41,7 +47,7 @@ const views = await getViewsForSlug(entry.slug);
             hx-get="/partials/views-counter/"
             hx-trigger="load"
             hx-swap="innerHTML"
-            hx-vals={JSON.stringify({ slug: entry.slug })}
+            hx-vals={JSON.stringify({ slug: entry.slug, track: true })}
         >
             {views} views
         </span>
@@ -73,4 +79,12 @@ const views = await getViewsForSlug(entry.slug);
     <article class="prose prose-invert">
         <Content />
     </article>
+
+    <hr class="my-8 border-neutral-500/50" />
 </Layout>
+
+<script>
+    import { animate, scroll } from 'motion';
+
+    scroll(animate('#progress-bar', { scale: [0, 1] }));
+</script>

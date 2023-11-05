@@ -24,7 +24,6 @@ export const getTotalViews = async () => {
 };
 
 export const getAllPostViews = async () => {
-    console.info('FUNCTION CALLED!');
     const result = await conn.execute('SELECT id, slug, views FROM posts');
     return result?.rows as DBPost[];
 };
