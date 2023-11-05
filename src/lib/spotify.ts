@@ -2,18 +2,18 @@ const { SPOTIFY_REFRESH_TOKEN, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = impo
 
 const token = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
 const NOW_PLAYING_ENDPOINT = 'https://api.spotify.com/v1/me/player/currently-playing';
-const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks';
+// const TOP_TRACKS_ENDPOINT = 'https://api.spotify.com/v1/me/top/tracks';
 const TOKEN_ENDPOINT = 'https://accounts.spotify.com/api/token';
 
-interface Track {
-    id: string;
-    external_urls: { spotify: string };
-    name: string;
-    artists: Array<{ name: string }>;
-    album: {
-        images: Array<{ width: number; height: number; url: string }>;
-    };
-}
+// interface Track {
+//     id: string;
+//     external_urls: { spotify: string };
+//     name: string;
+//     artists: Array<{ name: string }>;
+//     album: {
+//         images: Array<{ width: number; height: number; url: string }>;
+//     };
+// }
 
 export interface TrackData {
     name: string;

@@ -1,26 +1,24 @@
 import { getCollection } from 'astro:content';
 import rss from '@astrojs/rss';
 
-import config from '~/config';
-
 export async function GET() {
     const postsEntries = await getCollection('posts', ({ data }) => {
         return !data.draft && !data.archived;
     });
     const posts = postsEntries.sort(
-        (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+        (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
     );
     const items = posts.map(post => ({
         title: post.data.title,
-        pubDate: post.data.publishedAt.toUTCString(),
+        pubDate: new Date(post.data.publishedAt)?.toUTCString(),
         description: post.data.description,
         link: `/blog/${post.slug}/`
     }));
 
     return rss({
-        title: config.title,
-        description: config.description,
-        site: config.site,
+        title: "Sergio's personal website",
+        description: 'Engineer, developer, amateur writer',
+        site: import.meta.env.SITE,
         items
     });
 }

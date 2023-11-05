@@ -22,25 +22,6 @@ interface WakaAllTime {
     }[];
 }
 
-interface AlltimeSinceToday {
-    total_seconds: number;
-    text: string;
-    decimal: string;
-    digital: string;
-    is_up_to_date: boolean;
-    percent_calculated: number;
-    range: {
-        start: string;
-        start_date: string;
-        start_text: string;
-        end: string;
-        end_date: string;
-        end_text: string;
-        timezone: string;
-    };
-    timeout: number;
-}
-
 export async function getFavoriteLanguages() {
     const res = await fetch(
         `https://wakatime.com/api/v1/users/${WAKATIME_USER}/stats/all_time?api_key=${WAKATIME_API_KEY}`
