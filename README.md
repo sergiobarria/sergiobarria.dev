@@ -3,7 +3,7 @@
 > This is my personal website
 
 -   **Framework**: [Astro](https://astro.build/)
--   **Database**: [Planetscale](https://planetscale.com)
+-   **Database**: [Xata](https://xata.io)
 -   **Deployment**: [Vercel](https://vercel.com)
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com)
 -   **Analytics**: [Plausible](https://plausible.io/)

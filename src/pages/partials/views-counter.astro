@@ -1,24 +1,25 @@
 ---
-import { increment, getViewsForSlug } from '~/lib/planetscale';
+import { increment, getViewsForSlug } from '~/lib/xata';
 
 export const partial = true;
-export const prerender = false;
+
+if (Astro.request.method !== 'GET') return Astro.redirect(null, 404);
 
 async function updatePostCount() {
     const searchParams = new URLSearchParams(new URL(Astro.url).search);
     const slug = searchParams.get('slug');
     const track = searchParams.get('track');
-    let views: number | undefined;
+    let views;
 
     if (!slug) return;
 
-    if (track) await increment(slug);
-    views = await getViewsForSlug(slug);
+    if (track) views = await increment(slug);
 
+    views = await getViewsForSlug(slug);
     return views;
 }
 
 const views = updatePostCount();
 ---
 
-<span>{views} views</span>
+<span>{views}</span>

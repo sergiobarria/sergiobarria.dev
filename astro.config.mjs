@@ -32,9 +32,9 @@ export default defineConfig({
             [rehypeAutolinkHeadings, rehypeAutolinkHeadingsOptions]
         ]
     },
-    output: 'hybrid',
+    output: 'server',
     adapter: vercel(),
     experimental: {
-        devOverlay: import.meta.env.DEV
+        devOverlay: false
     }
 });

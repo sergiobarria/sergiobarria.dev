@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 import Layout from '~/layouts/main-layout.astro';
 import HomeIcons from '~/components/home-icons.astro';
 import profile from '~/assets/images/profile-4.png';
-import { getAllPostViews } from '~/lib/planetscale';
+import { getAllPosts } from '~/lib/xata';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
     return !data.draft && !data.archived;
@@ -14,11 +14,11 @@ const sortedPosts = postsEntries
     .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
     .slice(0, 3);
 
-const allViews = await getAllPostViews();
+const allPostsRecords = await getAllPosts();
 
 const posts = sortedPosts.map(post => ({
     ...post,
-    views: allViews.find(p => p.slug === post.slug)?.views ?? 0
+    views: allPostsRecords.find(p => p.slug === post.slug)?.views ?? 0
 }));
 ---
 
@@ -59,8 +59,8 @@ const posts = sortedPosts.map(post => ({
                         ></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg
                     >
                     <p>
-                        <span hx-get="/partials/stargazers" hx-trigger="load" hx-swap="innerHTML">
-                            --
+                        <span hx-get="/partials/stargazers" hx-trigger="load" hx-swap="outterHTML">
+                            <span class="htmx-indicator animate-pulse">--</span>
                         </span>
                          GitHub stars
                     </p>
@@ -87,8 +87,8 @@ const posts = sortedPosts.map(post => ({
                             points="16 7 22 7 22 13"></polyline></svg
                     >
                     <p>
-                        <span hx-get="/partials/total-views" hx-trigger="load" hx-swap="innerHTML">
-                            --
+                        <span hx-get="/partials/total-views" hx-trigger="load" hx-swap="outterHTML">
+                            <span class="htmx-indicator animate-pulse">--</span>
                         </span>
                          total posts views
                     </p>
@@ -116,7 +116,7 @@ const posts = sortedPosts.map(post => ({
                             hx-trigger="load"
                             hx-swap="innerHTML"
                         >
-                            --
+                            <span class="htmx-indicator animate-pulse">--</span>
                         </span>
                     </p>
                 </div>
@@ -147,7 +147,7 @@ const posts = sortedPosts.map(post => ({
                     <li class="border-b border-neutral-600 pb-2">
                         <a
                             href={'/blog/' + post.slug}
-                            class="flex justify-between hover:text-neutral-600"
+                            class="flex justify-between hover:text-neutral-300"
                         >
                             <h2 class="font-light tracking-tighter">{post.data.title}</h2>
                             <svg
@@ -168,7 +168,16 @@ const posts = sortedPosts.map(post => ({
                                 </>
                             </svg>
                         </a>
-                        <span class="text-sm text-neutral-400">{post.views} views</span>
+                        <p class="flex items-center gap-1 text-sm text-neutral-400">
+                            <span
+                                hx-get="/partials/views-counter"
+                                hx-trigger="load"
+                                hx-vals={JSON.stringify({ slug: post.slug })}
+                            >
+                                <span class="htmx-indicator animate-pulse">{post.views}</span>
+                            </span>
+                            views
+                        </p>
                     </li>
                 ))
             }

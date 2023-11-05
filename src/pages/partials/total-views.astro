@@ -1,10 +1,9 @@
 ---
-import { getTotalViews } from '~/lib/planetscale';
+import { getTotalPostViews } from '~/lib/xata';
 
 export const partial = true;
-export const prerender = false;
 
-const totalViews = await getTotalViews();
+const total = await getTotalPostViews();
 ---
 
-<span>{totalViews}</span>
+<span>{total}</span>

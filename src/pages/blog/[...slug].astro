@@ -1,29 +1,18 @@
 ---
-import type { GetStaticPaths } from 'astro';
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { getEntry } from 'astro:content';
 
 import Layout from '~/layouts/main-layout.astro';
-import { getViewsForSlug } from '~/lib/planetscale';
+import { getViewsForSlug } from '~/lib/xata';
 import { cn, formatDate } from '~/lib/utils';
 
-export const prerender = true;
+const { slug } = Astro.params as { slug: string };
 
-interface Props {
-    entry: CollectionEntry<'posts'>;
-}
+if (!slug) throw new Error('Slug is required');
 
-export const getStaticPaths = (async () => {
-    const postsEntries = await getCollection('posts', ({ data }) => {
-        return !data.archived && !data.draft;
-    });
+const entry = await getEntry('posts', slug);
 
-    return postsEntries.map(entry => ({
-        params: { slug: entry.slug },
-        props: { entry }
-    }));
-}) satisfies GetStaticPaths;
+if (!entry) return Astro.redirect('/404');
 
-const { entry } = Astro.props as Props;
 const { title, publishedAt } = entry.data;
 const { Content, headings } = await entry.render();
 const views = await getViewsForSlug(entry.slug);
@@ -43,14 +32,17 @@ const views = await getViewsForSlug(entry.slug);
     <div class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400">
         <p class="text-sm">{formatDate(publishedAt)}</p>
 
-        <span
-            hx-get="/partials/views-counter/"
-            hx-trigger="load"
-            hx-swap="innerHTML"
-            hx-vals={JSON.stringify({ slug: entry.slug, track: true })}
-        >
-            {views} views
-        </span>
+        <p class="flex items-center gap-1 text-sm text-neutral-400">
+            <span
+                hx-get="/partials/views-counter"
+                hx-trigger="load"
+                hx-swap="outterHTML"
+                hx-vals={JSON.stringify({ slug: entry.slug, track: true })}
+            >
+                <span class="htmx-indicator animate-pulse">{views}</span>
+            </span>
+             views
+        </p>
     </div>
 
     <!-- TOC -->
