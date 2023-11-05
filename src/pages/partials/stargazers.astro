@@ -1,0 +1,10 @@
+---
+import { getStargazersCount } from '~/lib/github';
+
+export const partial = true;
+export const prerender = false;
+
+const stargazers = await getStargazersCount();
+---
+
+<span>{stargazers}</span>

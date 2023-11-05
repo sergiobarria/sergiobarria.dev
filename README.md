@@ -2,11 +2,11 @@
 
 > This is my personal website
 
--   **Framework**: [Next.js](https://nextjs.org/)
+-   **Framework**: [Astro](https://astro.build/)
 -   **Database**: [Planetscale](https://planetscale.com)
 -   **Deployment**: [Vercel](https://vercel.com)
 -   **Styling**: [Tailwind CSS](https://tailwindcss.com)
--   **Analytics**: [Vercel Analytics](https://vercel.com/analytics)
+-   **Analytics**: [Plausible](https://plausible.io/)
 
 ## Running Locally
 
