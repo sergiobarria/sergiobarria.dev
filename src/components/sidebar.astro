@@ -13,7 +13,7 @@ const links = [
 const pathname = new URL(Astro.url).pathname.split('/')[1];
 ---
 
-<aside class="top-10 md:sticky">
+<aside class="top-10 md:sticky md:h-screen">
     <div class="h-auto w-[35px]">
         <Image src={logo} width={225} height={346} alt="logo" class="-pl-2.5" />
     </div>
@@ -24,15 +24,18 @@ const pathname = new URL(Astro.url).pathname.split('/')[1];
                 <a
                     href={link.href}
                     class={cn(
-                        'top-0 inline-block max-w-fit px-2.5 py-1.5 font-light text-neutral-400 hover:text-neutral-50',
+                        'relative top-0 inline-block max-w-fit px-2.5 py-1 font-light text-neutral-400 hover:text-neutral-50',
                         'transition-colors duration-200 ease-in-out',
                         {
-                            'rounded-md bg-neutral-700 text-neutral-50':
+                            'text-neutral-50 md:rounded md:bg-neutral-700':
                                 pathname === link.href.slice(1)
                         }
                     )}
                 >
                     {link.label}
+                    {pathname === link.href.slice(1) && (
+                        <span class="absolute inset-0 top-7 z-[-1] mx-2 h-[1px] bg-neutral-800 bg-gradient-to-r from-transparent to-neutral-900 md:hidden" />
+                    )}
                 </a>
             ))
         }
