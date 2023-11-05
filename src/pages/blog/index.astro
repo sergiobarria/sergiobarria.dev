@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+
+import Layout from '~/layouts/main-layout.astro';
+import { getAllPostViews } from '~/lib/planetscale';
+
+export const prerender = false;
+
+const postsEntries = await getCollection('posts', ({ data }) => {
+    return !data.draft && !data.archived;
+});
+const sortedPosts = postsEntries.sort(
+    (a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime()
+);
+
+const allViews = await getAllPostViews();
+
+const posts = sortedPosts.map(post => ({
+    ...post,
+    views: allViews.find(p => p.slug === post.slug)?.views ?? 0
+}));
+---
+
+<Layout>
+    <h1 class="text-2xl font-bold md:text-3xl">My Blog</h1>
+
+    <p class="prose prose-invert mb-6">
+        Here is a list of all the posts I&apos;ve published. In total I have written{' '}
+        <strong>{posts.length}</strong> posts.
+    </p>
+
+    <ul class="space-y-3">
+        {
+            posts.map(post => {
+                return (
+                    <li>
+                        <a href={'/blog/' + post.slug} class="hover:text-neutral-300">
+                            <h2 class="font-light tracking-tighter">{post.data.title}</h2>
+                        </a>
+                        <small class="text-neutral-400">{post.views} views</small>
+                    </li>
+                );
+            })
+        }
+    </ul>
+
+    <hr class="my-8 border-neutral-500/50" />
+</Layout>

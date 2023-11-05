@@ -3,4 +3,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.tabSize": 4,
     "editor.indentSize": "tabSize",
+    "[astro]": {
+        "editor.defaultFormatter": "astro-build.astro-vscode"
+    }
 }
