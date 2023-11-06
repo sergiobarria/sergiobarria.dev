@@ -7,4 +7,4 @@ export const prerender = false;
 const total = await getTotalPostViews();
 ---
 
-<span>{total}</span>
+<span>{total?.toLocaleString()}</span>

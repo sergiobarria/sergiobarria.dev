@@ -45,10 +45,8 @@ const views = await getViewsForSlug(entry.slug);
                 hx-get="/partials/views-counter"
                 hx-trigger="load"
                 hx-swap="outterHTML"
-                hx-vals={JSON.stringify({ slug: entry.slug, track: true })}
+                hx-vals={JSON.stringify({ slug: entry.slug, track: true })}>--</span
             >
-                <span class="htmx-indicator animate-pulse">{views}</span>
-            </span>
              views
         </p>
     </div>
