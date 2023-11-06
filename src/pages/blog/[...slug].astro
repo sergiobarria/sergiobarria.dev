@@ -1,18 +1,26 @@
 ---
-import { getEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 import Layout from '~/layouts/main-layout.astro';
 import { getViewsForSlug } from '~/lib/xata';
 import { cn, formatDate } from '~/lib/utils';
 
-const { slug } = Astro.params as { slug: string };
+interface Props {
+    entry: CollectionEntry<'posts'>;
+}
 
-if (!slug) throw new Error('Slug is required');
+export const getStaticPaths = (async () => {
+    const postsEntries = await getCollection('posts', ({ data }) => {
+        return !data.draft && !data.archived;
+    });
+    return postsEntries.map(entry => ({
+        params: { slug: entry.slug },
+        props: { entry }
+    }));
+}) satisfies GetStaticPaths;
 
-const entry = await getEntry('posts', slug);
-
-if (!entry) return Astro.redirect('/404');
-
+const { entry } = Astro.props as Props;
 const { title, publishedAt } = entry.data;
 const { Content, headings } = await entry.render();
 const views = await getViewsForSlug(entry.slug);
