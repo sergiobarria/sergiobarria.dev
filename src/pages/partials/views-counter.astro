@@ -2,6 +2,7 @@
 import { increment, getViewsForSlug } from '~/lib/xata';
 
 export const partial = true;
+export const prerender = false;
 
 if (Astro.request.method !== 'GET') return Astro.redirect(null, 404);
 
@@ -19,7 +20,7 @@ async function updatePostCount() {
     return views;
 }
 
-const views = updatePostCount();
+const views = await updatePostCount();
 ---
 
-<span>{views}</span>
+<span>{views?.toLocaleString()}</span>
