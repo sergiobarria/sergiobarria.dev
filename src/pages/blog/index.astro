@@ -35,7 +35,16 @@ const posts = sortedPosts.map(post => ({
                         <a href={'/blog/' + post.slug} class="hover:text-neutral-300">
                             <h2 class="font-light tracking-tighter">{post.data.title}</h2>
                         </a>
-                        <small class="text-neutral-400">{post.views} views</small>
+                        <p class="flex items-center gap-1 text-sm text-neutral-400">
+                            <span
+                                hx-get="/partials/views-counter"
+                                hx-trigger="load"
+                                hx-vals={JSON.stringify({ slug: post.slug })}
+                            >
+                                <span class="htmx-indicator animate-pulse">{post.views}</span>
+                            </span>
+                            views
+                        </p>
                     </li>
                 );
             })
