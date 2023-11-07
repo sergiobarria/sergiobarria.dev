@@ -12,8 +12,6 @@ export const prerender = false;
 <script>
     import { animate } from 'motion';
 
-    const barsEl = document.getElementById('#animated-bars') as HTMLDivElement;
-
     function runAnimations() {
         animate(
             '#bar1',
@@ -80,5 +78,5 @@ export const prerender = false;
         );
     }
 
-    if (barsEl) runAnimations();
+    runAnimations();
 </script>
