@@ -10,16 +10,9 @@ import { getAllPosts } from '~/lib/xata';
 const postsEntries = await getCollection('posts', ({ data }) => {
     return !data.draft && !data.archived;
 });
-const sortedPosts = postsEntries
+const posts = postsEntries
     .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
     .slice(0, 3);
-
-const allPostsRecords = await getAllPosts();
-
-const posts = sortedPosts.map(post => ({
-    ...post,
-    views: allPostsRecords.find(p => p.slug === post.slug)?.views ?? 0
-}));
 ---
 
 <Layout>
@@ -172,7 +165,7 @@ const posts = sortedPosts.map(post => ({
                                 hx-trigger="load"
                                 hx-vals={JSON.stringify({ slug: post.slug })}
                             >
-                                <span class="htmx-indicator animate-pulse">{post.views}</span>
+                                <span class="htmx-indicator animate-pulse">--</span>
                             </span>
                             views
                         </p>
