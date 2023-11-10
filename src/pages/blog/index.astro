@@ -45,13 +45,3 @@ const posts = postsEntries.sort(
 
     <hr class="my-8 border-neutral-500/50" />
 </Layout>
-
-<script>
-    import htmx from 'htmx.org';
-
-    // NOTE: this is a workaround to make htmx trigger the load event
-    // after navigation while using Astro's ViewsTransition
-    document.addEventListener('astro:after-swap', () => {
-        htmx.process(document.body);
-    });
-</script>

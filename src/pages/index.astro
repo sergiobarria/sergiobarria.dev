@@ -174,13 +174,3 @@ const posts = postsEntries
         </ul>
     </section>
 </Layout>
-
-<script>
-    import htmx from 'htmx.org';
-
-    // NOTE: this is a workaround to make htmx trigger the load event
-    // after navigation while using Astro's ViewsTransitions
-    document.addEventListener('astro:after-swap', () => {
-        htmx.process(document.body);
-    });
-</script>
