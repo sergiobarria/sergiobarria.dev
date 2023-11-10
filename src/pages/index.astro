@@ -5,7 +5,6 @@ import { getCollection } from 'astro:content';
 import Layout from '~/layouts/main-layout.astro';
 import HomeIcons from '~/components/home-icons.astro';
 import profile from '~/assets/images/profile-4.png';
-import { getAllPosts } from '~/lib/xata';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
     return !data.draft && !data.archived;

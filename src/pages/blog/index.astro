@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 
-import { getAllPosts } from '~/lib/xata';
 import Layout from '~/layouts/main-layout.astro';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
