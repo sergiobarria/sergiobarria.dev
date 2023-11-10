@@ -139,7 +139,12 @@ const posts = postsEntries
                             href={'/blog/' + post.slug}
                             class="flex justify-between hover:text-neutral-300"
                         >
-                            <h2 class="font-light tracking-tighter">{post.data.title}</h2>
+                            <h2
+                                class="font-light tracking-tighter"
+                                transition:name={`post-${post.slug}`}
+                            >
+                                {post.data.title}
+                            </h2>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"

@@ -32,7 +32,7 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
     >
     </div>
 
-    <h1 class="text-2xl font-semibold tracking-tighter">
+    <h1 class="text-2xl font-semibold tracking-tighter" transition:name={`post-${entry.slug}`}>
         {entry.data.title}
     </h1>
 
