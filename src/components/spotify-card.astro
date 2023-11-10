@@ -8,17 +8,14 @@ import AnimatedBars from './animated-bars.astro';
 >
     <img src="" alt="album cover" width={40} height={40} class="flex-none" />
     <div class="flex min-w-0 flex-grow flex-col justify-between">
-        <a href="" class="truncate text-start text-xs font-medium"> </a>
+        <a href="" class="truncate text-start text-xs font-medium"></a>
         <div class="flex items-baseline justify-between gap-3 space-y-1 md:space-y-0">
-            <span class="truncate text-start text-xs opacity-80"></span>
+            <span class="max-w-[85%] truncate text-start text-xs opacity-80"></span>
             <AnimatedBars />
         </div>
     </div>
 </div>
-<div
-    id="not-playing"
-    class="inline-flex items-center gap-3 rounded border border-neutral-700/70 p-2 text-sm text-neutral-300"
->
+<div id="not-playing" class="inline-flex items-center gap-3 text-sm text-neutral-300">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1333.33 1333.3"
