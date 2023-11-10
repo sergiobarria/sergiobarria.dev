@@ -3,8 +3,6 @@ import type { GetStaticPaths } from 'astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 import Layout from '~/layouts/main-layout.astro';
-import { getViewsForSlug } from '~/lib/xata';
-import { cn, formatDate } from '~/lib/utils';
 
 interface Props {
     entry: CollectionEntry<'posts'>;
@@ -21,9 +19,10 @@ export const getStaticPaths = (async () => {
 }) satisfies GetStaticPaths;
 
 const { entry } = Astro.props as Props;
-const { title, publishedAt } = entry.data;
 const { Content, headings } = await entry.render();
-const views = await getViewsForSlug(entry.slug);
+const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).format(
+    new Date(entry.data.publishedAt)
+);
 ---
 
 <Layout>
@@ -33,12 +32,12 @@ const views = await getViewsForSlug(entry.slug);
     >
     </div>
 
-    <h1 class="text-2xl font-semibold tracking-tighter">
-        {title}
+    <h1 class="text-2xl font-semibold tracking-tighter" transition:name={`post-${entry.slug}`}>
+        {entry.data.title}
     </h1>
 
     <div class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400">
-        <p class="text-sm">{formatDate(publishedAt)}</p>
+        <p class="text-sm">{formattedDate}</p>
 
         <p class="flex items-center gap-1 text-sm text-neutral-400">
             <span
@@ -57,11 +56,13 @@ const views = await getViewsForSlug(entry.slug);
         {
             headings.map(({ depth, slug, text }) => (
                 <li
-                    class={cn({
-                        'ml-0': depth === 2,
-                        'ml-4': depth === 3,
-                        'ml-8': depth === 4
-                    })}
+                    class:list={[
+                        {
+                            'ml-0': depth === 2,
+                            'ml-4': depth === 3,
+                            'ml-8': depth === 4
+                        }
+                    ]}
                 >
                     <a
                         href={`#${slug}`}

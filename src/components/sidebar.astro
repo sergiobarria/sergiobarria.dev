@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 
-import { cn } from '~/lib/utils';
 import logo from '~/assets/images/logo.png';
 
 const links = [
@@ -23,14 +22,14 @@ const pathname = new URL(Astro.url).pathname.split('/')[1];
             links.map(link => (
                 <a
                     href={link.href}
-                    class={cn(
+                    class:list={[
                         'relative top-0 inline-block max-w-fit px-2.5 py-1 font-light text-neutral-400 hover:text-neutral-50',
                         'transition-colors duration-200 ease-in-out',
                         {
                             'text-neutral-50 md:rounded md:bg-neutral-700':
                                 pathname === link.href.slice(1)
                         }
-                    )}
+                    ]}
                 >
                     {link.label}
                     {pathname === link.href.slice(1) && (

@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 
-import { getAllPosts } from '~/lib/xata';
 import Layout from '~/layouts/main-layout.astro';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
@@ -26,7 +25,12 @@ const posts = postsEntries.sort(
                 return (
                     <li>
                         <a href={'/blog/' + post.slug} class="hover:text-neutral-300">
-                            <h2 class="font-light tracking-tighter">{post.data.title}</h2>
+                            <h2
+                                class="font-light tracking-tighter"
+                                transition:name={`post-${post.slug}`}
+                            >
+                                {post.data.title}
+                            </h2>
                         </a>
                         <p class="flex items-center gap-1 text-sm text-neutral-400">
                             <span
