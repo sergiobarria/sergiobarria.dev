@@ -13,7 +13,7 @@ interface Props {
 const { title, description } = Astro.props as Props;
 ---
 
-<html lang="en" class="scroll-smooth bg-black text-neutral-100">
+<html lang="en" class="scroll-smooth bg-[#111010] text-neutral-100">
     <Head
         title={title ?? 'Home | Sergio Barria'}
         description={description ?? 'Engineer, developer, amateur writer'}
@@ -31,5 +31,9 @@ const { title, description } = Astro.props as Props;
 
             <Footer />
         </main>
+
+        <script>
+            import 'htmx.org';
+        </script>
     </body>
 </html>

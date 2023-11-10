@@ -7,20 +7,16 @@ export const prerender = false;
 if (Astro.request.method !== 'GET') return Astro.redirect(null, 404);
 
 async function updatePostCount() {
-    const searchParams = new URLSearchParams(new URL(Astro.url).search);
-    const slug = searchParams.get('slug');
-    const track = searchParams.get('track');
-    let views;
+    const slug = new URL(Astro.url).searchParams.get('slug');
+    const track = new URL(Astro.url).searchParams.get('track');
 
     if (!slug) return;
 
-    if (track) views = await increment(slug);
-
-    views = await getViewsForSlug(slug);
+    const views = track ? await increment(slug) : await getViewsForSlug(slug);
     return views;
 }
 
 const views = await updatePostCount();
 ---
 
-<span>{views?.toLocaleString()}</span>
+<span>{views?.toLocaleString() ?? '--'}</span>

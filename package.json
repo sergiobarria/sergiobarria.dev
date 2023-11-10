@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@xata.io/client": "^0.26.9",
+        "htmx.org": "^1.9.8",
         "motion": "^10.16.4",
         "sharp": "^0.32.6"
     },

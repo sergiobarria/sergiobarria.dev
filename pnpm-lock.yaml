@@ -8,6 +8,9 @@ dependencies:
   '@xata.io/client':
     specifier: ^0.26.9
     version: 0.26.9(typescript@5.2.2)
+  htmx.org:
+    specifier: ^1.9.8
+    version: 1.9.8
   motion:
     specifier: ^10.16.4
     version: 10.16.4
@@ -2558,6 +2561,10 @@ packages:
   /html-void-elements@3.0.0:
     resolution: {integrity: sha512-bEqo66MRXsUGxWHV5IP0PUiAWwoEjba4VCzg0LjFJBpchPaTfyfCKTG6bc5F8ucKec3q5y6qOdGyYTSBEvhCrg==}
     dev: true
+
+  /htmx.org@1.9.8:
+    resolution: {integrity: sha512-eH825QM6yJ1AeHTJgUxy3xnXnP/uXD56x52/VYnQ9CMw+o9H04ar/GY5PHuiZeelsqLK4wkviVdCel7u+3h4Fw==}
+    dev: false
 
   /http-cache-semantics@4.1.1:
     resolution: {integrity: sha512-er295DKPVsV82j5kw1Gjt+ADA/XYHsajl82cGNQG2eyoPkvgUhX+nDIyelzhIWbbsXP39EHcI6l5tYs2FYqYXQ==}

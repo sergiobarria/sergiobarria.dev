@@ -38,6 +38,6 @@ export default defineConfig({
         speedInsights: { enabled: true }
     }),
     experimental: {
-        devOverlay: import.meta.env.DEV
+        devOverlay: false // can use import.meta.env.DEV
     }
 });

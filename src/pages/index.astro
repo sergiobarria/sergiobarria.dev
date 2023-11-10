@@ -123,7 +123,7 @@ const posts = postsEntries
 
             <p>
                 Currently I&apos;m working on improving my knowledge with:
-                <strong>.NET</strong>, <strong>MySQL</strong>, and other tools for web development.
+                <strong>.NET</strong>, <strong>AWS</strong>, and other tools for web development.
             </p>
         </div>
     </section>
@@ -174,3 +174,13 @@ const posts = postsEntries
         </ul>
     </section>
 </Layout>
+
+<script>
+    import htmx from 'htmx.org';
+
+    // NOTE: this is a workaround to make htmx trigger the load event
+    // after navigation while using Astro's ViewsTransitions
+    document.addEventListener('astro:after-swap', () => {
+        htmx.process(document.body);
+    });
+</script>
