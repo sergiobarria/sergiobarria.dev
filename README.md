@@ -19,7 +19,7 @@ pnpm install
 pnpm dev
 ```
 
-Create a `.env` file similar to [`.env.example`](https://github.com/leerob/leerob.io/blob/main/.env.example).
+Create a `.env` file similar to [`.env.example`](https://github.com/sergiobarria/sergiobarria.dev/blob/main/.env.example).
 
 ## Contributing
 
