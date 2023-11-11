@@ -33,10 +33,7 @@ export default defineConfig({
         ]
     },
     output: 'hybrid',
-    adapter: vercel({
-        webAnalytics: { enabled: true },
-        speedInsights: { enabled: true }
-    }),
+    adapter: vercel(),
     experimental: {
         devOverlay: false, // can use import.meta.env.DEV
         contentCollectionCache: true
