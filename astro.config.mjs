@@ -11,7 +11,7 @@ import rehypeSlug from 'rehype-slug';
 import robotsTxt from 'astro-robots-txt';
 
 const rehypePrettyCodeOptions = {
-    theme: 'one-dark-pro'
+    theme: 'poimandres'
 };
 const rehypeAutolinkHeadingsOptions = {
     properties: {
@@ -36,7 +36,7 @@ export default defineConfig({
     adapter: vercel({
         speedInsights: { enabled: true }
     }),
-    devToolbar: {enabled: true},
+    devToolbar: { enabled: true },
     experimental: {
         contentCollectionCache: true
     }
