@@ -1,0 +1,39 @@
+---
+// import { Image } from 'astro:assets';
+
+// import logo from '~/assets/images/logo.png';
+
+const links = [
+    { label: 'home', href: '/' },
+    { label: 'about', href: '/about' },
+    { label: 'blog', href: '/blog' }
+];
+
+const pathname = new URL(Astro.url).pathname.split('/')[1];
+---
+
+<header class="mb-3 flex h-20 items-center justify-between md:mb-8">
+    <!-- <div class="h-auto w-[20px]">
+        <a href="/" class="text-2xl font-semibold text-white">
+            <Image src={logo} alt="logo" width={225} height={346} />
+        </a>
+    </div> -->
+
+    <nav class="ml-auto space-x-6">
+        {
+            links.map(link => (
+                <a
+                    href={link.href}
+                    class:list={[
+                        'relative inline-block text-sm font-light transition-colors duration-200 ease-in-out',
+                        pathname === link.href.slice(1)
+                            ? 'font-semibold text-white opacity-100'
+                            : 'opacity-70 hover:opacity-100'
+                    ]}
+                >
+                    {link.label}
+                </a>
+            ))
+        }
+    </nav>
+</header>

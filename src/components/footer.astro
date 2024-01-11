@@ -2,11 +2,13 @@
 import SpotifyCard from './spotify-card.astro';
 ---
 
-<footer class="mt-7">
+<footer class="mt-7 border-t border-neutral-700 py-7">
     <div
-        class="flex flex-col justify-between space-y-3 pb-6 md:flex-row md:items-center md:space-y-0"
+        class="flex flex-col justify-center space-y-6 md:flex-row md:items-center md:justify-between"
     >
-        <SpotifyCard />
+        <div class="flex justify-center">
+            <SpotifyCard />
+        </div>
         <div
             class="flex flex-col items-center space-y-2 text-xs font-light text-neutral-400 md:items-end"
         >

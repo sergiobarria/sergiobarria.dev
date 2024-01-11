@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 import Layout from '~/layouts/main-layout.astro';
 import HomeIcons from '~/components/home-icons.astro';
-import profile from '~/assets/images/profile-4.png';
+import profile from '~/assets/images/profile-2.png';
 
 const postsEntries = await getCollection('posts', ({ data }) => {
     return !data.draft && !data.archived;
@@ -12,10 +12,100 @@ const postsEntries = await getCollection('posts', ({ data }) => {
 const posts = postsEntries
     .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime())
     .slice(0, 3);
+
+const languages = 'JavaScript, TypeScript, Python, PHP, Dart, C#';
+const frameworks =
+    'React, Next.js, Vue, Nuxt.js, Svelte, SvelteKit, Django, Laravel, Flask, Express, Flutter, Nest.js, .NET';
+const databases = 'MongoDB, PostgreSQL, MySQL, SQLite, Firebase, Redis';
+const styling = 'Tailwind CSS, Bootstrap, Material UI, Chakra UI, Sass';
+const tools = 'Git, Docker, AWS, Vercel, Netlify, Heroku';
 ---
 
 <Layout>
-    <section id="hero">
+    <section id="hero" class="mb-4">
+        <div class="flex flex-col items-center gap-6 md:flex-row">
+            <div
+                class:list={[
+                    'aspect-square h-auto w-28 overflow-hidden rounded-full bg-gradient-to-br from-blue-600 to-purple-900',
+                    'shadow-lg shadow-purple-600/50'
+                ]}
+            >
+                <Image
+                    src={profile}
+                    alt="profile"
+                    class="rounded-full object-cover p-1"
+                    width="300"
+                    height="300"
+                />
+            </div>
+            <div class="flex-1">
+                <h1 class="text-2xl font-normal md:text-3xl lg:text-4xl">
+                    hey, I&apos;m Sergio 👋
+                </h1>
+
+                <p class="prose mt-2 dark:prose-invert">
+                    I&apos;m a full stack software engineer. Welcome to my small space of the
+                    internet, where I share about different topics related to the web.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <HomeIcons />
+
+    <section id="about-me" class="my-10">
+        <div class="flex flex-col items-start gap-6 md:flex-row">
+            <h2
+                class:list={[
+                    'text-right text-xl font-normal leading-none tracking-tighter text-neutral-200',
+                    'md:mr-auto md:w-min md:text-2xl lg:text-3xl'
+                ]}
+            >
+                about me
+            </h2>
+            <div class="flex-1 space-y-3">
+                <p class="prose prose-invert">Here are a few technologies I&apos;ve work with:</p>
+                <ul class="space-y-2">
+                    <li>
+                        <strong>Languages:</strong>
+                        <span class="opacity-80">{languages}</span>
+                    </li>
+                    <li>
+                        <strong>Frameworks:</strong>
+                        <span class="opacity-80">{frameworks}</span>
+                    </li>
+                    <li>
+                        <strong>Databases:</strong>
+                        <span class="opacity-80">{databases}</span>
+                    </li>
+                    <li>
+                        <strong>Styling:</strong>
+                        <span class="opacity-80">{styling}</span>
+                    </li>
+                    <li>
+                        <strong>Other Tools:</strong>
+                        <span class="opacity-80">{tools}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="recent-posts">
+        <div class="flex flex-col items-start gap-6 md:flex-row">
+            <h2
+                class:list={[
+                    'text-right text-xl font-normal leading-none tracking-tighter text-neutral-200',
+                    'md:mr-auto md:w-min md:text-2xl lg:text-3xl'
+                ]}
+            >
+                recent posts
+            </h2>
+        </div>
+    </section>
+</Layout>
+
+<!-- <section id="hero">
         <h1 class="text-2xl font-bold md:text-3xl">hey, I&apos;m Sergio 👋</h1>
         <p class="text-sm text-neutral-400">developer, engineer and amateur writer</p>
         <p class="prose prose-invert mt-3">
@@ -177,5 +267,4 @@ const posts = postsEntries
                 ))
             }
         </ul>
-    </section>
-</Layout>
+    </section> -->

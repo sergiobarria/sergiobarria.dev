@@ -1,8 +1,10 @@
 ---
-import Sidebar from '~/components/sidebar.astro';
+import '@fontsource-variable/inter';
+
 import Head from '~/components/head.astro';
 import Footer from '~/components/footer.astro';
 
+import Header from '~/components/header.astro';
 import '../globals.css';
 
 interface Props {
@@ -13,25 +15,22 @@ interface Props {
 const { title, description } = Astro.props as Props;
 ---
 
-<html lang="en" class="scroll-smooth bg-[#111010] text-neutral-100">
+<html lang="en" class="scroll-smooth">
     <Head
         title={title ?? 'Home | Sergio Barria'}
         description={description ?? 'Engineer, developer, amateur writer'}
     />
     <body
         class:list={[
-            'flex max-w-screen-md flex-col gap-6 px-5 pt-10 antialiased',
-            'md:mx-auto md:flex-row md:space-y-0 md:px-0 md:pt-24'
+            'mx-auto min-h-screen max-w-screen-sm font-light antialiased',
+            'bg-white px-6 text-black dark:bg-neutral-950 dark:text-white'
         ]}
     >
-        <Sidebar />
-
-        <main class="max-w-[600px] flex-1">
+        <Header />
+        <main>
             <slot />
-
-            <Footer />
         </main>
-
+        <Footer />
         <script>
             import htmx from 'htmx.org';
 
