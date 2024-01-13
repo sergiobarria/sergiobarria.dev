@@ -1,0 +1,111 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+import Layout from '~/layouts/main-layout.astro';
+
+export const prerender = true;
+const aboutURL = getRelativeLocaleUrl('en', 'about');
+---
+
+<Layout>
+    <div class="mb-6 flex items-center justify-between">
+        <h1 class="text-2xl font-bold md:text-3xl">Acerca de Mí</h1>
+        <a href={aboutURL} class="text-sm underline hover:opacity-80">Read in English</a>
+    </div>
+
+    <div class="prose prose-invert">
+        <p>
+            He amado construir cosas desde que tengo memoria, esa es la principal razón por la que
+            me convertí en <strong>ingeniero civil.</strong> Encuentro pasión en aprender cosas nuevas
+            y siempre estoy buscando nuevos desafíos.
+        </p>
+        <p>
+            Tomé mi primer curso de programación en la universidad y me enamoré de ello. Empecé a
+            aprender por mi cuenta y nunca paré. Gracias a eso, he estado trabajando como <strong
+                >ingeniero de software</strong
+            > durante algunos años ahora, usando diferentes lenguajes como <strong
+                >JavaScript</strong
+            >, <strong>PHP</strong> y <strong>Python</strong>.
+        </p>
+        <p>
+            Actualmente estoy trabajando como desarrollador full stack involucrado en diferentes
+            proyectos para plataformas web y móviles.
+        </p>
+        <p>
+            Cuando no estoy programando, me encanta jugar videojuegos, ver películas o series,
+            aprender otras cosas que despiertan mi interés y pasar tiempo con mi familia.
+        </p>
+    </div>
+
+    <hr class="my-8 border-neutral-500/50" />
+
+    <h2 class="mb-6 text-2xl font-bold md:text-3xl">Acerca de este Sitio</h2>
+
+    <div class="prose prose-invert">
+        <p>
+            Trabajar en mi sitio web personal es una forma de aprender, explorar y mejorar mis
+            habilidades. Uno de mis mayores errores al principio fue intentar sobreingenierizar mi
+            sitio web. Estaba usando un montón de bibliotecas y frameworks, y trataba de usar lo
+            último y lo mejor de todo, con diseños y animaciones complicados y locos. Estaba
+            intentando hacer demasiado y lo estaba haciendo mal.
+        </p>
+        <p>
+            Cuanto más trabajo en mi estilo, más disfruto trabajando en diseños minimalistas pero
+            atractivos. Siempre estoy buscando nuevas ideas e inspiraciones para mejorar mi sitio
+            web. Con eso en mente, no es sorpresa que encuentre mucha inspiración en el estilo
+            minimalista de <a href="https://leerob.io" target="_blank" rel="noopener noreferrer"
+                >Leerob</a
+            >.
+        </p>
+        <p>
+            Uno de mis desafíos al reconstruir este sitio web fue mantenerlo lo más simple posible y
+            usar la menor cantidad posible de bibliotecas/paquetes de terceros.
+        </p>
+        <p>
+            El primer paso fue seleccionar un stack. A lo largo de los años, he probado varios
+            frameworks como <a href="https://nextjs.org/" target="_blank" rel="noopener noreferrer"
+                >Next.js</a
+            >, <a href="https://www.gatsbyjs.com/" target="_blank" rel="noopener noreferrer"
+                >Gatsby</a
+            > y, más recientemente <a
+                href="https://astro.build/"
+                target="_blank"
+                rel="noopener noreferrer">Astro</a
+            >. Y, aunque he encontrado cosas que me gustan y no me gustan en todos estos frameworks,
+            finalmente decidí ir con el que más me gustó y sentí que era más adecuado para esta
+            tarea: <strong>Astro</strong>.
+        </p>
+        <p>
+            Y sí, lo sé, incluso un framework como Astro puede considerarse excesivo para construir
+            un sitio web como este que puede crearse fácilmente con HTML y CSS simples. Pero, soy
+            uno de esos que piensan que debes usar lo que prefieras y conozcas siempre que pueda
+            hacer el trabajo. Así que, por eso, creo que me daré un pase en esta selección 😅.
+        </p>
+        <p>
+            También soy un gran fan de <a
+                href="https://tailwindcss.com/"
+                target="_blank"
+                rel="noopener noreferrer">Tailwind CSS</a
+            > (sí, soy parte del culto de Tailwind), y lo uso cada vez que puedo.
+        </p>
+        <p>
+            Aunque no estoy usando un framework de UI como React, aún quería agregar un poco de
+            interactividad al sitio web. Para eso, decidí aprovechar la nueva característica de
+            Astro <a
+                href="https://docs.astro.build/en/core-concepts/astro-pages/#page-partials"
+                target="_blank"
+                rel="noopener noreferrer">Page Partials</a
+            > con <a href="https://htmx.org/" target="_blank" rel="noopener noreferrer">HTMX</a>.
+        </p>
+        <p>
+            Finalmente, como una forma de agregar un poco de todo, quería almacenar el conteo de
+            visitas de mis publicaciones en una base de datos. Para eso, decidí usar <a
+                href="https://xata.io/"
+                target="_blank"
+                rel="noopener noreferrer">Xata</a
+            >
+            , y hasta ahora, ha sido una gran experiencia de desarrollo (DX). Anteriormente estaba usando
+            Prisma como mi ORM con Planetscale pero decidí probar algo diferente.
+        </p>
+    </div>
+</Layout>
