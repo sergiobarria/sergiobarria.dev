@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+// import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
     title: string;
@@ -46,7 +46,7 @@ const { title, description, image = '/opengraph-image.png' } = Astro.props as Pr
     <!-- canonical link -->
     <link rel="canonical" href={Astro.url} />
 
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
 
     <script
         defer

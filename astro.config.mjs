@@ -37,6 +37,13 @@ export default defineConfig({
         speedInsights: { enabled: true }
     }),
     devToolbar: { enabled: true },
+    i18n: {
+        defaultLocale: 'en',
+        locales: ['en', 'es'],
+        routing: {
+            prefixDefaultLocale: false
+        }
+    },
     experimental: {
         contentCollectionCache: true
     }

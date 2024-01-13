@@ -1,5 +1,6 @@
 ---
 import '@fontsource-variable/inter';
+import '@fontsource-variable/montserrat';
 
 import Head from '~/components/head.astro';
 import Footer from '~/components/footer.astro';
@@ -22,8 +23,8 @@ const { title, description } = Astro.props as Props;
     />
     <body
         class:list={[
-            'mx-auto min-h-screen max-w-screen-sm font-light antialiased',
-            'bg-white px-6 text-black dark:bg-neutral-950 dark:text-white'
+            'mx-auto min-h-screen max-w-screen-sm antialiased',
+            'bg-neutral-50 px-6 text-black dark:bg-[#151515] dark:text-white'
         ]}
     >
         <Header />

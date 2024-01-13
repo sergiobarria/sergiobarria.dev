@@ -13,6 +13,7 @@
     },
     "dependencies": {
         "@fontsource-variable/inter": "^5.0.16",
+        "@fontsource-variable/montserrat": "^5.0.17",
         "@xata.io/client": "^0.26.9",
         "htmx.org": "^1.9.10",
         "motion": "^10.16.4",
