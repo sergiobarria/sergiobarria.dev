@@ -46,40 +46,41 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
                 hx-swap="outterHTML"
                 hx-vals={JSON.stringify({ slug: entry.slug, track: true })}>--</span
             >
-             views
+            views
         </p>
     </div>
 
     <!-- TOC -->
-    <h2 class="text-lg font-semibold capitalize tracking-tighter">table of contents</h2>
-    <ul class="mb-6">
-        {
-            headings.map(({ depth, slug, text }) => (
-                <li
-                    class:list={[
-                        {
-                            'ml-0': depth === 2,
-                            'ml-4': depth === 3,
-                            'ml-8': depth === 4
-                        }
-                    ]}
-                >
-                    <a
-                        href={`#${slug}`}
-                        class="py-1 font-light text-neutral-400 transition duration-200 hover:text-white"
+    <div class="rounded-xl border border-neutral-500 p-4 dark:border-neutral-700">
+        <h2 class="text-lg font-semibold capitalize tracking-tighter">table of contents</h2>
+        <ul class="mb-6">
+            {
+                headings.map(({ depth, slug, text }) => (
+                    <li
+                        class:list={[
+                            'text-sm',
+                            {
+                                'ml-0': depth === 2,
+                                'ml-4': depth === 3,
+                                'ml-8': depth === 4
+                            }
+                        ]}
                     >
-                        {text}
-                    </a>
-                </li>
-            ))
-        }
-    </ul>
+                        <a
+                            href={`#${slug}`}
+                            class="py-1 font-light text-neutral-400 transition duration-200 hover:text-white"
+                        >
+                            {text}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
 
     <article class="prose prose-invert">
         <Content />
     </article>
-
-    <hr class="my-8 border-neutral-500/50" />
 </Layout>
 
 <script>
