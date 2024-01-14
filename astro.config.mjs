@@ -36,14 +36,7 @@ export default defineConfig({
     adapter: vercel({
         speedInsights: { enabled: true }
     }),
-    devToolbar: { enabled: true },
-    i18n: {
-        defaultLocale: 'en',
-        locales: ['en', 'es'],
-        routing: {
-            prefixDefaultLocale: false
-        }
-    },
+    devToolbar: { enabled: false },
     experimental: {
         contentCollectionCache: true
     }

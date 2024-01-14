@@ -1,16 +1,12 @@
 ---
-import { getRelativeLocaleUrl } from 'astro:i18n';
-
 import Layout from '~/layouts/main-layout.astro';
 
 export const prerender = true;
-const aboutURL = getRelativeLocaleUrl('es', 'about');
 ---
 
 <Layout>
     <div class="mb-6 flex items-center justify-between">
         <h1 class="text-2xl font-bold md:text-3xl">About Me</h1>
-        <a href={aboutURL} class="text-sm underline hover:opacity-80">Leer en Español</a>
     </div>
 
     <div class="prose prose-invert">
