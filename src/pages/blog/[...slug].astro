@@ -28,7 +28,7 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
 <Layout>
     <div
         id="progress-bar"
-        class="fixed inset-x-0 top-0 h-1 origin-[0%] scale-x-0 transform bg-neutral-200"
+        class="fixed inset-x-0 top-0 h-1 origin-[0%] scale-x-0 transform bg-neutral-800 dark:bg-neutral-200"
     >
     </div>
 
@@ -36,10 +36,12 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
         {entry.data.title}
     </h1>
 
-    <div class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-400">
+    <div
+        class="mb-8 mt-2 flex items-center justify-between text-sm text-neutral-700 dark:text-neutral-300"
+    >
         <p class="text-sm">{formattedDate}</p>
 
-        <p class="flex items-center gap-1 text-sm text-neutral-400">
+        <p class="flex items-center gap-1 text-sm text-neutral-700 dark:text-neutral-300">
             <span
                 hx-get="/partials/views-counter"
                 hx-trigger="load"
@@ -51,7 +53,7 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
     </div>
 
     <!-- TOC -->
-    <div class="rounded-xl border border-neutral-500 p-4 dark:border-neutral-700">
+    <div class="rounded-xl border border-neutral-300 p-4 dark:border-neutral-700">
         <h2 class="text-lg font-semibold capitalize tracking-tighter">table of contents</h2>
         <ul class="mb-6">
             {
@@ -68,7 +70,7 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
                     >
                         <a
                             href={`#${slug}`}
-                            class="py-1 font-light text-neutral-400 transition duration-200 hover:text-white"
+                            class="py-1 font-light text-neutral-700 transition duration-200 hover:text-white dark:text-neutral-300"
                         >
                             {text}
                         </a>
@@ -78,7 +80,7 @@ const formattedDate = new Intl.DateTimeFormat('en', { dateStyle: 'long' }).forma
         </ul>
     </div>
 
-    <article class="prose prose-invert">
+    <article class="prose dark:prose-invert">
         <Content />
     </article>
 </Layout>

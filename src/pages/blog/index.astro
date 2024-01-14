@@ -14,7 +14,7 @@ const posts = postsEntries.sort(
 <Layout>
     <h1 class="text-2xl font-bold md:text-3xl">My Blog</h1>
 
-    <p class="prose prose-invert mb-6">
+    <p class="prose mb-6 dark:prose-invert">
         Here is a list of all the posts I&apos;ve published. In total I have written{' '}
         <strong>{posts.length}</strong> posts.
     </p>
@@ -24,7 +24,10 @@ const posts = postsEntries.sort(
             posts.map(post => {
                 return (
                     <li>
-                        <a href={'/blog/' + post.slug} class="hover:text-neutral-300">
+                        <a
+                            href={'/blog/' + post.slug}
+                            class="hover:text-neutral-700 dark:hover:text-neutral-300"
+                        >
                             <h2
                                 class="font-light tracking-tighter"
                                 transition:name={`post-${post.slug}`}
