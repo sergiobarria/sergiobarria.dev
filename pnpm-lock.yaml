@@ -44,13 +44,13 @@ devDependencies:
     specifier: ^5.1.0
     version: 5.1.0(astro@4.1.2)(tailwindcss@3.4.1)
   '@astrojs/vercel':
-    specifier: ^5.2.0
-    version: 5.2.0(astro@4.1.2)
+    specifier: ^6.1.4
+    version: 6.1.4(astro@4.1.2)
   '@tailwindcss/typography':
     specifier: ^0.5.10
     version: 0.5.10(tailwindcss@3.4.1)
   astro:
-    specifier: ^4.1.1
+    specifier: ^4.1.2
     version: 4.1.2(typescript@5.3.3)
   astro-robots-txt:
     specifier: ^1.0.0
@@ -292,14 +292,14 @@ packages:
       - supports-color
     dev: true
 
-  /@astrojs/vercel@5.2.0(astro@4.1.2):
-    resolution: {integrity: sha512-WUMgiVLbDsh2uRaMcjqx3Br7lWNvKSvDqbLwDeR21lJ4UIBB+1PYbQ3cLYLXl6GiksxPx8rg9dry9CDsPcA0nA==}
+  /@astrojs/vercel@6.1.4(astro@4.1.2):
+    resolution: {integrity: sha512-x+iugOR9TpAtqpvWzmxAkKi9TJQYAUVruzK1cimADi1ZeHr+e1z2wSCL1+phJmJetABjuM6XFcpPa3LPt+GA2w==}
     peerDependencies:
-      astro: ^3.0.0
+      astro: ^4.0.2
     dependencies:
       '@astrojs/internal-helpers': 0.2.1
       '@vercel/analytics': 1.1.1
-      '@vercel/nft': 0.23.1
+      '@vercel/nft': 0.24.4
       astro: 4.1.2(typescript@5.3.3)
       esbuild: 0.19.11
       fast-glob: 3.3.2
@@ -1374,9 +1374,9 @@ packages:
       server-only: 0.0.1
     dev: true
 
-  /@vercel/nft@0.23.1:
-    resolution: {integrity: sha512-NE0xSmGWVhgHF1OIoir71XAd0W0C1UE3nzFyhpFiMr3rVhetww7NvM1kc41trBsPG37Bh+dE5FYCTMzM/gBu0w==}
-    engines: {node: '>=14'}
+  /@vercel/nft@0.24.4:
+    resolution: {integrity: sha512-KjYAZty7boH5fi5udp6p+lNu6nawgs++pHW+3koErMgbRkkHuToGX/FwjN5clV1FcaM3udfd4zW/sUapkMgpZw==}
+    engines: {node: '>=16'}
     hasBin: true
     dependencies:
       '@mapbox/node-pre-gyp': 1.0.11
